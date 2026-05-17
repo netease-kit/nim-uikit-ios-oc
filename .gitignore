@@ -57,6 +57,16 @@ compile_commands.json
 *.log
 *.bak
 *.swp
+.DS_Store
+
+# CocoaPods
+Pods/
+
+# Xcode user/workspace state
+*.xcuserstate
+xcuserdata/
+.derivedData*/
+DerivedData/
 
 # vcpkg
 vcpkg_installed/

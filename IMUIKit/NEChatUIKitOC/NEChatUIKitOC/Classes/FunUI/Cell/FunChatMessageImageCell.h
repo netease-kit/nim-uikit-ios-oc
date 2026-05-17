@@ -1,0 +1,16 @@
+// Copyright (c) 2022 NetEase, Inc. All rights reserved.
+// Use of this source code is governed by a MIT license that can be
+// found in the LICENSE file.
+
+#import "FunChatMessageBaseCell.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface FunChatMessageImageCell : FunChatMessageBaseCell
+
+@property (nonatomic, strong) UIImageView *contentImageViewLeft;
+@property (nonatomic, strong) UIImageView *contentImageViewRight;
+
+@end
+
+NS_ASSUME_NONNULL_END
