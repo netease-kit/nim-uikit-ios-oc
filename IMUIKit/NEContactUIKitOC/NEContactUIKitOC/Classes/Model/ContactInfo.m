@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "ContactInfo.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 
 @class Router;
 

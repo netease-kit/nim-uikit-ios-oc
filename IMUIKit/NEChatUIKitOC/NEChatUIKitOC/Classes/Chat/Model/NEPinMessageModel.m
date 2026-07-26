@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "NEPinMessageModel.h"
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "ChatMessageHelper.h"
 #import "ChatUIConfig.h"
 #import "MessageFileModel.h"

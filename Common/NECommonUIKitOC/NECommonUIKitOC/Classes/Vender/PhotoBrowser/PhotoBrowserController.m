@@ -8,7 +8,7 @@
 #import "ToastImageView.h"
 #import "UIView+YXToast.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NEAuthManager.h>
+#import <NEChatKit/NEAuthManager.h>
 #import <Photos/Photos.h>
 
 @interface PhotoBrowserController () <BrowserToolsBarDelegate>

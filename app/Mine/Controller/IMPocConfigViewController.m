@@ -11,8 +11,8 @@
 #import "CustomSettingTextviewCell.h"
 #import "CustomThemeCells.h"
 #import "ArrowTitleCustomTeamSettingSwitchCell.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>

@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "TeamJoinActionViewModel.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/ChatConstant.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/ChatConstant.h>
 
 @interface TeamJoinActionViewModel () <NETeamListener>
 @property (nonatomic, assign) NSInteger offset;

@@ -5,13 +5,12 @@
 #import "NEBaseSelectUserViewController.h"
 #import "ChatNavigationView.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/ChatConstant.h>
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEAIUserManager.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEAIUserManager.h>
 
 @interface NEBaseSelectUserViewController ()
 @property (nonatomic, assign) BOOL showSelf;
@@ -155,7 +154,9 @@
                 }
             }
             if (selfIndex >= 0 && selfIndex < safeTeam.users.count) {
-                [safeTeam.users removeObjectAtIndex:selfIndex];
+                NSMutableArray<NETeamMemberInfoModel *> *mutableUsers = [safeTeam.users mutableCopy] ?: [NSMutableArray array];
+                [mutableUsers removeObjectAtIndex:selfIndex];
+                safeTeam.users = mutableUsers;
             }
         }
 

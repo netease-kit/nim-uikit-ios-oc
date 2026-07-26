@@ -5,7 +5,7 @@
 #import "BrowserToolsBar.h"
 #import "ExpandButton.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 
 @interface BrowserToolsBar ()
 

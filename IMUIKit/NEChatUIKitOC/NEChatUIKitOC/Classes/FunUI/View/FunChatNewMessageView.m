@@ -4,7 +4,7 @@
 
 #import "FunChatNewMessageView.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @implementation FunChatNewMessageView
 

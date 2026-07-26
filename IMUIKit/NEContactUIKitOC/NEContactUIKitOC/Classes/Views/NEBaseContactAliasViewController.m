@@ -3,12 +3,12 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactAliasViewController.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import "ContactConst.h"
 

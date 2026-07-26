@@ -4,9 +4,9 @@
 
 #import "NEBaseCollectionMessageLocationCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NEALog.h>
 #import <SDWebImage/SDWebImage.h>
 #import "ChatCellConstantValue.h"
 #import "NEChatUIConstant.h"

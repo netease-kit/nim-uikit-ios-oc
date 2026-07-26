@@ -6,7 +6,7 @@
 #import "FunContactUIColor.h"
 #import "ContactUIConfig.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 
 @implementation FunContactSelectedCell

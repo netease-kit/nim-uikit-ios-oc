@@ -5,7 +5,7 @@
 #import "PhotoBrowserBigImgBackView.h"
 #import "PhotoBrowserCell.h"
 #import "PhotoBrowserFlowLayout.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @interface PhotoBrowserBigImgBackView () <UICollectionViewDelegate, UICollectionViewDataSource, CAAnimationDelegate>
 

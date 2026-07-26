@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactViewCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation NEBaseContactViewCell

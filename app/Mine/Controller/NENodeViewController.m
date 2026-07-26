@@ -6,9 +6,9 @@
 #import "AppKey.h"
 #import "NodeSelectCell.h"
 #import "NodeViewModel.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/SettingRepo.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/SettingRepo.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NENavigationView.h>
 

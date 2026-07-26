@@ -1,6 +1,6 @@
 #import "ContactUnCheckCell.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactInfo.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 
 @implementation ContactUnCheckCell
 

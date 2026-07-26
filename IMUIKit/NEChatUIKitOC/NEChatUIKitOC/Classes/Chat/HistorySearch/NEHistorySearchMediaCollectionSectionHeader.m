@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NEHistorySearchMediaCollectionSectionHeader.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation NEHistorySearchMediaCollectionSectionHeader

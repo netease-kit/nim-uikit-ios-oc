@@ -5,7 +5,7 @@
 #import "NEChatUIConstant.h"
 #import "NEChatBaseViewController.h"
 #import "NEChatUIKitClient.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
 
 #pragma mark - Localization Utility
 
@@ -75,7 +75,8 @@ static NSBundle *_Nullable _chatBundle(void) {
 }
 
 NSString *chatLocalizable(NSString *key) {
-  NSString *language = NEAppLanguageRawValue([NEAppLanguageUtil getCurrentLanguage]);
+  NEAppLanguage currentLanguage = [NEAppLanguageUtil getCurrentLanguage];
+  NSString *language = currentLanguage == NEAppLanguageEnglish ? @"en" : @"zh-Hans";
   NSString *const missingValue = @"__NEChatUIKitMissing__";
   for (NSBundle *bundle in _chatCandidateBundles()) {
     NSBundle *stringBundle = bundle;

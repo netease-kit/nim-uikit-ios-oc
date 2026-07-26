@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "TeamIntroduceViewModel.h"
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/IMKitClient.h>
 
 @interface TeamIntroduceViewModel ()
 @property (nonatomic, strong) TeamRepo *teamRepo;

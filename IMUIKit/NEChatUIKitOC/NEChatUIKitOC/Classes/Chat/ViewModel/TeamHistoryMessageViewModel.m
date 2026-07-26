@@ -3,9 +3,8 @@
 // found in the LICENSE file.
 
 #import "TeamHistoryMessageViewModel.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import "NEChatUIConstant.h"
 #import "OperationItem+NEChatUIKit.h"

@@ -3,16 +3,16 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactUserViewController.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEAIUserManager.h>
-#import <NEChatKitOC/NEAIRobotManager.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NSString+NIMKit.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEAIUserManager.h>
+#import <NEChatKit/NEAIRobotManager.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+
+#import <NEChatKit/NSString+NIMKit.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/NENavigationView.h>
 #import "ContactConst.h"
@@ -21,6 +21,9 @@
 #import "TextWithDetailTextCell.h"
 #import "TextWithRightArrowCell.h"
 #import "TextWithSwitchCell.h"
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEContactPushP2pChatVCRouterCompat2 = @"imkit://chat/p2pChat.page";
 
 static UILabel *NEFindLabelWithText(UIView *view, NSString *text) {
   if (text.length == 0) {
@@ -47,7 +50,7 @@ static UILabel *NEFindLabelWithText(UIView *view, NSString *text) {
   if ([[NEFriendUserCache shared] isFriend:uid]) {
     return YES;
   }
-  if ([self.user.accountId isEqualToString:uid] && self.user.friend) {
+  if ([self.user.user.accountId isEqualToString:uid] && self.user.friend) {
     return YES;
   }
   return NO;
@@ -494,7 +497,7 @@ static UILabel *NEFindLabelWithText(UIView *view, NSString *text) {
   if (!accid) return;
 
   NSString *conversationId = [V2NIMConversationIdUtil p2pConversationId:accid];
-  [[Router shared] use:PushP2pChatVCRouter
+  [[Router shared] use:NEContactPushP2pChatVCRouterCompat2
             parameters:@{@"nav": self.navigationController ?: [NSNull null],
                          @"conversationId": conversationId ?: [NSNull null],
                          @"removeUserVC": @YES,

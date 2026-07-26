@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "PhotoBrowserCell.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 #import <SDWebImage/SDWebImage.h>
 
 @interface PhotoBrowserCell () <UIScrollViewDelegate, UIGestureRecognizerDelegate>

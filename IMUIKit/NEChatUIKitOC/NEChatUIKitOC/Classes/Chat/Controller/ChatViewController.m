@@ -7,15 +7,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MJRefresh/MJRefresh.h>
 #import <Photos/Photos.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECommonKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+#import <NEChatKit/NEALog.h>
+
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECustomUtils.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/NEPathUtils.h>
+#import <NEChatKit/NECustomUtils.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/NEPathUtils.h>
 #import <NIMSDK/NIMSDK.h>
 #import <objc/runtime.h>
 #import "NEChatUIConstant.h"
@@ -52,6 +52,14 @@
 static NSString *const kClassTag = @"ChatViewController";
 static NSString *const kCallKitDismissNoti = @"kCallKitDismissNoti";
 static NSString *const kCallKitShowNoti = @"kCallKitShowNoti";
+static NSString * const NEChatContactUserInfoPageRouter = @"imkit://contact/userInfo.page";
+static NSString * const NEChatMeSettingRouter = @"imkit://mine/userInfo.page";
+static NSString * const NEChatTeamSettingViewRouter = @"imkit://team/teamSetting.page";
+static NSString * const NEChatCallViewRouter = @"imkit://callkit.page";
+static NSString * const NEChatForwardMultiSelectedRouter = @"imkit://contact/tab/selector.result";
+static NSString * const NEChatForwardMultiSelectRouter = @"imkit://contact/tab/selector.page";
+static NSInteger const NEChatImageCountLimit = 9;
+static NSInteger const NEChatVideoCountLimit = 1;
 
 static Class NEChatResolveTableViewCellClass(id cellValue) {
   Class cellClass = Nil;
@@ -592,8 +600,8 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
   [self stopPlay];
 }
 
-- (void)willMoveToParentViewController:(UIViewController *)parent {
-  [super willMoveToParentViewController:parent];
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+  [super didMoveToParentViewController:parent];
   if (!parent) {
     NSDictionary *param = @{@"sessionId": ChatRepo.conversationId ?: @""};
     [[Router shared] use:@"ClearAtMessageRemind" parameters:param closure:nil];
@@ -967,7 +975,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
 
   NSString *uid = noti.userInfo[@"uid"];
   if (uid) {
-    [[Router shared] use:ContactUserInfoPageRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"uid": uid} closure:nil];
+    [[Router shared] use:NEChatContactUserInfoPageRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"uid": uid} closure:nil];
   }
 }
 
@@ -1216,7 +1224,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
 
 - (void)didTapHeadPortrait:(nullable MessageContentModel *)model {
   if ([ChatMessageHelper isSelf:model.message]) {
-    [[Router shared] use:MeSettingRouter parameters:@{@"nav": self.navigationController ?: [NSNull null]} closure:nil];
+    [[Router shared] use:NEChatMeSettingRouter parameters:@{@"nav": self.navigationController ?: [NSNull null]} closure:nil];
     return;
   }
   NSString *uid = [ChatMessageHelper getSenderId:model.message];
@@ -1231,10 +1239,10 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
       if (isRobot) {
         params[@"isRobot"] = @YES;
       }
-      [[Router shared] use:ContactUserInfoPageRouter parameters:params closure:nil];
+      [[Router shared] use:NEChatContactUserInfoPageRouter parameters:params closure:nil];
     }];
   } else {
-    [[Router shared] use:ContactUserInfoPageRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"uid": uid} closure:nil];
+    [[Router shared] use:NEChatContactUserInfoPageRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"uid": uid} closure:nil];
   }
 }
 
@@ -1459,7 +1467,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
   }
   if (self.isMutilSelect) return;
   if ([V2NIMConversationIdUtil conversationType:ChatRepo.conversationId] == V2NIM_CONVERSATION_TYPE_TEAM) {
-    [[Router shared] use:TeamSettingViewRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"teamid": ChatRepo.sessionId ?: @""} closure:nil];
+    [[Router shared] use:NEChatTeamSettingViewRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"teamid": ChatRepo.sessionId ?: @""} closure:nil];
   } else if ([V2NIMConversationIdUtil conversationType:ChatRepo.conversationId] == V2NIM_CONVERSATION_TYPE_P2P) {
     NEBaseUserSettingViewController *userSetting = [self getUserSettingViewController];
     [self.navigationController pushViewController:userSetting animated:YES];
@@ -1807,19 +1815,19 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
   NEChatInputPhotoClickBlock callback = ChatUIConfig.shared.chatInputPhotoClick;
   if (callback) {
     __weak typeof(self) weakSelf = self;
-    callback(self, NEMediaTypeAll, chatImageCountLimit, ^(NSArray<NEResultModel *> *results, BOOL isOriginal) {
+    callback(self, NEMediaTypeAll, NEChatImageCountLimit, ^(NSArray<NEResultModel *> *results, BOOL isOriginal) {
       __strong typeof(weakSelf) strongSelf = weakSelf;
       if (!strongSelf || results.count == 0) return;
 
       for (NEResultModel *model in results) {
         if (![model isKindOfClass:[NEResultModel class]]) continue;
-        if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > chatImageCountLimit) {
-          [strongSelf.view neMakeToast:[NSString stringWithFormat:commonLocalizable(@"video_count_over_limit"), (int)chatImageCountLimit]
+        if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > NEChatImageCountLimit) {
+          [strongSelf.view neMakeToast:[NSString stringWithFormat:commonLocalizable(@"video_count_over_limit"), (int)NEChatImageCountLimit]
                               position:NEToastPositionCenter];
           return;
         }
-        if (model.asset.mediaType == PHAssetMediaTypeVideo && results.count > chatVideoCountLimit) {
-          [strongSelf.view neMakeToast:[NSString stringWithFormat:commonLocalizable(@"video_count_over_limit"), (int)chatVideoCountLimit]
+        if (model.asset.mediaType == PHAssetMediaTypeVideo && results.count > NEChatVideoCountLimit) {
+          [strongSelf.view neMakeToast:[NSString stringWithFormat:commonLocalizable(@"video_count_over_limit"), (int)NEChatVideoCountLimit]
                               position:NEToastPositionCenter];
           return;
         }
@@ -1877,7 +1885,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
   if (user) {
     param[@"remoteAvatar"] = user.user.avatar;
   }
-  [[Router shared] use:CallViewRouter parameters:param closure:nil];
+  [[Router shared] use:NEChatCallViewRouter parameters:param closure:nil];
 }
 
 - (void)didToSearchLocationView {
@@ -2768,7 +2776,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
       addText = chatLocalizable(@"user_select_all");
     } else {
       addText = [model showNameInTeam] ?: @"";
-      accid = model.nimUser.accountId ?: @"";
+      accid = model.nimUser.user.accountId ?: @"";
     }
     addText = [@"@" stringByAppendingString:addText];
     [weakSelf addToAtUsers:addText isReply:NO accid:accid isLongPress:NO];
@@ -3297,7 +3305,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
 
 - (void)forwardMessages:(BOOL)isMultiForward depth:(NSInteger)depth {
   __weak typeof(self) weakSelf = self;
-  [[Router shared] register:ForwardMultiSelectedRouter closure:^(NSDictionary *param) {
+  [[Router shared] register:NEChatForwardMultiSelectedRouter closure:^(NSDictionary *param) {
     NSArray *conversations = param[@"conversations"];
     if (![conversations isKindOfClass:[NSArray class]]) {
       return;
@@ -3340,7 +3348,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
     }];
   }];
 
-  [[Router shared] use:ForwardMultiSelectRouter
+  [[Router shared] use:NEChatForwardMultiSelectRouter
              parameters:@{@"nav" : self.navigationController ?: [NSNull null], @"selctorMode" : @0}
                 closure:nil];
 }

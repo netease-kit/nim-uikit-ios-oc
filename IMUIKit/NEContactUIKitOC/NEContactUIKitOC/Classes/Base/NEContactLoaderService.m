@@ -4,7 +4,7 @@
 
 #import "NEContactLoaderService.h"
 #import "NEContactService.h"
-#import <NEChatKitOC/ChatKitClient.h>
+#import <NEChatKit/ChatKitClient.h>
 
 @interface NEContactLoaderService ()
 
@@ -24,15 +24,17 @@
 }
 
 - (void)setupInit {
-  [self setupInitWithFunUI:NO];
-}
-
-- (void)setupInitWithFunUI:(BOOL)isFun {
   ChatKitClient *client = [ChatKitClient shared];
   if (!self.didRegisterService) {
     [client registerInit:[NEContactService shared]];
+    [client buryDataPoints:@"ContactUIKitOC" language:@"oc"];
     self.didRegisterService = YES;
   }
+}
+
+- (void)setupInitWithFunUI:(BOOL)isFun {
+  [self setupInit];
+  ChatKitClient *client = [ChatKitClient shared];
   [client setupInit:isFun];
 }
 

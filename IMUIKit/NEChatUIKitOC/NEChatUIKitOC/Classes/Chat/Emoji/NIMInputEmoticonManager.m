@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NIMInputEmoticonManager.h"
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NEALog.h>
 #import "NSBundle+NEChatUIKit.h"
 
 static NSString *const kClassTag = @"NIMInputEmoticonManager";

@@ -5,15 +5,15 @@
 #import "NEBaseTeamIntroduceViewController.h"
 #import "TeamConstant.h"
 #import "TeamIntroduceViewModel.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 
 @interface NEBaseTeamIntroduceViewController ()
 @property (nonatomic, assign, readwrite) NSInteger textLimit;

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FunRecordAudioView.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NELottieAnimationView.h>
 #import "FunChatUIColor.h"
 #import "NEChatUIConstant.h"

@@ -7,13 +7,13 @@
 #import "SettingCellLabelArrowModel.h"
 #import "SettingCellModel.h"
 #import "SettingSectionModel.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECommonUtil.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECommonUtil.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 
 @implementation TeamManagerViewModel
 

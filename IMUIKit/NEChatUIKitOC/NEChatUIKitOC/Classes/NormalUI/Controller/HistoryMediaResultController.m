@@ -4,7 +4,7 @@
 
 #import "HistoryMediaResultController.h"
 #import "ForwardAlertViewController.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 
 @implementation HistoryMediaResultController
 

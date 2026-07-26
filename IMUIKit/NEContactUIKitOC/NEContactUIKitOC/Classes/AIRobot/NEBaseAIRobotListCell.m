@@ -4,9 +4,9 @@
 
 #import "NEBaseAIRobotListCell.h"
 #import "NEAIRobotModel.h"
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation NEBaseAIRobotListCell

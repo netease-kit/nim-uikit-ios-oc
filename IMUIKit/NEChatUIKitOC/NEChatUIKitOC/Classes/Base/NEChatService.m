@@ -7,8 +7,8 @@
 #import "NormalChatRouter.h"
 #import "FunChatRouter.h"
 #import "NEEmotionTool.h"
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NIMKitFileLocationHelper.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NIMKitFileLocationHelper.h>
 #import <NIMSDK/NIMSDK.h>
 #import <SDWebImage/SDWebImage.h>
 #if __has_include(<SDWebImageWebPCoder/SDImageWebPCoder.h>)

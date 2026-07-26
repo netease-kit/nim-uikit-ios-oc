@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 #import "ContactUserViewModel.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 
 @implementation ContactUserViewModel
 

@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/TeamRepo.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

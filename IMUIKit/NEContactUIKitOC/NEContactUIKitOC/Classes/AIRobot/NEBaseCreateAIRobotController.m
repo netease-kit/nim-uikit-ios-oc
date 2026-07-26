@@ -7,12 +7,15 @@
 #import "CreateAIRobotViewModel.h"
 #import "FunContactUIColor.h"
 #import "NormalContactUIColor.h"
-#import <NEChatKitOC/AIRepo.h>
-#import <NEChatKitOC/NEAIRobotManager.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/AIRepo.h>
+#import <NEChatKit/NEAIRobotManager.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
+
+static NSString * const NECreateAIRobotDetailRouterCompat = @"imkit://contact/aiRobotDetail.page";
+static NSString * const NECreateAIRobotNicknameEditRouterCompat = @"imkit://contact/robotNicknameEdit.page";
 
 @interface NEBaseCreateAIRobotController ()
 
@@ -272,7 +275,7 @@
               [controllers removeObjectsAtIndexes:indexes];
             }
             [nav setViewControllers:controllers animated:NO];
-            [[Router shared] use:ContactAIRobotDetailRouter
+            [[Router shared] use:NECreateAIRobotDetailRouterCompat
                       parameters:@{
                         @"nav": nav,
                         @"bot": bot,
@@ -283,7 +286,7 @@
         }];
       } else {
         [nav popViewControllerAnimated:NO];
-        [[Router shared] use:ContactAIRobotDetailRouter
+        [[Router shared] use:NECreateAIRobotDetailRouterCompat
                   parameters:@{
                     @"nav": nav,
                     @"bot": bot,
@@ -300,7 +303,7 @@
     return;
   }
   __weak typeof(self) weakSelf = self;
-  [[Router shared] use:ContactRobotNicknameEditRouter
+  [[Router shared] use:NECreateAIRobotNicknameEditRouterCompat
             parameters:@{
               @"nav": self.navigationController,
               @"currentName": self.nameTextField.text ?: @"",

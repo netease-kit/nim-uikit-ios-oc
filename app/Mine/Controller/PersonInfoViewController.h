@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import <NECommonUIKitOC/NEBaseViewController.h>
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
 
 NS_ASSUME_NONNULL_BEGIN

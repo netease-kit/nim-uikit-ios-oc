@@ -4,13 +4,14 @@
 
 #import "NEBaseTeamMemberSelectCell.h"
 #import "NESelectTeamMember.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/TeamMemberInfoModel.h>
-#import <NEChatKitOC/NEUserWithFriend.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/TeamMemberInfoModel.h>
+#import <NEChatKit/NEUserWithFriend.h>
+#import <NIMSDK/V2NIMUserServiceProtocol.h>
 
 @implementation NEBaseTeamMemberSelectCell
 

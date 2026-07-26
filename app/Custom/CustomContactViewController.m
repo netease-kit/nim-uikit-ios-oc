@@ -10,7 +10,7 @@
 #import <NEContactUIKitOC/ContactSection.h>
 #import <NEContactUIKitOC/ContactUIConfig.h>
 #import <NEContactUIKitOC/ContactViewModel.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @interface CustomContactViewController ()
 @property (nonatomic, strong) CustomView *customTopViewInner;

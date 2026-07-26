@@ -4,7 +4,7 @@
 
 #import "NEConversationLoaderService.h"
 #import "NEConversationService.h"
-#import <NEChatKitOC/ChatKitClient.h>
+#import <NEChatKit/ChatKitClient.h>
 
 @interface NEConversationLoaderService ()
 @property (nonatomic, assign) BOOL didRegisterService;
@@ -25,7 +25,7 @@
   ChatKitClient *client = [ChatKitClient shared];
   if (!self.didRegisterService) {
     [client registerInit:[NEConversationService shared]];
-    [client buryDataPoints:@"ConversationUIKit"];
+    [client buryDataPoints:@"ConversationUIKitOC" language:@"oc"];
     self.didRegisterService = YES;
   }
 }

@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 #import "NEBasePinMessageCell.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 #import <NECommonUIKitOC/FileStateView.h>
 
 NS_ASSUME_NONNULL_BEGIN

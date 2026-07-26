@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "IntroduceBrandViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "AppKey.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/NENavigationView.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 
 #pragma mark - IntroduceViewModel

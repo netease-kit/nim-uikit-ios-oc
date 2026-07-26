@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactSelectedCell.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import "ContactInfo.h"
 

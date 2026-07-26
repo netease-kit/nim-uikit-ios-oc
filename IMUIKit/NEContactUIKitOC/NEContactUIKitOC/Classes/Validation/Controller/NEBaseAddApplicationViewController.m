@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 #import "NEBaseAddApplicationViewController.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
 #import <NIMSDK/NIMSDK.h>
 #import "ContactConst.h"
 #import "NEBaseSystemNotificationCell.h"

@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import <UIKit/UIKit.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NSObject+YXModel.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NSObject+YXModel.h>
 #import "ChatInputViewDelegate.h"
 #import "MessageAtInfoModel.h"
 #import "NETeamUserManager.h"

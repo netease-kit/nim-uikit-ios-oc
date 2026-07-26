@@ -3,17 +3,17 @@
 // found in the LICENSE file.
 
 #import "NEBasePinMessageViewController.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
 #import <NIMSDK/NIMSDK.h>
 #import "ChatMessageHelper.h"
 #import "ChatNavigationView.h"
-#import <NEChatKitOC/NEPathUtils.h>
-#import <NEChatKitOC/NECustomUtils.h>
+#import <NEChatKit/NEPathUtils.h>
+#import <NEChatKit/NECustomUtils.h>
 #import <NECommonUIKitOC/NEWKWebViewController.h>
 #import <NECommonUIKitOC/VideoPlayerViewController.h>
 #import <NECommonUIKitOC/PhotoBrowserController.h>
@@ -33,6 +33,10 @@
 #import "ChatViewController.h"
 
 const NSInteger PinMessageDefaultType = 1000;
+static NSString * const NEPinPushP2pChatVCRouter = @"imkit://chat/p2pChat.page";
+static NSString * const NEPinPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
+static NSString * const NEPinForwardMultiSelectedRouter = @"imkit://contact/tab/selector.result";
+static NSString * const NEPinForwardMultiSelectRouter = @"imkit://contact/tab/selector.page";
 
 static Class NEPinResolveTableViewCellClass(id cellValue) {
     Class cellClass = Nil;
@@ -252,7 +256,7 @@ static void NEPinAppendUniqueMessages(NSMutableArray<V2NIMMessage *> *target, NS
 
     if (item.message.conversationType == V2NIM_CONVERSATION_TYPE_P2P) {
         NSString *conversationId = item.message.conversationId;
-        [Router.shared use:PushP2pChatVCRouter
+        [Router.shared use:NEPinPushP2pChatVCRouter
                 parameters:@{@"nav": self.navigationController ?: [NSNull null],
                               @"conversationId": conversationId ?: [NSNull null],
                               @"anchor": item.message,
@@ -261,7 +265,7 @@ static void NEPinAppendUniqueMessages(NSMutableArray<V2NIMMessage *> *target, NS
         [self.onReceiveNewMsgs removeAllObjects];
     } else if (item.message.conversationType == V2NIM_CONVERSATION_TYPE_TEAM) {
         NSString *conversationId = item.message.conversationId;
-        [Router.shared use:PushTeamChatVCRouter
+        [Router.shared use:NEPinPushTeamChatVCRouter
                 parameters:@{@"nav": self.navigationController ?: [NSNull null],
                               @"conversationId": conversationId ?: [NSNull null],
                               @"anchor": item.message,
@@ -388,7 +392,7 @@ static void NEPinAppendUniqueMessages(NSMutableArray<V2NIMMessage *> *target, NS
 
 - (void)forwardMessage:(V2NIMMessage *)message {
     __weak typeof(self) weakSelf = self;
-    [Router.shared register:ForwardMultiSelectedRouter closure:^(NSDictionary * _Nonnull param) {
+    [Router.shared register:NEPinForwardMultiSelectedRouter closure:^(NSDictionary * _Nonnull param) {
         NSMutableArray<ForwardItem *> *items = [NSMutableArray array];
         NSArray *conversations = param[@"conversations"];
         if (![conversations isKindOfClass:[NSArray class]]) return;
@@ -417,7 +421,7 @@ static void NEPinAppendUniqueMessages(NSMutableArray<V2NIMMessage *> *target, NS
             }];
         }];
     }];
-    [Router.shared use:ForwardMultiSelectRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"selctorMode": @0} closure:nil];
+    [Router.shared use:NEPinForwardMultiSelectRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"selctorMode": @0} closure:nil];
 }
 
 - (void)tableViewReload:(BOOL)needLoad {

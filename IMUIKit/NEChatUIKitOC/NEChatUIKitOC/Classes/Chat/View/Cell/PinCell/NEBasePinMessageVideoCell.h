@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 #import "NEBasePinMessageImageCell.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 
 #import <NECommonUIKitOC/VideoStateView.h>
 

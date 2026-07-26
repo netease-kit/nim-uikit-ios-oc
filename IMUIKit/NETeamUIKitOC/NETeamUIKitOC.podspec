@@ -1,7 +1,6 @@
 require_relative "../../PodConfigs/config_podspec.rb"
 require_relative "../../PodConfigs/config_local_common.rb"
 require_relative "../../PodConfigs/config_local_im.rb"
-require_relative "../../PodConfigs/config_third.rb"
 
 Pod::Spec.new do |s|
   s.name             = 'NETeamUIKitOC'
@@ -17,9 +16,9 @@ Pod::Spec.new do |s|
   s.resource     = 'NETeamUIKitOC/Assets/**/*'
 
   s.dependency NEChatUIKitOC.name
-  s.dependency NEChatKitOC.name
+  s.dependency NEChatKit.name, NEChatKit.version
   s.dependency NECommonUIKitOC.name
-  s.dependency NIMSDK.name, NIMSDK.version
+  s.dependency 'NIMSDK_LITE', YXConfig.nimsdk_version
 
   YXConfig.pod_target_xcconfig(s)
 end

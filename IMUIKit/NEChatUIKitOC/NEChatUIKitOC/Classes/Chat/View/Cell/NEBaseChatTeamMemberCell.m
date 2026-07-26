@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 #import "NEBaseChatTeamMemberCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 #import "ChatCellConstantValue.h"
 
 @implementation NEBaseChatTeamMemberCell

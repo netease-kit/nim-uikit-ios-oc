@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/IMKitPluginManager.h>
-#import <NEChatKitOC/XKit.h>
+#import <NEChatKit/IMKitPluginManager.h>
+#import <NEChatKit/XKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

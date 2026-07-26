@@ -4,10 +4,8 @@
 
 #import "ChatViewModel.h"
 #import <AVFoundation/AVFoundation.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECustomUtils.h>
-#import <NEChatKitOC/NECommonKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECustomUtils.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NIMSDK/NIMSDK.h>
 #import "NEChatUIConstant.h"
@@ -21,7 +19,7 @@
 #import "NotificationMessageUtils.h"
 #import "OperationItem+NEChatUIKit.h"
 #import "ReplyMessageUtil.h"
-#import <NEChatKitOC/NEPathUtils.h>
+#import <NEChatKit/NEPathUtils.h>
 
 static NSString *const TAG = @"ChatViewModel";
 extern NSString *const yxAtMsg;
@@ -2185,9 +2183,12 @@ extern NSString *const yxAtMsg;
         return;
     }
     switch (message.sendingState) {
-        case V2NIM_MESSAGE_SENDING_STATE_SENDING: [self sendingMsg:message]; break;
-        case V2NIM_MESSAGE_SENDING_STATE_FAILED: [self sendMsgFailed:message error:nil]; break;
-        case V2NIM_MESSAGE_SENDING_STATE_SUCCEEDED: [self sendMsgSuccess:message]; break;
+        case V2NIM_MESSAGE_SENDING_STATE_SENDING:
+        // 消息发送中
+        case V2NIM_MESSAGE_SENDING_STATE_FAILED:
+        // 消息发送失败
+        case V2NIM_MESSAGE_SENDING_STATE_SUCCEEDED:
+        // 消息发送成功
         default: break;
     }
 }

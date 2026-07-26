@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 #import "ConversationSearchViewModel.h"
-#import <NEChatKitOC/ConversationSearchListModel.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NIMExtension.h>
+#import <NEChatKit/ConversationSearchListModel.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NIMExtension.h>
 
 @implementation ConversationSearchViewModel
 

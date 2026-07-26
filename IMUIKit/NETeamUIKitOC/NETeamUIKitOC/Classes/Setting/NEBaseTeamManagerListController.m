@@ -4,12 +4,15 @@
 
 #import "NEBaseTeamManagerListController.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEConstant.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+
+static NSString * const NETeamManagerListMeSettingRouter = @"imkit://mine/userInfo.page";
+static NSString * const NETeamManagerListContactUserInfoPageRouter = @"imkit://contact/userInfo.page";
 
 @interface NEBaseTeamManagerListController ()
 @property (nonatomic, strong, readwrite) TeamManagerListViewModel *viewmodel;
@@ -111,11 +114,11 @@
   NETeamMemberInfoModel *model = self.viewmodel.managers[indexPath.row];
   NEUserWithFriend *user = model.nimUser;
   if ([[IMKitClient instance] isMe:user.user.accountId]) {
-    [[Router shared] use:MeSettingRouter
+    [[Router shared] use:NETeamManagerListMeSettingRouter
               parameters:@{@"nav": self.navigationController ?: [NSNull null]}
                  closure:nil];
   } else if (user.user.accountId.length > 0) {
-    [[Router shared] use:ContactUserInfoPageRouter
+    [[Router shared] use:NETeamManagerListContactUserInfoPageRouter
               parameters:@{
                 @"nav": self.navigationController ?: [NSNull null],
                 @"uid": user.user.accountId ?: @"",

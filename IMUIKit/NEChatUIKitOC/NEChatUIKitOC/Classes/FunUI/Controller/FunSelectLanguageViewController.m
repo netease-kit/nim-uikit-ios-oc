@@ -4,7 +4,7 @@
 
 #import "FunSelectLanguageViewController.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "FunLanguageCell.h"
 #import "FunChatUIColor.h"
 

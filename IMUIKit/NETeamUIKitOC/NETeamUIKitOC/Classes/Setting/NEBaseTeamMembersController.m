@@ -5,18 +5,21 @@
 #import "NEBaseTeamMembersController.h"
 #import "TeamConstant.h"
 #import "NEBaseTeamMemberCell.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NEChatUIKitOC/NEChatUIConstant.h>
 #import <NEChatUIKitOC/NETeamUserManager.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NIMExtension.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NIMExtension.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+
+static NSString * const NETeamMembersMeSettingRouter = @"imkit://mine/userInfo.page";
+static NSString * const NETeamMembersContactUserInfoPageRouter = @"imkit://contact/userInfo.page";
 
 @interface NEBaseTeamMembersController ()
 @property (nonatomic, strong, readwrite) UIView *backView;
@@ -202,11 +205,11 @@
   }
 
   if ([[IMKitClient instance] isMe:user.user.accountId]) {
-    [[Router shared] use:MeSettingRouter
+    [[Router shared] use:NETeamMembersMeSettingRouter
               parameters:@{@"nav": self.navigationController ?: [NSNull null]}
                  closure:nil];
   } else if (user.user.accountId.length > 0) {
-    [[Router shared] use:ContactUserInfoPageRouter
+    [[Router shared] use:NETeamMembersContactUserInfoPageRouter
               parameters:@{
                 @"nav": self.navigationController ?: [NSNull null],
                 @"uid": user.user.accountId ?: @"",

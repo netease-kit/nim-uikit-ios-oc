@@ -6,8 +6,8 @@
 #import "UIImage+Chat.h"
 #import "NEChatUIConstant.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
 
 @interface NEMutilSelectBottomView ()
 

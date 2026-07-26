@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "MessageOperationView.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "OperationCell.h"
 
 @interface MessageOperationView ()

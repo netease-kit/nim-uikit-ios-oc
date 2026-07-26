@@ -5,7 +5,6 @@
 #import "FunChatMessageVideoCell.h"
 #import "ChatMessageHelper.h"
 #import <AVFoundation/AVFoundation.h>
-#import <NEChatKitOC/NECommonKitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <SDWebImage/SDWebImage.h>
 #import "MessageVideoModel.h"

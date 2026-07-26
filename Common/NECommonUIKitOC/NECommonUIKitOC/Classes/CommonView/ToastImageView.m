@@ -4,8 +4,8 @@
 
 #import "ToastImageView.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
 
 @interface ToastImageView ()
 

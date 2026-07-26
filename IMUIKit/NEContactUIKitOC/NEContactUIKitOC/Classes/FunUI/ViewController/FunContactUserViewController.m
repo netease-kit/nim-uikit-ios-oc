@@ -5,7 +5,7 @@
 #import "FunContactUserViewController.h"
 #import "TextWithSwitchCell.h"
 #import "CenterTextCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "FunUserInfoHeaderView.h"
 #import "FunContactAliasViewController.h"
 #import "FunContactUIColor.h"

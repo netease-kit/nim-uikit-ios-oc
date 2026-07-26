@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "FunChatMessageRevokeCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ChatCellConstantValue.h"
 #import "ChatUIConfig.h"
 #import "NEChatUIConstant.h"

@@ -5,14 +5,16 @@
 #import "NEBaseJoinTeamViewController.h"
 #import "TeamConstant.h"
 #import "JoinTeamViewModel.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NEALog.h>
+
+static NSString * const NETeamDetailInfoPageRouterCompat = @"imkit://team/teamDetailInfo.page";
 
 @interface NEBaseJoinTeamViewController ()
 @property (nonatomic, strong, readwrite) JoinTeamViewModel *viewModel;
@@ -125,7 +127,7 @@
     }
 
     if (team) {
-      [[Router shared] use:TeamDetailInfoPageRouter
+      [[Router shared] use:NETeamDetailInfoPageRouterCompat
                 parameters:@{
                   @"nav" : strongSelf.navigationController ?: [NSNull null],
                   @"team" : team

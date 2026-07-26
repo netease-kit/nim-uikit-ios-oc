@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FileStateView.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 #import "NECommonUIConstant.h"
 
 @interface FileStateView ()

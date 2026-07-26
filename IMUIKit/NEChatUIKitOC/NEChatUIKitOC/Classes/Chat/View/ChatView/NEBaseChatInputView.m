@@ -11,10 +11,8 @@
 #import "NEEmotionTool.h"
 #import "NEInputMoreCell.h"
 #import "AIChatViewController.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECommonKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 
 NSString *const yxAtMsg = @"yxAitMsg";
 NSInteger const atRangeOffset = 1;

@@ -4,8 +4,8 @@
 
 #import "FunChatMessageLocationCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <SDWebImage/SDWebImage.h>
 #import "MessageLocationModel.h"
 #import "NEChatUIConstant.h"

@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

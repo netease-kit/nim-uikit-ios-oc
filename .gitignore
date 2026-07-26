@@ -61,12 +61,30 @@ compile_commands.json
 
 # CocoaPods
 Pods/
+app.xcworkspace/
+
+# Local credentials
+app/Main/AppKey.private.h
 
 # Xcode user/workspace state
 *.xcuserstate
 xcuserdata/
 .derivedData*/
 DerivedData/
+
+# Apple build and release artifacts
+*.dSYM/
+*.ipa
+*.xcarchive/
+release_output/
+spm_release/
+
+# Internal development material
+openspec/
+build_frame.sh
+PodConfigs/config_local_*.rb
+scripts/fix_oc_framework_headers.py
+scripts/generate_app_project.rb
 
 # vcpkg
 vcpkg_installed/

@@ -8,7 +8,7 @@
 #import "NEChatBaseCell.h"
 #import "ChatMessageHelper.h"
 #import "ReplyMessageUtil.h"
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/IMKitClient.h>
 
 @implementation MessageContentModel
 

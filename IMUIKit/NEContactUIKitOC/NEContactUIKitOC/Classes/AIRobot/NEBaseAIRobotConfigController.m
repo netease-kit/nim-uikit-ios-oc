@@ -6,9 +6,9 @@
 #import "ContactConst.h"
 #import "FunContactUIColor.h"
 #import "NormalContactUIColor.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/IMKitClient.h>
 
 @interface NEBaseAIRobotConfigController ()
 

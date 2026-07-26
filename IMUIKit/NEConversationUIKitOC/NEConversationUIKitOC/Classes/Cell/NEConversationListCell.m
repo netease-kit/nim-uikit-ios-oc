@@ -8,10 +8,10 @@
 #import "NEMessageUtil.h"
 #import "ConversationUIConfig.h"
 @import NECommonUIKitOC;
-#import <NEChatKitOC/NEAIUserManager.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/NEAIUserManager.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import <NIMSDK/NIMSDK.h>
 #import <objc/message.h>
 

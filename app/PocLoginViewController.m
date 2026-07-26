@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "PocLoginViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "Main/AppKey.h"
 #import "Manager/IMPocConfigManager.h"
-#import <NIMSDK/NIMSDK.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
 
 @interface PocLoginViewController ()
@@ -106,26 +106,21 @@
   }
 
   self.isLogining = YES;
-  V2NIMLoginOption *option = [[V2NIMLoginOption alloc] init];
-  option.syncLevel = V2NIM_DATA_SYNC_TYPE_LEVEL_BASIC;
-
-  [[NIMSDK sharedSDK].v2LoginService login:username
-                                     token:password
-                                    option:option
-                                   success:^{
+  [[IMKitClient instance] login:username
+                          token:password
+                     completion:^(NSError * _Nullable error) {
     dispatch_async(dispatch_get_main_queue(), ^{
       self.isLogining = NO;
-      IMPocConfigModel *config = [[IMPocConfigManager instance] getConfig];
-      config.accountId = username;
-      config.accountIdToken = password;
-      [[IMPocConfigManager instance] saveConfig:config];
-      if (self.loginSuccess) self.loginSuccess();
-    });
-  } failure:^(V2NIMError * _Nonnull error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      self.isLogining = NO;
-      [self.view endEditing:YES];
-      [self showToast:[NSString stringWithFormat:@"登录失败: %@", error.nserror.localizedDescription ?: @""]];
+      if (error) {
+        [self.view endEditing:YES];
+        [self showToast:[NSString stringWithFormat:@"登录失败: %@", error.localizedDescription ?: @""]];
+      } else {
+        IMPocConfigModel *config = [[IMPocConfigManager instance] getConfig];
+        config.accountId = username;
+        config.accountIdToken = password;
+        [[IMPocConfigManager instance] saveConfig:config];
+        if (self.loginSuccess) self.loginSuccess();
+      }
     });
   }];
 }

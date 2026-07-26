@@ -4,7 +4,7 @@
 
 #import "TeamSettingSubtitleSwitchCell.h"
 #import <NEChatUIKitOC/ChatCellConstantValue.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @implementation TeamSettingSubtitleSwitchCell
 

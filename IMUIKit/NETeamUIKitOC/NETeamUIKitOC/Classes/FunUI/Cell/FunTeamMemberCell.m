@@ -4,7 +4,7 @@
 
 #import "FunTeamMemberCell.h"
 #import "FunTeamUIColor.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
 
 @interface FunTeamMemberCell ()

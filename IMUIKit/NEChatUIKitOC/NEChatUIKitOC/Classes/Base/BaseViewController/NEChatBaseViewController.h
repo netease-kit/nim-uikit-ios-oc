@@ -4,7 +4,6 @@
 
 #import <UIKit/UIKit.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECommonKitOC.h>
 #import "ChatNavigationView.h"
 #import "FunChatUIColor.h"
 

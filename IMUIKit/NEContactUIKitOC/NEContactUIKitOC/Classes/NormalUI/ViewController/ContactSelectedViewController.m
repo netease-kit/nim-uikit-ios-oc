@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "ContactSelectedViewController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactSelectedCell.h"
 #import "ContactUnCheckCell.h"
 #import "ContactSectionView.h"

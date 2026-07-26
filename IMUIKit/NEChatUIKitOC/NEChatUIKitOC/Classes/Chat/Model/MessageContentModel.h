@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import <UIKit/UIKit.h>
-#import <NEChatKitOC/MessageModel.h>
+#import <NEChatKit/MessageModel.h>
 
 @class NEChatBaseCell;
 @class ChatUIConfig;

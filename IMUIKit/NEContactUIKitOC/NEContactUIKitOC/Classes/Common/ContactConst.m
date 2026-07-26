@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NECommonLoader.h>
 
 /// 资源加载器（定位 bundle 用）
 static NECommonLoader *_contactCoreLoader = nil;

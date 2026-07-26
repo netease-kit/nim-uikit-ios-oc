@@ -4,8 +4,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <NEChatKitOC/ChatKitClient.h>
-#import <NEChatKitOC/NEChatKitClient.h>
+#import <NEChatKit/ChatKitClient.h>
+#import <NEChatKit/NEChatKitClient.h>
 
 @class NEEmotionTool;
 

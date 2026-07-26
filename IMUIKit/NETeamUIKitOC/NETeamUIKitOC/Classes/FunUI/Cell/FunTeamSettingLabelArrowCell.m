@@ -4,7 +4,7 @@
 
 #import "FunTeamSettingLabelArrowCell.h"
 #import "SettingCellLabelArrowModel.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @interface FunTeamSettingLabelArrowCell ()
 @property (nonatomic, strong, readwrite) UILabel *arrowLabel;

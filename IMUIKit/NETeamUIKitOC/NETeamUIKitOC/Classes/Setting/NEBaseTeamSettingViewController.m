@@ -9,19 +9,27 @@
 #import "SettingSectionModel.h"
 #import "NEBaseTeamMembersController.h"
 #import "NEBaseTeamSettingCell.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NEChatUIKitOC/NETeamUserManager.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+
+static NSString * const NETeamContactSelectedUsersRouter = @"imkit://contact.selectUser.page";
+static NSString * const NETeamContactFusionSelectRouter = @"imkit://contact/fusionselector.page";
+static NSString * const NETeamContactUserSelectRouter = @"imkit://contact/selector.page";
+static NSString * const NETeamMeSettingRouter = @"imkit://mine/userInfo.page";
+static NSString * const NETeamContactUserInfoPageRouter = @"imkit://contact/userInfo.page";
+static NSString * const NETeamPushPinMessageVCRouter = @"imkit://chat/pinMessage.page";
+static NSString * const NETeamSearchMessageRouter = @"imkit://chat/searchMessage.page";
 
 @interface NEBaseTeamSettingViewController ()
 @property (nonatomic, strong, readwrite) TeamSettingViewModel *viewModel;
@@ -200,7 +208,7 @@
   self.isRequestingData = YES;
 
   __weak typeof(self) weakSelf = self;
-  [[Router shared] register:ContactSelectedUsersRouter closure:^(NSDictionary<NSString *,id> *params) {
+  [[Router shared] register:NETeamContactSelectedUsersRouter closure:^(NSDictionary<NSString *,id> *params) {
     NSArray<NSString *> *accids = [params[@"accids"] isKindOfClass:[NSArray class]] ? params[@"accids"] : nil;
     NSString *teamId = weakSelf.viewModel.teamInfoModel.team.teamId ?: @"";
     if (accids.count <= 0 || teamId.length <= 0) {
@@ -240,9 +248,9 @@
     params[@"limit"] = @(memberLimit - filters.count);
 
     if ([IMKitConfigCenter shared].enableAIUser) {
-      [[Router shared] use:ContactFusionSelectRouter parameters:params closure:nil];
+      [[Router shared] use:NETeamContactFusionSelectRouter parameters:params closure:nil];
     } else {
-      [[Router shared] use:ContactUserSelectRouter parameters:params closure:nil];
+      [[Router shared] use:NETeamContactUserSelectRouter parameters:params closure:nil];
     }
   }];
 }
@@ -337,11 +345,11 @@
   }
 
   if ([[IMKitClient instance] isMe:uid]) {
-    [[Router shared] use:MeSettingRouter
+    [[Router shared] use:NETeamMeSettingRouter
               parameters:@{@"nav": self.navigationController ?: [NSNull null]}
                  closure:nil];
   } else {
-    [[Router shared] use:ContactUserInfoPageRouter
+    [[Router shared] use:NETeamContactUserInfoPageRouter
               parameters:@{
                 @"nav": self.navigationController ?: [NSNull null],
                 @"uid": uid,
@@ -496,7 +504,7 @@
     return;
   }
   NSString *conversationId = [V2NIMConversationIdUtil teamConversationId:teamId];
-  [[Router shared] use:PushPinMessageVCRouter
+  [[Router shared] use:NETeamPushPinMessageVCRouter
             parameters:@{
               @"nav": self.navigationController ?: [NSNull null],
               @"conversationId": conversationId ?: @"",
@@ -577,7 +585,7 @@
   }
 
   NSString *conversationId = [V2NIMConversationIdUtil teamConversationId:teamId];
-  [[Router shared] use:SearchMessageRouter
+  [[Router shared] use:NETeamSearchMessageRouter
             parameters:@{
               @"nav": self.navigationController ?: [NSNull null],
               @"conversationId": conversationId ?: @"",

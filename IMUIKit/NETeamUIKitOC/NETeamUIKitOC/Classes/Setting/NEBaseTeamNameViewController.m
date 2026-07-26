@@ -5,14 +5,14 @@
 #import "NEBaseTeamNameViewController.h"
 #import "TeamConstant.h"
 #import "TeamNameViewModel.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/TeamRepo.h>
 
 @interface NEBaseTeamNameViewController ()
 @property (nonatomic, strong, readwrite) UIView *backView;

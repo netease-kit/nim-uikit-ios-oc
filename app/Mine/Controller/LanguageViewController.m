@@ -6,8 +6,8 @@
 #import "NEStyleManager.h"
 #import "CustomThemeCells.h"
 #import "AppKey.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NENavigationView.h>

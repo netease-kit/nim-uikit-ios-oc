@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import "TabNavigationView.h"
 
 NSString *const useSystemNav = @"useSystemNav";

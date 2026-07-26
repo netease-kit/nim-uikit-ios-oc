@@ -4,8 +4,8 @@
 
 #import "TextViewController.h"
 #import "ChatNavigationView.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import "NEChatUIConstant.h"
 #import <NECommonUIKitOC/NEWKWebViewController.h>

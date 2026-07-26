@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "NELocalConversationDataSource.h"
-#import <NEChatKitOC/LocalConversationRepo.h>
-#import <NEChatKitOC/MultiDelegate.h>
+#import <NEChatKit/LocalConversationRepo.h>
+#import <NEChatKit/MultiDelegate.h>
 #import <NIMSDK/NIMSDK.h>
 
 @interface NELocalConversationDataSource () <NELocalConversationListener>

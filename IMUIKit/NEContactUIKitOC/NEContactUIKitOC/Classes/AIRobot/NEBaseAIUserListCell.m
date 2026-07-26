@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "NEBaseAIUserListCell.h"
-#import <NEChatKitOC/NIMExtension.h>
-#import <NEChatKitOC/NEAIUserModel.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NIMExtension.h>
+#import <NEChatKit/NEAIUserModel.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation NEBaseAIUserListCell

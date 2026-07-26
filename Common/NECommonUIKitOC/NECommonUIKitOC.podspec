@@ -1,5 +1,4 @@
 require_relative "../../PodConfigs/config_podspec.rb"
-require_relative "../../PodConfigs/config_third.rb"
 require_relative "../../PodConfigs/config_local_common.rb"
 require_relative "../../PodConfigs/config_local_im.rb"
 
@@ -31,9 +30,9 @@ Pod::Spec.new do |s|
   end
   s.resource     = 'NECommonUIKitOC/Assets/**/*'
 
-  s.dependency NEChatKitOC.name
-  s.dependency SDWebImage.name, SDWebImage.version
-  s.dependency LottieOC.name, LottieOC.version
+  s.dependency NEChatKit.name, NEChatKit.version
+  s.dependency 'SDWebImage'
+  s.dependency 'lottie-ios'
 
   s.frameworks = 'UIKit', 'Foundation'
 

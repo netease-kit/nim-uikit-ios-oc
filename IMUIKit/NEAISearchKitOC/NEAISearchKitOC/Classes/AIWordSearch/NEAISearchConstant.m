@@ -4,8 +4,8 @@
 
 #import "NEAISearchConstant.h"
 #import "NEAISearchLoader.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
 
 NSString *const NEAISearchModuleName = @"NEAISearchKit";
 

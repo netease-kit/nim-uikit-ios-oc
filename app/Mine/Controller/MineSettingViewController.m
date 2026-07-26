@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #import "MineSettingViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "MessageRemindViewController.h"
 #import "StyleSelectionViewController.h"
 #import "LanguageViewController.h"
@@ -13,15 +14,14 @@
 #import "IMPocConfigManager.h"
 #import "NEStyleManager.h"
 #import "AppKey.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NESubscribeManager.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NESubscribeManager.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/ViewControllerExtension.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/SettingRepo.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/SettingRepo.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
 #import <NECommonUIKitOC/NENavigationView.h>
 #import <NIMSDK/NIMSDK.h>

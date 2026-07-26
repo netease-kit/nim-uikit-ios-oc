@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactTableViewCell.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECommonLoader.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ContactInfo.h"

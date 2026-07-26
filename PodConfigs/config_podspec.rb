@@ -1,6 +1,6 @@
 module YXConfig
   def self.imuikit_version
-    "10.9.20"
+    "10.9.21"
   end
 
   def self.nimsdk_version

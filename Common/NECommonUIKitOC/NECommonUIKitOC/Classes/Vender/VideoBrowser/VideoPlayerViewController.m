@@ -11,9 +11,9 @@
 #import "UIView+YXToast.h"
 #import <AVFoundation/AVFoundation.h>
 #import <math.h>
-#import <NEChatKitOC/NEAuthManager.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NSDate+NECommon.h>
+#import <NEChatKit/NEAuthManager.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NSDate+NECommon.h>
 
 static NSString *const kCallKitShowNoti = @"kCallKitShowNoti";
 

@@ -7,8 +7,8 @@
 #import "NEConfigManager.h"
 #import "CommonUIConfig.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @interface NEBaseViewController ()
 @property (nonatomic, strong, readwrite) NENavigationView *navigationView;

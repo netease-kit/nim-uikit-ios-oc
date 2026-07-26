@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 
 @class V2NIMTeam;
 @class V2NIMTeamMember;

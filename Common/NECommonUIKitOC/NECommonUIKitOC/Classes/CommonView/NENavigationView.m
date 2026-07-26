@@ -5,10 +5,10 @@
 #import "NENavigationView.h"
 #import "CommonUIConfig.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NECommonLoader.h>
 
 @interface NENavigationView ()
 @property (nonatomic, strong, readwrite) UIButton *backButton;

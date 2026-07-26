@@ -5,9 +5,9 @@
 #import "TeamAvatarViewController.h"
 #import "TeamDefaultIconCell.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
 

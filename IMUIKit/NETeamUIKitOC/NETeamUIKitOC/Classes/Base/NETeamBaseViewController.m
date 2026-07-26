@@ -10,9 +10,9 @@
 #import <NECommonUIKitOC/NEEmptyDataView.h>
 #import <NECommonUIKitOC/ViewControllerExtension.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 #import <Photos/Photos.h>
 
 @interface NETeamBaseViewController ()

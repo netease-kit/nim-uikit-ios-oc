@@ -5,7 +5,7 @@
 #import "NEBaseTeamInfoViewController.h"
 #import "TeamConstant.h"
 #import "NEBaseTeamSettingCell.h"
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 
 @interface NEBaseTeamInfoViewController ()
 @property (nonatomic, strong, readwrite) TeamInfoViewModel *viewModel;

@@ -3,16 +3,17 @@
 // found in the LICENSE file.
 
 #import "NEBaseCollectionMessageController.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
 #import <NIMSDK/NIMSDK.h>
 #import <MJRefresh/MJRefresh.h>
 #import "ChatMessageHelper.h"
-#import <NEChatKitOC/NEPathUtils.h>
-#import <NEChatKitOC/NECustomUtils.h>
+#import <NEChatKit/NEPathUtils.h>
+#import <NEChatKit/NECustomUtils.h>
 #import <NECommonUIKitOC/NEWKWebViewController.h>
 #import <NECommonUIKitOC/VideoPlayerViewController.h>
 #import <NECommonUIKitOC/PhotoBrowserController.h>
@@ -36,6 +37,9 @@
 @property (nonatomic, strong) NEBaseCollectionMessageAudioCell *playingCell;
 @property (nonatomic, strong) MessageAudioModel *playingModel;
 @end
+
+static NSString * const NECollectionForwardMultiSelectedRouter = @"imkit://contact/tab/selector.result";
+static NSString * const NECollectionForwardMultiSelectRouter = @"imkit://contact/tab/selector.page";
 
 static Class NECollectionResolveTableViewCellClass(id cellValue) {
     Class cellClass = Nil;
@@ -241,7 +245,7 @@ static Class NECollectionResolveTableViewCellClass(id cellValue) {
 
 - (void)forwardCollectionMessage:(V2NIMMessage *)message conversationName:(NSString *)conversationName {
     __weak typeof(self) weakSelf = self;
-    [Router.shared register:ForwardMultiSelectedRouter closure:^(NSDictionary * _Nonnull param) {
+    [Router.shared register:NECollectionForwardMultiSelectedRouter closure:^(NSDictionary * _Nonnull param) {
         NSMutableArray<ForwardItem *> *items = [NSMutableArray array];
         NSArray *conversations = param[@"conversations"];
         if (![conversations isKindOfClass:[NSArray class]]) return;
@@ -270,7 +274,7 @@ static Class NECollectionResolveTableViewCellClass(id cellValue) {
             }];
         }];
     }];
-    [Router.shared use:ForwardMultiSelectRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"selctorMode": @0} closure:nil];
+    [Router.shared use:NECollectionForwardMultiSelectRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"selctorMode": @0} closure:nil];
 }
 
 - (void)showForwardAlertController:(NSArray<ForwardItem *> *)items
@@ -398,12 +402,12 @@ static Class NECollectionResolveTableViewCellClass(id cellValue) {
     V2NIMMessageFileAttachment *object = (V2NIMMessageFileAttachment *)model.message.attachment;
     if (!object) return;
     if (![model.fileModel isKindOfClass:[CollectionFileModel class]]) {
-        NELog(@"%@ PinMessageFileModel not exit", NSStringFromClass([self class]));
+        [NEALog infoLog:NSStringFromClass([self class]) desc:@"PinMessageFileModel not exit"];
         return;
     }
     CollectionFileModel *fileModel = (CollectionFileModel *)model.fileModel;
     if (fileModel.state == DownloadStateDownalod) {
-        NELog(@"%@ downLoad state, click ingore", NSStringFromClass([self class]));
+        [NEALog infoLog:NSStringFromClass([self class]) desc:@"downLoad state, click ingore"];
         return;
     }
     NSString *path = object.path ?: [ChatMessageHelper createFilePath:model.message];
@@ -463,7 +467,7 @@ static Class NECollectionResolveTableViewCellClass(id cellValue) {
 }
 
 - (void)didClickContent:(CollectionMessageModel *)model cell:(NEBaseCollectionMessageCell *)cell {
-    NELog(@"%@ didClickContent", NSStringFromClass([self class]));
+    [NEALog infoLog:NSStringFromClass([self class]) desc:@"didClickContent"];
     if (!model.message) return;
     V2NIMMessageType type = model.message.messageType;
     if (type == V2NIM_MESSAGE_TYPE_AUDIO) {

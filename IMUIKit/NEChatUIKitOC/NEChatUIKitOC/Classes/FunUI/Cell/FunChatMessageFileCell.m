@@ -4,8 +4,8 @@
 
 #import "FunChatMessageFileCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ChatCellConstantValue.h"
 #import "ChatMessageHelper.h"
 #import "MessageFileModel.h"

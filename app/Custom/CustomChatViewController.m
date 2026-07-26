@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "CustomChatViewController.h"
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 #import <NERtcCallKit/NECallEngineConsts.h>
 
 static NSInteger NIMDemoCurrentCallStatus(void) {

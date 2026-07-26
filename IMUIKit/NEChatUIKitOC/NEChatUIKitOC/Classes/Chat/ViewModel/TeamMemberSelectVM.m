@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "TeamMemberSelectVM.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NEALog.h>
 #import "NEChatUIConstant.h"
 #import "NETeamUserManager.h"
 

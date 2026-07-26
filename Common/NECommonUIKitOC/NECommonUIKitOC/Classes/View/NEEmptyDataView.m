@@ -4,8 +4,8 @@
 
 #import "NEEmptyDataView.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @interface NEEmptyDataView ()
 @property (nonatomic, copy, nullable) NSString *imageName;

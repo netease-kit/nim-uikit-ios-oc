@@ -4,7 +4,6 @@
 #import "NEBaseMultiSelectedViewController.h"
 #import "ContactConst.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECommonKitOC.h>
 
 @implementation NEBaseMultiSelectedViewController
 

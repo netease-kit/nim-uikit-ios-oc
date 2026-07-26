@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "NEAtMessageManager.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/ConversationRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NECommonUtil.h>
-#import <NEChatKitOC/NEPathUtils.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/ConversationRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NECommonUtil.h>
+#import <NEChatKit/NEPathUtils.h>
 
 NSString *const NEAtMessageChangeNoti = @"at_message_change_noti";
 

@@ -3,13 +3,12 @@
 // found in the LICENSE file.
 
 #import "NEBaseTeamJoinActionViewController.h"
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 #import "NEBaseAddApplicationViewController.h"
 #import "ContactConst.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NECommonKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 
 @interface NEBaseTeamJoinActionViewController ()
 @property (nonatomic, strong, readwrite) TeamJoinActionViewModel *viewModel;

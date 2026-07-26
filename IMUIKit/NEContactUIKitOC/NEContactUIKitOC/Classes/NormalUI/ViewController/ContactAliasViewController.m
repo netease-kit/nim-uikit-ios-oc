@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "ContactAliasViewController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactConst.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 

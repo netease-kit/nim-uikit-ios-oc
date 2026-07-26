@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "FunConversationSearchController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "FunConversationSearchCell.h"
 #import "NEBaseConversationSearchCell.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NEEmptyDataView.h>
 #import <NECommonUIKitOC/FunSearchView.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>

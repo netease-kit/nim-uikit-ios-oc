@@ -4,8 +4,8 @@
 
 #import "AIRobotViewModel.h"
 #import "NEAIRobotModel.h"
-#import <NEChatKitOC/AIRepo.h>
-#import <NEChatKitOC/NEAIRobotManager.h>
+#import <NEChatKit/AIRepo.h>
+#import <NEChatKit/NEAIRobotManager.h>
 
 static NSInteger _AIRobotMaxRobotCount = 10;
 

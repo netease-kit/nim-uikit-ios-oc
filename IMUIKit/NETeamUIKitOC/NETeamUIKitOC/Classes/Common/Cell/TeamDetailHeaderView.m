@@ -4,16 +4,16 @@
 
 #import "TeamDetailHeaderView.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NSObject+NECommon.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NIMExtension.h>
+#import <NEChatKit/NIMExtension.h>
 #import <NECommonUIKitOC/CopyableLabel.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NEALog.h>
 
 @interface TeamDetailHeaderView ()
 @property (nonatomic, strong) UIView *lineView;

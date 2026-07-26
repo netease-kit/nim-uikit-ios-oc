@@ -1,6 +1,6 @@
 #import "FunMultiSelectedViewController.h"
 #import "FunSelectedListCell.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @interface FunMultiSelectedViewController ()
 

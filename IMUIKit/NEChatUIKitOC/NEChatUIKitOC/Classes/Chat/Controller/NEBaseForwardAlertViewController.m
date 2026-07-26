@@ -3,12 +3,12 @@
 // found in the LICENSE file.
 
 #import "NEBaseForwardAlertViewController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import "NEChatUIConstant.h"
 #import "ChatViewController.h"
-#import <NEChatKitOC/SettingRepo.h>
+#import <NEChatKit/SettingRepo.h>
 
 @implementation ForwardItem
 @end

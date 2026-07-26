@@ -5,7 +5,7 @@
 #import "NEAIWordSearchTextCell.h"
 #import "NEAISearchConstant.h"
 #import "NEAIWordSearchModel.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @interface NEAIWordSearchTextCell ()
 

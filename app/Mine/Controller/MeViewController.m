@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #import "MeViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "MeViewModel.h"
 #import "MineTableViewCell.h"
 #import "MineSettingViewController.h"
@@ -12,12 +13,11 @@
 #import <NEChatUIKitOC/FunCollectionMessageController.h>
 #import "NEStyleManager.h"
 #import "AppKey.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 #import <NIMSDK/NIMSDK.h>
 
 @interface MeViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>

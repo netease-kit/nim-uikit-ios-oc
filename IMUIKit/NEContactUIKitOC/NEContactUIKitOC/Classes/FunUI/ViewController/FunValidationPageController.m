@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "FunValidationPageController.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "FunAddApplicationViewController.h"
 #import "FunTeamJoinActionViewController.h"
 #import "FunContactUIColor.h"

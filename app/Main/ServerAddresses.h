@@ -12,10 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)configServer;
 + (void)configCustomServer:(IMPocConfigModel *)model;
-+ (void)configTestServer;
-+ (NSString *)getAppkey;
-+ (NSString *)apnsCername;
-+ (NSString *)pkCerName;
 + (nullable NSString *)customAppkeyFromConfig:(IMPocConfigModel *)model;
 
 @end

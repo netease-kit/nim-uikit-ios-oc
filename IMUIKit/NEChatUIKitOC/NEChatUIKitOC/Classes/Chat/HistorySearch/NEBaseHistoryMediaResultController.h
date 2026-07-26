@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import <UIKit/UIKit.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NIMSDK/NIMSDK.h>
 #import "NEChatBaseViewController.h"
 #import "TeamHistoryMessageViewModel.h"

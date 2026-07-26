@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "NEBaseTeamSettingCell.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 
 @implementation NEBaseTeamSettingCell

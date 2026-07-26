@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "NIMInputEmoticonButton.h"
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NEConstant.h>
 #import "UIImage+Chat.h"
 
 static NSString *const kClassTag = @"NIMInputEmoticonButton";

@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "FindFriendViewModel.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 
 @implementation FindFriendViewModel
 

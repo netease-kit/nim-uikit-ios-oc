@@ -5,7 +5,6 @@
 #import "NEBasePinMessageFileCell.h"
 #import "UIImage+Chat.h"
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/NECommonKitOC.h>
 #import "ChatCellConstantValue.h"
 #import "NEChatUIConstant.h"
 #import "MessageContentModel.h"

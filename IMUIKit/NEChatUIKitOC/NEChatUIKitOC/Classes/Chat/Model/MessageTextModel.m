@@ -5,9 +5,9 @@
 #import "MessageTextModel.h"
 #import "ChatCellConstantValue.h"
 #import "ChatMessageHelper.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import "NEEmotionTool.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 
 @implementation MessageTextModel
 

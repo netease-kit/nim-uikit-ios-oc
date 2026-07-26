@@ -6,7 +6,7 @@
 #import "FunTeamMemberCell.h"
 #import "FunTeamUIColor.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/IMKitClient.h>
 
 @interface FunTeamMembersController ()
 @property (nonatomic, strong) UIView *searchGrayBackView;

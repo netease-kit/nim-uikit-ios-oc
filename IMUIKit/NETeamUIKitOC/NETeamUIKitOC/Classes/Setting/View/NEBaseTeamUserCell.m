@@ -3,11 +3,12 @@
 // found in the LICENSE file.
 
 #import "NEBaseTeamUserCell.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/TeamMemberInfoModel.h>
-#import <NEChatKitOC/NEUserWithFriend.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/TeamMemberInfoModel.h>
+#import <NEChatKit/NEUserWithFriend.h>
+#import <NIMSDK/V2NIMUserServiceProtocol.h>
 
 @implementation NEBaseTeamUserCell
 

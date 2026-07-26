@@ -6,8 +6,8 @@
 #import "NEChatUIConstant.h"
 #import "ChatUIConfig.h"
 #import "NEMoreItemModel.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/XKitServiceManager.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/XKitServiceManager.h>
 #import <objc/runtime.h>
 
 @interface NEChatUIKitClient ()

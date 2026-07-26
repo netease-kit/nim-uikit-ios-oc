@@ -4,8 +4,7 @@
 
 #import "NETeamUserManager.h"
 #import "NEP2PChatUserCache.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NIMSDK/NIMSDK.h>
 
 @interface NETeamUserManager () <NEContactListener, NETeamListener, NEIMKitClientListener>

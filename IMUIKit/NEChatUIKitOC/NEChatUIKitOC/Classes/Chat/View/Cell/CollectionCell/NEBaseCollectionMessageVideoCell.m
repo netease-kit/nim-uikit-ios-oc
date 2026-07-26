@@ -4,11 +4,10 @@
 
 #import "NEBaseCollectionMessageVideoCell.h"
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <SDWebImage/SDWebImage.h>
-#import <NEChatKitOC/NECommonKitOC.h>
 #import "MessageContentModel.h"
-#import <NEChatKitOC/NSDate+NECommon.h>
+#import <NEChatKit/NSDate+NECommon.h>
 
 @implementation NEBaseCollectionMessageVideoCell
 

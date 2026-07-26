@@ -6,15 +6,15 @@
 #import "NEAISearchConstant.h"
 #import "NEAIWordSearchModel.h"
 #import "NEAIWordSearchTextCell.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NELottieAnimationView.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/ViewControllerExtension.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 
 @interface NEAIWordSearchViewController ()
 

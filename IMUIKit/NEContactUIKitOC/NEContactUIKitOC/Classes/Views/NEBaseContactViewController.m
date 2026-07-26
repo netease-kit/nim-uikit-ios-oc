@@ -3,18 +3,27 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactViewController.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NESubscribeManager.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NESubscribeManager.h>
+
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import "NEBaseContactTableViewCell.h"
 #import "ContactSectionView.h"
 #import "ContactUIConfig.h"
 #import "ContactConst.h"
 #import "NEBaseFindFriendViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEContactValidationMessageRouterCompat3 = @"imkit://contact/verifyList.page";
+static NSString * const NEContactBlackListRouterCompat3 = @"imkit://contact/blackList.page";
+static NSString * const NEContactTeamListRouterCompat3 = @"imkit://contact/teamList.page";
+static NSString * const NEContactPersonRouterCompat = @"imkit://contact/person.page";
+static NSString * const NEContactComputerRouterCompat = @"imkit://contact/computer.page";
+static NSString * const NEContactUserInfoPageRouterCompat4 = @"imkit://contact/userInfo.page";
+static NSString * const NESearchContactPageRouterCompat = @"imkit://search/search.page";
 
 @interface NEBaseContactViewController ()
 
@@ -296,21 +305,21 @@
       return;
     }
 
-    if ([info.router isEqualToString:ValidationMessageRouter]) {
-      [[Router shared] use:ValidationMessageRouter
+    if ([info.router isEqualToString:NEContactValidationMessageRouterCompat3]) {
+      [[Router shared] use:NEContactValidationMessageRouterCompat3
                 parameters:@{@"nav": self.navigationController ?: [NSNull null], @"animated": @NO}
                    closure:nil];
-    } else if ([info.router isEqualToString:ContactBlackListRouter]) {
-      [[Router shared] use:ContactBlackListRouter
+    } else if ([info.router isEqualToString:NEContactBlackListRouterCompat3]) {
+      [[Router shared] use:NEContactBlackListRouterCompat3
                 parameters:@{@"nav": self.navigationController ?: [NSNull null], @"animated": @NO}
                    closure:nil];
-    } else if ([info.router isEqualToString:ContactTeamListRouter]) {
-      [[Router shared] use:ContactTeamListRouter
+    } else if ([info.router isEqualToString:NEContactTeamListRouterCompat3]) {
+      [[Router shared] use:NEContactTeamListRouterCompat3
                 parameters:@{@"nav": self.navigationController ?: [NSNull null], @"animated": @NO}
                    closure:nil];
-    } else if ([info.router isEqualToString:ContactPersonRouter]) {
+    } else if ([info.router isEqualToString:NEContactPersonRouterCompat]) {
       // break
-    } else if ([info.router isEqualToString:ContactComputerRouter]) {
+    } else if ([info.router isEqualToString:NEContactComputerRouterCompat]) {
       // break
     } else {
       if (info.router.length > 0) {
@@ -325,7 +334,7 @@
       return;
     }
 
-    [[Router shared] use:ContactUserInfoPageRouter
+    [[Router shared] use:NEContactUserInfoPageRouterCompat4
               parameters:@{@"nav": self.navigationController ?: [NSNull null],
                            @"user": info.user ?: [NSNull null],
                            @"animated": @NO}
@@ -405,7 +414,7 @@
 }
 
 - (void)searchContact {
-  [[Router shared] use:SearchContactPageRouter
+  [[Router shared] use:NESearchContactPageRouterCompat
             parameters:@{@"nav": self.navigationController ?: [NSNull null],
                          @"animated": @NO}
                closure:nil];

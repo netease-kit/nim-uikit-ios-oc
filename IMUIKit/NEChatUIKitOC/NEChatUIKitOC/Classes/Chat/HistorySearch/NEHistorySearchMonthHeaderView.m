@@ -4,7 +4,7 @@
 
 #import "NEHistorySearchMonthHeaderView.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "FunChatUIColor.h"
 
 @implementation NEHistorySearchMonthHeaderView

@@ -1,6 +1,5 @@
 # 配置内容详见：PodConfigs/config_podspec.rb
 require_relative "PodConfigs/config_podspec.rb"
-require_relative "PodConfigs/config_third.rb"
 
 # Uncomment the next line to define a global platform for your project
 platform :ios, YXConfig.deployment_target
@@ -9,12 +8,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'app' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  project 'app.xcodeproj'
-
-  # 基础库
-  pod 'NEChatKitOC', YXConfig.imuikit_version
-
-  # IM UIKit OC 组件
+#  pod 'NIMSDK_LITE', '10.9.81'
+  pod 'NEChatKit', YXConfig.imuikit_version
+  # UI 组件
   pod 'NEChatUIKitOC', YXConfig.imuikit_version						# 会话（聊天）组件
   pod 'NEContactUIKitOC', YXConfig.imuikit_version				# 通讯录组件
   pod 'NEConversationUIKitOC', YXConfig.imuikit_version		# 会话列表组件
@@ -27,12 +23,9 @@ target 'app' do
   pod 'NEAISearchKitOC', YXConfig.imuikit_version
   
   # 扩展库 - 呼叫组件
-  pod 'NERtcSDK/RtcBasic', NERtcSDK.version       # RTC 音视频基础组件
-  pod 'NERtcSDK/Nenn', NERtcSDK.version           # RTC 音视频神经网络组件（使用背景虚化功能需要集成）
-  pod 'NERtcSDK/Segment', NERtcSDK.version        # RTC 音视频背景分割组件（使用背景虚化功能需要集成）
-  pod 'NECoreKit', '9.8.0'
-  pod 'NECommonKit', '9.7.5'
-  pod 'NECommonUIKit', '9.8.2'
+  pod 'NERtcSDK/RtcBasic'       # RTC 音视频基础组件
+  pod 'NERtcSDK/Nenn'           # RTC 音视频神经网络组件（使用背景虚化功能需要集成）
+  pod 'NERtcSDK/Segment'        # RTC 音视频背景分割组件（使用背景虚化功能需要集成）
   pod 'NERtcCallKit/NOS_Special', YXConfig.calluikit_version
   pod 'NERtcCallUIKit/NOS_Special', YXConfig.calluikit_version # (源码地址：https://github.com/netease-kit/NEVideoCall-1to1/tree/main/NLiteAVDemo-iOS-ObjC/CallKit)
 

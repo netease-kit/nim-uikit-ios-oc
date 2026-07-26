@@ -4,7 +4,7 @@
 
 #import "FunSelectCell.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation FunSelectCell

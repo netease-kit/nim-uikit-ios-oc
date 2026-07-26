@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NormalTeamUIColor.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @implementation UIColor (NormalTeam)
 

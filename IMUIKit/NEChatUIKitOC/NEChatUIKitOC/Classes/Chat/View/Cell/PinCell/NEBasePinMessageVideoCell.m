@@ -4,9 +4,8 @@
 
 #import "NEBasePinMessageVideoCell.h"
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <SDWebImage/SDWebImage.h>
-#import <NEChatKitOC/NECommonKitOC.h>
 #import <NECommonUIKitOC/UIView+NECorner.h>
 #import "MessageContentModel.h"
 

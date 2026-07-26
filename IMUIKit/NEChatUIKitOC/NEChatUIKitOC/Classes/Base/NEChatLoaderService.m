@@ -4,7 +4,7 @@
 
 #import "NEChatLoaderService.h"
 #import "NEChatService.h"
-#import <NEChatKitOC/ChatKitClient.h>
+#import <NEChatKit/ChatKitClient.h>
 
 @interface NEChatLoaderService ()
 
@@ -29,15 +29,17 @@
 }
 
 - (void)setupInit {
-  [self setupInitWithFunUI:NO];
-}
-
-- (void)setupInitWithFunUI:(BOOL)isFun {
   ChatKitClient *client = [ChatKitClient shared];
   if (!self.didRegisterService) {
     [client registerInit:[NEChatService shared]];
+    [client buryDataPoints:@"ChatUIKitOC" language:@"oc"];
     self.didRegisterService = YES;
   }
+}
+
+- (void)setupInitWithFunUI:(BOOL)isFun {
+  [self setupInit];
+  ChatKitClient *client = [ChatKitClient shared];
   [client setupInit:isFun];
 }
 

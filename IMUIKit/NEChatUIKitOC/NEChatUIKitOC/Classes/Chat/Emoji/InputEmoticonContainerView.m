@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "InputEmoticonContainerView.h"
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NEALog.h>
 #import "EmojiPageView.h"
 #import "InputEmoticonTabView.h"
 #import "NIMInputEmoticonButton.h"

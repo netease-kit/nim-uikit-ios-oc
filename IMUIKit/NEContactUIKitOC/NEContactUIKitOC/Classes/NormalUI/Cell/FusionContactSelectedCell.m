@@ -1,5 +1,5 @@
 #import "FusionContactSelectedCell.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 
 @implementation FusionContactSelectedCell
 

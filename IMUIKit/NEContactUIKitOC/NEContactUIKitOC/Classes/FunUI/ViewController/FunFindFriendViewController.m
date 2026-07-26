@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "FunFindFriendViewController.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactConst.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 

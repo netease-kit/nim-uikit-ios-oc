@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactSelectedViewController.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/UIColor+NECommon.h>
+
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/NEConfigManager.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
@@ -17,6 +17,9 @@
 #import "NEBaseContactTableViewCell.h"
 #import "ContactSectionView.h"
 #import "ContactInfo.h"
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEContactSelectedUsersRouterCompat = @"imkit://contact.selectUser.page";
 
 @interface NEBaseContactSelectedViewController ()
 @property (nonatomic, assign) NSInteger lastTitleIndex;
@@ -223,7 +226,7 @@
     }
     NSString *nameString = [names componentsJoinedByString:@"、"];
     NSLog(@"name string : %@", nameString);
-    [[Router shared] use:ContactSelectedUsersRouter
+    [[Router shared] use:NEContactSelectedUsersRouterCompat
               parameters:@{@"accids": accids, @"names": nameString, @"im_user": users}
                  closure:nil];
     [weakSelf.navigationController popViewControllerAnimated:YES];

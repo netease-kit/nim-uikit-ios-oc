@@ -4,7 +4,7 @@
 
 #import "FunTeamMemberSelectCell.h"
 #import "FunTeamUIColor.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
 

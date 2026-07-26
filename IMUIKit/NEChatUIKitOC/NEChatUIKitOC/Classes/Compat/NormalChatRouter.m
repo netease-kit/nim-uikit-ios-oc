@@ -9,8 +9,13 @@
 #import "HistoryMessageController.h"
 #import "ChatViewController.h"
 #import "NEBaseChatRouter.h"
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
+
+static NSString * const NEChatCompatPushPinMessageVCRouter = @"imkit://chat/pinMessage.page";
+static NSString * const NEChatCompatPushP2pChatVCRouter = @"imkit://chat/p2pChat.page";
+static NSString * const NEChatCompatPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
+static NSString * const NEChatCompatSearchMessageRouter = @"imkit://chat/searchMessage.page";
 
 static BOOL NECompatChatRouterBoolValue(id value, BOOL defaultValue) {
     return [value respondsToSelector:@selector(boolValue)] ? [value boolValue] : defaultValue;
@@ -34,7 +39,7 @@ static NSArray<V2NIMMessage *> *NECompatChatRouterMessagesValue(id value) {
 + (void)register {
     [ChatRouter registerCommon];
 
-    [Router.shared register:PushPinMessageVCRouter closure:^(NSDictionary *param) {
+    [Router.shared register:NEChatCompatPushPinMessageVCRouter closure:^(NSDictionary *param) {
         UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
         BOOL animated = NECompatChatRouterBoolValue(param[@"animated"], YES);
         NSString *conversationId = [param[@"conversationId"] isKindOfClass:[NSString class]] ? param[@"conversationId"] : nil;
@@ -44,7 +49,7 @@ static NSArray<V2NIMMessage *> *NECompatChatRouterMessagesValue(id value) {
         [nav pushViewController:pin animated:animated];
     }];
 
-    [Router.shared register:PushP2pChatVCRouter closure:^(NSDictionary *param) {
+    [Router.shared register:NEChatCompatPushP2pChatVCRouter closure:^(NSDictionary *param) {
         UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
         BOOL animated = NECompatChatRouterBoolValue(param[@"animated"], YES);
         NSString *conversationId = [param[@"conversationId"] isKindOfClass:[NSString class]] ? param[@"conversationId"] : nil;
@@ -95,7 +100,7 @@ static NSArray<V2NIMMessage *> *NECompatChatRouterMessagesValue(id value) {
         });
     }];
 
-    [Router.shared register:PushTeamChatVCRouter closure:^(NSDictionary *param) {
+    [Router.shared register:NEChatCompatPushTeamChatVCRouter closure:^(NSDictionary *param) {
         UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
         BOOL animated = NECompatChatRouterBoolValue(param[@"animated"], YES);
         NSString *conversationId = [param[@"conversationId"] isKindOfClass:[NSString class]] ? param[@"conversationId"] : nil;
@@ -144,7 +149,7 @@ static NSArray<V2NIMMessage *> *NECompatChatRouterMessagesValue(id value) {
         });
     }];
 
-    [Router.shared register:SearchMessageRouter closure:^(NSDictionary *param) {
+    [Router.shared register:NEChatCompatSearchMessageRouter closure:^(NSDictionary *param) {
         UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
         BOOL animated = NECompatChatRouterBoolValue(param[@"animated"], YES);
         NSString *conversationId = [param[@"conversationId"] isKindOfClass:[NSString class]] ? param[@"conversationId"] : nil;

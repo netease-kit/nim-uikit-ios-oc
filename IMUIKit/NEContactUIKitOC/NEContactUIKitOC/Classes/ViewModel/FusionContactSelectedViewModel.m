@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "FusionContactSelectedViewModel.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NEAIUserManager.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NEAIUserManager.h>
 
 @implementation FusionContactSelectedViewModel
 

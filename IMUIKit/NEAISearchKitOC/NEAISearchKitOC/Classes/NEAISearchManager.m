@@ -5,14 +5,14 @@
 #import "NEAISearchManager.h"
 #import "AIWordSearch/NEAISearchConstant.h"
 #import "AIWordSearch/NEAIWordSearchViewController.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/ChatKitClient.h>
-#import <NEChatKitOC/OperationItem.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/ChatKitClient.h>
+#import <NEChatKit/OperationItem.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/ViewControllerExtension.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/IMKitClient.h>
 
 @implementation NEAISearchManager
 
@@ -44,7 +44,7 @@
   dispatch_once(&onceToken, ^{
     [[XKit instance] registerService:self];
     [[IMKitPluginManager shared] registerPlugin:self.serviceName plugin:self];
-    [[ChatKitClient shared] buryDataPoints:@"AISearchKit"];
+    [[ChatKitClient shared] buryDataPoints:@"AISearchKitOC" language:@"oc"];
   });
 }
 

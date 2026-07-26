@@ -4,8 +4,11 @@
 
 #import "NETeamBaseViewController.h"
 #import "TeamMemberSelectViewModel.h"
+#import <NEChatKit/NETeamMemberInfoModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^NESelectTeamMemberBlock)(NSArray<NETeamMemberInfoModel *> *members);
 
 @interface NEBaseTeamMemberSelectController : NETeamBaseViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, TeamMemberSelectViewModelDelegate>
 

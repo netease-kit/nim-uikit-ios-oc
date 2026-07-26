@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "NEBaseValidationPageController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactConst.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/NENavigationView.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 
 @implementation NEBaseValidationPageController
 

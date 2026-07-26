@@ -4,7 +4,7 @@
 
 #import "CommonUIConfig.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 
 @implementation CommonUIConfig
 

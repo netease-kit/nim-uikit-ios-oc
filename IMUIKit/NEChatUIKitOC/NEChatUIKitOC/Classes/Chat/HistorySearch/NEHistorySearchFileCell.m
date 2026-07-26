@@ -4,8 +4,8 @@
 
 #import "NEHistorySearchFileCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NIMSDK/NIMSDK.h>
 #import "FunChatUIColor.h"

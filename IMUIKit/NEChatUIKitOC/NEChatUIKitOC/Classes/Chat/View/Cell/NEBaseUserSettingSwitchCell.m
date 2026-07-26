@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 #import "NEBaseUserSettingSwitchCell.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 #import "MessageContentModel.h"
 
 @implementation NEBaseUserSettingSwitchCell

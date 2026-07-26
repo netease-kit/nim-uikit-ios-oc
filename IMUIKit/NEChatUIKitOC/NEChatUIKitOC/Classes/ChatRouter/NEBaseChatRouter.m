@@ -4,17 +4,19 @@
 // found in the LICENSE file.
 
 #import "NEBaseChatRouter.h"
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/NEALog.h>
 #import <NIMSDK/NIMSDK.h>
+
+static NSString * const NEBaseChatAddFriendRouter = @"imkit://chat/addFriend";
 
 @implementation ChatRouter
 
 + (void)registerCommon {
   // sendMessage
-  [Router.shared register:ChatAddFriendRouter closure:^(NSDictionary<NSString *, id> *params) {
+  [Router.shared register:NEBaseChatAddFriendRouter closure:^(NSDictionary<NSString *, id> *params) {
     NSString *text = params[@"text"];
     NSString *cid = params[@"conversationId"];
     if ([text isKindOfClass:[NSString class]] && [cid isKindOfClass:[NSString class]]) {

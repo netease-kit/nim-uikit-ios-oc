@@ -5,9 +5,9 @@
 #import "TeamInfoViewModel.h"
 #import "TeamConstant.h"
 #import "SettingCellModel.h"
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/NIMExtension.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/NIMExtension.h>
+#import <NEChatKit/NEALog.h>
 
 @implementation TeamInfoViewModel
 

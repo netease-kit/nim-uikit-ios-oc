@@ -5,12 +5,12 @@
 #import "NEAIWordSearchViewModel.h"
 #import "NEAISearchConstant.h"
 #import "NEAIWordSearchModel.h"
-#import <NEChatKitOC/AIRepo.h>
-#import <NEChatKitOC/NEAIUserManager.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
+#import <NEChatKit/AIRepo.h>
+#import <NEChatKit/NEAIUserManager.h>
+#import <NEChatKit/NSObject+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 
 @interface NEAIWordSearchViewModel ()
 

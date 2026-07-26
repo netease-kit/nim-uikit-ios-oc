@@ -5,7 +5,7 @@
 #import "AIChatDataLoader.h"
 #import "AppKey.h"
 #import "ServerAddresses.h"
-#import <NEChatKitOC/ChatRepo.h>
+#import <NEChatKit/ChatRepo.h>
 #import <NEChatUIKitOC/AIChatCellModel.h>
 
 static UIColor *AIChatColorFromHex(NSUInteger hex) {

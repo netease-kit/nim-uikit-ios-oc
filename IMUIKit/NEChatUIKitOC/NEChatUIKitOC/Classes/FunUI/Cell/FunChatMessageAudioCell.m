@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "FunChatMessageAudioCell.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ChatCellConstantValue.h"
 #import "MessageAudioModel.h"
 #import "NSString+Chat.h"

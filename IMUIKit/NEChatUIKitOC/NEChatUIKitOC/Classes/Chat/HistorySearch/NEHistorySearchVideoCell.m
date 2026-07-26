@@ -4,13 +4,13 @@
 
 #import "NEHistorySearchVideoCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NIMSDK/NIMSDK.h>
 #import <SDWebImage/SDWebImage.h>
 #import "MessageVideoModel.h"
 #import <NECommonUIKitOC/VideoStateView.h>
-#import <NEChatKitOC/NSDate+NECommon.h>
+#import <NEChatKit/NSDate+NECommon.h>
 
 @interface NEHistorySearchVideoCell ()
 @property(nonatomic, weak) MessageVideoModel *currentModel;

@@ -1,6 +1,6 @@
 #import "FunContactViewController.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/FunSearchView.h>
 #import "ContactConst.h"
@@ -13,6 +13,12 @@
 #import "FunAIRobotController.h"
 #import "FunContactUIColor.h"
 #import "FunFindFriendViewController.h"
+
+static NSString * const NEFunValidationMessageRouterCompat = @"imkit://contact/verifyList.page";
+static NSString * const NEFunContactBlackListRouterCompat = @"imkit://contact/blackList.page";
+static NSString * const NEFunContactTeamListRouterCompat = @"imkit://contact/teamList.page";
+static NSString * const NEFunContactAIRobotListRouterCompat = @"imkit://contact/aiRobotList.page";
+static NSString * const NEFunContactAIUserListRouterCompat = @"imkit://contact/aiList.page";
 
 @implementation FunContactViewController
 
@@ -49,29 +55,29 @@
 - (void)changeLanguage {
   NSMutableArray<ContactHeadItem *> *headers = [NSMutableArray array];
   if ([ContactUIConfig shared].showHeader) {
-    [headers addObject:[[ContactHeadItem alloc] initWithRouter:ValidationMessageRouter
+    [headers addObject:[[ContactHeadItem alloc] initWithRouter:NEFunValidationMessageRouterCompat
                                                           name:contactLocalizable(@"validation_message")
                                                      imageName:@"fun_valid_message"
                                                          color:nil]];
-    [headers addObject:[[ContactHeadItem alloc] initWithRouter:ContactBlackListRouter
+    [headers addObject:[[ContactHeadItem alloc] initWithRouter:NEFunContactBlackListRouterCompat
                                                           name:contactLocalizable(@"blacklist")
                                                      imageName:@"fun_blacklist"
                                                          color:nil]];
 
     if ([IMKitConfigCenter shared].enableTeam) {
-      [headers addObject:[[ContactHeadItem alloc] initWithRouter:ContactTeamListRouter
+      [headers addObject:[[ContactHeadItem alloc] initWithRouter:NEFunContactTeamListRouterCompat
                                                             name:contactLocalizable(@"my_teams")
                                                        imageName:@"fun_my_team"
                                                            color:nil]];
     }
 
-    [headers addObject:[[ContactHeadItem alloc] initWithRouter:ContactAIRobotListRouter
+    [headers addObject:[[ContactHeadItem alloc] initWithRouter:NEFunContactAIRobotListRouterCompat
                                                           name:contactLocalizable(@"my_ai_robot")
                                                      imageName:@"fun_ai_robot"
                                                          color:nil]];
 
     if ([IMKitConfigCenter shared].enableAIUser) {
-      [headers addObject:[[ContactHeadItem alloc] initWithRouter:ContactAIUserListRouter
+      [headers addObject:[[ContactHeadItem alloc] initWithRouter:NEFunContactAIUserListRouterCompat
                                                             name:contactLocalizable(@"my_ai_user")
                                                        imageName:@"fun_ai_user"
                                                            color:nil]];

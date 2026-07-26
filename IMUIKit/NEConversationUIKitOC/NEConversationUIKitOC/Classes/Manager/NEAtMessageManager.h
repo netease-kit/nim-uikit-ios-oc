@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/IMKitClient.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

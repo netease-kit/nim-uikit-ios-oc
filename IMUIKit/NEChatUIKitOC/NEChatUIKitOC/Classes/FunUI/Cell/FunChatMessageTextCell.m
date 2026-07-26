@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FunChatMessageTextCell.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "ChatCellConstantValue.h"
 #import "MessageTextModel.h"
 

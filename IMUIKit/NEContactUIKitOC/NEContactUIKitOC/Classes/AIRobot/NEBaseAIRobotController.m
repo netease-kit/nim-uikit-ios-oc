@@ -7,8 +7,11 @@
 #import "ContactConst.h"
 #import "NEAIRobotModel.h"
 #import "NEBaseAIRobotListCell.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
+
+static NSString * const NEAIRobotCreateRouterCompat2 = @"imkit://contact/createAIRobot.page";
+static NSString * const NEAIRobotDetailRouterCompat2 = @"imkit://contact/aiRobotDetail.page";
 
 @implementation NEBaseAIRobotController
 
@@ -66,7 +69,7 @@
     return;
   }
 
-  [[Router shared] use:ContactCreateAIRobotRouter
+  [[Router shared] use:NEAIRobotCreateRouterCompat2
             parameters:@{
               @"nav": self.navigationController ?: [NSNull null],
               @"animated": @YES,
@@ -132,7 +135,7 @@
     return;
   }
 
-  [[Router shared] use:ContactAIRobotDetailRouter
+  [[Router shared] use:NEAIRobotDetailRouterCompat2
             parameters:@{
               @"nav": self.navigationController ?: [NSNull null],
               @"bot": bot,

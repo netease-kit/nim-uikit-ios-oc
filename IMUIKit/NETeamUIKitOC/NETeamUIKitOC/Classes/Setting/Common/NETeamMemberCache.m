@@ -4,9 +4,9 @@
 
 #import "NETeamMemberCache.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/NEALog.h>
 #import <UIKit/UIKit.h>
 
 @interface NETeamMemberCache ()
@@ -414,14 +414,16 @@
       return;
     }
 
+    NSMutableArray<NETeamMemberInfoModel *> *mutableUsers = [model.users mutableCopy] ?: [NSMutableArray array];
     for (NSUInteger index = 0; index < members.count; index++) {
       NETeamMemberInfoModel *memberInfoModel = [[NETeamMemberInfoModel alloc] init];
       memberInfoModel.teamMember = members[index];
       if (infos.count > index) {
         memberInfoModel.nimUser = infos[index];
       }
-      [model.users addObject:memberInfoModel];
+      [mutableUsers addObject:memberInfoModel];
     }
+    model.users = mutableUsers.copy;
     [remainUserIds removeObjectAtIndex:0];
     [weakSelf fetchTeamMemberUserInfos:remainUserIds model:model completion:completion];
   }];

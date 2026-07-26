@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/TeamRepo.h>
 #import <NEChatUIKitOC/NETeamUserManager.h>
 
 NS_ASSUME_NONNULL_BEGIN

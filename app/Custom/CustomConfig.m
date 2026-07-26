@@ -9,10 +9,10 @@
 #import "NEStyleManager.h"
 #import "NEP2PSecurityWarningView.h"
 #import "NESecurityWarningView.h"
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
 #import <NEChatUIKitOC/AIChatViewController.h>
 #import <NEChatUIKitOC/ChatUIConfig.h>
 #import <NEChatUIKitOC/ChatViewController.h>
@@ -26,6 +26,7 @@
 #import <NEConversationUIKitOC/NEConversationViewController.h>
 
 static NSInteger const kNIMDemoSecurityWarningTag = 2026043001;
+static NSString *const NIMDemoPushP2pChatVCRouterCompat = @"imkit://chat/p2pChat.page";
 
 static NSArray<V2NIMMessage *> *NIMDemoSafeMessagesValue(id value) {
   if (![value isKindOfClass:NSArray.class]) {
@@ -249,7 +250,7 @@ static NSArray<V2NIMMessage *> *NIMDemoSafeMessagesValue(id value) {
 }
 
 - (void)registerCustomChatRouterForFunUI:(BOOL)isFunUI {
-  [[Router shared] register:PushP2pChatVCRouter closure:^(NSDictionary<NSString *, id> *param) {
+  [[Router shared] register:NIMDemoPushP2pChatVCRouterCompat closure:^(NSDictionary<NSString *, id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:UINavigationController.class]
                                        ? param[@"nav"]
                                        : nil;

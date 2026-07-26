@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "InputEmoticonTabView.h"
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
 #import "NEChatUIConstant.h"
 
 static NSString *const kClassTag = @"InputEmoticonTabView";

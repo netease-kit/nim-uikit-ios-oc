@@ -16,8 +16,8 @@
 #import "FunTeamUIColor.h"
 #import "TeamDetailHeaderView.h"
 #import <NEChatUIKitOC/NEChatUIConstant.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 
 @interface FunTeamSettingViewController ()

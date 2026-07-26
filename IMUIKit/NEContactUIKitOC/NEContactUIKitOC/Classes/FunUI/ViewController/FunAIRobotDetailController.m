@@ -4,7 +4,7 @@
 
 #import "FunAIRobotDetailController.h"
 #import "FunContactUIColor.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 static NSInteger const kNEFunAIRobotDetailSeparatorTag = 8311;
 

@@ -4,8 +4,8 @@
 
 #import "TeamNameViewController.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NENavigationView.h>
 

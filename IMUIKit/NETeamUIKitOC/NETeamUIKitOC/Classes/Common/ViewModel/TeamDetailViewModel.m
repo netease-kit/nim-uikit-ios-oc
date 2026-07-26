@@ -4,8 +4,8 @@
 
 #import "TeamDetailViewModel.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/TeamRepo.h>
 
 @interface TeamDetailViewModel ()
 @property (nonatomic, strong) TeamRepo *teamRepo;

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "CustomSettingTextviewCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "NEStyleManager.h"
 
 @implementation CustomSettingTextviewCell

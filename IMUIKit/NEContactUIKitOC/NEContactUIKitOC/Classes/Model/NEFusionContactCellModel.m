@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NEFusionContactCellModel.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 
 @implementation NEFusionContactCellModel
 

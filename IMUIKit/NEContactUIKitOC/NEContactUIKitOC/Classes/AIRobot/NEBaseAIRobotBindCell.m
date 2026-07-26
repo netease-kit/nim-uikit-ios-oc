@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "NEBaseAIRobotBindCell.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation NEBaseAIRobotBindCell

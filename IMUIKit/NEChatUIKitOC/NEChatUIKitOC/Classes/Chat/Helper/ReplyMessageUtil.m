@@ -6,7 +6,7 @@
 #import "MessageContentModel.h"
 #import "ChatMessageHelper.h"
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NECustomUtils.h>
+#import <NEChatKit/NECustomUtils.h>
 #import <NIMSDK/NIMSDK.h>
 
 @implementation ReplyMessageUtil

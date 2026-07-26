@@ -20,13 +20,32 @@
 #import "NEBaseAIRobotBindController.h"
 #import "AIRobotBindViewModel.h"
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+
 #import <NIMSDK/NIMSDK.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEFunContactUserSelectRouterCompat = @"imkit://contact/selector.page";
+static NSString * const NEFunContactFusionSelectRouterCompat = @"imkit://contact/fusionselector.page";
+static NSString * const NEFunForwardMultiSelectRouterCompat = @"imkit://contact/tab/selector.page";
+static NSString * const NEFunContactBlackListRouterCompat = @"imkit://contact/blackList.page";
+static NSString * const NEFunContactTeamListRouterCompat = @"imkit://contact/teamList.page";
+static NSString * const NEFunValidationMessageRouterCompat = @"imkit://contact/verifyList.page";
+static NSString * const NEFunContactAddFriendRouterCompat = @"imkit://contact/addFriend.page";
+static NSString * const NEFunContactUserInfoPageRouterCompat = @"imkit://contact/userInfo.page";
+static NSString * const NEFunContactPageRouterCompat = @"imkit://contact/contactList.page";
+static NSString * const NEFunContactAIUserListRouterCompat = @"imkit://contact/aiList.page";
+static NSString * const NEFunContactAIRobotListRouterCompat = @"imkit://contact/aiRobotList.page";
+static NSString * const NEFunContactCreateAIRobotRouterCompat = @"imkit://contact/createAIRobot.page";
+static NSString * const NEFunContactRobotChatCardRouterCompat = @"imkit://contact/robotChatCard.page";
+static NSString * const NEFunContactRobotNicknameEditRouterCompat = @"imkit://contact/robotNicknameEdit.page";
+static NSString * const NEFunContactAIRobotDetailRouterCompat = @"imkit://contact/aiRobotDetail.page";
+static NSString * const NEFunContactAIRobotConfigRouterCompat = @"imkit://contact/aiRobotConfig.page";
+static NSString * const NEFunContactAIRobotBindRouterCompat = @"imkit://contact/aiRobotBind.page";
 
 @implementation ContactRouter (Fun)
 
 + (void)registerFun {
-  [[Router shared] register:ContactUserSelectRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactUserSelectRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     NSSet<NSString *> *filters = [param[@"filters"] isKindOfClass:[NSSet class]] ? param[@"filters"] : nil;
@@ -39,7 +58,7 @@
     }
     [nav pushViewController:vc animated:animated];
   }];
-  [[Router shared] register:ContactFusionSelectRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactFusionSelectRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     NSSet<NSString *> *filters = [param[@"filters"] isKindOfClass:[NSSet class]] ? param[@"filters"] : nil;
@@ -52,7 +71,7 @@
     }
     [nav pushViewController:vc animated:animated];
   }];
-  [[Router shared] register:ForwardMultiSelectRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunForwardMultiSelectRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     NSSet<NSString *> *filters = [param[@"filters"] isKindOfClass:[NSSet class]] ? param[@"filters"] : nil;
@@ -66,32 +85,32 @@
     }
     [nav presentViewController:vc animated:animated completion:nil];
   }];
-  [[Router shared] register:ContactBlackListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactBlackListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     FunBlackListViewController *vc = [[FunBlackListViewController alloc] init];
     [nav pushViewController:vc animated:animated];
   }];
-  [[Router shared] register:ContactTeamListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactTeamListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     FunTeamListViewController *vc = [[FunTeamListViewController alloc] init];
     if (param[@"isClickCallBack"]) vc.isClickCallBack = [param[@"isClickCallBack"] boolValue];
     [nav pushViewController:vc animated:animated];
   }];
-  [[Router shared] register:ValidationMessageRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunValidationMessageRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     FunValidationPageController *vc = [[FunValidationPageController alloc] init];
     [nav pushViewController:vc animated:animated];
   }];
-  [[Router shared] register:ContactAddFriendRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactAddFriendRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     FunFindFriendViewController *vc = [[FunFindFriendViewController alloc] init];
     [nav pushViewController:vc animated:animated];
   }];
-  [[Router shared] register:ContactUserInfoPageRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactUserInfoPageRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     BOOL isRobot = [param[@"isRobot"] isKindOfClass:[NSNumber class]] ? [param[@"isRobot"] boolValue] : NO;
@@ -112,13 +131,13 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactPageRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactPageRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     FunContactViewController *vc = [[FunContactViewController alloc] init];
     [nav pushViewController:vc animated:animated];
   }];
-  [[Router shared] register:ContactAIUserListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactAIUserListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
@@ -126,7 +145,7 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactAIRobotListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactAIRobotListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
@@ -134,7 +153,7 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactCreateAIRobotRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactCreateAIRobotRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
@@ -163,7 +182,7 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactRobotChatCardRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactRobotChatCardRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     V2NIMUserAIBot *bot = param[@"bot"];
     if (nav != nil && bot != nil) {
@@ -172,7 +191,7 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactRobotNicknameEditRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactRobotNicknameEditRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
@@ -185,7 +204,7 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactAIRobotDetailRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactAIRobotDetailRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     V2NIMUserAIBot *bot = param[@"bot"];
     if (nav != nil && bot != nil) {
@@ -194,7 +213,7 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactAIRobotConfigRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactAIRobotConfigRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     V2NIMUserAIBot *bot = param[@"bot"];
     if (nav != nil && bot != nil) {
@@ -203,7 +222,7 @@
       [nav pushViewController:vc animated:animated];
     }
   }];
-  [[Router shared] register:ContactAIRobotBindRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEFunContactAIRobotBindRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;

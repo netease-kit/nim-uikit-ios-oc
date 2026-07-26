@@ -7,7 +7,7 @@
 #import "ChatUIConfig.h"
 #import "ChatMessageHelper.h"
 #import "NotificationMessageUtils.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import <NIMSDK/NIMSDK.h>
 
 @implementation MessageTipsModel

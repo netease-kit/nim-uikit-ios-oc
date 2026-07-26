@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #import "NEBaseBlackListViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
 #import "ContactUIConfig.h"
 #import "NEBaseContactSelectedViewController.h"
@@ -10,9 +11,7 @@
 #import <NECommonUIKitOC/NEConfigManager.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NENavigationView.h>
-#import <NEChatKitOC/NECommonKitOC.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEConstant.h>
 
 @implementation NEBaseBlackListViewController
 

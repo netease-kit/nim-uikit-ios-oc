@@ -4,11 +4,11 @@
 
 #import "TeamMembersViewModel.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NEChatUIKitOC/NETeamUserManager.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
 
 @implementation TeamMembersViewModel
 
@@ -199,7 +199,7 @@
   if (team && teamMembers) {
     NETeamInfoModel *model = [[NETeamInfoModel alloc] init];
     model.team = team;
-    [model.users addObjectsFromArray:teamMembers];
+    model.users = [teamMembers copy];
     [weakSelf setShowDatas:model.users];
     weakSelf.currentMember = [[NETeamUserManager shared] getTeamMemberInfo:[[IMKitClient instance] account]];
     if (completion) {
@@ -222,7 +222,7 @@
     if (members) {
       NETeamInfoModel *model = [[NETeamInfoModel alloc] init];
       model.team = currentTeam;
-      [model.users addObjectsFromArray:members];
+      model.users = [members copy];
       [weakSelf setShowDatas:model.users];
       weakSelf.currentMember = [[NETeamUserManager shared] getTeamMemberInfo:[[IMKitClient instance] account]];
       if (completion) {

@@ -7,8 +7,8 @@
 #import "NEChatUIConstant.h"
 #import "ChatUIConfig.h"
 #import "ChatMessageHelper.h"
-#import <NEChatKitOC/NSDate+NECommon.h>
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSDate+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import <NIMSDK/NIMSDK.h>
 
 @implementation MessageCallRecordModel

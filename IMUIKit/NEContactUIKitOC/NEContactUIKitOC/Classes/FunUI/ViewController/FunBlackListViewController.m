@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FunBlackListViewController.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import "FunBlackListCell.h"
 #import "FunContactSelectedViewController.h"
 #import "ContactConst.h"

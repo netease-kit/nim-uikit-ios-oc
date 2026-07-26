@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "ChatDeduplicationHelper.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NIMSDK/NIMSDK.h>
 
 @implementation ChatDeduplicationHelper

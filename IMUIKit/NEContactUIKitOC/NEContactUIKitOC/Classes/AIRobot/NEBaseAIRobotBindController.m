@@ -9,12 +9,14 @@
 #import "FunContactUIColor.h"
 #import "NEBaseAIRobotBindCell.h"
 #import "NormalContactUIColor.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 static NSInteger const kNEAIRobotBindAlertTag = 9921;
+static NSString * const NEAIRobotBindCreateRouterCompat = @"imkit://contact/createAIRobot.page";
+static NSString * const NEAIRobotBindDetailRouterCompat = @"imkit://contact/aiRobotDetail.page";
 
 @interface NEBaseAIRobotBindController ()
 
@@ -308,7 +310,7 @@ static NSInteger const kNEAIRobotBindAlertTag = 9921;
     return;
   }
   NSString *defaultName = @"Bot_Claw";
-  [[Router shared] use:ContactCreateAIRobotRouter
+  [[Router shared] use:NEAIRobotBindCreateRouterCompat
             parameters:@{
               @"nav": self.navigationController ?: [NSNull null],
               @"animated": @YES,
@@ -480,7 +482,7 @@ static NSInteger const kNEAIRobotBindAlertTag = 9921;
           [nav setViewControllers:controllers animated:NO];
         }
 
-        [[Router shared] use:ContactAIRobotDetailRouter
+        [[Router shared] use:NEAIRobotBindDetailRouterCompat
                   parameters:@{
                     @"nav": nav,
                     @"bot": bot,

@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 #import "MultiSelectViewModel.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/ConversationRepo.h>
-#import <NEChatKitOC/LocalConversationRepo.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/SettingRepo.h>
+#import <NEChatKit/ConversationRepo.h>
+#import <NEChatKit/LocalConversationRepo.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/SettingRepo.h>
 
 @interface MultiSelectViewModel ()
 

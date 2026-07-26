@@ -7,7 +7,7 @@
 #import "FunTeamArrowSettingCell.h"
 #import "FunTeamManagerMemberCell.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 
 @implementation FunTeamManagerListController
 
