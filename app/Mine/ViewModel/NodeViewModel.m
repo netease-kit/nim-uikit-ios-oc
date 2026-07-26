@@ -4,7 +4,7 @@
 
 #import "NodeViewModel.h"
 #import "AppKey.h"
-#import <NEChatKitOC/SettingRepo.h>
+#import <NEChatKit/SettingRepo.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 
 @implementation NodeViewModel

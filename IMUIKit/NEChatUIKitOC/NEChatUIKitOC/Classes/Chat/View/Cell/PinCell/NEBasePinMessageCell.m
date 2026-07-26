@@ -4,7 +4,6 @@
 
 #import "NEBasePinMessageCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import "ChatMessageHelper.h"
 #import "ChatCellConstantValue.h"

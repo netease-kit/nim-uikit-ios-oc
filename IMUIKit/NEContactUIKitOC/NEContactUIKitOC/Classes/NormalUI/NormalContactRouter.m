@@ -4,8 +4,9 @@
 
 #import "NormalContactRouter.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+
 #import <NIMSDK/NIMSDK.h>
+#import <NEChatKit/NEChatKitOC.h>
 
 // ViewController imports
 #import "ContactSelectedViewController.h"
@@ -29,11 +30,29 @@
 #import "AIRobotBindViewModel.h"
 #import <NECommonUIKitOC/UIView+YXToast.h>
 
+static NSString * const NEContactUserSelectRouterCompat = @"imkit://contact/selector.page";
+static NSString * const NEContactFusionSelectRouterCompat = @"imkit://contact/fusionselector.page";
+static NSString * const NEForwardMultiSelectRouterCompat = @"imkit://contact/tab/selector.page";
+static NSString * const NEContactAddFriendRouterCompat = @"imkit://contact/addFriend.page";
+static NSString * const NEContactUserInfoPageRouterCompat = @"imkit://contact/userInfo.page";
+static NSString * const NEContactPageRouterCompat = @"imkit://contact/contactList.page";
+static NSString * const NEValidationMessageRouterCompat = @"imkit://contact/verifyList.page";
+static NSString * const NEContactBlackListRouterCompat = @"imkit://contact/blackList.page";
+static NSString * const NEContactAIUserListRouterCompat = @"imkit://contact/aiList.page";
+static NSString * const NEContactAIRobotListRouterCompat = @"imkit://contact/aiRobotList.page";
+static NSString * const NEContactCreateAIRobotRouterCompat = @"imkit://contact/createAIRobot.page";
+static NSString * const NEContactRobotChatCardRouterCompat = @"imkit://contact/robotChatCard.page";
+static NSString * const NEContactRobotNicknameEditRouterCompat = @"imkit://contact/robotNicknameEdit.page";
+static NSString * const NEContactAIRobotDetailRouterCompat = @"imkit://contact/aiRobotDetail.page";
+static NSString * const NEContactAIRobotConfigRouterCompat = @"imkit://contact/aiRobotConfig.page";
+static NSString * const NEContactAIRobotBindRouterCompat = @"imkit://contact/aiRobotBind.page";
+static NSString * const NEContactTeamListRouterCompat = @"imkit://contact/teamList.page";
+
 @implementation ContactRouter (Normal)
 
 + (void)registerRouter {
   // 成员选择页面
-  [[Router shared] register:ContactUserSelectRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactUserSelectRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     NSLog(@"param:%@", param);
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
@@ -52,7 +71,7 @@
   }];
 
   // 携带机器人的成员选择页面
-  [[Router shared] register:ContactFusionSelectRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactFusionSelectRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
     BOOL animated = animatedNum != nil ? [animatedNum boolValue] : YES;
@@ -70,7 +89,7 @@
   }];
 
   // 转发选择页面
-  [[Router shared] register:ForwardMultiSelectRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEForwardMultiSelectRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
     BOOL animated = animatedNum != nil ? [animatedNum boolValue] : YES;
@@ -88,7 +107,7 @@
   }];
 
   // 添加好友页面
-  [[Router shared] register:ContactAddFriendRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactAddFriendRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
     BOOL animated = animatedNum != nil ? [animatedNum boolValue] : YES;
@@ -97,7 +116,7 @@
   }];
 
   // 用户信息页面
-  [[Router shared] register:ContactUserInfoPageRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactUserInfoPageRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     if (nav != nil) {
       NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
@@ -124,7 +143,7 @@
   }];
 
   // 好友列表页面
-  [[Router shared] register:ContactPageRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactPageRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     if (nav != nil) {
       NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
@@ -135,7 +154,7 @@
   }];
 
   // 验证消息页面
-  [[Router shared] register:ValidationMessageRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEValidationMessageRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     if (nav != nil) {
       NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
@@ -146,7 +165,7 @@
   }];
 
   // 黑名单页面
-  [[Router shared] register:ContactBlackListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactBlackListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     if (nav != nil) {
       NSNumber *animatedNum = [param[@"animated"] isKindOfClass:[NSNumber class]] ? param[@"animated"] : nil;
@@ -157,7 +176,7 @@
   }];
 
   // 我的数字人列表
-  [[Router shared] register:ContactAIUserListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactAIUserListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       NSNumber *animatedNum = param[@"animated"];
@@ -168,7 +187,7 @@
   }];
 
   // 我的机器人列表
-  [[Router shared] register:ContactAIRobotListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactAIRobotListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       NSNumber *animatedNum = param[@"animated"];
@@ -179,7 +198,7 @@
   }];
 
   // 创建机器人
-  [[Router shared] register:ContactCreateAIRobotRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactCreateAIRobotRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       NSNumber *animatedNum = param[@"animated"];
@@ -214,7 +233,7 @@
   }];
 
   // 聊天页头像点击进入的机器人名片页
-  [[Router shared] register:ContactRobotChatCardRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactRobotChatCardRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     V2NIMUserAIBot *bot = param[@"bot"];
     if (nav != nil && bot != nil) {
@@ -226,7 +245,7 @@
   }];
 
   // 机器人昵称编辑页
-  [[Router shared] register:ContactRobotNicknameEditRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactRobotNicknameEditRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       NSNumber *animatedNum = param[@"animated"];
@@ -243,7 +262,7 @@
   }];
 
   // 机器人名片页
-  [[Router shared] register:ContactAIRobotDetailRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactAIRobotDetailRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     V2NIMUserAIBot *bot = param[@"bot"];
     if (nav != nil && bot != nil) {
@@ -255,7 +274,7 @@
   }];
 
   // 机器人配置串页
-  [[Router shared] register:ContactAIRobotConfigRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactAIRobotConfigRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     V2NIMUserAIBot *bot = param[@"bot"];
     if (nav != nil && bot != nil) {
@@ -267,7 +286,7 @@
   }];
 
   // 绑定机器人页（扫码后跳转）
-  [[Router shared] register:ContactAIRobotBindRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactAIRobotBindRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       NSNumber *animatedNum = param[@"animated"];
@@ -300,7 +319,7 @@
   }];
 
   // 我的群聊
-  [[Router shared] register:ContactTeamListRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NEContactTeamListRouterCompat closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = param[@"nav"];
     if (nav != nil) {
       NSNumber *animatedNum = param[@"animated"];

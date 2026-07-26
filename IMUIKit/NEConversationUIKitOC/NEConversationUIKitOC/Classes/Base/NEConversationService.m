@@ -5,7 +5,7 @@
 #import "NEConversationService.h"
 #import "ConversationRouter.h"
 #import "NEAtMessageManager.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import <NIMSDK/NIMSDK.h>
 
 @implementation NEConversationService

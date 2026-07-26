@@ -4,7 +4,7 @@
 
 #import "CustomThemeCells.h"
 #import "NEStyleManager.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
 
 @implementation CustomTeamSettingSubtitleCell

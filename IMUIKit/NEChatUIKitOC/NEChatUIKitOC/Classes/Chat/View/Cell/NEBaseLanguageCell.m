@@ -4,7 +4,7 @@
 
 #import "NEBaseLanguageCell.h"
 #import "SelectLanguageViewModel.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation NEBaseLanguageCell

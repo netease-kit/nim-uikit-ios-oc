@@ -5,7 +5,7 @@
 #import "FunRecentSelectCell.h"
 #import "MultiSelectModel.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation FunRecentSelectCell

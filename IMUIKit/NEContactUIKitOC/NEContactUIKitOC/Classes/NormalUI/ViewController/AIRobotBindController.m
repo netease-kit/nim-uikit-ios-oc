@@ -4,7 +4,7 @@
 
 #import "AIRobotBindController.h"
 #import "NormalContactUIColor.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @implementation AIRobotBindController
 

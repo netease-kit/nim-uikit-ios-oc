@@ -4,9 +4,12 @@
 
 #import "AddApplicationViewModel.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/ChatConstant.h>
+
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEChatAddFriendRouterCompat = @"imkit://chat/addFriend";
 
 @interface AddApplicationViewModel () <NEContactListener>
 @property (nonatomic, assign) NSUInteger offset;
@@ -308,7 +311,7 @@ static NSMutableSet<NSString *> *neLocallyReadApplicationKeys;
       if (accid) {
         NSString *conversationId = [V2NIMConversationIdUtil p2pConversationId:accid];
         if (conversationId) {
-          [[Router shared] use:ChatAddFriendRouter
+          [[Router shared] use:NEChatAddFriendRouterCompat
                   parameters:@{@"text": contactLocalizable(@"let_us_chat"),
                                 @"conversationId": conversationId}
                      closure:nil];

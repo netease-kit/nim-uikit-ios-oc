@@ -3,13 +3,17 @@
 // found in the LICENSE file.
 
 #import "NEBaseTeamListViewController.h"
-#import <NEChatKitOC/NETeam.h>
+#import <NEChatKit/NETeam.h>
 #import <NIMSDK/NIMSDK.h>
 #import "ContactConst.h"
 #import "ContactUIConfig.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECommonKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+
+
+static NSString * const NEContactTeamDataRouterCompat = @"imkit://contact/team/data";
+static NSString * const NEContactPushTeamChatVCRouterCompat = @"imkit://chat/teamChat.page";
 
 @implementation NEBaseTeamListViewController
 
@@ -102,7 +106,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NETeam *model = self.viewModel.teamList[indexPath.row];
   if (self.isClickCallBack == YES) {
-    [[Router shared] use:ContactTeamDataRouter
+    [[Router shared] use:NEContactTeamDataRouterCompat
               parameters:@{@"team": model.v2Team ?: [NSNull null]}
                  closure:nil];
     [self.navigationController popViewControllerAnimated:YES];
@@ -110,7 +114,7 @@
   }
   if (model.teamId) {
     NSString *conversationId = [V2NIMConversationIdUtil teamConversationId:model.teamId];
-    [[Router shared] use:PushTeamChatVCRouter
+    [[Router shared] use:NEContactPushTeamChatVCRouterCompat
               parameters:@{@"nav": self.navigationController ?: [NSNull null], @"conversationId": conversationId ?: [NSNull null]}
                  closure:nil];
   }

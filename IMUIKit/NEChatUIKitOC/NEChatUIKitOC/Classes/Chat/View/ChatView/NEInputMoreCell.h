@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import <UIKit/UIKit.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import "NEMoreItemModel.h"
 
 NS_ASSUME_NONNULL_BEGIN

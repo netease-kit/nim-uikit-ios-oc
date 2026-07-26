@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "NEBaseFusionContactSelectedController.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import "ContactConst.h"
 

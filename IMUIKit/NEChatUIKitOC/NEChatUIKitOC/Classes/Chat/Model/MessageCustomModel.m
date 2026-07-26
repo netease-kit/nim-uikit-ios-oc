@@ -4,7 +4,7 @@
 
 #import "MessageCustomModel.h"
 #import "ChatCellConstantValue.h"
-#import <NEChatKitOC/NECustomUtils.h>
+#import <NEChatKit/NECustomUtils.h>
 #import <NIMSDK/NIMSDK.h>
 
 @implementation MessageCustomModel

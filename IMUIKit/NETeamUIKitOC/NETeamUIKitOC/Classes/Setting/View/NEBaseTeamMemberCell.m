@@ -5,11 +5,13 @@
 #import "NEBaseTeamMemberCell.h"
 #import "TeamConstant.h"
 #import <NECommonUIKitOC/NEUserHeaderView.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/TeamMemberInfoModel.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/TeamMemberInfoModel.h>
+#import <NEChatKit/NEUserWithFriend.h>
+#import <NIMSDK/V2NIMUserServiceProtocol.h>
 
 @interface NEBaseTeamMemberCell ()
 @property (nonatomic, strong, readwrite) NEUserHeaderView *headerView;

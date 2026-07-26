@@ -10,10 +10,10 @@
 #import "NEViewExtension.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
-#import <NEChatKitOC/NEAuthManager.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAuthManager.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <objc/runtime.h>
 #import "NECommonUIConstant.h"
 

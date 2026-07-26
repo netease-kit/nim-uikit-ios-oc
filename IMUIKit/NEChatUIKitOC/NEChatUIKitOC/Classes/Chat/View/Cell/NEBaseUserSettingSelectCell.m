@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 #import "NEBaseUserSettingSelectCell.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 
 @implementation NEBaseUserSettingSelectCell
 

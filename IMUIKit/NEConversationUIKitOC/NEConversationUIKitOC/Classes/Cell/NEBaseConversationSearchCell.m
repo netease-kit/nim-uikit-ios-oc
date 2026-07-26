@@ -4,9 +4,9 @@
 
 #import "NEBaseConversationSearchCell.h"
 #import <NECommonUIKitOC/NEUserHeaderView.h>
-#import <NEChatKitOC/ConversationSearchListModel.h>
-#import <NEChatKitOC/NIMExtension.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/ConversationSearchListModel.h>
+#import <NEChatKit/NIMExtension.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @implementation NEBaseConversationSearchCell
 

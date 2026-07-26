@@ -4,17 +4,17 @@
 
 #import "NEBaseHistoryMediaResultController.h"
 #import <MJRefresh/MJRefresh.h>
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
 #import <NIMSDK/NIMSDK.h>
 #import <SDWebImage/SDWebImage.h>
 #import "NEChatUIConstant.h"
 #import "TeamHistoryMessageViewModel.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "NEHistorySearchFileCell.h"
 #import "NEHistorySearchImageCell.h"
 #import "NEHistorySearchMediaCollectionSectionHeader.h"
@@ -31,6 +31,11 @@
 #import "MessageFileModel.h"
 #import "MessageImageModel.h"
 #import "MediaSectionModel.h"
+
+static NSString * const NEHistoryForwardMultiSelectedRouter = @"imkit://contact/tab/selector.result";
+static NSString * const NEHistoryForwardMultiSelectRouter = @"imkit://contact/tab/selector.page";
+static NSString * const NEHistoryPushP2pChatVCRouter = @"imkit://chat/p2pChat.page";
+static NSString * const NEHistoryPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
 
 @implementation NEBaseHistoryMediaResultController
 
@@ -288,7 +293,7 @@
 
 - (void)forwardMessage:(V2NIMMessage *)message {
     __weak typeof(self) weakSelf = self;
-    [Router.shared register:ForwardMultiSelectedRouter closure:^(NSDictionary * _Nullable param) {
+    [Router.shared register:NEHistoryForwardMultiSelectedRouter closure:^(NSDictionary * _Nullable param) {
         NSMutableArray *items = [NSMutableArray array];
         NSArray *conversations = param[@"conversations"];
         if ([conversations isKindOfClass:[NSArray class]]) {
@@ -318,7 +323,7 @@
         }
     }];
 
-    [Router.shared use:ForwardMultiSelectRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"selctorMode": @(0)} closure:nil];
+    [Router.shared use:NEHistoryForwardMultiSelectRouter parameters:@{@"nav": self.navigationController ?: [NSNull null], @"selctorMode": @(0)} closure:nil];
 }
 
 - (void)addForwardAlertControllerWithItems:(NSArray *)items type:(NSString *)type sureBlock:(void (^)(NSString * _Nullable))sureBlock {
@@ -615,7 +620,7 @@
     }
 
     if (conversationType == V2NIM_CONVERSATION_TYPE_P2P) {
-        [Router.shared use:PushP2pChatVCRouter parameters:@{
+        [Router.shared use:NEHistoryPushP2pChatVCRouter parameters:@{
             @"nav": self.navigationController ?: [NSNull null],
             @"conversationId": conversationId ?: [NSNull null],
             @"anchor": message ?: [NSNull null],
@@ -629,7 +634,7 @@
             }
         }
     } else if (conversationType == V2NIM_CONVERSATION_TYPE_TEAM) {
-        [Router.shared use:PushTeamChatVCRouter parameters:@{
+        [Router.shared use:NEHistoryPushTeamChatVCRouter parameters:@{
             @"nav": self.navigationController ?: [NSNull null],
             @"conversationId": conversationId ?: [NSNull null],
             @"anchor": message ?: [NSNull null],

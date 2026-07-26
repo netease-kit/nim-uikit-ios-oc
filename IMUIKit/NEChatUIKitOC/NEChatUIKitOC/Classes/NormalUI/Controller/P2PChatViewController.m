@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "P2PChatViewController.h"
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 #import "NEP2PChatUserCache.h"
-#import <NEChatKitOC/ChatRepo.h>
+#import <NEChatKit/ChatRepo.h>
 #import "NormalChatUIColor.h"
 #import "UITextView+NEPlaceholder.h"
 

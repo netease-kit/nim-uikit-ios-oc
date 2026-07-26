@@ -19,7 +19,7 @@
 #import "MessageContentModel.h"
 #import "MessageAudioModel.h"
 #import "MessageVideoModel.h"
-#import <NEChatKitOC/OperationItem.h>
+#import <NEChatKit/OperationItem.h>
 #import "NEBaseSelectLanguageViewController.h"
 
 @class ForwardItem;

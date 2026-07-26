@@ -3,21 +3,27 @@
 // found in the LICENSE file.
 
 #import "ContactViewController.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactTableViewCell.h"
 #import "ContactSectionView.h"
 #import "ContactViewModel.h"
 #import "ContactHeadItem.h"
 #import "ContactUIConfig.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEConstant.h>
 #import "FindFriendViewController.h"
 #import "AIUserController.h"
 #import "AIRobotController.h"
 #import "NormalContactUIColor.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
+
+static NSString * const NENormalValidationMessageRouterCompat = @"imkit://contact/verifyList.page";
+static NSString * const NENormalContactBlackListRouterCompat = @"imkit://contact/blackList.page";
+static NSString * const NENormalContactTeamListRouterCompat = @"imkit://contact/teamList.page";
+static NSString * const NENormalContactAIRobotListRouterCompat = @"imkit://contact/aiRobotList.page";
+static NSString * const NENormalContactAIUserListRouterCompat = @"imkit://contact/aiList.page";
 
 @implementation ContactViewController
 
@@ -51,17 +57,17 @@
 - (void)changeLanguage {
   NSMutableArray<ContactHeadItem *> *contactHeaders = [NSMutableArray array];
   if ([ContactUIConfig shared].showHeader) {
-    [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:ValidationMessageRouter name:contactLocalizable(@"validation_message") imageName:@"valid_message" color:nil]];
-    [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:ContactBlackListRouter name:contactLocalizable(@"blacklist") imageName:@"blacklist" color:nil]];
+    [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:NENormalValidationMessageRouterCompat name:contactLocalizable(@"validation_message") imageName:@"valid_message" color:nil]];
+    [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:NENormalContactBlackListRouterCompat name:contactLocalizable(@"blacklist") imageName:@"blacklist" color:nil]];
 
     if ([IMKitConfigCenter shared].enableTeam) {
-      [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:ContactTeamListRouter name:contactLocalizable(@"my_teams") imageName:@"group" color:nil]];
+      [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:NENormalContactTeamListRouterCompat name:contactLocalizable(@"my_teams") imageName:@"group" color:nil]];
     }
 
-    [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:ContactAIRobotListRouter name:contactLocalizable(@"my_ai_robot") imageName:@"ai_robot" color:nil]];
+    [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:NENormalContactAIRobotListRouterCompat name:contactLocalizable(@"my_ai_robot") imageName:@"ai_robot" color:nil]];
 
     if ([IMKitConfigCenter shared].enableAIUser) {
-      [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:ContactAIUserListRouter name:contactLocalizable(@"my_ai_user") imageName:@"ai_user" color:nil]];
+      [contactHeaders addObject:[[ContactHeadItem alloc] initWithRouter:NENormalContactAIUserListRouterCompat name:contactLocalizable(@"my_ai_user") imageName:@"ai_user" color:nil]];
     }
 
     if ([ContactUIConfig shared].headerData) {

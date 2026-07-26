@@ -5,9 +5,9 @@
 #import "VideoToolBar.h"
 #import "ExpandButton.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NSDate+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NSDate+NECommon.h>
 
 @interface VideoToolBar ()
 

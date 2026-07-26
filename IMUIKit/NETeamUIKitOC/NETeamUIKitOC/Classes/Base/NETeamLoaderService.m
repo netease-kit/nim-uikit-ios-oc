@@ -4,7 +4,13 @@
 
 #import "NETeamLoaderService.h"
 #import "NETeamService.h"
-#import <NEChatKitOC/ChatKitClient.h>
+#import <NEChatKit/ChatKitClient.h>
+
+@interface NETeamLoaderService ()
+
+@property(nonatomic, assign) BOOL didRegisterService;
+
+@end
 
 @implementation NETeamLoaderService
 
@@ -18,8 +24,12 @@
 }
 
 - (void)setupInit {
-  [[ChatKitClient shared] registerInit:[NETeamService shared]];
-  [[ChatKitClient shared] buryDataPoints:@"TeamUIKit"];
+  ChatKitClient *client = [ChatKitClient shared];
+  if (!self.didRegisterService) {
+    [client registerInit:[NETeamService shared]];
+    [client buryDataPoints:@"TeamUIKitOC" language:@"oc"];
+    self.didRegisterService = YES;
+  }
 }
 
 @end

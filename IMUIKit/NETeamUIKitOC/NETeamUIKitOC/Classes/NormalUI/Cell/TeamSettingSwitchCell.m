@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "TeamSettingSwitchCell.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @implementation TeamSettingSwitchCell
 

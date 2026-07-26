@@ -3,16 +3,16 @@
 // found in the LICENSE file.
 
 #import "ContactViewModel.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/SubscribeRepo.h>
-#import <NEChatKitOC/NESubscribeManager.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/SubscribeRepo.h>
+#import <NEChatKit/NESubscribeManager.h>
 #import "NETeamJoinAction.h"
-#import <NEChatKitOC/NSString+NECoreKit.h>
+#import <NEChatKit/StringExtension.h>
 
 @interface ContactViewModel () <NEContactListener, NETeamListener, NESubscribeListener>
 

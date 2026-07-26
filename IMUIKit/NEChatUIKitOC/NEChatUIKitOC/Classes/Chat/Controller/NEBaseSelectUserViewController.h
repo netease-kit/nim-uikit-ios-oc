@@ -5,8 +5,8 @@
 #import <UIKit/UIKit.h>
 #import "NEChatBaseViewController.h"
 #import "TeamMemberSelectVM.h"
-#import <NEChatKitOC/TeamInfoModel.h>
-#import <NEChatKitOC/TeamMemberInfoModel.h>
+#import <NEChatKit/TeamInfoModel.h>
+#import <NEChatKit/TeamMemberInfoModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

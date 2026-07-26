@@ -8,12 +8,15 @@
 #import "TeamRouter.h"
 #import "TeamConstant.h"
 #import <NEChatUIKitOC/ChatUIConfig.h>
-#import <NEChatKitOC/NEResultModel.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NEResultModel.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECustomActionSheetController.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
+#import <Photos/Photos.h>
+
+static NSInteger const NETwitterAvatarImageCountLimit = 1;
 
 @implementation FunTeamAvatarViewController
 
@@ -100,14 +103,14 @@
       if (!strongSelf) {
         return;
       }
-      callback(strongSelf, NEMediaTypeImage, avatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
+      callback(strongSelf, NEMediaTypeImage, NETwitterAvatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
         for (NEResultModel *model in results) {
           if (model.asset.mediaType == PHAssetMediaTypeVideo) {
             [strongSelf showToast:commonLocalizable(@"only_support_choose_image")];
             return;
           }
-          if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > avatarImageCountLimit) {
-            [strongSelf showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)avatarImageCountLimit]];
+          if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > NETwitterAvatarImageCountLimit) {
+            [strongSelf showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)NETwitterAvatarImageCountLimit]];
             return;
           }
           [strongSelf uploadHeadImage:model.image];

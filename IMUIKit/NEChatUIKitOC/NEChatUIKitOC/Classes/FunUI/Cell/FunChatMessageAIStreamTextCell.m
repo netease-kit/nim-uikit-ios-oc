@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "FunChatMessageAIStreamTextCell.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import "ChatCellConstantValue.h"
 #import "NEChatUIConstant.h"
 

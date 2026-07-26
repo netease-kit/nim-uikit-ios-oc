@@ -4,7 +4,7 @@
 
 #import "SelectLanguageViewController.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "LanguageCell.h"
 
 @implementation SelectLanguageViewController

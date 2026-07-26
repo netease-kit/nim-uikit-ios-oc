@@ -3,15 +3,15 @@
 // found in the LICENSE file.
 
 #import "NEAITranslateView.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NELottieAnimationView.h>
 #import "NEChatUIConstant.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 
 @implementation NEAITranslateView
 

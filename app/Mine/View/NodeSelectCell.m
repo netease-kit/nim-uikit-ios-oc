@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NodeSelectCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @implementation NodeSelectCell
 

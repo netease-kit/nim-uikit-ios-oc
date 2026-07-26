@@ -1,6 +1,6 @@
 #import "FunFusionContactUnCheckCell.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "NEFusionContactCellModel.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 
 @implementation FunFusionContactUnCheckCell
 

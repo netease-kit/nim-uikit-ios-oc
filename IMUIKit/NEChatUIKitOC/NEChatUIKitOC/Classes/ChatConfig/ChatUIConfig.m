@@ -4,7 +4,7 @@
 // found in the LICENSE file.
 
 #import "ChatUIConfig.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 #pragma mark - MessageProperties
 

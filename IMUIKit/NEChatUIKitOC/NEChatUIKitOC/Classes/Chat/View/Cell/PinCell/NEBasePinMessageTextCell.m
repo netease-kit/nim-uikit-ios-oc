@@ -8,7 +8,6 @@
 #import "MessageTextModel.h"
 #import <NECommonUIKitOC/NELinkableLabel.h>
 #import "NEEmotionTool.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 
 @implementation NEBasePinMessageTextCell
 

@@ -6,10 +6,10 @@
 #import "TeamConstant.h"
 #import "NESelectTeamMember.h"
 #import "NEBaseTeamMemberSelectCell.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
 
 @interface NEBaseTeamMemberSelectController ()

@@ -13,11 +13,11 @@
 #import "TeamUserCell.h"
 #import "TeamConstant.h"
 #import "TeamDetailHeaderView.h"
-#import <NEChatKitOC/NEFriendUserCache.h>
+#import <NEChatKit/NEFriendUserCache.h>
 #import <NEChatUIKitOC/NEChatUIConstant.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 
 @interface TeamSettingViewController ()

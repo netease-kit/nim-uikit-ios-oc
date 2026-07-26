@@ -4,7 +4,7 @@
 
 #import "NETeamJoinAction.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/ChatConstant.h>
+#import <NEChatKit/ChatConstant.h>
 
 NSTimeInterval neTeamJoinActionReadTime = 0;
 NSInteger neTeamJoinActionPageLimit = 100;

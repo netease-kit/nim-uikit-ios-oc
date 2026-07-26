@@ -3,14 +3,14 @@
 // found in the LICENSE file.
 
 #import "NEBaseTeamTableViewCell.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NETeam.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NIMExtension.h>
+#import <NEChatKit/NETeam.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NIMExtension.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
+#import <NEChatKit/NEFriendUserCache.h>
 
 @implementation NEBaseTeamTableViewCell
 

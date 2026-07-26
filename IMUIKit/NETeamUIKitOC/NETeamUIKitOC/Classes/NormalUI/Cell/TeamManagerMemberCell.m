@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "TeamManagerMemberCell.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
 
 @implementation TeamManagerMemberCell
 

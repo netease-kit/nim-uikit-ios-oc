@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NEBaseCollectionMessageRichTextCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ChatUIConfig.h"
 #import "MessageContentModel.h"
 #import "MessageRichTextModel.h"

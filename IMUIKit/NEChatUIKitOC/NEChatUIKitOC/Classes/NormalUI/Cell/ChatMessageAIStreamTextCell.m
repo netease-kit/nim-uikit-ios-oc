@@ -5,9 +5,9 @@
 #import "ChatMessageAIStreamTextCell.h"
 #import "UIImage+Chat.h"
 #import "MessageContentModel.h"
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/IMKitClient.h>
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 
 @implementation ChatMessageAIStreamTextCell
 

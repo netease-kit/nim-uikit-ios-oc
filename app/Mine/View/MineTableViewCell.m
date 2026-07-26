@@ -4,7 +4,7 @@
 
 #import "MineTableViewCell.h"
 #import "AppKey.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 
 @interface MineTableViewCell ()

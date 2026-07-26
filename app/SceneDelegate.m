@@ -1,4 +1,5 @@
 #import "SceneDelegate.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "AppDelegate.h"
 #import "AppKey.h"
 #import "Custom/CustomConfig.h"
@@ -10,22 +11,25 @@
 #import "Mine/Controller/PersonInfoViewController.h"
 #import "Main/NETabBarController.h"
 #import <UserNotifications/UserNotifications.h>
-#import <NEChatKitOC/ChatKitClient.h>
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEAIUserManager.h>
-#import <NEChatKitOC/SettingRepo.h>
-#import <NEChatKitOC/NECommonUtil.h>
+#import <NEChatKit/ChatKitClient.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEAIUserManager.h>
+#import <NEChatKit/SettingRepo.h>
+#import <NEChatKit/NECommonUtil.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
 #import <NERtcCallKit/NERtcCallKit.h>
 #import <NERtcCallUIKit/NERtcCallUIKit.h>
 #import <NIMSDK/NIMSDK.h>
 
 static NSString *const kEnableCloudConversationKey = @"nim_enable_v2_cloud_conversation";
+static NSString *const NIMDemoMeSettingRouterCompat = @"imkit://mine/userInfo.page";
+static NSString *const NIMDemoPushP2pChatVCRouterCompat = @"imkit://chat/p2pChat.page";
+static NSString *const NIMDemoPushTeamChatVCRouterCompat = @"imkit://chat/teamChat.page";
+static NSString *const NIMDemoCallViewRouterCompat = @"imkit://callkit.page";
 
 @interface SceneDelegate () <AIUserAgentProvider, NEIMKitClientListener, UNUserNotificationCenterDelegate>
 
@@ -139,6 +143,13 @@ willConnectToSession:(UISceneSession *)session
     }
 
     [ServerAddresses configServer];
+    if (NEAppKey.length == 0) {
+        [self showLoginViewController];
+        if (completion) {
+            completion(nil);
+        }
+        return;
+    }
     [self setupIMWithAppKey:NEAppKey];
     [self configureSharedServices];
     [self showLoginViewController];
@@ -229,21 +240,12 @@ willConnectToSession:(UISceneSession *)session
 }
 
 - (void)loginIMAccount:(NSString *)account token:(NSString *)token completion:(void (^)(NSError *_Nullable error))completion {
-    V2NIMLoginOption *option = [[V2NIMLoginOption alloc] init];
-    option.syncLevel = V2NIM_DATA_SYNC_TYPE_LEVEL_BASIC;
-    [[NIMSDK sharedSDK].v2LoginService login:account
-                                       token:token
-                                     option:option
-                                     success:^{
+    [[IMKitClient instance] login:account
+                            token:token
+                       completion:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
-                completion(nil);
-            }
-        });
-    } failure:^(V2NIMError * _Nonnull error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (completion) {
-                completion(error.nserror);
+                completion(error);
             }
         });
     }];
@@ -260,8 +262,7 @@ willConnectToSession:(UISceneSession *)session
 
 - (void)showMainViewController {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.window.rootViewController = [[NETabBarController alloc] initWithChangeUI:NO];
-        [self consumePendingPushUserInfoIfNeeded];
+        [self initializePageWithChangeUI:NO];
     });
 }
 
@@ -282,9 +283,16 @@ willConnectToSession:(UISceneSession *)session
 
 - (void)refreshUIStyle {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.window.rootViewController = [[NETabBarController alloc] initWithChangeUI:YES];
-        [self consumePendingPushUserInfoIfNeeded];
+        [self initializePageWithChangeUI:YES];
     });
+}
+
+- (void)initializePageWithChangeUI:(BOOL)isChangeUI {
+    BOOL isFunUI = ![[NEStyleManager instance] isNormalStyle];
+    [[ChatKitClient shared] setupInit:isFunUI];
+    [[CustomConfig shared] registerCustomChatRouterForFunUI:isFunUI];
+    self.window.rootViewController = [[NETabBarController alloc] initWithChangeUI:isChangeUI];
+    [self consumePendingPushUserInfoIfNeeded];
 }
 
 - (void)registerAPNS {
@@ -340,7 +348,7 @@ willConnectToSession:(UISceneSession *)session
         return param;
     };
 
-    [[Router shared] register:MeSettingRouter closure:^(NSDictionary *param) {
+    [[Router shared] register:NIMDemoMeSettingRouterCompat closure:^(NSDictionary *param) {
         id navParam = param[@"nav"];
         if (![navParam isKindOfClass:[UINavigationController class]]) {
             return;
@@ -353,13 +361,11 @@ willConnectToSession:(UISceneSession *)session
 - (void)loadSwiftDemoParityConfig {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        BOOL isFunUI = ![[NEStyleManager instance] isNormalStyle];
         [self loadCallKitIfAvailable];
         [[CustomConfig shared] loadAIChatData];
         [[CustomConfig shared] loadSecurityWarningView];
         [[CustomConfig shared] loadRtcEntry];
         [[CustomConfig shared] loadPhotoBrowser];
-        [[CustomConfig shared] registerCustomChatRouterForFunUI:isFunUI];
     });
 }
 
@@ -370,11 +376,40 @@ willConnectToSession:(UISceneSession *)session
 
     NECallUIKitConfig *uiConfig = [[NECallUIKitConfig alloc] init];
     [[NERtcCallUIKit sharedInstance] setupWithConfig:uiConfig];
+    [self registerCallRouter];
 
     id<UIApplicationDelegate> delegate = UIApplication.sharedApplication.delegate;
     if ([delegate isKindOfClass:AppDelegate.class]) {
         [(AppDelegate *)delegate setupVoIPPushRegistryIfNeeded];
     }
+}
+
+- (void)registerCallRouter {
+    __weak typeof(self) weakSelf = self;
+    [[Router shared] register:NIMDemoCallViewRouterCompat closure:^(NSDictionary<NSString *, id> *param) {
+        if (![[NEChatDetectNetworkTool shareInstance] isNetworkReachability]) {
+            UIView *toastHost = weakSelf.window ?: UIApplication.sharedApplication.keyWindow;
+            [toastHost ne_makeToast:commonLocalizable(@"network_error")
+                            duration:2
+                            position:NEToastPositionCenter];
+            return;
+        }
+
+        NEUICallParam *callParam = [[NEUICallParam alloc] init];
+        id remoteUserAccid = param[@"remoteUserAccid"];
+        id remoteShowName = param[@"remoteShowName"];
+        id remoteAvatar = param[@"remoteAvatar"];
+        id type = param[@"type"];
+
+        callParam.remoteUserAccid = [remoteUserAccid isKindOfClass:NSString.class] ? remoteUserAccid : @"";
+        callParam.remoteShowName = [remoteShowName isKindOfClass:NSString.class] ? remoteShowName : @"";
+        callParam.remoteAvatar = [remoteAvatar isKindOfClass:NSString.class] ? remoteAvatar : @"";
+        callParam.callType = ([type isKindOfClass:NSNumber.class] && [type integerValue] == 1)
+            ? NECallTypeAudio
+            : NECallTypeVideo;
+
+        [[NERtcCallUIKit sharedInstance] callWithParam:callParam];
+    }];
 }
 
 - (void)consumePendingPushUserInfoIfNeeded {
@@ -413,10 +448,10 @@ willConnectToSession:(UISceneSession *)session
     NSString *router = nil;
     if ([sessionType isEqualToString:@"p2p"]) {
         conversationId = [V2NIMConversationIdUtil p2pConversationId:sessionId];
-        router = PushP2pChatVCRouter;
+        router = NIMDemoPushP2pChatVCRouterCompat;
     } else if ([sessionType isEqualToString:@"team"]) {
         conversationId = [V2NIMConversationIdUtil teamConversationId:sessionId];
-        router = PushTeamChatVCRouter;
+        router = NIMDemoPushTeamChatVCRouterCompat;
     }
 
     if (conversationId.length <= 0 || router.length <= 0) {

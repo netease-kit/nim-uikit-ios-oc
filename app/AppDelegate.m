@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/ChatKitClient.h>
 #import "SceneDelegate.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 #import <NERtcCallKit/NERtcCallKit.h>
 #import <NIMSDK/NIMSDK.h>
 #import <PushKit/PushKit.h>

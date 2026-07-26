@@ -7,22 +7,25 @@
 #import "ConversationSearchController.h"
 #import "FunConversationSearchController.h"
 #import "NEConversationViewController.h"
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
+
+static NSString * const NEConversationSearchContactPageRouter = @"imkit://search/search.page";
+static NSString * const NEConversationPageRouter = @"imkit://conversation/conversation.page";
 
 @implementation ConversationRouter
 
 + (void)register {
   [self registerCommon];
 
-  [[Router shared] register:SearchContactPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
+  [[Router shared] register:NEConversationSearchContactPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
     UINavigationController *nav = param[@"nav"];
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     ConversationSearchController *searchCtrl = [[ConversationSearchController alloc] init];
     [nav pushViewController:searchCtrl animated:animated];
   }];
 
-  [[Router shared] register:ConversationPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
+  [[Router shared] register:NEConversationPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
     UINavigationController *nav = param[@"nav"];
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     NEConversationViewController *conversation = [NEConversationViewController cloudController];
@@ -33,14 +36,14 @@
 + (void)registerFun {
   [self registerCommon];
 
-  [[Router shared] register:SearchContactPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
+  [[Router shared] register:NEConversationSearchContactPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
     UINavigationController *nav = param[@"nav"];
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     FunConversationSearchController *searchCtrl = [[FunConversationSearchController alloc] init];
     [nav pushViewController:searchCtrl animated:animated];
   }];
 
-  [[Router shared] register:ConversationPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
+  [[Router shared] register:NEConversationPageRouter closure:^(NSDictionary<NSString *,id> * _Nonnull param) {
     UINavigationController *nav = param[@"nav"];
     BOOL animated = [param[@"animated"] isKindOfClass:[NSNumber class]] ? [param[@"animated"] boolValue] : YES;
     NEConversationViewController *conversation = [NEConversationViewController cloudController];

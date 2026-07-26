@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "IMPushConfigManager.h"
-#import <NEChatKitOC/SettingRepo.h>
+#import <NEChatKit/SettingRepo.h>
 
 static NSString *const kPushConfigFilename = @"im_sdk_push_config";
 

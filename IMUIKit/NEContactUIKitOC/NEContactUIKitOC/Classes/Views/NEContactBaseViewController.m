@@ -4,7 +4,7 @@
 
 #import "NEContactBaseViewController.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactUIConfig.h"
 #import "NEBaseContactRouter.h"
 

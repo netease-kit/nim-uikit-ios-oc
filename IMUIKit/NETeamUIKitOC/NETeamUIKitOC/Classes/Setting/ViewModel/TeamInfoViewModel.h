@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/TeamRepo.h>
 
 @class SettingCellModel;
 

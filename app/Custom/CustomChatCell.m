@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #import "CustomChatCell.h"
+#import <NIMSDK/V2NIMMessage.h>
 #import <NEChatUIKitOC/MessageContentModel.h>
 #import <NEChatUIKitOC/MessageCustomModel.h>
 

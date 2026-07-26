@@ -4,7 +4,7 @@
 
 #import "FunSearchMessageOperationCell.h"
 #import "FunChatUIColor.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
 
 @implementation FunSearchMessageOperationCell

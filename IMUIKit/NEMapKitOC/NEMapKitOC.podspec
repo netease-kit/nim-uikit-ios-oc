@@ -1,5 +1,4 @@
 require_relative "../../PodConfigs/config_podspec.rb"
-require_relative "../../PodConfigs/config_third.rb"
 require_relative "../../PodConfigs/config_local_im.rb"
 
 Pod::Spec.new do |s|

@@ -3,13 +3,16 @@
 // found in the LICENSE file.
 
 #import "HistoryMessageController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "HistoryMessageMemberController.h"
 #import "HistoryMediaResultController.h"
 #import "NormalSearchMessageOperationCell.h"
 #import "ChatMessageHelper.h"
 #import "NEHistoryDatePickerViewController.h"
 #import "NormalChatUIColor.h"
+
+static NSString * const NENormalTeamMemberSelectViewRouter = @"imkit://team/member.select.page";
+typedef void (^NENormalSelectTeamMemberBlock)(NSArray<NETeamMemberInfoModel *> *members);
 
 @implementation HistoryMessageController
 
@@ -70,7 +73,7 @@
 
     HistoryMessageMemberController *teamMemberSearchVC = [[HistoryMessageMemberController alloc] initWithConversationId:self.conversationId];
     __weak typeof(self) weakSelf = self;
-    NESelectTeamMemberBlock callback = ^(NSArray<NETeamMemberInfoModel *> *datas) {
+    NENormalSelectTeamMemberBlock callback = ^(NSArray<NETeamMemberInfoModel *> *datas) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf && datas.count > 0) {
             NETeamMemberInfoModel *memberInfo = [datas.firstObject isKindOfClass:[NETeamMemberInfoModel class]] ? datas.firstObject : nil;
@@ -93,7 +96,7 @@
         }
     };
 
-    [Router.shared use:TeamMemberSelectViewRouter parameters:@{
+    [Router.shared use:NENormalTeamMemberSelectViewRouter parameters:@{
         @"nav": self.navigationController ?: [NSNull null],
         @"teamId": teamId,
         @"navTitle": chatLocalizable(@"group_memmber"),

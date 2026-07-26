@@ -4,7 +4,7 @@
 
 #import "NormalChatViewController.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ChatInpuView.h"
 #import "ForwardAlertViewController.h"
 #import "NormalMultiForwardViewController.h"
@@ -12,8 +12,8 @@
 #import "SelectLanguageViewController.h"
 #import "NormalChatUIColor.h"
 #import "ChatMessageHelper.h"
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import "ChatNavigationView.h"
 #import "ChatRecordView.h"
 #import "NEChatMoreActionView.h"

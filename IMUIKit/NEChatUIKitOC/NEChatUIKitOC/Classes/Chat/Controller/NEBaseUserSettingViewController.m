@@ -3,20 +3,30 @@
 // found in the LICENSE file.
 
 #import "NEBaseUserSettingViewController.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+#import <NEChatKit/NECoreIM2Constant.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
 #import "NEChatUIConstant.h"
 #import "ChatCellConstantValue.h"
 #import "ChatNavigationView.h"
 #import "ChatViewController.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEAIUserManager.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEAIUserManager.h>
+
+static NSString * const NEChatContactSelectedUsersRouter = @"imkit://contact.selectUser.page";
+static NSString * const NEChatTeamCreateDisussRouter = @"imkit://team.create.discuss";
+static NSString * const NEChatContactFusionSelectRouter = @"imkit://contact/fusionselector.page";
+static NSString * const NEChatContactUserSelectRouter = @"imkit://contact/selector.page";
+static NSString * const NEChatTeamCreateDiscussResultRouter = @"imkit://team.create.discuss.result";
+static NSString * const NEChatContactUserInfoPageRouter = @"imkit://contact/userInfo.page";
+static NSString * const NEChatPushPinMessageVCRouter = @"imkit://chat/pinMessage.page";
+static NSString * const NEChatPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
+static NSString * const NEChatSearchMessageRouter = @"imkit://chat/searchMessage.page";
 
 @implementation NEBaseUserSettingViewController
 
@@ -162,7 +172,7 @@
 
 - (void)createDiscuss {
     __weak typeof(self) weakSelf = self;
-    [Router.shared register:ContactSelectedUsersRouter closure:^(NSDictionary * _Nonnull param) {
+    [Router.shared register:NEChatContactSelectedUsersRouter closure:^(NSDictionary * _Nonnull param) {
         NSMutableDictionary *convertParam = [NSMutableDictionary dictionary];
         for (NSString *key in param) {
             if ([key isEqualToString:@"names"] && [param[key] isKindOfClass:[NSString class]]) {
@@ -172,7 +182,7 @@
             }
         }
         [weakSelf.view makeToastActivity:YXToastPositionCenter];
-        [Router.shared use:TeamCreateDisuss parameters:convertParam closure:nil];
+        [Router.shared use:NEChatTeamCreateDisussRouter parameters:convertParam closure:nil];
     }];
 
     NSMutableSet<NSString *> *filters = [NSMutableSet set];
@@ -189,12 +199,12 @@
     }];
 
     if ([IMKitConfigCenter shared].enableAIUser) {
-        [Router.shared use:ContactFusionSelectRouter parameters:params closure:nil];
+        [Router.shared use:NEChatContactFusionSelectRouter parameters:params closure:nil];
     } else {
-        [Router.shared use:ContactUserSelectRouter parameters:params closure:nil];
+        [Router.shared use:NEChatContactUserSelectRouter parameters:params closure:nil];
     }
 
-    [Router.shared register:TeamCreateDiscussResult closure:^(NSDictionary * _Nonnull param) {
+    [Router.shared register:NEChatTeamCreateDiscussResultRouter closure:^(NSDictionary * _Nonnull param) {
         [weakSelf.view ne_hideToastActivity];
         NSInteger code = [param[@"code"] integerValue];
         NSString *teamid = param[@"teamId"];
@@ -204,7 +214,7 @@
                 NSArray *allControllers = [weakSelf filterStackViewController];
                 if (allControllers) {
                     weakSelf.navigationController.viewControllers = allControllers;
-                    [Router.shared use:PushTeamChatVCRouter
+                    [Router.shared use:NEChatPushTeamChatVCRouter
                             parameters:@{@"nav": weakSelf.navigationController ?: [NSNull null],
                                           @"conversationId": conversationId ?: [NSNull null]}
                                closure:nil];
@@ -218,7 +228,7 @@
 
 - (void)showUserInfo {
     if (self.viewModel.userInfo) {
-        [Router.shared use:ContactUserInfoPageRouter
+        [Router.shared use:NEChatContactUserInfoPageRouter
                 parameters:@{@"nav": self.navigationController ?: [NSNull null], @"user": self.viewModel.userInfo}
                    closure:nil];
     }
@@ -268,7 +278,7 @@
     NSString *conversationId = self.userId.length > 0 ? [V2NIMConversationIdUtil p2pConversationId:self.userId] : nil;
     UINavigationController *nav = self.navigationController;
     if (conversationId.length > 0 && nav) {
-        [Router.shared use:PushPinMessageVCRouter
+        [Router.shared use:NEChatPushPinMessageVCRouter
                 parameters:@{@"nav": nav, @"conversationId": conversationId}
                    closure:nil];
     }
@@ -278,7 +288,7 @@
     NSString *conversationId = self.userId.length > 0 ? [V2NIMConversationIdUtil p2pConversationId:self.userId] : nil;
     UINavigationController *nav = self.navigationController;
     if (conversationId.length > 0 && nav) {
-        [Router.shared use:SearchMessageRouter
+        [Router.shared use:NEChatSearchMessageRouter
                 parameters:@{@"nav": nav, @"conversationId": conversationId}
                    closure:nil];
     }

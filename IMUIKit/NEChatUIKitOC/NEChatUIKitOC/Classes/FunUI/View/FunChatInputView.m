@@ -4,7 +4,7 @@
 
 #import "FunChatInputView.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import "ChatCellConstantValue.h"
 #import "FunChatUIColor.h"
 #import "NEChatUIConstant.h"

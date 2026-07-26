@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "SelectLanguageViewModel.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import "NETranslateLanguageManager.h"
 
 @implementation NElanguageCellModel

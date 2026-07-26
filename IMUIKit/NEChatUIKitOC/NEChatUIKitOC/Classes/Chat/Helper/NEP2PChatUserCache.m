@@ -3,8 +3,7 @@
 // found in the LICENSE file.
 
 #import "NEP2PChatUserCache.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NIMSDK/NIMSDK.h>
 
 @interface NEP2PChatUserCache () <NEContactListener>

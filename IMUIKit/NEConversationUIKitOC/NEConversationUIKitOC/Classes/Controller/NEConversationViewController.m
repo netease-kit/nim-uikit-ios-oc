@@ -9,22 +9,23 @@
 #import "NEConversationListModel.h"
 #import "NEConversationListCell.h"
 #import "ConversationUIConfig.h"
+#import <NEChatKit/NEChatKitOC.h>
 @import NECommonUIKitOC;
 #import <NECommonUIKitOC/FunSearchView.h>
-#import <NEChatKitOC/NEAIUserModel.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NESubscribeManager.h>
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAIUserModel.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NESubscribeManager.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NIMSDK/V2NIMConversationEnum.h>
 #import <MJRefresh/MJRefresh.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
@@ -32,6 +33,13 @@
 
 static NSString * const kCellReuseId = @"NEConversationListCell";
 static NSString * const kStickTopCellReuseId = @"NEConversationStickTopCell";
+static NSString * const NEConversationContactUserSelectRouter = @"imkit://contact/selector.page";
+static NSString * const NEConversationContactFusionSelectRouter = @"imkit://contact/fusionselector.page";
+static NSString * const NEConversationContactSelectedUsersRouter = @"imkit://contact.selectUser.page";
+static NSString * const NEConversationTeamCreateDiscussRouter = @"imkit://team.create.discuss";
+static NSString * const NEConversationTeamCreateSeniorRouter = @"imkit://team.create.senior";
+static NSString * const NEConversationTeamCreateDiscussResultRouter = @"imkit://team.create.discuss.result";
+static NSString * const NEConversationTeamCreateSeniorResultRouter = @"imkit://team.create.senior.result";
 
 static BOOL NEConversationIsNormalStyle(void);
 
@@ -156,6 +164,13 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
 @end
 
 @implementation NEConversationViewController
+
+static NSString * const NEConversationContactAddFriendRouter = @"imkit://contact/addFriend.page";
+static NSString * const NEConversationTeamJoinTeamRouter = @"imkit://team/joinTeam.page";
+static NSString * const NEConversationContactAIRobotBindRouter = @"imkit://contact/aiRobotBind.page";
+static NSString * const NEConversationSearchContactPageRouter = @"imkit://search/search.page";
+static NSString * const NEConversationPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
+static NSString * const NEConversationPushP2pChatVCRouter = @"imkit://chat/p2pChat.page";
 
 #pragma mark - 初始化
 
@@ -579,7 +594,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
   }
 
   if (![IMKitConfigCenter shared].enableTeam) {
-    [[Router shared] use:ContactAddFriendRouter
+    [[Router shared] use:NEConversationContactAddFriendRouter
               parameters:@{
                 @"nav": self.navigationController,
                 @"animated": @YES,
@@ -611,7 +626,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
     if (!self.navigationController) {
       return;
     }
-    [[Router shared] use:ContactAddFriendRouter
+    [[Router shared] use:NEConversationContactAddFriendRouter
               parameters:@{
                 @"nav": self.navigationController,
                 @"animated": @NO,
@@ -629,7 +644,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
     if (!self.navigationController) {
       return;
     }
-    [[Router shared] use:TeamJoinTeamRouter
+    [[Router shared] use:NEConversationTeamJoinTeamRouter
               parameters:@{
                 @"nav": self.navigationController,
                 @"animated": @YES,
@@ -705,7 +720,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
       }
 
       UINavigationController *nav = self.navigationController;
-      [[Router shared] use:ContactAIRobotBindRouter
+      [[Router shared] use:NEConversationContactAIRobotBindRouter
                 parameters:@{
                   @"nav": nav,
                   @"qrCode": result,
@@ -757,7 +772,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
     return;
   }
 
-  [[Router shared] use:SearchContactPageRouter
+  [[Router shared] use:NEConversationSearchContactPageRouter
             parameters:@{
               @"nav": self.navigationController,
               @"animated": @YES,
@@ -767,8 +782,8 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
 
 - (void)createDiscussGroup {
   __weak typeof(self) weakSelf = self;
-  [[Router shared] register:ContactSelectedUsersRouter closure:^(NSDictionary<NSString *, id> *param) {
-    [[Router shared] use:TeamCreateDisuss parameters:param closure:nil];
+  [[Router shared] register:NEConversationContactSelectedUsersRouter closure:^(NSDictionary<NSString *, id> *param) {
+    [[Router shared] use:NEConversationTeamCreateDiscussRouter parameters:param closure:nil];
   }];
 
   NSMutableSet<NSString *> *filters = [NSMutableSet set];
@@ -786,12 +801,12 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
   params[@"filters"] = filters;
 
   if ([IMKitConfigCenter shared].enableAIUser) {
-    [[Router shared] use:ContactFusionSelectRouter parameters:params closure:nil];
+    [[Router shared] use:NEConversationContactFusionSelectRouter parameters:params closure:nil];
   } else {
-    [[Router shared] use:ContactUserSelectRouter parameters:params closure:nil];
+    [[Router shared] use:NEConversationContactUserSelectRouter parameters:params closure:nil];
   }
 
-  [[Router shared] register:TeamCreateDiscussResult closure:^(NSDictionary<NSString *, id> *param) {
+  [[Router shared] register:NEConversationTeamCreateDiscussResultRouter closure:^(NSDictionary<NSString *, id> *param) {
     __strong typeof(weakSelf) self = weakSelf;
     if (!self) {
       return;
@@ -804,7 +819,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
       if (conversationId.length == 0 || !self.navigationController) {
         return;
       }
-      [[Router shared] use:PushTeamChatVCRouter
+      [[Router shared] use:NEConversationPushTeamChatVCRouter
                 parameters:@{
                   @"nav": self.navigationController,
                   @"conversationId": conversationId,
@@ -818,8 +833,8 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
 
 - (void)createSeniorGroup {
   __weak typeof(self) weakSelf = self;
-  [[Router shared] register:ContactSelectedUsersRouter closure:^(NSDictionary<NSString *, id> *param) {
-    [[Router shared] use:TeamCreateSenior parameters:param closure:nil];
+  [[Router shared] register:NEConversationContactSelectedUsersRouter closure:^(NSDictionary<NSString *, id> *param) {
+    [[Router shared] use:NEConversationTeamCreateSeniorRouter parameters:param closure:nil];
   }];
 
   NSMutableSet<NSString *> *filters = [NSMutableSet set];
@@ -837,12 +852,12 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
   params[@"filters"] = filters;
 
   if ([IMKitConfigCenter shared].enableAIUser) {
-    [[Router shared] use:ContactFusionSelectRouter parameters:params closure:nil];
+    [[Router shared] use:NEConversationContactFusionSelectRouter parameters:params closure:nil];
   } else {
-    [[Router shared] use:ContactUserSelectRouter parameters:params closure:nil];
+    [[Router shared] use:NEConversationContactUserSelectRouter parameters:params closure:nil];
   }
 
-  [[Router shared] register:TeamCreateSeniorResult closure:^(NSDictionary<NSString *, id> *param) {
+  [[Router shared] register:NEConversationTeamCreateSeniorResultRouter closure:^(NSDictionary<NSString *, id> *param) {
     __strong typeof(weakSelf) self = weakSelf;
     if (!self) {
       return;
@@ -855,7 +870,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
       if (conversationId.length == 0 || !self.navigationController) {
         return;
       }
-      [[Router shared] use:PushTeamChatVCRouter
+      [[Router shared] use:NEConversationPushTeamChatVCRouter
                 parameters:@{
                   @"nav": self.navigationController,
                   @"conversationId": conversationId,
@@ -896,12 +911,12 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
   };
 
   if (model.type == V2NIM_CONVERSATION_TYPE_P2P) {
-    [[Router shared] use:PushP2pChatVCRouter parameters:parameters closure:nil];
+    [[Router shared] use:NEConversationPushP2pChatVCRouter parameters:parameters closure:nil];
     return;
   }
 
   if (model.type == V2NIM_CONVERSATION_TYPE_TEAM) {
-    [[Router shared] use:PushTeamChatVCRouter parameters:parameters closure:nil];
+    [[Router shared] use:NEConversationPushTeamChatVCRouter parameters:parameters closure:nil];
     return;
   }
 
@@ -947,7 +962,7 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
     return;
   }
 
-  [[Router shared] use:PushP2pChatVCRouter
+  [[Router shared] use:NEConversationPushP2pChatVCRouter
             parameters:@{
               @"nav": self.navigationController,
               @"conversationId": conversationId,

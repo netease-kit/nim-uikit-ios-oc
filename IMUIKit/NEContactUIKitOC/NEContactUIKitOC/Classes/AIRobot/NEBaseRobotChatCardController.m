@@ -5,10 +5,12 @@
 #import "NEBaseRobotChatCardController.h"
 #import "ContactConst.h"
 #import "NormalContactUIColor.h"
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <QuartzCore/QuartzCore.h>
+
+static NSString * const NEContactPushP2pChatVCRouterCompat = @"imkit://chat/p2pChat.page";
 
 @interface NEBaseRobotChatCardController ()
 
@@ -112,7 +114,7 @@
   UINavigationController *nav = self.navigationController;
   [CATransaction begin];
   [CATransaction setCompletionBlock:^{
-    [[Router shared] use:PushP2pChatVCRouter
+    [[Router shared] use:NEContactPushP2pChatVCRouterCompat
               parameters:@{
                 @"nav": nav,
                 @"conversationId": conversationId,

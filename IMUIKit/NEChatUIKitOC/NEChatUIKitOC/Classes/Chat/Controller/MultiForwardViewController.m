@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 #import "MultiForwardViewController.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
 #import <NIMSDK/NIMSDK.h>
 #import <objc/runtime.h>
 #import "ChatUIConfig.h"
@@ -21,14 +21,14 @@
 #import "NEChatBaseCell.h"
 #import "ChatMessageHelper.h"
 #import "ChatNavigationView.h"
-#import <NEChatKitOC/NEPathUtils.h>
-#import <NEChatKitOC/NECustomUtils.h>
+#import <NEChatKit/NEPathUtils.h>
+#import <NEChatKit/NECustomUtils.h>
 #import <NECommonUIKitOC/NEWKWebViewController.h>
 #import <NECommonUIKitOC/VideoPlayerViewController.h>
 #import <NECommonUIKitOC/PhotoBrowserController.h>
 #import "NEAudioSessionManager.h"
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 
 @interface MultiForwardViewController ()
 @property (nonatomic, copy) NSString *messageAttachmentUrl;
@@ -378,12 +378,12 @@ static Class NEMultiForwardResolveTableViewCellClass(id cellValue) {
                          url:(NSString *)url
                         path:(NSString *)path {
     if (!url || ![model isKindOfClass:[MessageVideoModel class]]) {
-        NELog(@"%@ MessageFileModel not exit", NSStringFromClass([self class]));
+        [NEALog infoLog:NSStringFromClass([self class]) desc:@"MessageFileModel not exit"];
         return;
     }
     MessageVideoModel *fileModel = (MessageVideoModel *)model;
     if (fileModel.state == DownloadStateDownalod) {
-        NELog(@"%@ downLoad state, click ingore", NSStringFromClass([self class]));
+        [NEALog infoLog:NSStringFromClass([self class]) desc:@"downLoad state, click ingore"];
         return;
     }
     fileModel.state = DownloadStateDownalod;

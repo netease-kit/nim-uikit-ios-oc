@@ -5,21 +5,23 @@
 #import "NEBaseTeamAvatarViewController.h"
 #import "TeamConstant.h"
 #import "TeamRouter.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NEChatUIKitOC/ChatUIConfig.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NEPathUtils.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEPathUtils.h>
 #import <Photos/Photos.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+
+static NSInteger const NETeamAvatarImageCountLimit = 1;
 
 @interface NEBaseTeamAvatarViewController ()
 @property (nonatomic, strong, readwrite) NEUserHeaderView *headerView;
@@ -165,14 +167,14 @@
       if (!strongSelf) {
         return;
       }
-      callback(strongSelf, NEMediaTypeImage, avatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
+      callback(strongSelf, NEMediaTypeImage, NETeamAvatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
         for (NEResultModel *model in results) {
           if (model.asset.mediaType == PHAssetMediaTypeVideo) {
             [strongSelf showToast:commonLocalizable(@"only_support_choose_image")];
             return;
           }
-          if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > avatarImageCountLimit) {
-            [strongSelf showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)avatarImageCountLimit]];
+          if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > NETeamAvatarImageCountLimit) {
+            [strongSelf showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)NETeamAvatarImageCountLimit]];
             return;
           }
           [strongSelf uploadHeadImage:model.image];

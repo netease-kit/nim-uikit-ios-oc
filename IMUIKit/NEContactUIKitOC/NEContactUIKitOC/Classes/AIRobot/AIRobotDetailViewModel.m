@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "AIRobotDetailViewModel.h"
-#import <NEChatKitOC/AIRepo.h>
+#import <NEChatKit/AIRepo.h>
 
 @implementation AIRobotDetailViewModel
 

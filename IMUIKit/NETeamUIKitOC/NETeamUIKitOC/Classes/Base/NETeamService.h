@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/ChatKitClient.h>
+#import <NEChatKit/ChatKitClient.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

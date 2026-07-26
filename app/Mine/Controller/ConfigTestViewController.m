@@ -8,10 +8,10 @@
 #import "CustomSettingCellModel.h"
 #import "CustomSettingTextviewCell.h"
 #import "CustomThemeCells.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NEConfigManager.h>

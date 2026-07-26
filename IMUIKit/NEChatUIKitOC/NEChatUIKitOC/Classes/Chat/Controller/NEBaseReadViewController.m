@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "NEBaseReadViewController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 #import <NIMSDK/NIMSDK.h>
 #import "ChatNavigationView.h"
 #import "NEChatUIConstant.h"

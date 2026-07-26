@@ -9,10 +9,13 @@
 #import "ContactConst.h"
 #import "FunContactUIColor.h"
 #import "NEBaseAIUserListCell.h"
-#import <NEChatKitOC/NEAIUserModel.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAIUserModel.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
+#import <NIMSDK/V2NIMAIServiceProtocol.h>
+
+static NSString * const NEAIUserContactUserInfoPageRouterCompat = @"imkit://contact/userInfo.page";
 
 @interface AIUserListCell : NEBaseAIUserListCell
 @end
@@ -151,7 +154,7 @@
   if (!model.aiUser) {
     return;
   }
-  [[Router shared] use:ContactUserInfoPageRouter
+  [[Router shared] use:NEAIUserContactUserInfoPageRouterCompat
             parameters:@{
               @"nav": self.navigationController ?: [NSNull null],
               @"nim_user": model.aiUser,

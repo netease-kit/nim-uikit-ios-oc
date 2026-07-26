@@ -4,11 +4,11 @@
 
 #import <Foundation/Foundation.h>
 #import "NEBaseTeamSettingCell.h"
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/ConversationRepo.h>
-#import <NEChatKitOC/LocalConversationRepo.h>
-#import <NEChatKitOC/TeamMemberInfoModel.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/ConversationRepo.h>
+#import <NEChatKit/LocalConversationRepo.h>
+#import <NEChatKit/TeamMemberInfoModel.h>
+#import <NEChatKit/TeamRepo.h>
 #import <NIMSDK/NIMSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN

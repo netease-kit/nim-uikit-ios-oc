@@ -4,18 +4,22 @@
 
 #import "NEBaseFindFriendViewController.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/UIColor+NECommon.h>
+
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/NENavigationView.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
 #import "ContactConst.h"
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEFindFriendMeSettingRouterCompat = @"imkit://mine/userInfo.page";
+static NSString * const NEFindFriendContactUserInfoPageRouterCompat = @"imkit://contact/userInfo.page";
 
 @implementation NEBaseFindFriendViewController
 
@@ -141,7 +145,7 @@
   }
 
   if ([[IMKitClient instance] isMe:text]) {
-    [[Router shared] use:MeSettingRouter
+    [[Router shared] use:NEFindFriendMeSettingRouterCompat
               parameters:@{@"nav": self.navigationController ?: [NSNull null]}
                  closure:nil];
     return;
@@ -155,7 +159,7 @@
     if (error == nil) {
       if (user && (user.user != nil || user.friend != nil)) {
         // go to detail
-        [[Router shared] use:ContactUserInfoPageRouter
+        [[Router shared] use:NEFindFriendContactUserInfoPageRouterCompat
                   parameters:@{@"nav": weakSelf.navigationController ?: [NSNull null], @"user": user}
                      closure:nil];
         weakSelf.emptyView.hidden = YES;

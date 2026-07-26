@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "CollectionMessageModel.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "ChatMessageHelper.h"
 #import "ChatUIConfig.h"
 #import "MessageEnum.h"

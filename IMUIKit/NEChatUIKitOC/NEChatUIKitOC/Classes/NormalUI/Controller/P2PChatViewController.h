@@ -5,7 +5,7 @@
 #import <UIKit/UIKit.h>
 #import "NormalChatViewController.h"
 #import "P2PChatViewModel.h"
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 #import "NEP2PChatUserCache.h"
 
 NS_ASSUME_NONNULL_BEGIN

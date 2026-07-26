@@ -4,7 +4,7 @@
 
 #import "ReadViewController.h"
 #import "ChatNavigationView.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "UserTableViewCell.h"
 
 @implementation ReadViewController

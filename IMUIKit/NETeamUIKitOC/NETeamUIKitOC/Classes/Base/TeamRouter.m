@@ -5,23 +5,32 @@
 #import "TeamRouter.h"
 #import "TeamConstant.h"
 #import "TeamKitConfigCenter.h"
-#import <NEChatKitOC/NECommonUtil.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/NESubscribeManager.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
+#import <NEChatKit/NECommonUtil.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/NESubscribeManager.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEFriendUserCache.h>
 #import <NIMSDK/NIMSDK.h>
 #import <UIKit/UIKit.h>
 #import <objc/message.h>
 
 @implementation TeamRouter
+
+static NSString * const NETeamCreateDiscussRoute = @"imkit://team.create.discuss";
+static NSString * const NETeamCreateDiscussResultRoute = @"imkit://team.create.discuss.result";
+static NSString * const NETeamCreateSeniorRoute = @"imkit://team.create.senior";
+static NSString * const NETeamCreateSeniorResultRoute = @"imkit://team.create.senior.result";
+static NSString * const NETeamJoinTeamRouter = @"imkit://team/joinTeam.page";
+static NSString * const NETeamDetailInfoPageRouter = @"imkit://team/teamDetailInfo.page";
+static NSString * const NETeamSettingViewRouter = @"imkit://team/teamSetting.page";
+static NSString * const NETeamMemberSelectViewRouter = @"imkit://team/team.member.select.page";
 
 + (BOOL)isBlankString:(NSString *)string {
   if (![string isKindOfClass:[NSString class]]) {
@@ -128,7 +137,7 @@
 }
 
 + (void)registerCommonWithIconUrls:(NSArray<NSString *> *)iconUrls {
-  [[Router shared] register:TeamCreateDisuss closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NETeamCreateDiscussRoute closure:^(NSDictionary<NSString *,id> *param) {
     NSArray<NSString *> *accids = [param[@"accids"] isKindOfClass:[NSArray class]] ? param[@"accids"] : nil;
     if (!accids.count) {
       return;
@@ -170,11 +179,11 @@
           result[@"teamId"] = createResult.team.teamId;
         }
       }
-      [[Router shared] use:TeamCreateDiscussResult parameters:result closure:nil];
+      [[Router shared] use:NETeamCreateDiscussResultRoute parameters:result closure:nil];
     }];
   }];
 
-  [[Router shared] register:TeamCreateSenior closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NETeamCreateSeniorRoute closure:^(NSDictionary<NSString *,id> *param) {
     NSArray<NSString *> *accids = [param[@"accids"] isKindOfClass:[NSArray class]] ? param[@"accids"] : nil;
     if (!accids.count) {
       return;
@@ -229,7 +238,7 @@
         }
       }
 
-      [[Router shared] use:TeamCreateSeniorResult parameters:result closure:nil];
+      [[Router shared] use:NETeamCreateSeniorResultRoute parameters:result closure:nil];
     }];
   }];
 
@@ -244,7 +253,7 @@
                         detailClass:(NSString *)detailClass
                        settingClass:(NSString *)settingClass
                   memberSelectClass:(NSString *)memberSelectClass {
-  [[Router shared] register:TeamJoinTeamRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NETeamJoinTeamRouter closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
     UIViewController *controller = [self instantiateControllerWithClassName:joinClass team:nil];
@@ -253,7 +262,7 @@
     }
   }];
 
-  [[Router shared] register:TeamDetailInfoPageRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NETeamDetailInfoPageRouter closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
     V2NIMTeam *team = [param[@"team"] isKindOfClass:[V2NIMTeam class]] ? param[@"team"] : nil;
@@ -263,7 +272,7 @@
     }
   }];
 
-  [[Router shared] register:TeamSettingViewRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NETeamSettingViewRouter closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
     UIViewController *controller = [self instantiateControllerWithClassName:settingClass team:nil];
@@ -275,7 +284,7 @@
     }
   }];
 
-  [[Router shared] register:TeamMemberSelectViewRouter closure:^(NSDictionary<NSString *,id> *param) {
+  [[Router shared] register:NETeamMemberSelectViewRouter closure:^(NSDictionary<NSString *,id> *param) {
     UINavigationController *nav = [param[@"nav"] isKindOfClass:[UINavigationController class]] ? param[@"nav"] : nil;
     BOOL animated = param[@"animated"] ? [param[@"animated"] boolValue] : YES;
     UIViewController *controller = [self instantiateControllerWithClassName:memberSelectClass team:nil];

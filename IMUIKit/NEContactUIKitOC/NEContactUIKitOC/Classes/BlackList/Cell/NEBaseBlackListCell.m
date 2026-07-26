@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 #import "NEBaseBlackListCell.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @interface NEBaseBlackListCell ()

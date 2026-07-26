@@ -4,7 +4,7 @@
 
 #import <UIKit/UIKit.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 #import "NEContactBaseViewController.h"
 #import "ContactUserViewModel.h"
 #import "NEBaseUserInfoHeaderView.h"

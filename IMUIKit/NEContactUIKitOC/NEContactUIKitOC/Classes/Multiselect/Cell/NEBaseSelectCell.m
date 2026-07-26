@@ -2,13 +2,13 @@
 // Use of this source code is governed by a MIT license that can be found in the LICENSE file.
 
 #import "NEBaseSelectCell.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
 #import "ContactUIConfig.h"
 #import "NormalContactUIColor.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEFriendUserCache.h>
 #import <NIMSDK/NIMSDK.h>
 
 @implementation NEBaseSelectCell

@@ -4,7 +4,7 @@
 
 #import "NEAIWordSearchModel.h"
 #import "NEAISearchConstant.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 
 @implementation NEAIWordSearchModel
 

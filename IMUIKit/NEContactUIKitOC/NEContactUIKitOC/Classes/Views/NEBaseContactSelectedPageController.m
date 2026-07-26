@@ -3,14 +3,17 @@
 // found in the LICENSE file.
 
 #import "NEBaseContactSelectedPageController.h"
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import "ContactConst.h"
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEContactSelectedUsersRouterCompat2 = @"imkit://contact.selectUser.page";
 
 @interface NEBaseContactSelectedPageController ()
 @property (nonatomic, assign) BOOL isRequesting;
@@ -173,7 +176,7 @@
 
     NSString *nameString = [names componentsJoinedByString:@"、"];
     NSLog(@"name string : %@", nameString);
-    [[Router shared] use:ContactSelectedUsersRouter
+    [[Router shared] use:NEContactSelectedUsersRouterCompat2
               parameters:@{@"accids": accids, @"names": nameString, @"im_user": users}
                  closure:nil];
     [weakSelf.navigationController popViewControllerAnimated:YES];

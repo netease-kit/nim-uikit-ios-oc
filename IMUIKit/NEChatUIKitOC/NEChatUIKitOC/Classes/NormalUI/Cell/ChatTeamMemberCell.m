@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "ChatTeamMemberCell.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @implementation ChatTeamMemberCell
 

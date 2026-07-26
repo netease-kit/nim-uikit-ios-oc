@@ -4,9 +4,9 @@
 
 #import "TeamMemberCell.h"
 #import "NormalTeamUIColor.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @implementation TeamMemberCell
 

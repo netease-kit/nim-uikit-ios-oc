@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FunReadViewController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "FunUserTableViewCell.h"
 #import "FunChatUIColor.h"
 

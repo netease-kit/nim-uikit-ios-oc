@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "NEInputMoreCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "NEChatUIConstant.h"
 
 @implementation NEInputMoreCell

@@ -3,20 +3,20 @@
 // found in the LICENSE file.
 
 #import "ConversationViewModel.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "NEAtMessageManager.h"
 #import "NEConversationListModel.h"
 #import "NECloudConversationDataSource.h"
 #import "NELocalConversationDataSource.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEAIUserModel.h>
-#import <NEChatKitOC/NEAIUserManager.h>
-#import <NEChatKitOC/NEAIUserPinManager.h>
-#import <NEChatKitOC/NESubscribeManager.h>
-#import <NEChatKitOC/SubscribeRepo.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEAIUserModel.h>
+#import <NEChatKit/NEAIUserManager.h>
+#import <NEChatKit/NEAIUserPinManager.h>
+#import <NEChatKit/NESubscribeManager.h>
+#import <NEChatKit/SubscribeRepo.h>
+#import <NEChatKit/TeamRepo.h>
 #import <NIMSDK/NIMSDK.h>
 
 static NSString * const kClassName = @"ConversationViewModel";

@@ -3,8 +3,7 @@
 // found in the LICENSE file.
 
 #import "NEBasePinMessageMultiForwardCell.h"
-#import <NEChatKitOC/NECommonKitOC.h>
-#import <NEChatKitOC/NECustomUtils.h>
+#import <NEChatKit/NECustomUtils.h>
 #import "ChatCellConstantValue.h"
 #import "NEChatUIConstant.h"
 #import "NEEmotionTool.h"

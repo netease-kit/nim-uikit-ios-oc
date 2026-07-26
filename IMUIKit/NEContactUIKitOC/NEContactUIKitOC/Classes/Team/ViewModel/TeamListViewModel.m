@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 #import "TeamListViewModel.h"
-#import <NEChatKitOC/NETeam.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NETeam.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/TeamRepo.h>
 
 @interface TeamListViewModel () <NETeamListener>
 @end
@@ -38,15 +38,15 @@
       completion(nil, error);
     } else if (teams) {
       [weakSelf.teamList removeAllObjects];
-      for (V2NIMTeam *v2team in teams) {
-        NETeam *neTeam = [[NETeam alloc] initWithV2TeamInfo:v2team];
-        [weakSelf.teamList addObject:neTeam];
-      }
-      [weakSelf.teamList sortUsingComparator:^NSComparisonResult(NETeam *team1, NETeam *team2) {
+      NSArray<V2NIMTeam *> *sortedTeams = [teams sortedArrayUsingComparator:^NSComparisonResult(V2NIMTeam * _Nonnull team1, V2NIMTeam * _Nonnull team2) {
         if (team1.createTime > team2.createTime) return NSOrderedAscending;
         if (team1.createTime < team2.createTime) return NSOrderedDescending;
         return NSOrderedSame;
       }];
+      for (V2NIMTeam *v2team in sortedTeams) {
+        NETeam *neTeam = [[NETeam alloc] initWithV2teamInfo:v2team];
+        [weakSelf.teamList addObject:neTeam];
+      }
       completion(weakSelf.teamList, nil);
     }
   }];
@@ -55,7 +55,7 @@
 #pragma mark - NETeamListener
 
 - (void)onTeamAdded:(V2NIMTeam *)team {
-  [self.teamList insertObject:[[NETeam alloc] initWithV2TeamInfo:team] atIndex:0];
+  [self.teamList insertObject:[[NETeam alloc] initWithV2teamInfo:team] atIndex:0];
   self.refresh();
 }
 
@@ -63,7 +63,7 @@
   for (NSInteger i = 0; i < (NSInteger)self.teamList.count; i++) {
     NETeam *t = self.teamList[i];
     if ([t.teamId isEqualToString:team.teamId]) {
-      self.teamList[i] = [[NETeam alloc] initWithV2TeamInfo:team];
+      self.teamList[i] = [[NETeam alloc] initWithV2teamInfo:team];
       self.refresh();
       break;
     }

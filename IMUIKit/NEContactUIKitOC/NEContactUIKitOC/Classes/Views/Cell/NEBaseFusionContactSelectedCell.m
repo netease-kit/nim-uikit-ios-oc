@@ -3,12 +3,12 @@
 // found in the LICENSE file.
 
 #import "NEBaseFusionContactSelectedCell.h"
-#import <NEChatKitOC/NIMExtension.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NIMExtension.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation NEBaseFusionContactSelectedCell

@@ -6,7 +6,7 @@
 #import "UserSettingSwitchCell.h"
 #import "UserSettingSelectCell.h"
 #import "ChatNavigationView.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 
 @implementation UserSettingViewController
 

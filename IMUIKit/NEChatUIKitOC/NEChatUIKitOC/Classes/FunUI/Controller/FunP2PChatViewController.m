@@ -5,11 +5,11 @@
 #import "FunP2PChatViewController.h"
 #import "UIImage+Chat.h"
 #import "P2PChatViewModel.h"
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 #import "NEP2PChatUserCache.h"
-#import <NEChatKitOC/ChatRepo.h>
+#import <NEChatKit/ChatRepo.h>
 #import "FunChatUIColor.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import "NEChatUIConstant.h"
 #import <NECommonUIKitOC/NELottieAnimationView.h>
 #import "AIChatViewController.h"

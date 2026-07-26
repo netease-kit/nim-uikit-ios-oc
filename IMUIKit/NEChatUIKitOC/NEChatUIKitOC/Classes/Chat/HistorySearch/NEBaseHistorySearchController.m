@@ -5,17 +5,17 @@
 #import "NEBaseHistorySearchController.h"
 #import "UIImage+Chat.h"
 #import <MJRefresh/MJRefresh.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
 #import <NIMSDK/NIMSDK.h>
 #import "NEChatUIConstant.h"
 #import "TeamHistoryMessageViewModel.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "NEBaseHistoryMediaResultController.h"
 #import "NEHistoryDatePickerViewController.h"
 #import "NERefreshHasNoMoreView.h"
@@ -26,9 +26,14 @@
 #import "MessageContentModel.h"
 #import "MessageTipsModel.h"
 #import "OperationCell.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 #import "NEBaseChatMessageTipCell.h"
 #import "NEChatBaseCell.h"
+
+typedef void (^NECompatSelectTeamMemberBlock)(NSArray<NETeamMemberInfoModel *> *members);
+static NSString * const NEHistoryTeamMemberSelectViewRouter = @"imkit://team/member.select.page";
+static NSString * const NEHistoryPushP2pChatVCRouter = @"imkit://chat/p2pChat.page";
+static NSString * const NEHistoryPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
 
 #pragma mark - NEHistorySearchContainerView
 
@@ -339,7 +344,7 @@
     if (!teamId) return;
 
     __weak typeof(self) weakSelf = self;
-    NESelectTeamMemberBlock callback = ^(NSArray *datas) {
+    NECompatSelectTeamMemberBlock callback = ^(NSArray *datas) {
         id firstData = datas.firstObject;
         NSString *accountId = nil;
         if ([firstData respondsToSelector:@selector(nimUser)]) {
@@ -363,7 +368,7 @@
         }
     };
 
-    [Router.shared use:TeamMemberSelectViewRouter
+    [Router.shared use:NEHistoryTeamMemberSelectViewRouter
             parameters:@{
                 @"nav": self.navigationController ?: [NSNull null],
                 @"teamId": teamId,
@@ -412,7 +417,7 @@
     }
 
     if (conversationType == V2NIM_CONVERSATION_TYPE_P2P) {
-        [Router.shared use:PushP2pChatVCRouter
+        [Router.shared use:NEHistoryPushP2pChatVCRouter
                 parameters:@{
                     @"nav": self.navigationController ?: [NSNull null],
                     @"conversationId": conversationId ?: [NSNull null],
@@ -428,7 +433,7 @@
             }
         }
     } else if (conversationType == V2NIM_CONVERSATION_TYPE_TEAM) {
-        [Router.shared use:PushTeamChatVCRouter
+        [Router.shared use:NEHistoryPushTeamChatVCRouter
                 parameters:@{
                     @"nav": self.navigationController ?: [NSNull null],
                     @"conversationId": conversationId ?: [NSNull null],

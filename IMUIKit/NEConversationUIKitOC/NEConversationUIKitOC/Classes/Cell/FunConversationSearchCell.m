@@ -4,7 +4,7 @@
 
 #import "FunConversationSearchCell.h"
 #import <NECommonUIKitOC/NEUserHeaderView.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
 
 static UIColor *NEFunConversationLineBorderColor(void) {

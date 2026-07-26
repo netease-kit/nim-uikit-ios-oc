@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "BlackListCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @interface BlackListCell ()

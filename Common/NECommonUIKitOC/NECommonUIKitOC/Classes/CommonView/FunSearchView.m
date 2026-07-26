@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FunSearchView.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import "NECommonUIConstant.h"
 #import "UIView+YXToast.h"
 

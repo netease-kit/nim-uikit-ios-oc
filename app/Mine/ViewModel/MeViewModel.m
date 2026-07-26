@@ -4,7 +4,7 @@
 
 #import "MeViewModel.h"
 #import "AppKey.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 
 @interface MeViewModel ()
 @property (nonatomic, strong, readwrite) NSArray<NSDictionary<NSString *, NSString *> *> *mineData;

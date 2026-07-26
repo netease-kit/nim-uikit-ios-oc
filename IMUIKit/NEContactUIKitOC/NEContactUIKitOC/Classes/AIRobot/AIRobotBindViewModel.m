@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "AIRobotBindViewModel.h"
-#import <NEChatKitOC/AIRepo.h>
-#import <NEChatKitOC/NEAIRobotManager.h>
+#import <NEChatKit/AIRepo.h>
+#import <NEChatKit/NEAIRobotManager.h>
 
 @implementation AIRobotBindViewModel
 

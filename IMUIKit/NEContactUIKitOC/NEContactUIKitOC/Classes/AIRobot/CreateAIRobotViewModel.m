@@ -4,8 +4,8 @@
 
 #import "CreateAIRobotViewModel.h"
 #import "ContactConst.h"
-#import <NEChatKitOC/AIRepo.h>
-#import <NEChatKitOC/ResourceRepo.h>
+#import <NEChatKit/AIRepo.h>
+#import <NEChatKit/ResourceRepo.h>
 
 @implementation CreateAIRobotViewModel
 

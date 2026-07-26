@@ -4,11 +4,11 @@
 
 #import "FunTeamChatViewController.h"
 #import "TeamChatViewModel.h"
-#import <NEChatKitOC/ChatRepo.h>
+#import <NEChatKit/ChatRepo.h>
 #import "NETeamUserManager.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import "FunChatUIColor.h"
 #import "NEChatUIConstant.h"
 #import "UITextView+NEPlaceholder.h"

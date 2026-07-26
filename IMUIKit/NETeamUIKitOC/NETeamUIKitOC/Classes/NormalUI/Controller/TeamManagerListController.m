@@ -7,7 +7,7 @@
 #import "TeamArrowSettingCell.h"
 #import "TeamManagerMemberCell.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 
 @implementation TeamManagerListController
 

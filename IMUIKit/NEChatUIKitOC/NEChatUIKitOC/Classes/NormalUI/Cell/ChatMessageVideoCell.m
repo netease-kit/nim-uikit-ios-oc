@@ -4,9 +4,9 @@
 
 #import "ChatMessageVideoCell.h"
 #import "ChatMessageHelper.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 #import <AVFoundation/AVFoundation.h>
-#import <NEChatKitOC/NSDate+NECommon.h>
+#import <NEChatKit/NSDate+NECommon.h>
 #import <SDWebImage/SDWebImage.h>
 
 static UIImage *NEChatVideoCellFirstFrame(NSString *path) {

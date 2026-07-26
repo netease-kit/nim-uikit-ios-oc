@@ -5,13 +5,16 @@
 #import "ContactConst.h"
 #import "NormalContactUIColor.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECommonKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
+
+
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import <NIMSDK/NIMSDK.h>
+#import <NEChatKit/NEChatKitOC.h>
+
+static NSString * const NEForwardMultiSelectedRouterCompat = @"imkit://contact/tab/selector.result";
 
 @interface NEBaseMultiSelectViewController ()
 @property (nonatomic, strong, readwrite) MultiSelectViewModel *viewModel;
@@ -236,7 +239,7 @@
     [conversationJSONs addObject:conversationJSON];
   }
 
-  [[Router shared] use:ForwardMultiSelectedRouter parameters:@{@"conversations": conversationJSONs} closure:nil];
+  [[Router shared] use:NEForwardMultiSelectedRouterCompat parameters:@{@"conversations": conversationJSONs} closure:nil];
   [self cancelButtonAction];
 }
 

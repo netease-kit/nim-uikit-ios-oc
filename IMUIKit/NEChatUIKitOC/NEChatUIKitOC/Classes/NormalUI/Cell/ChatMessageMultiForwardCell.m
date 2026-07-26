@@ -4,10 +4,10 @@
 
 #import "ChatMessageMultiForwardCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NECustomUtils.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NECustomUtils.h>
+#import <NEChatKit/NEFriendUserCache.h>
 #import "NEChatUIConstant.h"
 #import "NSString+Chat.h"
 

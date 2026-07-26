@@ -5,9 +5,9 @@
 #import "TabNavigationView.h"
 #import "NECommonUIConstant.h"
 #import "ExpandButton.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
 
 @interface TabNavigationView ()
 @property (nonatomic, strong, readwrite) UIButton *brandBtn;

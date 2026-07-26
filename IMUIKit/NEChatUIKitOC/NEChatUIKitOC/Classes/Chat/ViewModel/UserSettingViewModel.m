@@ -4,11 +4,10 @@
 
 #import "UserSettingViewModel.h"
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECommonKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 
 @interface UserSettingViewModel () <NEConversationListener, NELocalConversationListener, AIUserPinListener>
 @property (nonatomic, strong) ChatRepo *chatRepo;

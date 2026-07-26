@@ -4,11 +4,11 @@
 
 #import "TeamAvatarViewModel.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/ResourceRepo.h>
-#import <NEChatKitOC/TeamRepo.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/ResourceRepo.h>
+#import <NEChatKit/TeamRepo.h>
 
 @interface TeamAvatarViewModel ()
 @property (nonatomic, strong) TeamRepo *teamRepo;

@@ -5,8 +5,7 @@
 #import "NotificationMessageUtils.h"
 #import "NETeamUserManager.h"
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NIMSDK/NIMSDK.h>
 

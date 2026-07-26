@@ -6,10 +6,10 @@
 #import <UIKit/UIKit.h>
 
 // 路由 URL 常量（声明在 NECoreKitOC/NERouterUrl.h，这里 re-export）
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/NERouterUrl.h>
 
 // Router 类（声明在 NECoreKitOC/Router.h）
-#import <NEChatKitOC/Router.h>
+#import <NEChatKit/Router.h>
 
 @class ContactInfo;
 @class NEContactBaseViewController;

@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "NormalChatMessageBaseCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "NEEmotionTool.h"
 
 @implementation NormalChatMessageBaseCell

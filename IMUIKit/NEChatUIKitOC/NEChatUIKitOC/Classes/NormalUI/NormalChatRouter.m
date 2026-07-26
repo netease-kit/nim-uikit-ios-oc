@@ -9,8 +9,8 @@
 #import "HistoryMessageController.h"
 #import "ChatViewController.h"
 #import "NEBaseChatRouter.h"
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NERouterUrl.h>
 
 static BOOL NEChatRouterBoolValue(id value, BOOL defaultValue) {
     return [value respondsToSelector:@selector(boolValue)] ? [value boolValue] : defaultValue;

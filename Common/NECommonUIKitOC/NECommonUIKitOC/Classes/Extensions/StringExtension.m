@@ -4,7 +4,7 @@
 
 #import "StringExtension.h"
 #import "NECommonUIConstant.h"
-#import <NEChatKitOC/NSDate+NECommon.h>
+#import <NEChatKit/NSDate+NECommon.h>
 
 @implementation NSString (StringExtension)
 

@@ -4,7 +4,7 @@
 
 #import "FunHistoryMediaResultController.h"
 #import "FunForwardAlertViewController.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
 
 @implementation FunHistoryMediaResultController
 

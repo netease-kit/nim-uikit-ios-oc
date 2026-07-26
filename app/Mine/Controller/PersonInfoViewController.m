@@ -3,25 +3,25 @@
 // found in the LICENSE file.
 
 #import "PersonInfoViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "InputPersonInfoController.h"
 #import "BirthdayDatePickerView.h"
 #import "AppKey.h"
 #import "NEStyleManager.h"
 #import <NEChatUIKitOC/ChatUIConfig.h>
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NEResultModel.h>
-#import <NEChatKitOC/NEPathUtils.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NEResultModel.h>
+#import <NEChatKit/NEPathUtils.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NENavigationView.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/ResourceRepo.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/ResourceRepo.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
@@ -29,6 +29,8 @@
 #import "CustomThemeCells.h"
 #import <NIMSDK/NIMSDK.h>
 #import <Photos/Photos.h>
+
+static NSInteger const NIMDemoAvatarImageCountLimitCompat = 1;
 
 #pragma mark - PersonInfoViewModel
 
@@ -648,8 +650,8 @@ PersonInfoViewModelDelegate>
       [self showToast:commonLocalizable(@"only_support_choose_image")];
       return;
     }
-    if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > avatarImageCountLimit) {
-      [self showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)avatarImageCountLimit]];
+    if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > NIMDemoAvatarImageCountLimitCompat) {
+      [self showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)NIMDemoAvatarImageCountLimitCompat]];
       return;
     }
     [self uploadHeadImage:model.image];
@@ -669,7 +671,7 @@ PersonInfoViewModelDelegate>
       UIAlertAction *photoAction = [UIAlertAction actionWithTitle:commonLocalizable(@"select_from_album")
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(__unused UIAlertAction *action) {
-        callback(weakSelf, NEMediaTypeImage, avatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
+        callback(weakSelf, NEMediaTypeImage, NIMDemoAvatarImageCountLimitCompat, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
           [weakSelf handleSelectedAvatarResults:results];
         });
       }];
@@ -684,7 +686,7 @@ PersonInfoViewModelDelegate>
       [weakSelf goCamera:weakSelf editing:YES isVideo:NO];
     }];
     NECustomAlertAction *photoAction = [NECustomAlertAction actionWithTitle:commonLocalizable(@"select_from_album") handler:^{
-      callback(weakSelf, NEMediaTypeImage, avatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
+      callback(weakSelf, NEMediaTypeImage, NIMDemoAvatarImageCountLimitCompat, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
         [weakSelf handleSelectedAvatarResults:results];
       });
     }];

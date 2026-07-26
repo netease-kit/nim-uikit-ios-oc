@@ -4,7 +4,7 @@
 
 #import "ChatMessageReplyCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "MessageImageModel.h"
 #import <SDWebImage/SDWebImage.h>
 

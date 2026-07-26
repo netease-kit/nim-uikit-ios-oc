@@ -5,9 +5,9 @@
 #import "TeamMembersController.h"
 #import "TeamMemberCell.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/IMKitClient.h>
 
 @implementation TeamMembersController
 

@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import "NEConversationPopListView.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NEButtonExtension.h>
 #import <NECommonUIKitOC/NEConfigManager.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>

@@ -4,7 +4,7 @@
 
 #import "NEP2PSecurityWarningView.h"
 #import "AppKey.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 

@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/IMKitClient.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/IMKitClient.h>
 
 @class ConversationSearchListModel;
 

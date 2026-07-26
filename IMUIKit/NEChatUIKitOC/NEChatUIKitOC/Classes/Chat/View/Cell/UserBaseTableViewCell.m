@@ -3,9 +3,7 @@
 // found in the LICENSE file.
 
 #import "UserBaseTableViewCell.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECommonKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @implementation UserBaseTableViewCell

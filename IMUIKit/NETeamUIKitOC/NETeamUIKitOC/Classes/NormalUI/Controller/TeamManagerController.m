@@ -8,8 +8,8 @@
 #import "TeamSettingSelectCell.h"
 #import "TeamSettingSubtitleSwitchCell.h"
 #import "TeamSettingSwitchCell.h"
-#import <NEChatKitOC/TeamInfoModel.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/TeamInfoModel.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @implementation TeamManagerController
 

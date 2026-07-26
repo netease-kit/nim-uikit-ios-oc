@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #import "AIUserViewModel.h"
-#import <NEChatKitOC/AIRepo.h>
-#import <NEChatKitOC/NEAIUserModel.h>
+#import <NEChatKit/AIRepo.h>
+#import <NEChatKit/NEAIUserModel.h>
 
 @implementation AIUserViewModel
 

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "EmojiPageView.h"
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NEALog.h>
 
 static NSString *const kClassTag = @"EmojiPageView";
 

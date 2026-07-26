@@ -4,8 +4,8 @@
 
 #import "MultiForwardViewModel.h"
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NEALog.h>
 #import "ChatMessageHelper.h"
 #import "MessageTextModel.h"
 

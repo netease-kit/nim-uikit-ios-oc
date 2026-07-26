@@ -5,7 +5,7 @@
 #import "StyleSelectionViewController.h"
 #import "NEStyleManager.h"
 #import "AppKey.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
 #import <NECommonUIKitOC/NENavigationView.h>
 

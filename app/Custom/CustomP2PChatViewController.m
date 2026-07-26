@@ -3,15 +3,15 @@
 // found in the LICENSE file.
 
 #import "CustomP2PChatViewController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "CustomChatCell.h"
 #import "CustomView.h"
-#import <NEChatKitOC/NECommonUtil.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/NECommonUtil.h>
 #import <NEChatUIKitOC/MessageCustomModel.h>
 #import <NEChatUIKitOC/MessageUtils.h>
 #import <NEChatUIKitOC/NEChatUIKitClient.h>
 #import <NEChatUIKitOC/NEMoreItemModel.h>
-#import <NEChatKitOC/OperationItem.h>
+#import <NEChatKit/OperationItem.h>
 
 static NSInteger const kCustomMessageType = 20;
 

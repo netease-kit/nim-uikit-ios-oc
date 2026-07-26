@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "ReadViewModel.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import "NETeamUserManager.h"
 #import "ChatMessageHelper.h"
 

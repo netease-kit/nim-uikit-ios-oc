@@ -5,7 +5,7 @@
 #import "FunTeamIntroduceViewController.h"
 #import "FunTeamUIColor.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @implementation FunTeamIntroduceViewController
 

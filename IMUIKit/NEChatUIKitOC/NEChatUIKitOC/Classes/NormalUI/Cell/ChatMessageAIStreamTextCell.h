@@ -4,7 +4,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ChatMessageTextCell.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import <NECommonUIKitOC/NELottieAnimationView.h>
 
 NS_ASSUME_NONNULL_BEGIN

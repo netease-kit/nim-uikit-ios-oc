@@ -1,5 +1,4 @@
 require_relative "../../PodConfigs/config_podspec.rb"
-require_relative "../../PodConfigs/config_third.rb"
 require_relative "../../PodConfigs/config_local_common.rb"
 require_relative "../../PodConfigs/config_local_im.rb"
 
@@ -16,11 +15,11 @@ Pod::Spec.new do |s|
   s.source_files = 'NEConversationUIKitOC/Classes/**/*'
   s.resource     = 'NEConversationUIKitOC/Assets/**/*'
 
-  s.dependency NEChatKitOC.name
+  s.dependency NEChatKit.name, NEChatKit.version
   s.dependency NECommonUIKitOC.name
-  s.dependency MJRefresh.name
-  s.dependency SDWebImage.name
-  s.dependency NIMSDK.name, NIMSDK.version
+  s.dependency 'MJRefresh'
+  s.dependency 'SDWebImage'
+  s.dependency 'NIMSDK_LITE', YXConfig.nimsdk_version
 
   YXConfig.pod_target_xcconfig(s)
 end

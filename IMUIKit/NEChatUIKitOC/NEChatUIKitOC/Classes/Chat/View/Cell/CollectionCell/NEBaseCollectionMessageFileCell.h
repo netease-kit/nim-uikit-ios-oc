@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 #import "NEBaseCollectionMessageCell.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 #import <NECommonUIKitOC/FileStateView.h>
 
 NS_ASSUME_NONNULL_BEGIN

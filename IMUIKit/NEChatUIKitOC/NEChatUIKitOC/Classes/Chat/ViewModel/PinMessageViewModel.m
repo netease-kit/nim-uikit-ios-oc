@@ -4,10 +4,10 @@
 
 #import "PinMessageViewModel.h"
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECustomUtils.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECustomUtils.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 #import "NETeamUserManager.h"
 #import "ChatMessageHelper.h"
 #import "MessageUtils.h"

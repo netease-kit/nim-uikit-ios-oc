@@ -3,9 +3,8 @@
 // found in the LICENSE file.
 
 #import "P2PChatViewModel.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NEALog.h>
 #import "NEChatUIConstant.h"
 #import "NEP2PChatUserCache.h"
 #import "ChatUIConfig.h"

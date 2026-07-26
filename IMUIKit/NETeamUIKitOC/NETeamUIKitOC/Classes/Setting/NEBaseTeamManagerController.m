@@ -7,15 +7,15 @@
 #import "SettingCellModel.h"
 #import "SettingSectionModel.h"
 #import "NEBaseTeamSettingCell.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 
 @interface NEBaseTeamManagerController ()
 @property (nonatomic, strong, readwrite) TeamManagerViewModel *viewModel;

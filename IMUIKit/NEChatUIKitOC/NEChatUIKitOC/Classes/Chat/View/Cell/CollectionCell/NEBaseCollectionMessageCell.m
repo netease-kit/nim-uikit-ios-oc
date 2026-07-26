@@ -4,14 +4,14 @@
 
 #import "NEBaseCollectionMessageCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import "ChatMessageHelper.h"
 #import "ChatCellConstantValue.h"
 #import "ChatUIConfig.h"
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/NEConstant.h>
 
 @implementation NEBaseCollectionMessageCell
 

@@ -6,16 +6,19 @@
 #import "AIRobotDetailViewModel.h"
 #import "ContactConst.h"
 #import "NormalContactUIColor.h"
-#import <NEChatKitOC/NEAIRobotManager.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAIRobotManager.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 static NSInteger const kNEAIRobotRefreshAlertTag = 9901;
 static NSInteger const kNEAIRobotDeleteAlertTag = 9911;
 static NSInteger const kNEAIRobotDetailSeparatorTag = 8301;
+static NSString * const NEAIRobotCreateRouterCompat = @"imkit://contact/createAIRobot.page";
+static NSString * const NEAIRobotConfigRouterCompat = @"imkit://contact/aiRobotConfig.page";
+static NSString * const NEAIRobotPushP2pChatVCRouterCompat = @"imkit://chat/p2pChat.page";
 
 @implementation NEBaseAIRobotDetailController
 
@@ -315,7 +318,7 @@ static NSInteger const kNEAIRobotDetailSeparatorTag = 8301;
     return;
   }
   __weak typeof(self) weakSelf = self;
-  [[Router shared] use:ContactCreateAIRobotRouter
+  [[Router shared] use:NEAIRobotCreateRouterCompat
             parameters:@{
               @"nav": self.navigationController,
               @"bot": bot,
@@ -337,7 +340,7 @@ static NSInteger const kNEAIRobotDetailSeparatorTag = 8301;
   if (!bot || !self.navigationController) {
     return;
   }
-  [[Router shared] use:ContactAIRobotConfigRouter
+  [[Router shared] use:NEAIRobotConfigRouterCompat
             parameters:@{
               @"nav": self.navigationController,
               @"bot": bot,
@@ -401,7 +404,7 @@ static NSInteger const kNEAIRobotDetailSeparatorTag = 8301;
   }
 
   UINavigationController *nav = self.navigationController;
-  [[Router shared] use:PushP2pChatVCRouter
+  [[Router shared] use:NEAIRobotPushP2pChatVCRouterCompat
             parameters:@{
               @"nav": nav,
               @"conversationId": conversationId,

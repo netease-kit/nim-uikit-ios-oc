@@ -4,11 +4,11 @@
 
 #import "TeamManagerListViewModel.h"
 #import "TeamConstant.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NEChatUIKitOC/NETeamUserManager.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NSObject+NECommon.h>
 
 @implementation TeamManagerListViewModel
 
@@ -313,14 +313,16 @@
     }
 
     if (infos) {
+      NSMutableArray<NETeamMemberInfoModel *> *users = [model.users mutableCopy] ?: [NSMutableArray array];
       for (NSUInteger index = 0; index < members.count; index++) {
         NETeamMemberInfoModel *memberInfoModel = [[NETeamMemberInfoModel alloc] init];
         memberInfoModel.teamMember = members[index];
         if (infos.count > index) {
           memberInfoModel.nimUser = infos[index];
         }
-        [model.users addObject:memberInfoModel];
+        [users addObject:memberInfoModel];
       }
+      model.users = [users copy];
     }
     [remainUserIds removeObjectAtIndex:0];
     [weakSelf fetchManagersInfo:remainUserIds model:model completion:completion];

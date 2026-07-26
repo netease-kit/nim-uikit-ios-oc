@@ -8,8 +8,8 @@
 #import "UIImage+Chat.h"
 #import "NEEmotionTool.h"
 #import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <SDWebImage/SDWebImage.h>
 
 @implementation TopMessageView

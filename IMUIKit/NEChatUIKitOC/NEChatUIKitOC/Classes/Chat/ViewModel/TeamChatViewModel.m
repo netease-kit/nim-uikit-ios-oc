@@ -3,18 +3,16 @@
 // found in the LICENSE file.
 
 #import "TeamChatViewModel.h"
-#import <NEChatKitOC/NEChatKitOC.h>
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECommonKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEALog.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import "NEChatUIConstant.h"
 #import "NETeamUserManager.h"
 #import "ChatMessageHelper.h"
 #import "ChatUIConfig.h"
-#import <NEChatKitOC/NIMExtension.h>
+#import <NEChatKit/NIMExtension.h>
 
 static NSString *const TAG = @"TeamChatViewModel";
 

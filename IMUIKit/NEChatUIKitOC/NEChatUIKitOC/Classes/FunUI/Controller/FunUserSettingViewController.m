@@ -6,7 +6,7 @@
 #import "FunUserSettingSwitchCell.h"
 #import "FunUserSettingSelectCell.h"
 #import "FunP2PChatViewController.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import "NEChatUIConstant.h"
 #import "FunChatUIColor.h"
 

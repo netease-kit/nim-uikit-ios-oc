@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 #import "NEBaseValidationCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatKitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactConst.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
 
 @implementation NEBaseValidationCell
 

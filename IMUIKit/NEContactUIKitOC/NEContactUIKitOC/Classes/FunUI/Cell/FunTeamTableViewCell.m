@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FunTeamTableViewCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "FunContactUIColor.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 

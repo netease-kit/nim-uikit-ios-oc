@@ -4,7 +4,7 @@
 
 #import "NEBasePinMessageAudioCell.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ChatUIConfig.h"
 #import "ChatCellConstantValue.h"
 #import "MessageContentModel.h"

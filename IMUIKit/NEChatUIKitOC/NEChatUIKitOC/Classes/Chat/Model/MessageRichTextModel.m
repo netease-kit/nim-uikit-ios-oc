@@ -3,10 +3,11 @@
 // found in the LICENSE file.
 
 #import "MessageRichTextModel.h"
-#import <NEChatKitOC/NECustomUtils.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NIMSDK/V2NIMMessage.h>
+#import <NEChatKit/NECustomUtils.h>
+#import <NEChatKit/NECoreIM2Constant.h>
 #import "NEEmotionTool.h"
-#import <NEChatKitOC/NSString+NECommon.h>
+#import <NEChatKit/NSString+NECommon.h>
 #import "ChatCellConstantValue.h"
 
 @implementation MessageRichTextModel

@@ -5,7 +5,7 @@
 #import "ChatInpuView.h"
 #import "UIImage+Chat.h"
 #import "NormalChatUIColor.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
+#import <NEChatKit/IMKitConfigCenter.h>
 #import "ChatViewController.h"
 #import "NEChatUIConstant.h"
 #import "ChatRecordView.h"

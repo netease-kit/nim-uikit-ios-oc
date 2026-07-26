@@ -4,7 +4,7 @@
 
 #import "TextBaseCell.h"
 #import "NEUserHeaderView.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 
 @interface TextBaseCell ()
 

@@ -4,9 +4,9 @@
 
 #import "NEMessageUtil.h"
 #import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NECustomUtils.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NECustomUtils.h>
 
 static NECommonLoader *NEConversationMessageLoader(void) {
   static NECommonLoader *loader = nil;

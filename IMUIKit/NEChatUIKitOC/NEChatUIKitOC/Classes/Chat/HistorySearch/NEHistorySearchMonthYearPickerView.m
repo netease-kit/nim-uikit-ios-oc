@@ -5,7 +5,7 @@
 #import "NEHistorySearchMonthYearPickerView.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import "NEChatUIConstant.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "NormalChatUIColor.h"
 
 @implementation NEHistorySearchMonthYearPickerView

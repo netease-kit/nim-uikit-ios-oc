@@ -5,17 +5,17 @@
 #import "NEBaseConversationSearchController.h"
 #import "ConversationSearchViewModel.h"
 #import "NEBaseConversationSearchCell.h"
-#import <NEChatKitOC/ConversationSearchListModel.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NIMExtension.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/ConversationSearchListModel.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NIMExtension.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 #import <NECommonUIKitOC/FunSearchView.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
+#import <NEChatKit/NEChatKitOC.h>
 
 static NECommonLoader *NEConversationSearchLoader(void) {
   static NECommonLoader *loader = nil;
@@ -35,6 +35,9 @@ NSString *NEConversationSearchLocalizedString(NSString *key) {
 }
 
 @implementation NEBaseConversationSearchController
+
+static NSString * const NEConversationSearchPushP2pChatVCRouter = @"imkit://chat/p2pChat.page";
+static NSString * const NEConversationSearchPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -144,7 +147,7 @@ NSString *NEConversationSearchLocalizedString(NSString *key) {
     NSString *userId = searchModel.userInfo.user.accountId ?: @"";
     if (userId.length > 0 && self.navigationController != nil) {
       NSString *conversationId = [V2NIMConversationIdUtil p2pConversationId:userId];
-      [[Router shared] use:PushP2pChatVCRouter
+      [[Router shared] use:NEConversationSearchPushP2pChatVCRouter
                 parameters:@{ @"nav" : self.navigationController,
                               @"conversationId" : conversationId }
                    closure:nil];
@@ -181,7 +184,7 @@ NSString *NEConversationSearchLocalizedString(NSString *key) {
     }
     if (self.navigationController != nil) {
       NSString *conversationId = [V2NIMConversationIdUtil teamConversationId:teamId];
-      [[Router shared] use:PushTeamChatVCRouter
+      [[Router shared] use:NEConversationSearchPushTeamChatVCRouter
                 parameters:@{ @"nav" : self.navigationController,
                               @"conversationId" : conversationId }
                    closure:nil];

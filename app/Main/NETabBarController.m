@@ -3,27 +3,24 @@
 // found in the LICENSE file.
 
 #import "NETabBarController.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "NEStyleManager.h"
 #import "AppKey.h"
 #import "UITabBar+Badge.h"
-#import "CustomConfig.h"
 #import "MeViewController.h"
-#import <NEChatUIKitOC/NEChatLoaderService.h>
 #import <NEConversationUIKitOC/NEConversationViewController.h>
 #import <NEConversationUIKitOC/ConversationViewModel.h>
-#import <NEContactUIKitOC/NEContactLoaderService.h>
 #import <NEContactUIKitOC/ContactViewController.h>
 #import <NEContactUIKitOC/FunContactViewController.h>
 #import <NEContactUIKitOC/NETeamJoinAction.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/ConversationRepo.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/TeamRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/LocalConversationRepo.h>
+#import <NEChatKit/ConversationRepo.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/TeamRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/LocalConversationRepo.h>
 #import <NIMSDK/NIMSDK.h>
 
 /// 判断是否开启了 V2 云端会话
@@ -54,13 +51,6 @@ static BOOL NEIsCloudConversation(void) {
 - (void)viewDidLoad {
   [super viewDidLoad];
   _meVC = [[MeViewController alloc] init];
-
-  BOOL isFunUI = ![NEStyleManager.instance isNormalStyle];
-
-  // 初始化 ChatKit / ContactKit 路由（必须在 setUpControllers 之前）
-  [[NEChatLoaderService shared] setupInitWithFunUI:isFunUI];
-  [[NEContactLoaderService shared] setupInitWithFunUI:isFunUI];
-  [[CustomConfig shared] registerCustomChatRouterForFunUI:isFunUI];
 
   [self setUpControllers];
   [self setUpSessionBadgeValue];

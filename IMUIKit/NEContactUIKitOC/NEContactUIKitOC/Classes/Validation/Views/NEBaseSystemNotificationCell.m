@@ -3,12 +3,12 @@
 // found in the LICENSE file.
 
 #import "NEBaseSystemNotificationCell.h"
+#import <NEChatKit/NEChatKitOC.h>
 #import "ContactConst.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "ContactConst.h"
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEChatKit/ContactRepo.h>
 
 @interface NEBaseSystemNotificationCell ()
 @property (nonatomic, strong, nullable) NEAddApplication *addApplication;

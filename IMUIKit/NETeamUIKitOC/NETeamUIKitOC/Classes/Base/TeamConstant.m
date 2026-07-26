@@ -4,8 +4,8 @@
 
 #import "TeamConstant.h"
 #import "NETeamLoader.h"
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 
 NSString *const NETeamUIKitModuleName = @"NETeamUIKit";

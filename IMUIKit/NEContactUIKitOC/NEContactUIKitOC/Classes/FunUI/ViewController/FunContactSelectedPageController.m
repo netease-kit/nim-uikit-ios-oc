@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "FunContactSelectedPageController.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "FunFusionContactSelectedController.h"
 #import "FunFusionContactUnCheckCell.h"
 #import "FunContactUIColor.h"

@@ -5,11 +5,11 @@
 #import "TeamMemberSelectViewModel.h"
 #import "TeamConstant.h"
 #import "NESelectTeamMember.h"
-#import <NEChatKitOC/NEChatKitOC.h>
+#import <NEChatKit/NEChatKitOC.h>
 #import <NEChatUIKitOC/NETeamUserManager.h>
-#import <NEChatKitOC/NSObject+NECommon.h>
-#import <NEChatKitOC/IMKitClient.h>
-#import <NEChatKitOC/NEALog.h>
+#import <NEChatKit/NSObject+NECommon.h>
+#import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/NEALog.h>
 
 @implementation TeamMemberSelectViewModel
 
@@ -93,7 +93,7 @@
         }];
         [members removeObjectsAtIndexes:indexes];
       }
-      [teamInfo.users addObjectsFromArray:members];
+      teamInfo.users = [members copy];
       weakSelf.teamInfoModel = teamInfo;
       [weakSelf.datas removeAllObjects];
       [weakSelf.showDatas removeAllObjects];
@@ -127,11 +127,13 @@
                        maxSizeByPage:150
                           completion:^(NSError * _Nullable splitError, NETeamInfoModel * _Nullable model) {
           if (model.users.count > 0) {
-            NSIndexSet *indexes = [model.users indexesOfObjectsPassingTest:^BOOL(NETeamMemberInfoModel * _Nonnull obj, __unused NSUInteger idx, __unused BOOL * _Nonnull stop) {
+            NSMutableArray<NETeamMemberInfoModel *> *filteredUsers = [model.users mutableCopy] ?: [NSMutableArray array];
+            NSIndexSet *indexes = [filteredUsers indexesOfObjectsPassingTest:^BOOL(NETeamMemberInfoModel * _Nonnull obj, __unused NSUInteger idx, __unused BOOL * _Nonnull stop) {
               NSString *account = obj.nimUser.user.accountId ?: @"";
               return [[NEAIUserManager shared] isAIUser:account];
             }];
-            [model.users removeObjectsAtIndexes:indexes];
+            [filteredUsers removeObjectsAtIndexes:indexes];
+            model.users = [filteredUsers copy];
           }
           weakSelf.teamInfoModel = model;
           weakSelf.isRequest = NO;
@@ -287,7 +289,7 @@
 
   NSArray<NETeamMemberInfoModel *> *cachedMembers = [[NETeamUserManager shared] getAllTeamMemberModels];
   if (cachedMembers) {
-    [teamInfo.users addObjectsFromArray:cachedMembers];
+    teamInfo.users = [cachedMembers copy];
     if (completion) {
       completion(nil, teamInfo);
     }
@@ -365,14 +367,16 @@
     }
 
     if (infos) {
+      NSMutableArray<NETeamMemberInfoModel *> *users = [model.users mutableCopy] ?: [NSMutableArray array];
       for (NSUInteger index = 0; index < members.count; index++) {
         NETeamMemberInfoModel *memberInfoModel = [[NETeamMemberInfoModel alloc] init];
         memberInfoModel.teamMember = members[index];
         if (infos.count > index) {
           memberInfoModel.nimUser = infos[index];
         }
-        [model.users addObject:memberInfoModel];
+        [users addObject:memberInfoModel];
       }
+      model.users = [users copy];
     }
 
     [remainUserIds removeObjectAtIndex:0];

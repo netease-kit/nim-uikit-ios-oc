@@ -9,14 +9,16 @@
 #import "TeamTextWithDetailCell.h"
 #import "TeamDetailItem.h"
 #import "TeamDetailViewModel.h"
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
-#import <NEChatKitOC/NIMExtension.h>
-#import <NEChatKitOC/NEALog.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
+#import <NEChatKit/NIMExtension.h>
+#import <NEChatKit/NEALog.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+
+static NSString * const NETeamDetailPushTeamChatVCRouter = @"imkit://chat/teamChat.page";
 
 @interface NEBaseTeamDetailViewController ()
 @property (nonatomic, strong) NSMutableArray<NSArray<TeamDetailItem *> *> *data;
@@ -184,7 +186,7 @@
     return;
   }
 
-  [[Router shared] use:PushTeamChatVCRouter
+  [[Router shared] use:NETeamDetailPushTeamChatVCRouter
             parameters:@{
               @"nav" : self.navigationController ?: [NSNull null],
               @"conversationId" : conversationId,

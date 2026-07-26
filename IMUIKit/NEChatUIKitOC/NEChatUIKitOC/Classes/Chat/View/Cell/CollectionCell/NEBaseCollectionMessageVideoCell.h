@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 #import "NEBaseCollectionMessageImageCell.h"
-#import <NEChatKitOC/NECommonKitOC.h>
 #import <NECommonUIKitOC/VideoStateView.h>
 
 NS_ASSUME_NONNULL_BEGIN

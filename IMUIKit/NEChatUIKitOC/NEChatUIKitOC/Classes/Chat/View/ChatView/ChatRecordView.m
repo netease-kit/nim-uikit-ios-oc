@@ -4,7 +4,7 @@
 
 #import "ChatRecordView.h"
 #import "UIImage+Chat.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "NEChatUIConstant.h"
 
 @interface ChatRecordView ()

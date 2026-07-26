@@ -4,7 +4,7 @@
 
 #import "TeamTextWithDetailCell.h"
 #import "TeamDetailItem.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/ChatCellConstantValue.h>
 
 @implementation TeamTextWithDetailCell

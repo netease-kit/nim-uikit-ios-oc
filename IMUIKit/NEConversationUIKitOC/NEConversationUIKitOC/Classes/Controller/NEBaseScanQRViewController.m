@@ -6,7 +6,7 @@
 #import "NEConversationLoader.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreImage/CoreImage.h>
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIKitOC.h>
 
 @interface NEScanBeamView : UIView

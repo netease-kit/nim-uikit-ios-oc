@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "TeamMemberSelectCell.h"
-#import <NEChatKitOC/NECommonLoader.h>
+#import <NEChatKit/NECommonLoader.h>
 #import <NECommonUIKitOC/NECommonUIConstant.h>
 #import <NECommonUIKitOC/NEUserHeaderView.h>
 
