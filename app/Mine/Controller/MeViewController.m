@@ -3,6 +3,8 @@
 // found in the LICENSE file.
 
 #import "MeViewController.h"
+#import <NEChatKit/NEChatKit.h>
+#import <NEBaseUIKitOC/NEAdaptiveDeviceGate.h>
 #import "MeViewModel.h"
 #import "MineTableViewCell.h"
 #import "MineSettingViewController.h"
@@ -12,18 +14,19 @@
 #import <NEChatUIKitOC/FunCollectionMessageController.h>
 #import "NEStyleManager.h"
 #import "AppKey.h"
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEBaseUIKitOC/NEBaseUIKitOC.h>
+#import <NEBaseUIKitOC/UITableViewCell+NEAdaptiveSelection.h>
 #import <NIMSDK/NIMSDK.h>
 
 @interface MeViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) MeViewModel *viewModel;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong, nullable) NSIndexPath *adaptiveSelectedIndexPath;
 @property (nonatomic, strong) NEUserHeaderView *header;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *idLabel;
@@ -172,6 +175,7 @@ static NSString *const kMineCellId = @"MineTableViewCell";
   _personInfoButton = [UIButton buttonWithType:UIButtonTypeCustom];
   _personInfoButton.translatesAutoresizingMaskIntoConstraints = NO;
   [_personInfoButton addTarget:self action:@selector(personInfoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+  _personInfoButton.accessibilityIdentifier = @"id.personInfo";
   [self.view addSubview:_personInfoButton];
 
   [NSLayoutConstraint activateConstraints:@[
@@ -254,34 +258,69 @@ static NSString *const kMineCellId = @"MineTableViewCell";
   [cell configCellWithData:data];
   NSString *cellTitle = data.allKeys.firstObject ?: [NSString stringWithFormat:@"config%ld", (long)indexPath.row];
   cell.accessibilityIdentifier = [NSString stringWithFormat:@"id.%@", cellTitle];
+  BOOL shouldSelect = self.listSelectionBackgroundColor != nil &&
+                      [indexPath isEqual:self.adaptiveSelectedIndexPath];
+  // cell 复用可能带着上一次的选中底色：先还原再记录原始底色，
+  // 然后只覆盖底色、不改变 selectionStyle；按下期间不会出现系统高亮。
+  [cell ne_applyAdaptiveSelectionColor:nil selected:NO];
+  [cell ne_captureAdaptiveSelectionBackground];
+  [cell ne_applyAdaptiveSelectionColor:self.listSelectionBackgroundColor selected:shouldSelect];
   return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
+- (void)setListSelectionBackgroundColor:(UIColor *)listSelectionBackgroundColor {
+  _listSelectionBackgroundColor = listSelectionBackgroundColor;
+  [self refreshAdaptiveSelectionTint];
+}
+
+- (void)refreshAdaptiveSelectionTint {
+  if (!self.isViewLoaded) {
+    return;
+  }
+  for (UITableViewCell *cell in self.tableView.visibleCells) {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    BOOL selected = self.listSelectionBackgroundColor != nil && indexPath &&
+                    [indexPath isEqual:self.adaptiveSelectedIndexPath];
+    [cell ne_applyAdaptiveSelectionColor:self.listSelectionBackgroundColor selected:selected];
+  }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  UIViewController *pushed = nil;
+  // 先更新选中行并刷新底色，再 push；选中态只由 adaptiveSelectedIndexPath 决定。
+  self.adaptiveSelectedIndexPath = indexPath;
+  [self refreshAdaptiveSelectionTint];
   if ([IMKitConfigCenter shared].enableCollectionMessage) {
     if (indexPath.row == 0) {
       MineSettingViewController *vc = [[MineSettingViewController alloc] init];
       [self.navigationController pushViewController:vc animated:YES];
+      pushed = vc;
     } else if (indexPath.row == 1) {
       UIViewController *collectionVC = [NEStyleManager.instance isNormalStyle]
         ? [[CollectionMessageController alloc] init]
         : [[FunCollectionMessageController alloc] init];
       [self.navigationController pushViewController:collectionVC animated:YES];
+      pushed = collectionVC;
     } else if (indexPath.row == 2) {
       IntroduceBrandViewController *vc = [[IntroduceBrandViewController alloc] init];
       [self.navigationController pushViewController:vc animated:YES];
+      pushed = vc;
     }
   } else {
     if (indexPath.row == 0) {
       MineSettingViewController *vc = [[MineSettingViewController alloc] init];
       [self.navigationController pushViewController:vc animated:YES];
+      pushed = vc;
     } else if (indexPath.row == 1) {
       IntroduceBrandViewController *vc = [[IntroduceBrandViewController alloc] init];
       [self.navigationController pushViewController:vc animated:YES];
+      pushed = vc;
     }
   }
+  (void)pushed;
 }
 
 #pragma mark - UIGestureRecognizerDelegate

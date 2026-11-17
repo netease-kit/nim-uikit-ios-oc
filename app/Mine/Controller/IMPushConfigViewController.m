@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #import "IMPushConfigViewController.h"
+#import <NEBaseUIKitOC/NEAdaptiveDeviceGate.h>
 #import "AppKey.h"
 #import "IMPushConfigManager.h"
 #import "NEStyleManager.h"
@@ -11,12 +12,12 @@
 #import "CustomSettingTextviewCell.h"
 #import "CustomThemeCells.h"
 #import "ArrowTitleCustomTeamSettingSwitchCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NEChatKitOC/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
-#import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NECommonUIKitOC/NENavigationView.h>
+#import <NEBaseUIKitOC/NEBaseUIKitOC.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
 #import <NIMSDK/NIMSDK.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
@@ -57,7 +58,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.title = @"推送配置";
+  self.title = NELocalizable(@"push_config");
   [self setupCellData];
   [self setupPushUI];
 }
@@ -86,7 +87,7 @@
   [NSLayoutConstraint activateConstraints:@[
     [self.contentTableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
     [self.contentTableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    [self.contentTableView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:NEConstant.statusBarHeight + NEConstant.navigationHeight],
+    [self.contentTableView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:self.topConstant],
     [self.contentTableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
   ]];
 
@@ -234,20 +235,24 @@
 }
 
 - (UIView *)getFooterView {
-  UIView *back = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 60)];
+  // 取屏幕宽度会让按钮越出列（实测 911pt vs 列宽 422pt）。
+  UIView *back = [[UIView alloc] init];
   back.backgroundColor = UIColor.clearColor;
   ExpandButton *button = [[ExpandButton alloc] init];
+  button.translatesAutoresizingMaskIntoConstraints = NO;
   [back addSubview:button];
   [button setTitle:NELocalizable(@"save") forState:UIControlStateNormal];
   [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-  if ([NEStyleManager.instance isNormalStyle]) {
-    button.backgroundColor = [UIColor ne_normalTheme];
-    button.frame = CGRectMake(20, 10, self.view.frame.size.width - 40, 40);
-  } else {
-    button.frame = CGRectMake(0, 10, self.view.frame.size.width, 40);
-    button.backgroundColor = [UIColor ne_funTheme];
-  }
+  CGFloat inset = [NEStyleManager.instance isNormalStyle] ? 20.0 : 0.0;
+  button.backgroundColor = [NEStyleManager.instance isNormalStyle] ? [UIColor ne_normalTheme] : [UIColor ne_funTheme];
   [button addTarget:self action:@selector(didSave) forControlEvents:UIControlEventTouchUpInside];
+  [NSLayoutConstraint activateConstraints:@[
+    [button.leadingAnchor constraintEqualToAnchor:back.leadingAnchor constant:inset],
+    [button.trailingAnchor constraintEqualToAnchor:back.trailingAnchor constant:-inset],
+    [button.topAnchor constraintEqualToAnchor:back.topAnchor constant:10],
+    [button.heightAnchor constraintEqualToConstant:40],
+    [back.heightAnchor constraintEqualToConstant:60],
+  ]];
   return back;
 }
 

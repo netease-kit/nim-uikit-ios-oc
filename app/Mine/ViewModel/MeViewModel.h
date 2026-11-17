@@ -6,7 +6,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 对齐 Swift MeViewModel
 @interface MeViewModel : NSObject
 
 /// 列表数据 — 每项为 @{ @"标题": @"图标名" }

@@ -4,8 +4,8 @@
 
 #import "MineTableViewCell.h"
 #import "AppKey.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
 
 @interface MineTableViewCell ()
 @property (nonatomic, strong) UIView *bottomLine;

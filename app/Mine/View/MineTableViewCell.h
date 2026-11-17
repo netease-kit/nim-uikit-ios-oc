@@ -6,7 +6,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 对齐 Swift MineTableViewCell — "我"页面列表 Cell
 @interface MineTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *avatarImageView;

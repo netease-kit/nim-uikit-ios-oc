@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "CustomSettingTextviewCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "NEStyleManager.h"
 
 @implementation CustomSettingTextviewCell
@@ -11,6 +11,7 @@
 - (void)setupUI {
   [self.contentView addSubview:self.titleLabel];
   [self.contentView addSubview:self.inputTextView];
+  [self.contentView addSubview:self.clearButton];
 
   if ([NEStyleManager.instance isNormalStyle]) {
     [NSLayoutConstraint activateConstraints:@[
@@ -23,9 +24,13 @@
 
     [NSLayoutConstraint activateConstraints:@[
       [self.inputTextView.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:36],
-      [self.inputTextView.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-36],
+      [self.inputTextView.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-60],
       [self.inputTextView.topAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:10],
       [self.inputTextView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-10],
+      [self.clearButton.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-40],
+      [self.clearButton.topAnchor constraintEqualToAnchor:self.inputTextView.topAnchor constant:8],
+      [self.clearButton.widthAnchor constraintEqualToConstant:24],
+      [self.clearButton.heightAnchor constraintEqualToConstant:24],
     ]];
   } else {
     UIView *whiteBgView = [[UIView alloc] init];
@@ -49,9 +54,13 @@
 
     [NSLayoutConstraint activateConstraints:@[
       [self.inputTextView.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:20],
-      [self.inputTextView.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-20],
+      [self.inputTextView.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-44],
       [self.inputTextView.topAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:10],
       [self.inputTextView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-10],
+      [self.clearButton.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-24],
+      [self.clearButton.topAnchor constraintEqualToAnchor:self.inputTextView.topAnchor constant:8],
+      [self.clearButton.widthAnchor constraintEqualToConstant:24],
+      [self.clearButton.heightAnchor constraintEqualToConstant:24],
     ]];
     self.dividerLineLeftMargin.constant = 20.0;
     self.dividerLineRightMargin.constant = 0.0;
@@ -66,7 +75,23 @@
     self.cornerType = model.cornerType;
     self.inputTextView.text = model.customInputText;
     self.dataModel = model;
+    [self updateClearButton];
   }
+}
+
+- (void)clearText {
+  self.inputTextView.text = @"";
+  self.dataModel.customInputText = @"";
+  [self updateClearButton];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+  self.dataModel.customInputText = textView.text;
+  [self updateClearButton];
+}
+
+- (void)updateClearButton {
+  self.clearButton.hidden = self.inputTextView.text.length == 0;
 }
 
 - (BOOL)textView:(UITextView *)textView
@@ -90,6 +115,27 @@
     _inputTextView.delegate = self;
   }
   return _inputTextView;
+}
+
+- (UIButton *)clearButton {
+  if (!_clearButton) {
+    _clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _clearButton.translatesAutoresizingMaskIntoConstraints = NO;
+    _clearButton.backgroundColor = UIColor.clearColor;
+    _clearButton.tintColor = UIColor.ne_emptyTitleColor;
+    _clearButton.accessibilityIdentifier = @"id.clear";
+    if (@available(iOS 13.0, *)) {
+      UIImageSymbolConfiguration *configuration = [UIImageSymbolConfiguration configurationWithPointSize:16 weight:UIImageSymbolWeightRegular];
+      [_clearButton setImage:[UIImage systemImageNamed:@"xmark.circle.fill" withConfiguration:configuration] forState:UIControlStateNormal];
+    } else {
+      [_clearButton setTitle:@"×" forState:UIControlStateNormal];
+      [_clearButton setTitleColor:UIColor.ne_emptyTitleColor forState:UIControlStateNormal];
+      _clearButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    }
+    [_clearButton addTarget:self action:@selector(clearText) forControlEvents:UIControlEventTouchUpInside];
+    _clearButton.hidden = YES;
+  }
+  return _clearButton;
 }
 
 @end

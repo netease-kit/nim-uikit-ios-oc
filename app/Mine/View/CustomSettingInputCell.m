@@ -85,6 +85,7 @@
     _inputTextField.textColor = UIColor.blackColor;
     _inputTextField.borderStyle = UITextBorderStyleRoundedRect;
     _inputTextField.textAlignment = NSTextAlignmentLeft;
+    _inputTextField.clearButtonMode = UITextFieldViewModeAlways;
     _inputTextField.delegate = self;
   }
   return _inputTextField;

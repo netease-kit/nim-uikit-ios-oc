@@ -6,7 +6,7 @@
 #import "CustomConversationListCell.h"
 #import <NEConversationUIKitOC/ConversationViewModel.h>
 #import <NEConversationUIKitOC/NEConversationListModel.h>
-#import <NECommonUIKitOC/UIView+YXToast.h>
+#import <NEBaseUIKitOC/UIView+YXToast.h>
 
 static NSString *const kCustomConversationCellReuseId = @"CustomConversationListCell";
 

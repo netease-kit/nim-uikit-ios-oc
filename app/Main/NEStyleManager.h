@@ -6,7 +6,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// UI 风格管理器（对齐 Swift NEStyleManager）
 /// Normal = 1, Fun = 2
 @interface NEStyleManager : NSObject
 

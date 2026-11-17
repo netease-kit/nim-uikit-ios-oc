@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "CustomContactTableViewCell.h"
-#import <NECommonUIKitOC/NEUserHeaderView.h>
+#import <NEBaseUIKitOC/NEUserHeaderView.h>
 #import <NEContactUIKitOC/ContactInfo.h>
 #import <NEContactUIKitOC/NEBaseContactViewCell.h>
 

@@ -1,0 +1,8 @@
+// Copy this file to AppKey.private.h and fill in values from your own project.
+#import <Foundation/Foundation.h>
+
+NSString *const NEAppKey = @"";
+NSString *const NEAPNSCername = @"";
+NSString *const NEPKCerName = @"";
+NSString *const NEAppAccount = @"";
+NSString *const NEAppToken = @"";

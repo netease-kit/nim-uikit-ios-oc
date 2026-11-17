@@ -5,7 +5,7 @@
 #import "AIChatDataLoader.h"
 #import "AppKey.h"
 #import "ServerAddresses.h"
-#import <NEChatKitOC/ChatRepo.h>
+#import <NEChatKit/ChatRepo.h>
 #import <NEChatUIKitOC/AIChatCellModel.h>
 
 static UIColor *AIChatColorFromHex(NSUInteger hex) {
@@ -132,11 +132,7 @@ static UIColor *AIChatColorFromHex(NSUInteger hex) {
 
 + (nullable NSMutableURLRequest *)requestWithMessages:(nullable NSArray<V2NIMMessage *> *)messages
                                          lastMessage:(nullable V2NIMMessage *)lastMessage {
-#if DEBUG
-  NSString *host = @"https://yiyong-qa.netease.im/";
-#else
   NSString *host = @"https://yiyong.netease.im/";
-#endif
   NSURL *url =
       [NSURL URLWithString:[host stringByAppendingString:@"im/ai/chat_assistant/v1/chat_assist"]];
   if (!url) {

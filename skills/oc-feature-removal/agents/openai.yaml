@@ -1,0 +1,6 @@
+interface:
+  display_name: "OC Feature Removal"
+  short_description: "Remove registered open-source OC UIKit and Demo features"
+  default_prompt: "Use $oc-feature-removal to remove a registered feature from the OC UIKit NEChatUIKitOC and app using its maintained inventory."
+policy:
+  allow_implicit_invocation: true

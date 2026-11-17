@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomConversationController : NEConversationViewController <NEConversationViewControllerDelegate>
+@interface CustomConversationController : ConversationController <NEBaseConversationControllerDelegate>
 @end
 
 NS_ASSUME_NONNULL_END

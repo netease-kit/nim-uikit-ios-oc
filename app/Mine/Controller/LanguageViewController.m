@@ -6,12 +6,12 @@
 #import "NEStyleManager.h"
 #import "CustomThemeCells.h"
 #import "AppKey.h"
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NECommonUIKitOC/NENavigationView.h>
-#import <NECommonUIKitOC/UIView+YXToast.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
+#import <NEBaseUIKitOC/UIView+YXToast.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
 #import <NETeamUIKitOC/NEBaseTeamSettingCell.h>

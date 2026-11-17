@@ -1,0 +1,6 @@
+interface:
+  display_name: "OC Skin Removal"
+  short_description: "Remove NormalUI or FunUI from the open-source Objective-C UIKit"
+  default_prompt: "Use $oc-skin-removal to remove one OC UIKit skin completely."
+policy:
+  allow_implicit_invocation: true

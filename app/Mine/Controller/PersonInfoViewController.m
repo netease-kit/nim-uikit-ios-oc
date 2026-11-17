@@ -3,25 +3,25 @@
 // found in the LICENSE file.
 
 #import "PersonInfoViewController.h"
+#import <NEChatKit/NEChatKit.h>
 #import "InputPersonInfoController.h"
 #import "BirthdayDatePickerView.h"
 #import "AppKey.h"
 #import "NEStyleManager.h"
 #import <NEChatUIKitOC/ChatUIConfig.h>
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NECoreIM2Constant.h>
-#import <NEChatKitOC/NEChatDetectNetworkTool.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
-#import <NEChatKitOC/NEResultModel.h>
-#import <NEChatKitOC/NEPathUtils.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NECommonUIKitOC/NENavigationView.h>
-#import <NEChatKitOC/ContactRepo.h>
-#import <NEChatKitOC/ResourceRepo.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/NECoreIM2Constant.h>
+#import <NEChatKit/NEChatDetectNetworkTool.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
+#import <NEChatKit/NEResultModel.h>
+#import <NEChatKit/NEPathUtils.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEBaseUIKitOC/NEBaseUIKitOC.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
+#import <NEChatKit/ContactRepo.h>
+#import <NEChatKit/ResourceRepo.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
@@ -29,6 +29,8 @@
 #import "CustomThemeCells.h"
 #import <NIMSDK/NIMSDK.h>
 #import <Photos/Photos.h>
+
+static NSInteger const NIMDemoAvatarImageCountLimitCompat = 1;
 
 #pragma mark - PersonInfoViewModel
 
@@ -262,6 +264,7 @@ PersonInfoViewModelDelegate>
 @property (nonatomic, strong) PersonInfoViewModel *viewModel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) BirthdayDatePickerView *pickerView;
+@property (nonatomic, strong, nullable) UIViewController *birthdayPickerOverlay;
 @property (nonatomic, strong) NSDictionary<NSNumber *, Class> *cellClassDic;
 
 @end
@@ -633,13 +636,46 @@ PersonInfoViewModelDelegate>
       }
     }];
   };
-  [self.view addSubview:self.pickerView];
+  UIView *container = self.view;
+  if (NEAdaptiveDeviceGate.adaptiveHostActive && self.view.window != nil) {
+    UIViewController *overlay = [[UIViewController alloc] init];
+    overlay.view.backgroundColor = UIColor.clearColor;
+    overlay.view.accessibilityIdentifier = @"id.adaptive.columnOverlay";
+    [self addChildViewController:overlay];
+    overlay.view.frame = self.view.bounds;
+    overlay.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:overlay.view];
+    [overlay didMoveToParentViewController:self];
+    self.birthdayPickerOverlay = overlay;
+    container = overlay.view;
+  }
+  __weak typeof(self) weakPickerOwner = self;
+  self.pickerView.onDismiss = ^{
+    [weakPickerOwner detachBirthdayPickerOverlay];
+  };
+  [container addSubview:self.pickerView];
   [NSLayoutConstraint activateConstraints:@[
-    [self.pickerView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
-    [self.pickerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
-    [self.pickerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    [self.pickerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+    [self.pickerView.topAnchor constraintEqualToAnchor:container.topAnchor],
+    [self.pickerView.leftAnchor constraintEqualToAnchor:container.leftAnchor],
+    [self.pickerView.rightAnchor constraintEqualToAnchor:container.rightAnchor],
+    [self.pickerView.bottomAnchor constraintEqualToAnchor:container.bottomAnchor],
   ]];
+  if (self.birthdayPickerOverlay) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NEAdaptivePresentationDidChange" object:self];
+  }
+}
+
+- (void)detachBirthdayPickerOverlay {
+  UIViewController *overlay = self.birthdayPickerOverlay;
+  if (!overlay) {
+    return;
+  }
+  self.birthdayPickerOverlay = nil;
+  [overlay willMoveToParentViewController:nil];
+  [overlay.view removeFromSuperview];
+  [overlay removeFromParentViewController];
+  self.pickerView = nil;
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"NEAdaptivePresentationDidChange" object:self];
 }
 
 - (void)handleSelectedAvatarResults:(NSArray<NEResultModel *> *)results {
@@ -648,8 +684,8 @@ PersonInfoViewModelDelegate>
       [self showToast:commonLocalizable(@"only_support_choose_image")];
       return;
     }
-    if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > avatarImageCountLimit) {
-      [self showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)avatarImageCountLimit]];
+    if (model.asset.mediaType == PHAssetMediaTypeImage && results.count > NIMDemoAvatarImageCountLimitCompat) {
+      [self showToast:[NSString stringWithFormat:commonLocalizable(@"image_count_over_limit"), (int)NIMDemoAvatarImageCountLimitCompat]];
       return;
     }
     [self uploadHeadImage:model.image];
@@ -669,7 +705,7 @@ PersonInfoViewModelDelegate>
       UIAlertAction *photoAction = [UIAlertAction actionWithTitle:commonLocalizable(@"select_from_album")
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(__unused UIAlertAction *action) {
-        callback(weakSelf, NEMediaTypeImage, avatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
+        callback(weakSelf, NEMediaTypeImage, NIMDemoAvatarImageCountLimitCompat, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
           [weakSelf handleSelectedAvatarResults:results];
         });
       }];
@@ -684,7 +720,7 @@ PersonInfoViewModelDelegate>
       [weakSelf goCamera:weakSelf editing:YES isVideo:NO];
     }];
     NECustomAlertAction *photoAction = [NECustomAlertAction actionWithTitle:commonLocalizable(@"select_from_album") handler:^{
-      callback(weakSelf, NEMediaTypeImage, avatarImageCountLimit, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
+      callback(weakSelf, NEMediaTypeImage, NIMDemoAvatarImageCountLimitCompat, ^(NSArray<NEResultModel *> *results, __unused BOOL isOriginal) {
         [weakSelf handleSelectedAvatarResults:results];
       });
     }];
@@ -700,7 +736,7 @@ PersonInfoViewModelDelegate>
 }
 
 - (void)uploadHeadImage:(UIImage *)image {
-  if (![[NEChatDetectNetworkTool shareInstance] isNetworkReachability]) {
+  if ([[NEChatDetectNetworkTool shareInstance] isNetworkExplicitlyUnreachable]) {
     [self showToast:commonLocalizable(@"network_error")];
     return;
   }

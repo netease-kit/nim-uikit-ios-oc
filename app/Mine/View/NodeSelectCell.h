@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
-#import <NECommonUIKitOC/CornerCell.h>
+#import <NEBaseUIKitOC/CornerCell.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 
 NS_ASSUME_NONNULL_BEGIN

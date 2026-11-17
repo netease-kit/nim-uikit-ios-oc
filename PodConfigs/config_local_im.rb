@@ -1,33 +1,14 @@
 require_relative "config_podspec.rb"
 
-# ---------- NEChatKitOC ----------
-module NEChatKitOC
+# ---------- NEChatKit ----------
+# NEChatKit 是闭源二进制依赖，始终从远端 Pod 源解析（与 OC UIKit 10.9.30 配套）。
+module NEChatKit
   def self.name
-    "NEChatKitOC"
+    "NEChatKit"
   end
 
   def self.version
-    YXConfig.imuikit_version
-  end
-
-  def self.NOS
-    "#{NEChatKitOC.name}/NOS"
-  end
-
-  def self.FCS
-    "#{NEChatKitOC.name}/FCS"
-  end
-
-  def self.NOS_Special
-    "#{NEChatKitOC.name}/NOS_Special"
-  end
-
-  def self.FCS_Special
-    "#{NEChatKitOC.name}/FCS_Special"
-  end
-
-  def self.install(pod)
-    pod.pod NEChatKitOC.name, NEChatKitOC.version
+    YXConfig.chatkit_version
   end
 end
 
@@ -38,15 +19,11 @@ module NEChatUIKitOC
   end
 
   def self.version
-    YXConfig.imuikit_version
+    YXConfig.oc_uikit_version
   end
 
   def self.path
-    "IMUIKit/NEChatUIKitOC/NEChatUIKitOC.podspec"
-  end
-
-  def self.install(pod)
-    pod.pod NEChatUIKitOC.name, :path => NEChatUIKitOC.path
+    "NEChatUIKitOC/NEChatUIKitOC.podspec"
   end
 end
 
@@ -57,15 +34,11 @@ module NEConversationUIKitOC
   end
 
   def self.version
-    YXConfig.imuikit_version
+    YXConfig.oc_uikit_version
   end
 
   def self.path
-    "IMUIKit/NEConversationUIKitOC/NEConversationUIKitOC.podspec"
-  end
-
-  def self.install(pod)
-    pod.pod NEConversationUIKitOC.name, :path => NEConversationUIKitOC.path
+    "NEConversationUIKitOC/NEConversationUIKitOC.podspec"
   end
 end
 
@@ -76,15 +49,11 @@ module NEContactUIKitOC
   end
 
   def self.version
-    YXConfig.imuikit_version
+    YXConfig.oc_uikit_version
   end
 
   def self.path
-    "IMUIKit/NEContactUIKitOC/NEContactUIKitOC.podspec"
-  end
-
-  def self.install(pod)
-    pod.pod NEContactUIKitOC.name, :path => NEContactUIKitOC.path
+    "NEContactUIKitOC/NEContactUIKitOC.podspec"
   end
 end
 
@@ -95,15 +64,11 @@ module NETeamUIKitOC
   end
 
   def self.version
-    YXConfig.imuikit_version
+    YXConfig.oc_uikit_version
   end
 
   def self.path
-    "IMUIKit/NETeamUIKitOC/NETeamUIKitOC.podspec"
-  end
-
-  def self.install(pod)
-    pod.pod NETeamUIKitOC.name, :path => NETeamUIKitOC.path
+    "NETeamUIKitOC/NETeamUIKitOC.podspec"
   end
 end
 
@@ -114,15 +79,11 @@ module NEMapKitOC
   end
 
   def self.version
-    YXConfig.imuikit_version
+    YXConfig.oc_uikit_version
   end
 
   def self.path
-    "IMUIKit/NEMapKitOC/NEMapKitOC.podspec"
-  end
-
-  def self.install(pod)
-    pod.pod NEMapKitOC.name, :path => NEMapKitOC.path
+    "NEMapKitOC/NEMapKitOC.podspec"
   end
 end
 
@@ -133,14 +94,10 @@ module NEAISearchKitOC
   end
 
   def self.version
-    YXConfig.imuikit_version
+    YXConfig.oc_uikit_version
   end
 
   def self.path
-    "IMUIKit/NEAISearchKitOC/NEAISearchKitOC.podspec"
-  end
-
-  def self.install(pod)
-    pod.pod NEAISearchKitOC.name, :path => NEAISearchKitOC.path
+    "NEAISearchKitOC/NEAISearchKitOC.podspec"
   end
 end

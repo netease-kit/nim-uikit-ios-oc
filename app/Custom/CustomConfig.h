@@ -4,11 +4,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class UIButton;
+@class CustomView;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CustomConfig : NSObject
 
 + (instancetype)shared;
+@property (nonatomic, strong) CustomView *customTopView;
+@property (nonatomic, strong) CustomView *customBottomView;
 - (void)configCommonUIKit;
 - (void)configChatUIKit;
 - (void)configContactUIKit;
@@ -18,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loadSecurityWarningView;
 - (void)loadRtcEntry;
 - (void)registerCustomChatRouterForFunUI:(BOOL)isFunUI;
+- (void)customClick:(UIButton *)button;
 
 @end
 

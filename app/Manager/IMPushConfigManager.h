@@ -7,7 +7,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 对齐 Swift IMPushConfigModel
 @interface IMPushConfigModel : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSMutableDictionary    *configMap;
@@ -16,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/// 对齐 Swift IMPushConfigManager — 推送配置持久化
 @interface IMPushConfigManager : NSObject
 
 + (instancetype)instance;
