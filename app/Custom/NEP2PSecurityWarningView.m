@@ -4,9 +4,9 @@
 
 #import "NEP2PSecurityWarningView.h"
 #import "AppKey.h"
-#import <NEChatKitOC/NECommonLoader.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NECommonUIKitOC/NECommonUIKitOC.h>
+#import <NEChatKit/NECommonLoader.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
+#import <NEBaseUIKitOC/NEBaseUIKitOC.h>
 
 static NSString *const kReportAddress = @"https://yunxin.163.com/survey/report";
 
@@ -123,8 +123,12 @@ static UIColor *P2PSecurityWarningColor(NSUInteger hex) {
   (void)interaction;
   NEWKWebViewController *controller =
       [[NEWKWebViewController alloc] initWithUrl:URL.absoluteString title:URL.absoluteString];
-  UIViewController *parent = [self neParentContainerViewController];
-  [parent.navigationController pushViewController:controller animated:YES];
+  UIViewController *owner = [self neViewContainingController];
+  UINavigationController *navigation = owner.navigationController;
+  if (!navigation) {
+    return NO;
+  }
+  [navigation pushViewController:controller animated:YES];
   return NO;
 }
 

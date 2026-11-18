@@ -2,8 +2,8 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
-#import <NECommonUIKitOC/NEBaseViewController.h>
-#import <NEChatKitOC/ContactRepo.h>
+#import <NEBaseUIKitOC/NEBaseViewController.h>
+#import <NEChatKit/ContactRepo.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,7 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/// 对齐 Swift PersonInfoViewController — 个人信息编辑
 @interface PersonInfoViewController : NEBaseViewController
 
 @end

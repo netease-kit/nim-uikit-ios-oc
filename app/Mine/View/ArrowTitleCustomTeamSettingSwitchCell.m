@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "ArrowTitleCustomTeamSettingSwitchCell.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import "CustomSettingCellModel.h"
 
 @implementation ArrowTitleCustomTeamSettingSwitchCell

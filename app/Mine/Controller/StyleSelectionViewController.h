@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
-#import <NECommonUIKitOC/NEBaseViewController.h>
+#import <NEBaseUIKitOC/NEBaseViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (CGSize)cellSize;
 @end
 
-/// 对齐 Swift StyleSelectionViewController — 外观选择
 @interface StyleSelectionViewController : NEBaseViewController
 
 @end

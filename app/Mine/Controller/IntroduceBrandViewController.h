@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
-#import <NECommonUIKitOC/NEBaseViewController.h>
+#import <NEBaseUIKitOC/NEBaseViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, IntroduceCellType) {
 - (void)configData:(SettingCellModel *)model;
 @end
 
-/// 对齐 Swift IntroduceBrandViewController — 关于云信
 @interface IntroduceBrandViewController : NEBaseViewController
 
 @end

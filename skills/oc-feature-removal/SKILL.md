@@ -1,0 +1,86 @@
+---
+name: oc-feature-removal
+description: 按维护清单完整移除 OC 版 IMUIKit 开源 UI 组件和 Demo 中的已登记功能（表情评论、跳转最早未读、自适应外壳可选接线），包括入口、资源、接线和功能专属代码。当用户说“移除...功能”“去掉...功能”“删除...功能”且目标匹配登记名称或别名时自动使用，也支持显式调用 $oc-feature-removal；不要用于普通重构、未登记功能、闭源 NEChatKit 或 Swift/SwiftUI 端。
+---
+
+# OC Feature Removal
+
+这个技能用于“按已维护清单移除功能”，不是在删除时重新发现功能范围。清单路径均相对于 OC 开源仓库根目录，业务代码范围是 `NEChatUIKitOC/` 和 Demo `app/`；`NEAdaptiveUIKitOC/` 是外部组件，只有 `adaptive-shell` 清单明确列出的可选接线可改。`NEChatKit` 是闭源组件，不扫描、不修改。
+
+## Invocation Contract
+
+- 用户使用“移除...功能”“去掉...功能”“删除...功能”等明确删除表达，且目标命中登记名称或别名时，自动调用本技能；无需用户写 `$oc-feature-removal`。
+- 用户也可以显式调用 `$oc-feature-removal`。上述两种调用都已授权移除点名功能，不要重复询问是否删除。
+- 只扫描和修改 `NEChatUIKitOC/` 与 `app/`。只有清单明确记录了真实 Demo 源码或资源引用时，才修改 `app.xcodeproj/`；当前三个功能都不需要。
+- 不扫描、不打开、不修改 `NEAdaptiveUIKitOC/` 的实现、闭源 `NEChatKit`、Swift 或 SwiftUI 工程，也不得离开当前源码 checkout 追删其他实现。
+- 未登记功能不要自动套用本技能；先按“Register Future Features”建立 UI/Demo 清单。
+- 不提交、不推送，除非用户另外明确要求。
+- 保留 dirty worktree 中与目标需求无关的改动；禁止 reset、checkout 或按历史提交整体 revert。
+- 交付标准是客户拿到的最终代码：功能入口、实现、资源、路由与 ObjC 兼容层一并删除，不为“兼容”保留空壳类、空 override 或仅剩转发的方法。确有必须保留的公开符号时，只能在清单中显式登记并写明原因，不能默认保留。
+
+## Registered Features
+
+先读 [references/registry.md](references/registry.md)，再完整读取目标需求清单：
+
+- 表情评论 / Emoji Reaction / Reaction：`references/features/emoji-reaction.md`
+- 跳转最早未读 / 上次阅读位置：`references/features/earliest-unread.md`
+- 自适应外壳 / 折叠屏外壳 / Duo UI：`references/features/adaptive-shell.md`（仅可选接线，外部组件边界见清单）
+
+结构化审计数据位于 `references/feature-registry.json`。运行：
+
+```bash
+python3 skills/oc-feature-removal/scripts/audit_inventory.py --list
+python3 skills/oc-feature-removal/scripts/audit_inventory.py <feature> --phase before
+# skill 尚未放入目标仓库时：追加 --repo /absolute/path/to/nim-uikit-ios-oc
+```
+
+审计优先用 `rg`（ripgrep）加速残留扫描；目标机器没装 ripgrep 时脚本自动回退到内置纯 Python 扫描，结果一致，不需要额外安装。
+
+## 验证矩阵（10.9.30 模拟器实测）
+
+- `earliest-unread`：真实删除后一次构建通过，真实树 `--phase after` 为 0 残留，Demo 的会话打开/返回 UI 流程（有 UI 测试时）通过（列表→聊天→输入→面板→长按→返回）。
+- `adaptive-shell`：真实删除 Demo 外壳接线与 Router presentation API 后构建通过，真实树 `--phase after` 为 0 残留，启动正常。
+- `emoji-reaction`：按 `emoji-reaction.md` 的 7 段顺序真实移除，10 次构建全部通过，真实树 `--phase after` 为 0 残留，安装启动正常（登录态丢失，停在登录页）。
+
+## 编译陷阱（实测）
+
+- 删除源码/资源文件后必须重跑 `pod install --no-repo-update`。否则构建直接失败
+  `Build input file cannot be found: <被删文件>`——Pods 工程缓存了旧文件列表，这一步不能省。
+- 不要用大括号配对脚本或正则批量删除 OC 方法。实测会残留孤立的 `@property`、`#pragma mark`、文档注释和空 `if/else`；也会误删仍被其他功能使用的通用属性。逐处 `apply_patch`，删除后检查：孤立属性/注释、空 `else`、空 `if`、悬空 `#import`、重复 `@end`。
+- 只被某个观察器调用的通用属性要保留属性本身，只删观察器里的调用（例如 `ChatViewModel.anchor` 只删 `didSet` 内仅为 Last Read 存在的调用）。
+- ObjC 兼容层不是自动保留项：`NEChatUIKitObjCModels.h/m` 中的 `LastReadPositionState` 在功能移除后必须删除，除非清单登记了 `allowed_paths` 并说明原因。
+- 删完后必须真正编译，至少构建 `NEChatUIKitOC` target 和 `app`；`clang -fsyntax-only` 不能替代。
+- 批量替换三元表达式也会吞掉行尾的 `)`、`,` 等符号，替换后必须编译验证。
+
+## Removal Workflow
+
+1. 从登记表解析用户点名的需求，只加载这一份清单。不要重新对整个仓库做功能发现扫描。
+2. 从脚本自动识别的源码 Git 根目录检查 `git status --short`，记录用户已有改动；只有审计其他 checkout 时才传 `--repo`。目标文件有重叠时逐段编辑，不能覆盖现有修改。
+3. 运行 `audit_inventory.py <feature> --phase before`。它只按登记的路径和指纹审计；缺失项表示清单可能漂移，针对该项查看当前文件和当前仓库的 `git log -S`/`git blame`，不要扩大为全盘扫描。如果专属路径和残留均为零，确认清单列出的入口文件也不含目标符号后，报告该 checkout 已不包含此功能，不要转向其他仓库继续搜索。
+4. 按清单依次处理：入口和配置 UI、闭源能力在 UI 层的接线、视图/资源、必要的 Demo 工程引用、功能专属文件。不得进入 `NEChatKit` 追删底层实现。
+5. 同一文件包含其他需求时只移除目标符号和调用链。尤其不要按某个历史 commit 整体反向应用；历史提交经常混有无关修复。
+6. 运行 `audit_inventory.py <feature> --phase after`。必须清除所有非允许残留，并删除清单列出的功能专属路径。
+7. 执行 `git diff --check`、重新 `pod install --no-repo-update` 后的 `xcodebuild` 编译和 `git status --short`。编译不能替代 NormalUI/FunUI 运行时检查；若未运行 UI 验证要明确说明。
+8. 如果定向审计发现清单遗漏或代码迁移，先完成本次移除，再同步更新该需求的 Markdown 清单与 `feature-registry.json`，保证下一次仍可直接执行。
+
+## Completeness Rules
+
+一次移除只有同时满足以下条件才算完成：
+
+- 用户可见入口、配置开关和长按/点击入口消失。
+- 功能专属 View、ViewModel、Controller 接线、状态字段和回调全部从 UI/Demo 移除。
+- NormalUI 与 FunUI 中的布局、复用和消息类型特化代码全部移除。
+- 功能专属图片、asset catalog、原始资源、本地化 key 全部移除。
+- UI/Demo 中不留下仅为该功能存在的兼容桥、协议或闭源 API 调用；闭源实现本身不在处理范围。
+- 定向残留审计通过，受影响模块至少通过语法/静态检查。
+
+## Register Future Features
+
+用户要求把新需求纳入本技能时，只在 `NEChatUIKitOC/` 和 `app/` 内按 [references/manifest-template.md](references/manifest-template.md) 做一次完整发现并建立清单。不要扫描 `NEChatKit`。新增需求必须同时：
+
+- 在 `references/registry.md` 登记名称和别名。
+- 新建 `references/features/<slug>.md`，记录删除项、共享边界、交叉需求和验证条件。
+- 在 `references/feature-registry.json` 增加专属路径、编辑路径、残留指纹和允许残留。
+- 运行审计脚本的 `before` 模式以及 skill-creator 提供的 `quick_validate.py`（如果目标环境已安装其 YAML 依赖）。
+
+后续该需求发生新增入口、资源或接线变化时，在同一变更中更新清单；不要等到移除时再重新扫描。

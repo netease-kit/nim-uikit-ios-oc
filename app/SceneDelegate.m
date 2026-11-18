@@ -1,3 +1,4 @@
+#import <NETeamUIKitOC/TeamMemberSelectController.h>
 #import "SceneDelegate.h"
 #import "AppDelegate.h"
 #import "AppKey.h"
@@ -8,29 +9,89 @@
 #import "Manager/IMPushConfigManager.h"
 #import "Manager/IMPocConfigManager.h"
 #import "Mine/Controller/PersonInfoViewController.h"
-#import "Main/NETabBarController.h"
+#import <NEAdaptiveUIKitOC/NEAdaptiveUIKitOC.h>
+
+#import "NETabBarController.h"
 #import <UserNotifications/UserNotifications.h>
-#import <NEChatKitOC/ChatKitClient.h>
-#import <NEChatKitOC/ChatRepo.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/NEAIUserManager.h>
-#import <NEChatKitOC/SettingRepo.h>
-#import <NEChatKitOC/NECommonUtil.h>
-#import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NERouterUrl.h>
-#import <NEChatKitOC/Router.h>
+
+#import <NEChatKit/ChatKitClient.h>
+#import <NEChatKit/ChatRepo.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/NEAIUserManager.h>
+#import <NEChatKit/SettingRepo.h>
+#import <NEChatKit/NECommonUtil.h>
+#import <NEBaseUIKitOC/NEBaseUIKitOC.h>
+#import <NEBaseUIKitOC/UIView+YXToast.h>
+
+#import <NEChatKit/NERouterUrl.h>
+#import <NEChatKit/Router.h>
 #import <NERtcCallKit/NERtcCallKit.h>
 #import <NERtcCallUIKit/NERtcCallUIKit.h>
 #import <NIMSDK/NIMSDK.h>
+#import <NEChatKit/NEChatKit.h>
 
 static NSString *const kEnableCloudConversationKey = @"nim_enable_v2_cloud_conversation";
+static NSString *const kConversationGroupDefaultEnabledMigrationKey = @"nim_conversation_group_default_enabled_v2";
+static NSString *const NIMDemoMeSettingRouterCompat = @"imkit://mine/userInfo.page";
+static NSString *const NIMDemoPushP2pChatVCRouterCompat = @"imkit://chat/p2pChat.page";
+static NSString *const NIMDemoPushTeamChatVCRouterCompat = @"imkit://chat/teamChat.page";
+static NSString *const NIMDemoCallViewRouterCompat = @"imkit://callkit.page";
+
+@interface NEMapFallbackViewController : UIViewController
+@property (nonatomic, assign) NEMapType mapType;
+- (instancetype)initWithMapType:(NEMapType)mapType;
+@end
+
+@implementation NEMapFallbackViewController
+
+- (instancetype)initWithMapType:(NEMapType)mapType {
+  self = [super initWithNibName:nil bundle:nil];
+  if (self) {
+    _mapType = mapType;
+  }
+  return self;
+}
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  self.view.backgroundColor = UIColor.systemBackgroundColor;
+  self.title = self.mapType == NEMapTypeSearch
+                   ? NELocalizable(@"map_fallback_title_search")
+                   : NELocalizable(@"map_fallback_title_detail");
+
+  UILabel *label = [[UILabel alloc] init];
+  label.translatesAutoresizingMaskIntoConstraints = NO;
+  label.numberOfLines = 0;
+  label.textAlignment = NSTextAlignmentCenter;
+  label.textColor = UIColor.secondaryLabelColor;
+  label.font = [UIFont systemFontOfSize:15];
+  label.text = NELocalizable(@"map_fallback_message");
+  [self.view addSubview:label];
+
+  [NSLayoutConstraint activateConstraints:@[
+    [label.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:24],
+    [label.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-24],
+    [label.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+  ]];
+}
+
+@end
+
 
 @interface SceneDelegate () <AIUserAgentProvider, NEIMKitClientListener, UNUserNotificationCenterDelegate>
 
 @property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *pendingPushUserInfo;
 @property (nonatomic, copy) NSString *currentAppKey;
+@property (nonatomic, strong, nullable) NETabBarController *retainedTabBarController;
+
+- (void)loadService;
+- (void)restoreTranslationConfig;
+- (void)registerMapFallbackRouter;
+- (void)loginIMAccount:(NSString *)account
+                 token:(NSString *)token
+                option:(nullable V2NIMLoginOption *)option
+            completion:(void (^)(NSError *_Nullable error))completion;
+- (void)initConfig;
 
 @end
 
@@ -98,7 +159,12 @@ willConnectToSession:(UISceneSession *)session
     option.pkCername = NEPKCerName;
 
     V2NIMSDKOption *v2Option = [[V2NIMSDKOption alloc] init];
-    NSNumber *enableCloudConversation = [NSUserDefaults.standardUserDefaults objectForKey:kEnableCloudConversationKey];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    if ([userDefaults objectForKey:kConversationGroupDefaultEnabledMigrationKey] == nil) {
+        [userDefaults setBool:NO forKey:kEnableCloudConversationKey];
+        [userDefaults setBool:YES forKey:kConversationGroupDefaultEnabledMigrationKey];
+    }
+    NSNumber *enableCloudConversation = [userDefaults objectForKey:kEnableCloudConversationKey];
     v2Option.enableV2CloudConversation = enableCloudConversation ? enableCloudConversation.boolValue : NO;
 
     IMKitClient.instance.config.shouldSyncStickTopSessionInfos = YES;
@@ -113,11 +179,17 @@ willConnectToSession:(UISceneSession *)session
 
 - (void)configureSharedServices {
     [[NEAIUserManager shared] setProvider:self];
-    [NEKeyboardManager shared].enable = YES;
-    [NEKeyboardManager shared].shouldResignOnTouchOutside = YES;
-    [self loadAppServices];
-    [self loadSwiftDemoParityConfig];
-    [IMKitConfigCenter shared].enableTeamJoinAgreeModelAuth = YES;
+}
+
+- (void)restoreTranslationConfig {
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [IMKitConfigCenter shared].autoTranslationEnableTime =
+        [userDefaults doubleForKey:@"autoTranslationEnableTime"];
+
+    NSString *savedLanguage = [userDefaults stringForKey:@"translationTargetLanguage"];
+    if (savedLanguage.length > 0) {
+        [IMKitConfigCenter shared].translationTargetLanguage = savedLanguage;
+    }
 }
 
 - (void)setupInitWithCompletion:(void (^)(NSError *_Nullable error))completion {
@@ -133,14 +205,27 @@ willConnectToSession:(UISceneSession *)session
         if (customAppKey.length > 0) {
             [self setupIMWithAppKey:customAppKey];
             [self configureSharedServices];
+            [self loadService];
+            [self restoreTranslationConfig];
+            [IMKitConfigCenter shared].enableTeamJoinAgreeModelAuth = YES;
             [self loginWithCustomConfig:configModel completion:completion];
             return;
         }
     }
 
     [ServerAddresses configServer];
+    if (NEAppKey.length == 0) {
+        [self showLoginViewController];
+        if (completion) {
+            completion(nil);
+        }
+        return;
+    }
     [self setupIMWithAppKey:NEAppKey];
     [self configureSharedServices];
+    [self loadService];
+    [self restoreTranslationConfig];
+    [IMKitConfigCenter shared].enableTeamJoinAgreeModelAuth = YES;
     [self showLoginViewController];
     if (completion) {
         completion(nil);
@@ -177,7 +262,6 @@ willConnectToSession:(UISceneSession *)session
 
     NSString *appKey = [dictionary[@"appkey"] isKindOfClass:[NSString class]] ? dictionary[@"appkey"] : nil;
     [self setupIMWithAppKey:appKey];
-    [self configureSharedServices];
 
     if (configModel.accountId.length <= 0 || configModel.accountIdToken.length <= 0) {
         [self showLoginViewController];
@@ -187,8 +271,12 @@ willConnectToSession:(UISceneSession *)session
         return;
     }
 
+    [[NEAIUserManager shared] setProvider:self];
     __weak typeof(self) weakSelf = self;
-    [self loginIMAccount:configModel.accountId token:configModel.accountIdToken completion:^(NSError * _Nullable error) {
+    [self loginIMAccount:configModel.accountId
+                   token:configModel.accountIdToken
+                  option:nil
+              completion:^(NSError * _Nullable error) {
         if (error) {
             if (error.localizedDescription.length > 0) {
                 [weakSelf showWindowToast:error.localizedDescription];
@@ -212,8 +300,12 @@ willConnectToSession:(UISceneSession *)session
         return;
     }
 
+    [[NEAIUserManager shared] setProvider:self];
     __weak typeof(self) weakSelf = self;
-    [self loginIMAccount:configModel.accountId token:configModel.accountIdToken completion:^(NSError * _Nullable error) {
+    [self loginIMAccount:configModel.accountId
+                   token:configModel.accountIdToken
+                  option:nil
+              completion:^(NSError * _Nullable error) {
         if (error) {
             if (error.localizedDescription.length > 0) {
                 [weakSelf showWindowToast:error.localizedDescription];
@@ -228,28 +320,24 @@ willConnectToSession:(UISceneSession *)session
     }];
 }
 
-- (void)loginIMAccount:(NSString *)account token:(NSString *)token completion:(void (^)(NSError *_Nullable error))completion {
-    V2NIMLoginOption *option = [[V2NIMLoginOption alloc] init];
-    option.syncLevel = V2NIM_DATA_SYNC_TYPE_LEVEL_BASIC;
-    [[NIMSDK sharedSDK].v2LoginService login:account
-                                       token:token
-                                     option:option
-                                     success:^{
+- (void)loginIMAccount:(NSString *)account
+                 token:(NSString *)token
+                option:(nullable V2NIMLoginOption *)option
+            completion:(void (^)(NSError *_Nullable error))completion {
+    [[IMKitClient instance] login:account
+                            token:token
+                            option:option
+                       completion:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
-                completion(nil);
-            }
-        });
-    } failure:^(V2NIMError * _Nonnull error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (completion) {
-                completion(error.nserror);
+                completion(error);
             }
         });
     }];
 }
 
 - (void)showLoginViewController {
+    [NEKeyboardManager shared].enable = NO;
     NELoginViewController *loginVC = [[NELoginViewController alloc] init];
     __weak typeof(self) weakSelf = self;
     loginVC.loginSuccess = ^{
@@ -260,8 +348,10 @@ willConnectToSession:(UISceneSession *)session
 
 - (void)showMainViewController {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.window.rootViewController = [[NETabBarController alloc] initWithChangeUI:NO];
-        [self consumePendingPushUserInfoIfNeeded];
+        [NEKeyboardManager shared].enable = YES;
+        [NEKeyboardManager shared].shouldResignOnTouchOutside = YES;
+        [self initConfig];
+        [self initializePageWithChangeUI:NO];
     });
 }
 
@@ -282,9 +372,25 @@ willConnectToSession:(UISceneSession *)session
 
 - (void)refreshUIStyle {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.window.rootViewController = [[NETabBarController alloc] initWithChangeUI:YES];
-        [self consumePendingPushUserInfoIfNeeded];
+        [self initializePageWithChangeUI:YES];
     });
+}
+
+- (void)initializePageWithChangeUI:(BOOL)isChangeUI {
+    [self loadService];
+    NETabBarController *tabBar = [[NETabBarController alloc] initWithChangeUI:isChangeUI];
+    UIViewController *adaptiveShell = [tabBar makeAdaptiveShellIfEnabled];
+    self.retainedTabBarController =
+        [adaptiveShell isKindOfClass:[NEAdaptiveShellViewController class]] ? tabBar : nil;
+    self.window.rootViewController = adaptiveShell ?: tabBar;
+    if ([adaptiveShell isKindOfClass:[NEAdaptiveShellViewController class]]) {
+      // 刚挂到 window 上时还没有 window 引用，延后一轮再采集窗口事实。
+      __weak NEAdaptiveShellViewController *weakShell = (NEAdaptiveShellViewController *)adaptiveShell;
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [weakShell refreshWindow];
+      });
+    }
+    [self consumePendingPushUserInfoIfNeeded];
 }
 
 - (void)registerAPNS {
@@ -301,14 +407,19 @@ willConnectToSession:(UISceneSession *)session
     UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
 }
 
-- (void)loadAppServices {
+- (void)loadService {
+    BOOL isFunUI = ![[NEStyleManager instance] isNormalStyle];
+    [[ChatKitClient shared] setupInit:isFunUI];
+    [[CustomConfig shared] loadSecurityWarningView];
+    [[CustomConfig shared] loadAIChatData];
+    [[CustomConfig shared] loadPhotoBrowser];
+
     IMPushConfigManager *pushManager = [IMPushConfigManager instance];
     V2NIMMessagePushConfig *pushConfig = [pushManager getPushConfig];
     if (pushConfig.pushEnabled) {
         [[SettingRepo shared] setMessagePushConfig:pushConfig];
     }
 
-    __weak typeof(self) weakSelf = self;
     [ChatKitClient shared].beforeSend = ^MessageSendParams * _Nullable(__unused UIViewController *viewController, MessageSendParams *param) {
         V2NIMSendMessageParams *sendParams = param.params;
         V2NIMMessagePushConfig *messagePushConfig = sendParams.pushConfig ?: [[SettingRepo shared] getMessagePushConfig];
@@ -330,17 +441,12 @@ willConnectToSession:(UISceneSession *)session
             pushDic[@"sessionType"] = @"team";
         }
 
-        if (!sendParams) {
-            sendParams = [[V2NIMSendMessageParams alloc] init];
-            param.params = sendParams;
-        }
         messagePushConfig.pushPayload = [NECommonUtil getJSONStringFromDictionary:pushDic];
         sendParams.pushConfig = messagePushConfig;
-        [weakSelf consumePendingPushUserInfoIfNeeded];
         return param;
     };
 
-    [[Router shared] register:MeSettingRouter closure:^(NSDictionary *param) {
+    [[Router shared] register:NIMDemoMeSettingRouterCompat closure:^(NSDictionary *param) {
         id navParam = param[@"nav"];
         if (![navParam isKindOfClass:[UINavigationController class]]) {
             return;
@@ -348,33 +454,63 @@ willConnectToSession:(UISceneSession *)session
         UINavigationController *nav = (UINavigationController *)navParam;
         [nav pushViewController:[[PersonInfoViewController alloc] init] animated:YES];
     }];
+    [[CustomConfig shared] registerCustomChatRouterForFunUI:isFunUI];
+    [self registerMapFallbackRouter];
 }
 
-- (void)loadSwiftDemoParityConfig {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        BOOL isFunUI = ![[NEStyleManager instance] isNormalStyle];
-        [self loadCallKitIfAvailable];
-        [[CustomConfig shared] loadAIChatData];
-        [[CustomConfig shared] loadSecurityWarningView];
-        [[CustomConfig shared] loadRtcEntry];
-        [[CustomConfig shared] loadPhotoBrowser];
-        [[CustomConfig shared] registerCustomChatRouterForFunUI:isFunUI];
-    });
+- (void)registerMapFallbackRouter {
+    [[Router shared] register:NERouterUrl.LocationVCRouter closure:^(NSDictionary<NSString *, id> *param) {
+        UINavigationController *nav = param[@"nav"];
+        if (![nav isKindOfClass:[UINavigationController class]]) {
+            return;
+        }
+        NSNumber *typeValue = param[@"type"];
+        NEMapType type = typeValue ? (NEMapType)typeValue.integerValue : NEMapTypeDetail;
+        [nav pushViewController:[[NEMapFallbackViewController alloc] initWithMapType:type] animated:YES];
+    }];
 }
 
-- (void)loadCallKitIfAvailable {
+- (void)initConfig {
     NESetupConfig *setupConfig = [[NESetupConfig alloc] initWithAppkey:self.currentAppKey ?: NEAppKey];
     [[NECallEngine sharedInstance] setup:setupConfig];
     [[NECallEngine sharedInstance] setTimeout:30];
 
     NECallUIKitConfig *uiConfig = [[NECallUIKitConfig alloc] init];
     [[NERtcCallUIKit sharedInstance] setupWithConfig:uiConfig];
+    [self registerCallRouter];
 
     id<UIApplicationDelegate> delegate = UIApplication.sharedApplication.delegate;
     if ([delegate isKindOfClass:AppDelegate.class]) {
         [(AppDelegate *)delegate setupVoIPPushRegistryIfNeeded];
     }
+}
+
+- (void)registerCallRouter {
+    __weak typeof(self) weakSelf = self;
+    [[Router shared] register:NIMDemoCallViewRouterCompat closure:^(NSDictionary<NSString *, id> *param) {
+        if ([[NEChatDetectNetworkTool shareInstance] isNetworkExplicitlyUnreachable]) {
+            UIView *toastHost = weakSelf.window;
+            [toastHost ne_makeToast:commonLocalizable(@"network_error")
+                            duration:2
+                            position:NEToastPositionCenter];
+            return;
+        }
+
+        NEUICallParam *callParam = [[NEUICallParam alloc] init];
+        id remoteUserAccid = param[@"remoteUserAccid"];
+        id remoteShowName = param[@"remoteShowName"];
+        id remoteAvatar = param[@"remoteAvatar"];
+        id type = param[@"type"];
+
+        callParam.remoteUserAccid = [remoteUserAccid isKindOfClass:NSString.class] ? remoteUserAccid : @"";
+        callParam.remoteShowName = [remoteShowName isKindOfClass:NSString.class] ? remoteShowName : @"";
+        callParam.remoteAvatar = [remoteAvatar isKindOfClass:NSString.class] ? remoteAvatar : @"";
+        callParam.callType = ([type isKindOfClass:NSNumber.class] && [type integerValue] == 1)
+            ? NECallTypeAudio
+            : NECallTypeVideo;
+
+        [[NERtcCallUIKit sharedInstance] callWithParam:callParam];
+    }];
 }
 
 - (void)consumePendingPushUserInfoIfNeeded {
@@ -396,15 +532,25 @@ willConnectToSession:(UISceneSession *)session
         return;
     }
 
-    if (![self.window.rootViewController isKindOfClass:[NETabBarController class]]) {
+    UIViewController *root = self.window.rootViewController;
+    NEAdaptiveShellViewController *adaptiveShell =
+        [root isKindOfClass:[NEAdaptiveShellViewController class]] ? (NEAdaptiveShellViewController *)root : nil;
+    if (!adaptiveShell && ![root isKindOfClass:[NETabBarController class]]) {
         self.pendingPushUserInfo = userInfo;
         return;
     }
 
-    NETabBarController *tabBar = (NETabBarController *)self.window.rootViewController;
-    UINavigationController *nav = [tabBar.selectedViewController isKindOfClass:[UINavigationController class]]
-        ? (UINavigationController *)tabBar.selectedViewController
-        : nil;
+    UINavigationController *nav = nil;
+    BOOL adaptivePresentation = adaptiveShell != nil;
+    if (adaptivePresentation) {
+        [adaptiveShell selectSection:0];
+        nav = adaptiveShell.sections.firstObject;
+    } else {
+        NETabBarController *tabBar = (NETabBarController *)root;
+        nav = [tabBar.selectedViewController isKindOfClass:[UINavigationController class]]
+            ? (UINavigationController *)tabBar.selectedViewController
+            : nil;
+    }
     if (!nav) {
         return;
     }
@@ -413,29 +559,44 @@ willConnectToSession:(UISceneSession *)session
     NSString *router = nil;
     if ([sessionType isEqualToString:@"p2p"]) {
         conversationId = [V2NIMConversationIdUtil p2pConversationId:sessionId];
-        router = PushP2pChatVCRouter;
+        router = NIMDemoPushP2pChatVCRouterCompat;
     } else if ([sessionType isEqualToString:@"team"]) {
         conversationId = [V2NIMConversationIdUtil teamConversationId:sessionId];
-        router = PushTeamChatVCRouter;
+        router = NIMDemoPushTeamChatVCRouterCompat;
     }
 
     if (conversationId.length <= 0 || router.length <= 0) {
         return;
     }
 
-    [[Router shared] use:router
-              parameters:@{
-                  @"nav": nav,
-                  @"conversationId": conversationId,
-                  @"animated": @NO,
-                  @"anchor": [NSNull null],
-              }
-                 closure:nil];
+    NSMutableDictionary<NSString *, id> *parameters = [@{
+        @"nav": nav,
+        @"conversationId": conversationId,
+        @"animated": @NO,
+    } mutableCopy];
+    if (!adaptivePresentation) {
+        parameters[@"anchor"] = [NSNull null];
+    }
+    [[Router shared] use:router parameters:parameters closure:nil];
 }
 
 - (void)sceneWillEnterForeground:(UIScene *)scene API_AVAILABLE(ios(13.0)) {
     (void)scene;
     UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
+}
+
+- (void)windowScene:(UIWindowScene *)windowScene
+    didUpdateCoordinateSpace:(id<UICoordinateSpace>)previousCoordinateSpace
+    interfaceOrientation:(UIInterfaceOrientation)previousInterfaceOrientation
+    traitCollection:(UITraitCollection *)previousTraitCollection API_AVAILABLE(ios(13.0)) {
+    (void)windowScene;
+    (void)previousCoordinateSpace;
+    (void)previousInterfaceOrientation;
+    (void)previousTraitCollection;
+    UIViewController *root = self.window.rootViewController;
+    if ([root isKindOfClass:[NEAdaptiveShellViewController class]]) {
+        [(NEAdaptiveShellViewController *)root refreshWindow];
+    }
 }
 
 - (void)onLoginFailed:(V2NIMError *)error {

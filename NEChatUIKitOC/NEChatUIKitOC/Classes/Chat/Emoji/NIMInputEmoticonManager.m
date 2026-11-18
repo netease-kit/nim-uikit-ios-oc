@@ -1,0 +1,329 @@
+// Copyright (c) 2022 NetEase, Inc. All rights reserved.
+// Use of this source code is governed by a MIT license that can be
+// found in the LICENSE file.
+
+#import "NIMInputEmoticonManager.h"
+#import <NEChatKit/NEALog.h>
+#import "NSBundle+NEChatUIKit.h"
+
+static NSString *const kClassTag = @"NIMInputEmoticonManager";
+
+#pragma mark - NIMInputEmoticon
+
+@implementation NIMInputEmoticon
+
+- (NIMEmoticonType)type {
+  if (self.unicode.length > 0) {
+    return NIMEmoticonTypeUnicode;
+  }
+  return NIMEmoticonTypeFile;
+}
+
+@end
+
+#pragma mark - NIMInputEmoticonLayout
+
+@implementation NIMInputEmoticonLayout
+
+- (instancetype)initWithWidth:(CGFloat)width {
+  self = [super init];
+  if (self) {
+    _rows = NIMKit_EmojRows;
+    _columes = ((NSInteger)width - NIMKit_EmojiLeftMargin - NIMKit_EmojiRightMargin) /
+               (NSInteger)NIMKit_EmojImageWidth;
+    _itemCountInPage = _rows * _columes - 1;
+    _cellWidth =
+        (CGFloat)(((NSInteger)width - NIMKit_EmojiLeftMargin - NIMKit_EmojiRightMargin) / _columes);
+    _cellHeight = NIMKit_EmojCellHeight;
+    _imageWidth = NIMKit_EmojImageWidth;
+    _imageHeight = NIMKit_EmojImageHeight;
+    _emoji = @(YES);
+  }
+  return self;
+}
+
+@end
+
+#pragma mark - NIMInputEmoticonCatalog
+
+@implementation NIMInputEmoticonCatalog
+@end
+
+#pragma mark - NIMInputEmoticonManager
+
+@interface NIMInputEmoticonManager ()
+
+@property (nonatomic, strong, nullable) NSArray<NIMInputEmoticonCatalog *> *catalogs;
+@property (nonatomic, assign, readwrite) BOOL isCustomEmojResource;
+@property (nonatomic, strong) NSLock *stickerLock;
+@property (nonatomic, strong) NSMutableArray<NIMInputStickerPackage *> *registeredStickerPackages;
+
+@end
+
+@implementation NIMInputEmoticonManager
+
++ (instancetype)shared {
+  static NIMInputEmoticonManager *instance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    instance = [[NIMInputEmoticonManager alloc] init];
+  });
+  return instance;
+}
+
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    _isCustomEmojResource = NO;
+    _stickerLock = [[NSLock alloc] init];
+    _registeredStickerPackages = [NSMutableArray array];
+    [self parsePlist];
+    [self preloadEmoticonResource];
+  }
+  return self;
+}
+
+- (void)setCustomEmojConfig:(NSArray *)array {
+  NSMutableArray<NIMInputEmoticonCatalog *> *catalogs = [NSMutableArray array];
+  for (id dict in array) {
+    if ([dict isKindOfClass:[NSDictionary class]]) {
+      NSDictionary *convertDict = (NSDictionary *)dict;
+      NSDictionary *info = convertDict[@"info"];
+      NSArray *emotions = convertDict[@"data"];
+      NIMInputEmoticonCatalog *catalog = [self catalogByInfo:info emoticonsArray:emotions];
+      [catalogs addObject:catalog];
+    }
+  }
+  self.catalogs = catalogs;
+  _isCustomEmojResource = YES;
+}
+
+- (void)parsePlist {
+  NSMutableArray<NIMInputEmoticonCatalog *> *catalogs = [NSMutableArray array];
+  NSString *filePath = [NSBundle nim_EmojiPlistFile];
+  if (filePath) {
+    NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
+    for (id dict in array) {
+      if ([dict isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *convertDict = (NSDictionary *)dict;
+        NSDictionary *info = convertDict[@"info"];
+        NSArray *emotions = convertDict[@"data"];
+        NIMInputEmoticonCatalog *catalog = [self catalogByInfo:info emoticonsArray:emotions];
+        [catalogs addObject:catalog];
+      }
+    }
+  }
+  self.catalogs = catalogs;
+}
+
+- (NIMInputEmoticonCatalog *)catalogByInfo:(nullable NSDictionary *)info
+                            emoticonsArray:(nullable NSArray *)emoticonsArray {
+  NIMInputEmoticonCatalog *catalog = [[NIMInputEmoticonCatalog alloc] init];
+  if (!info || !emoticonsArray) {
+    [NEALog errorLog:kClassTag desc:@"info or emoticonsArray is nil"];
+    return catalog;
+  }
+
+  catalog.catalogID = info[@"id"];
+  catalog.title = info[@"title"];
+  catalog.icon = info[@"normal"];
+  catalog.iconPressed = info[@"pressed"];
+
+  NSMutableDictionary<NSString *, NIMInputEmoticon *> *tag2Emoticons = [NSMutableDictionary dictionary];
+  NSMutableDictionary<NSString *, NIMInputEmoticon *> *id2Emoticons = [NSMutableDictionary dictionary];
+  NSMutableArray<NIMInputEmoticon *> *resultEmotions = [NSMutableArray array];
+
+  for (id emoticonDict in emoticonsArray) {
+    if ([emoticonDict isKindOfClass:[NSDictionary class]]) {
+      NSDictionary *dict = (NSDictionary *)emoticonDict;
+      NIMInputEmoticon *emotion = [[NIMInputEmoticon alloc] init];
+      emotion.emoticonID = dict[@"id"];
+      emotion.tag = dict[@"tag"];
+      emotion.unicode = dict[@"unicode"];
+      emotion.fileName = dict[@"file"];
+
+      if (emotion.emoticonID.length > 0) {
+        [resultEmotions addObject:emotion];
+        id2Emoticons[emotion.emoticonID] = emotion;
+      }
+      if (emotion.tag.length > 0) {
+        tag2Emoticons[emotion.tag] = emotion;
+      }
+    }
+  }
+
+  catalog.emoticons = resultEmotions;
+  catalog.id2Emoticons = id2Emoticons;
+  catalog.tag2Emoticons = tag2Emoticons;
+  return catalog;
+}
+
+- (void)preloadEmoticonResource {
+  // 预加载资源（目前为空实现，与 Swift 一致）
+}
+
+- (nullable NIMInputEmoticonCatalog *)emoticonCatalogWithID:(NSString *)catalogID {
+  for (NIMInputEmoticonCatalog *catalog in self.catalogs) {
+    if ([catalog.catalogID isEqualToString:catalogID]) {
+      return catalog;
+    }
+  }
+  return nil;
+}
+
+- (nullable NIMInputEmoticon *)emoticonByTag:(NSString *)tag {
+  if (tag.length == 0) {
+    return nil;
+  }
+  if (!self.catalogs) {
+    [NEALog errorLog:kClassTag desc:@"catalogs is nil"];
+    return nil;
+  }
+  for (NIMInputEmoticonCatalog *catalog in self.catalogs) {
+    NIMInputEmoticon *emotion = catalog.tag2Emoticons[tag];
+    if (emotion) {
+      return emotion;
+    }
+  }
+  return nil;
+}
+
+- (nullable NIMInputEmoticon *)emoticonByID:(NSString *)emoticonID {
+  if (emoticonID.length == 0) {
+    return nil;
+  }
+  if (!self.catalogs) {
+    [NEALog errorLog:kClassTag desc:@"catalogs is nil"];
+    return nil;
+  }
+  for (NIMInputEmoticonCatalog *catalog in self.catalogs) {
+    NIMInputEmoticon *emotion = catalog.id2Emoticons[emoticonID];
+    if (emotion) {
+      return emotion;
+    }
+  }
+  return nil;
+}
+
+- (nullable NIMInputEmoticon *)emoticonByCatalogID:(NSString *)catalogID
+                                        emoticonID:(NSString *)emoticonID {
+  if (catalogID.length == 0 || emoticonID.length == 0) {
+    return nil;
+  }
+  if (!self.catalogs) {
+    [NEALog errorLog:kClassTag desc:@"catalogs is nil"];
+    return nil;
+  }
+  for (NIMInputEmoticonCatalog *catalog in self.catalogs) {
+    if ([catalog.catalogID isEqualToString:catalogID]) {
+      return catalog.id2Emoticons[emoticonID];
+    }
+  }
+  return nil;
+}
+
+- (BOOL)registerStickerPackage:(NIMInputStickerPackage *)package {
+  NIMInputStickerPackage *snapshot = [self validatedStickerPackage:package];
+  if (!snapshot) {
+    return NO;
+  }
+
+  [self.stickerLock lock];
+  NSUInteger index = [self.registeredStickerPackages indexOfObjectPassingTest:
+      ^BOOL(NIMInputStickerPackage *object, NSUInteger idx, BOOL *stop) {
+    return [object.packageID isEqualToString:snapshot.packageID];
+  }];
+  if (index == NSNotFound) {
+    [self.registeredStickerPackages addObject:snapshot];
+  } else {
+    self.registeredStickerPackages[index] = snapshot;
+  }
+  [self.stickerLock unlock];
+
+  [self postStickerPackagesDidChange];
+  return YES;
+}
+
+- (BOOL)unregisterStickerPackageWithID:(NSString *)packageID {
+  NSString *normalizedID = [packageID stringByTrimmingCharactersInSet:
+      NSCharacterSet.whitespaceAndNewlineCharacterSet];
+  if (normalizedID.length == 0 || [normalizedID isEqualToString:NIMKit_EmojiCatalog]) {
+    return NO;
+  }
+
+  [self.stickerLock lock];
+  NSUInteger index = [self.registeredStickerPackages indexOfObjectPassingTest:
+      ^BOOL(NIMInputStickerPackage *object, NSUInteger idx, BOOL *stop) {
+    return [object.packageID isEqualToString:normalizedID];
+  }];
+  if (index == NSNotFound) {
+    [self.stickerLock unlock];
+    return NO;
+  }
+  [self.registeredStickerPackages removeObjectAtIndex:index];
+  [self.stickerLock unlock];
+
+  [self postStickerPackagesDidChange];
+  return YES;
+}
+
+- (NSArray<NIMInputStickerPackage *> *)stickerPackages {
+  [self.stickerLock lock];
+  NSArray<NIMInputStickerPackage *> *snapshot = [self.registeredStickerPackages copy];
+  [self.stickerLock unlock];
+  return snapshot;
+}
+
+- (nullable NIMInputStickerPackage *)validatedStickerPackage:(NIMInputStickerPackage *)package {
+  NSString *packageID = [package.packageID stringByTrimmingCharactersInSet:
+      NSCharacterSet.whitespaceAndNewlineCharacterSet];
+  if (packageID.length == 0 || [packageID isEqualToString:NIMKit_EmojiCatalog] ||
+      package.normalIcon.size.width <= 0 || package.normalIcon.size.height <= 0 ||
+      package.selectedIcon.size.width <= 0 || package.selectedIcon.size.height <= 0) {
+    return nil;
+  }
+
+  NSMutableSet<NSString *> *stickerIDs = [NSMutableSet set];
+  NSMutableArray<NIMInputSticker *> *validStickers = [NSMutableArray array];
+  for (NIMInputSticker *sticker in package.stickers) {
+    if (![sticker isKindOfClass:[NIMInputSticker class]]) {
+      continue;
+    }
+    NSString *stickerID = [sticker.stickerID stringByTrimmingCharactersInSet:
+        NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    NSString *path = sticker.fileURL.path;
+    if (stickerID.length == 0 || [stickerIDs containsObject:stickerID] ||
+        !sticker.fileURL.isFileURL ||
+        ![[NSFileManager defaultManager] isReadableFileAtPath:path] ||
+        ![UIImage imageWithContentsOfFile:path]) {
+      continue;
+    }
+    [stickerIDs addObject:stickerID];
+    [validStickers addObject:[[NIMInputSticker alloc] initWithStickerID:stickerID
+                                                               fileURL:sticker.fileURL]];
+  }
+
+  if (validStickers.count == 0) {
+    return nil;
+  }
+  return [[NIMInputStickerPackage alloc] initWithPackageID:packageID
+                                                     title:package.title
+                                                normalIcon:package.normalIcon
+                                              selectedIcon:package.selectedIcon
+                                                  stickers:validStickers];
+}
+
+- (void)postStickerPackagesDidChange {
+  void (^postNotification)(void) = ^{
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:NIMInputStickerNotification.packagesDidChange
+                      object:self];
+  };
+  if (NSThread.isMainThread) {
+    postNotification();
+  } else {
+    dispatch_async(dispatch_get_main_queue(), postNotification);
+  }
+}
+
+@end

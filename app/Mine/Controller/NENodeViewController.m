@@ -3,14 +3,15 @@
 // found in the LICENSE file.
 
 #import "NENodeViewController.h"
+#import <NEBaseUIKitOC/NEAdaptiveDeviceGate.h>
 #import "AppKey.h"
 #import "NodeSelectCell.h"
 #import "NodeViewModel.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/SettingRepo.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NECommonUIKitOC/NENavigationView.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/SettingRepo.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
 
 @interface NENodeViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -37,7 +38,7 @@
   [NSLayoutConstraint activateConstraints:@[
     [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
     [self.tableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:NEConstant.navigationAndStatusHeight],
+    [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:NEUIKitNavigationAndStatusHeight()],
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
   ]];
 

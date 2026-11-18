@@ -6,8 +6,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 对齐 Swift MeViewController — "我" Tab 主页
 @interface MeViewController : UIViewController
+
+@property (nonatomic, strong, nullable) UIColor *listSelectionBackgroundColor;
 
 @end
 

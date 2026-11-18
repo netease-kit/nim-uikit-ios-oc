@@ -5,9 +5,9 @@
 #import "StyleSelectionViewController.h"
 #import "NEStyleManager.h"
 #import "AppKey.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
-#import <NECommonUIKitOC/NENavigationView.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
 
 // ─────────────────────────────────────────────
 #pragma mark - StyleCellModel
@@ -140,6 +140,23 @@
     }),
   ];
   self.sectionCount = (NSInteger)ceil((double)self.styleData.count / (double)self.itemsInSection);
+}
+
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+  if (![layout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+    return;
+  }
+  CGFloat width = CGRectGetWidth(self.collectionView.bounds);
+  if (width <= 0) {
+    return;
+  }
+  CGSize size = CGSizeMake(width / (CGFloat)self.itemsInSection, [StyleSelectionCell cellSize].height);
+  if (!CGSizeEqualToSize(layout.itemSize, size)) {
+    layout.itemSize = size;
+    [layout invalidateLayout];
+  }
 }
 
 - (void)setupSubviews {

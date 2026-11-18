@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CustomSettingTextviewCell : TeamSettingSubtitleCell <UITextViewDelegate>
 
 @property(nonatomic, strong) UITextView *inputTextView;
+@property(nonatomic, strong) UIButton *clearButton;
 @property(nonatomic, weak, nullable) CustomSettingCellModel *dataModel;
 
 @end

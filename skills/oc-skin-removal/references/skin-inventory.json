@@ -1,0 +1,380 @@
+{
+  "shared_paths": [
+    "NEBaseUIKitOC/NEBaseUIKitOC/Classes/Extensions/UIColor+NEUIKitDefault.h",
+    "NEBaseUIKitOC/NEBaseUIKitOC/Classes/NEBaseUIKitOC.h",
+    "NEChatUIKitOC/NEChatUIKitOC.podspec",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Base/BaseViewController/NEChatBaseViewController.h",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Base/NEChatLoaderService.h",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Base/NEChatLoaderService.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Base/NEChatService.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Controller/ChatViewController.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Controller/NEBaseUserSettingViewController.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Helper/ChatMessageHelper.h",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Helper/ChatMessageHelper.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/HistorySearch/NEBaseHistorySearchController.h",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/HistorySearch/NEHistoryDatePickerViewController.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/HistorySearch/NEHistorySearchDateCell.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/HistorySearch/NEHistorySearchFileCell.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/HistorySearch/NEHistorySearchMonthHeaderView.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/HistorySearch/NEHistorySearchMonthYearPickerView.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/Cell/CollectionCell/NEBaseCollectionMessageCell.h",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/Cell/CollectionCell/NEBaseCollectionMessageCell.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/Cell/NEBaseChatMessageCell.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/Cell/NEBaseChatTeamMemberCell.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Common/ChatCellConstantValue.h",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Common/ChatCellConstantValue.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Common/NEChatUIKitClient.m",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Common/NEChatUIKitObjCBridge.h",
+    "NEChatUIKitOC/NEChatUIKitOC/Classes/Common/NEChatUIKitObjCBridge.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/AIRobot/NEBaseAIRobotBindController.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/AIRobot/NEBaseAIRobotConfigController.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/AIRobot/NEBaseAIRobotDetailController.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/AIRobot/NEBaseAIUserController.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/AIRobot/NEBaseCreateAIRobotController.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/AIRobot/NEBaseRobotChatCardController.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/AIRobot/NEBaseRobotNicknameEditController.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/Base/NEContactLoaderService.h",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/Base/NEContactLoaderService.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/Base/NEContactService.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/Common/NEBaseContactRouter.h",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/Multiselect/Cell/NEBaseSelectCell.m",
+    "NEContactUIKitOC/NEContactUIKitOC/Classes/Multiselect/ViewController/NEBaseMultiSelectViewController.m",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Base/ConversationRouter.h",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Base/ConversationRouter.m",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Base/NEConversationService.m",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Cell/NEConversationListCell.h",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Cell/NEConversationListCell.m",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/NEBaseConversationSearchController.m",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/NEConversationPopListView.h",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/NEConversationViewController.h",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/NEConversationViewController.m",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/ConversationGroup/NEConversationGroupBar.m",
+    "NEConversationUIKitOC/NEConversationUIKitOC/Classes/ConversationGroup/NEConversationGroupManageController.m",
+    "NETeamUIKitOC/NETeamUIKitOC/Classes/Base/NETeamService.m",
+    "NETeamUIKitOC/NETeamUIKitOC/Classes/Base/TeamRouter.h",
+    "NETeamUIKitOC/NETeamUIKitOC/Classes/Base/TeamRouter.m",
+    "NETeamUIKitOC/NETeamUIKitOC/Classes/Setting/ViewModel/TeamSettingViewModel.h",
+    "NETeamUIKitOC/NETeamUIKitOC/Classes/Setting/ViewModel/TeamSettingViewModel.m",
+    "app/Custom/CustomChatViewController.h",
+    "app/Custom/CustomChatViewController.m",
+    "app/Custom/CustomConfig.h",
+    "app/Custom/CustomConfig.m",
+    "app/Main/NEStyleManager.h",
+    "app/Main/NEStyleManager.m",
+    "app/Main/NETabBarController.m",
+    "app/Mine/Controller/ConfigTestViewController.m",
+    "app/Mine/Controller/IMPocConfigViewController.m",
+    "app/Mine/Controller/IMPushConfigViewController.m",
+    "app/Mine/Controller/InputPersonInfoController.m",
+    "app/Mine/Controller/LanguageViewController.m",
+    "app/Mine/Controller/MeViewController.m",
+    "app/Mine/Controller/MessageRemindViewController.m",
+    "app/Mine/Controller/MineSettingViewController.m",
+    "app/Mine/Controller/PersonInfoViewController.m",
+    "app/Mine/View/CustomSettingInputCell.m",
+    "app/Mine/View/CustomSettingTextviewCell.m",
+    "app/Mine/View/CustomThemeCells.m",
+    "app/SceneDelegate.m",
+    "app/en.lproj/Localizable.strings",
+    "app/zh-Hans.lproj/Localizable.strings"
+  ],
+  "common_removals": [
+    "app/Mine/Controller/StyleSelectionViewController.h",
+    "app/Mine/Controller/StyleSelectionViewController.m"
+  ],
+  "shared_migrations": {
+    "fun": [
+      {
+        "from": "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/FunSearchView.h",
+        "to": "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/SearchSessionBaseView.h",
+        "reason": "SearchSessionBaseView 是 NormalUI 会话/本地会话搜索头部仍在使用的共享类型，移除 FunUI 时迁到中性文件。"
+      },
+      {
+        "from": "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/FunSearchView.m",
+        "to": "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/SearchSessionBaseView.m",
+        "reason": "同上；FunSearchView/FunSearchSessionHeaderView 随 FunUI 一起删除。"
+      }
+    ],
+    "normal": []
+  },
+  "skins": {
+    "normal": {
+      "aliases": [
+        "normal",
+        "normalui",
+        "飞书",
+        "通用",
+        "normal style"
+      ],
+      "owned_paths": [
+        "NEBaseUIKitOC/NEBaseUIKitOC/Assets/NECommonUI.xcassets/NormalUI/",
+        "NEChatUIKitOC/NEChatUIKitOC/Assets/NormalChatUIKit.xcassets/",
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/Compat/NormalChatRouter.m",
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/",
+        "NEContactUIKitOC/NEContactUIKitOC/Assets/NormalContactUIKit.xcassets/",
+        "NEContactUIKitOC/NEContactUIKitOC/Classes/NormalUI/",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Assets/NormalConversationUIKit.xcassets/",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Cell/ConversationSearchCell.h",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Cell/ConversationSearchCell.m",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/ConversationSearchController.h",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/ConversationSearchController.m",
+        "NETeamUIKitOC/NETeamUIKitOC/Assets/NormalTeamUIKit.xcassets/",
+        "NETeamUIKitOC/NETeamUIKitOC/Classes/NormalUI/",
+        "app/Assets.xcassets/Mine/clicked_normal.imageset",
+        "app/Assets.xcassets/Mine/style_normal.imageset",
+        "app/Assets.xcassets/Tabbar/chat.imageset",
+        "app/Assets.xcassets/Tabbar/chatSelect.imageset",
+        "app/Assets.xcassets/Tabbar/contact.imageset",
+        "app/Assets.xcassets/Tabbar/contactSelect.imageset",
+        "app/Assets.xcassets/Tabbar/person.imageset",
+        "app/Assets.xcassets/Tabbar/personSelect.imageset",
+        "app/Custom/CustomContactTableViewCell.h",
+        "app/Custom/CustomContactTableViewCell.m",
+        "app/Custom/CustomContactViewController.h",
+        "app/Custom/CustomContactViewController.m",
+        "app/Custom/CustomConversationController.h",
+        "app/Custom/CustomConversationController.m",
+        "app/Custom/CustomConversationListCell.h",
+        "app/Custom/CustomConversationListCell.m",
+        "app/Custom/CustomP2PChatViewController.h",
+        "app/Custom/CustomP2PChatViewController.m"
+      ],
+      "markers": [
+        "NormalUI",
+        "NormalChat",
+        "NormalContact",
+        "NormalConversation",
+        "NormalTeam",
+        "normalChat",
+        "normalContact",
+        "normal_input_",
+        "registerNormal",
+        "NormalStyle",
+        "NEStyleManager",
+        "style_normal",
+        "style_selection"
+      ],
+      "accepted_candidates": [
+        {
+          "path": "NEBaseUIKitOC/NEBaseUIKitOC/Classes/Extensions/UIColor+NEUIKitDefault.h",
+          "contains": "NormalUI",
+          "reason": "注释说明公共默认色取值来源，不依赖 NormalUI 目录。"
+        },
+        {
+          "path": "NETeamUIKitOC/NETeamUIKitOC/Classes/Setting/ViewModel/TeamSettingViewModel.h",
+          "contains": "isNormalTeam",
+          "reason": "普通群判断，不是 NormalUI 皮肤。"
+        },
+        {
+          "path": "NETeamUIKitOC/NETeamUIKitOC/Classes/Setting/ViewModel/TeamSettingViewModel.m",
+          "contains": "isNormalTeam",
+          "reason": "普通群判断，不是 NormalUI 皮肤。"
+        },
+        {
+          "path": "NETeamUIKitOC/NETeamUIKitOC/Classes/FunUI/Controller/FunTeamSettingViewController.m",
+          "contains": "isNormalTeam",
+          "reason": "普通群判断，不是 NormalUI 皮肤。"
+        },
+        {
+          "path": "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Controller/FunChatViewController.m",
+          "contains": "NormalStyle",
+          "reason": "录音/输入状态方法（isRecordNormalStyle 等），不是皮肤分支。"
+        },
+        {
+          "path": "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunChatInputView.h",
+          "contains": "NormalStyle",
+          "reason": "录音/输入状态方法，不是皮肤分支。"
+        },
+        {
+          "path": "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunChatInputView.m",
+          "contains": "NormalStyle",
+          "reason": "录音/输入状态方法，不是皮肤分支。"
+        },
+        {
+          "path": "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunRecordAudioView.h",
+          "contains": "NormalStyle",
+          "reason": "录音浮层状态方法，不是皮肤分支。"
+        },
+        {
+          "path": "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunRecordAudioView.m",
+          "contains": "NormalStyle",
+          "reason": "录音浮层状态方法，不是皮肤分支。"
+        },
+        {
+          "path": "NEContactUIKitOC/NEContactUIKitOC/Classes/FunUI/ViewController/FunAIRobotDetailController.m",
+          "contains": "NormalUI",
+          "reason": "注释说明与共享实现一致；实现本身不依赖 NormalUI 目录。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.h",
+          "contains": "NEStyleManager",
+          "reason": "组件层通过 NSClassFromString 反射读取 NEStyleManager，保留类与 isNormalStyle 作为跨边界契约。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.h",
+          "contains": "isNormalStyle",
+          "reason": "反射契约方法，返回值固定为存活皮肤。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.m",
+          "contains": "NEStyleManager",
+          "reason": "反射契约实现，保留类本身。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.m",
+          "contains": "isNormalStyle",
+          "reason": "反射契约方法，返回值固定为存活皮肤。"
+        }
+      ],
+      "extra_edit_paths": [
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Controller/FunChatViewController.m",
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunChatInputView.h",
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunChatInputView.m",
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunRecordAudioView.h",
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunRecordAudioView.m",
+        "NEContactUIKitOC/NEContactUIKitOC/Classes/FunUI/ViewController/FunAIRobotDetailController.m",
+        "NETeamUIKitOC/NETeamUIKitOC/Classes/FunUI/Controller/FunTeamSettingViewController.m",
+        "app/Mine/View/CustomThemeCells.h"
+      ],
+      "project_cleanup": {
+        "app.xcodeproj/project.pbxproj": [
+          "StyleSelectionViewController"
+        ]
+      }
+    },
+    "fun": {
+      "aliases": [
+        "fun",
+        "funui",
+        "微信",
+        "娱乐",
+        "fun style"
+      ],
+      "owned_paths": [
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/",
+        "NEChatUIKitOC/NEChatUIKitOC/Assets/FunChatUIKit.xcassets/",
+        "NEContactUIKitOC/NEContactUIKitOC/Classes/FunUI/",
+        "NEContactUIKitOC/NEContactUIKitOC/Assets/FunContactUIKit.xcassets/",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Cell/FunConversationSearchCell.h",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Cell/FunConversationSearchCell.m",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/FunConversationSearchController.h",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/FunConversationSearchController.m",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Assets/FunConversationUIKit.xcassets/",
+        "NETeamUIKitOC/NETeamUIKitOC/Classes/FunUI/",
+        "NETeamUIKitOC/NETeamUIKitOC/Assets/FunTeamUIKit.xcassets/",
+        "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/FunSearchView.h",
+        "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/FunSearchView.m",
+        "NEBaseUIKitOC/NEBaseUIKitOC/Assets/NECommonUI.xcassets/FunUI/",
+        "app/Assets.xcassets/Tabbar/funChat.imageset",
+        "app/Assets.xcassets/Tabbar/funChatSelect.imageset",
+        "app/Assets.xcassets/Tabbar/funContact.imageset",
+        "app/Assets.xcassets/Tabbar/funContactSelect.imageset",
+        "app/Assets.xcassets/Tabbar/funPerson.imageset",
+        "app/Assets.xcassets/Tabbar/funPersonSelect.imageset",
+        "app/Assets.xcassets/Mine/clicked_fun.imageset",
+        "app/Assets.xcassets/Mine/style_fun.imageset"
+      ],
+      "markers": [
+        "FunUI",
+        "FunChat",
+        "FunContact",
+        "FunConversation",
+        "FunTeam",
+        "FunSearch",
+        "FunPin",
+        "FunCollection",
+        "FunLanguage",
+        "FunUser",
+        "FunRecord",
+        "funChat",
+        "funContact",
+        "fun_",
+        "registerFun",
+        "FunStyle",
+        "style_fun",
+        "clicked_fun",
+        "style_selection",
+        "NEStyleManager"
+      ],
+      "accepted_candidates": [
+        {
+          "path": "NEChatUIKitOC/NEChatUIKitOC/Classes/Base/NEChatLoaderService.h",
+          "contains": "setupInitWithFunUI",
+          "reason": "公开初始化签名，保留以兼容客户集成调用。"
+        },
+        {
+          "path": "NEChatUIKitOC/NEChatUIKitOC/Classes/Base/NEChatLoaderService.m",
+          "contains": "setupInitWithFunUI",
+          "reason": "公开初始化签名，保留以兼容客户集成调用。"
+        },
+        {
+          "path": "NEContactUIKitOC/NEContactUIKitOC/Classes/Base/NEContactLoaderService.h",
+          "contains": "setupInitWithFunUI",
+          "reason": "公开初始化签名，保留以兼容客户集成调用。"
+        },
+        {
+          "path": "NEContactUIKitOC/NEContactUIKitOC/Classes/Base/NEContactLoaderService.m",
+          "contains": "setupInitWithFunUI",
+          "reason": "公开初始化签名，保留以兼容客户集成调用。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.h",
+          "contains": "NEStyleManager",
+          "reason": "组件层通过 NSClassFromString 反射读取 NEStyleManager，保留类与 isNormalStyle 作为跨边界契约。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.h",
+          "contains": "isNormalStyle",
+          "reason": "反射契约方法，返回值固定为存活皮肤。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.m",
+          "contains": "NEStyleManager",
+          "reason": "反射契约实现，保留类本身。"
+        },
+        {
+          "path": "app/Main/NEStyleManager.m",
+          "contains": "isNormalStyle",
+          "reason": "反射契约方法，返回值固定为存活皮肤。"
+        }
+      ],
+      "extra_edit_paths": [
+        "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageImageCell.m",
+        "NEContactUIKitOC/NEContactUIKitOC/Classes/NormalUI/ViewController/CreateAIRobotController.m",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/ConversationSearchController.h",
+        "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/ConversationSearchController.m"
+      ],
+      "project_cleanup": {
+        "app.xcodeproj/project.pbxproj": [
+          "StyleSelectionViewController"
+        ]
+      }
+    }
+  },
+  "shared_replacements": {
+    "colors": {
+      "normalChatNavigationDivideBg": "ne_defaultNavigationDividerColor",
+      "normalContactNavigationDivideBg": "ne_defaultNavigationDividerColor",
+      "normalChatReplyViewBg": "ne_defaultReplyBackgroundColor",
+      "normalContactThemeColor": "ne_defaultPrimaryColor",
+      "ne_normalTheme": "ne_defaultPrimaryColor",
+      "funChatLineBorderColor": "ne_defaultLineColor",
+      "funContactLineBorderColor": "ne_defaultLineColor",
+      "ne_funTheme": "ne_defaultPrimaryColor"
+    },
+    "images": {
+      "fun_chat_photo": "photo",
+      "fun_chat_aiChat": "ai_icon_default"
+    },
+    "style_booleans": {
+      "isNormalStyle": true
+    }
+  },
+  "adaptive_list_selection": {
+    "shared_api": "NEAdaptiveDeviceGate / NEAdaptiveContentInsets / listSelectionBackgroundColor 等自适应呈现能力保留",
+    "color_source": "存活皮肤 selectedTintColor.withAlphaComponent(0.1) 提供浅色选中背景",
+    "selection_retention": "会话/联系人按稳定标识在双栏刷新后恢复选中行",
+    "device_scope": "仅 NEAdaptiveDeviceGate.isFoldableDevice 为真时启用 Duo 分支",
+    "retain_responsive_layout": "资料表头、菜单、网格与多选 tab 的父容器宽度约束属于通用响应式修复，不回滚"
+  }
+}

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "CustomConversationListCell.h"
-#import <NECommonUIKitOC/NEUserHeaderView.h>
+#import <NEBaseUIKitOC/NEUserHeaderView.h>
 
 @interface CustomConversationListCell ()
 @property (nonatomic, strong) UIImageView *customBadgeView;

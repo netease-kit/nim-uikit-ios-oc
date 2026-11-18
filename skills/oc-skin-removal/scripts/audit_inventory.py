@@ -1,0 +1,265 @@
+#!/usr/bin/env python3
+"""Read-only audit of registered Objective-C UIKit skin deletion targets."""
+
+import argparse
+import json
+import subprocess
+from pathlib import Path
+
+
+SKILL_DIR = Path(__file__).resolve().parent.parent
+INVENTORY = SKILL_DIR / "references" / "skin-inventory.json"
+ALLOWED_ROOTS = {
+    "NEChatUIKitOC", "NEContactUIKitOC", "NEConversationUIKitOC", "NETeamUIKitOC",
+    "NEAISearchKitOC", "NEMapKitOC", "NEAdaptiveUIKitOC", "NEBaseUIKitOC",
+    "app", "app.xcodeproj",
+}
+
+
+def has_expected_layout(root):
+    return (root / "NEChatUIKitOC").is_dir() and (root / "app").is_dir()
+
+
+def source_root(candidate):
+    """Resolve a checkout with the open-source OC layout ( + Common/ + app/)."""
+
+    for base in (candidate, candidate / "nim-uikit-ios-oc"):
+        if base is None:
+            continue
+        try:
+            result = subprocess.run(
+                ["git", "-C", str(base), "rev-parse", "--show-toplevel"],
+                check=True, capture_output=True, text=True,
+            )
+            root = Path(result.stdout.strip()).resolve()
+            if has_expected_layout(root):
+                return root
+        except (OSError, subprocess.CalledProcessError):
+            pass
+        resolved = base.expanduser().resolve()
+        if has_expected_layout(resolved):
+            return resolved
+    raise ValueError(
+        "checkout must contain  and app/ (open-source OC layout); "
+        "pass --repo /absolute/path/to/nim-uikit-ios-oc"
+    )
+
+
+def default_root():
+    for candidate in (SKILL_DIR, Path.cwd()):
+        try:
+            root = source_root(candidate)
+        except ValueError:
+            continue
+        return root
+    raise ValueError(
+        "cannot locate an OC checkout with  and app/; "
+        "place this skill under skills/ in that repository or pass --repo"
+    )
+
+
+def scoped_path(root, relative):
+    path = Path(relative)
+    if (
+        path.is_absolute()
+        or ".." in path.parts
+        or not path.parts
+        or path.parts[0] not in ALLOWED_ROOTS
+    ):
+        raise ValueError(f"out-of-scope inventory path: {relative}")
+    target = (root / path).resolve()
+    if not target.is_relative_to(root):
+        raise ValueError(f"inventory path escapes checkout: {relative}")
+    return target
+
+
+def verify_inventory(root, inventory, skin_name, skin):
+    """Return drift issues that would make a removal audit unreliable."""
+    issues = []
+    owned = skin["owned_paths"]
+    shared = inventory["shared_paths"] + skin.get("extra_edit_paths", [])
+    common = inventory["common_removals"]
+
+    for relative in owned:
+        if not scoped_path(root, relative).exists():
+            issues.append(f"STALE owned: {relative} (already removed or path drifted)")
+    for relative in shared:
+        if not scoped_path(root, relative).is_file():
+            issues.append(f"STALE shared: {relative}")
+    for relative in common:
+        if not scoped_path(root, relative).exists():
+            issues.append(f"STALE common removal: {relative}")
+
+    owned_dirs = [relative.rstrip("/") for relative in owned]
+    for relative in shared + common:
+        for directory in owned_dirs:
+            if relative == directory or relative.startswith(directory + "/"):
+                issues.append(f"OVERLAP {relative} is inside skin-owned path {directory}")
+
+    for relative, markers in skin.get("project_cleanup", {}).items():
+        path = scoped_path(root, relative)
+        if not path.is_file():
+            issues.append(f"MISSING project cleanup path: {relative}")
+            continue
+        contents = path.read_text(encoding="utf-8", errors="replace")
+        for marker in markers:
+            if marker not in contents:
+                issues.append(f"STALE project cleanup marker: {marker} in {relative}")
+
+    replacements = inventory.get("shared_replacements", {})
+    for group, mapping in replacements.items():
+        if not isinstance(mapping, dict) or not mapping:
+            issues.append(f"INVALID shared_replacements.{group}")
+            continue
+        for old, new in mapping.items():
+            if not old or new in (None, ""):
+                issues.append(f"INVALID shared_replacements.{group}: {old!r} -> {new!r}")
+
+    print(f"verify-inventory / {skin_name} / {root}")
+    if not issues:
+        print("  inventory ok")
+    for issue in issues:
+        print(f"  {issue}")
+    return issues
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("skin", nargs="?", help="normal / fun (or registered alias)")
+    parser.add_argument("--phase", choices=("before", "after"), default="before")
+    parser.add_argument("--repo", type=Path, help="OC source checkout when the skill is not installed there")
+    parser.add_argument(
+        "--list",
+        action="store_true",
+        help="list registered skins and aliases",
+    )
+    parser.add_argument(
+        "--verify-inventory",
+        action="store_true",
+        help="check inventory drift (stale paths, overlaps, project refs) before auditing",
+    )
+    args = parser.parse_args()
+
+    inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
+    if args.list:
+        for key, skin in sorted(inventory["skins"].items()):
+            print(f"{key}: {', '.join(skin['aliases'])}")
+        return 0
+    if not args.skin:
+        parser.error("skin is required unless --list is used")
+    requested = args.skin.casefold().strip()
+    matches = [
+        (key, skin)
+        for key, skin in inventory["skins"].items()
+        if requested in [alias.casefold() for alias in skin["aliases"]]
+    ]
+    if len(matches) != 1:
+        parser.error(f"unknown skin {args.skin!r}; use normal or fun")
+    skin_name, skin = matches[0]
+    try:
+        root = source_root(args.repo) if args.repo else default_root()
+    except ValueError as error:
+        parser.error(str(error))
+
+    owned = skin["owned_paths"] + inventory["common_removals"]
+    shared = inventory["shared_paths"] + skin.get("extra_edit_paths", [])
+    if len(set(owned + shared)) != len(owned + shared):
+        raise ValueError("duplicate paths in inventory")
+
+    if args.verify_inventory:
+        return 1 if verify_inventory(root, inventory, skin_name, skin) else 0
+
+    print(f"{skin_name} / {args.phase} / {root}")
+    structural_errors = 0
+
+    # A deletion can expose a shared type that lived in the removed skin
+    # directory. These migrations are part of the inventory so callers do not
+    # need a second repository-wide search to discover them.
+    for migration in inventory.get("shared_migrations", {}).get(skin_name, []):
+        source = scoped_path(root, migration["from"])
+        destination = scoped_path(root, migration["to"])
+        if args.phase == "before":
+            source_state = "present" if source.exists() else "missing"
+            destination_state = "present" if destination.exists() else "absent"
+            print(
+                f"  MOVE {migration['from']} -> {migration['to']} "
+                f"(before: {source_state}, destination: {destination_state})"
+            )
+            if not source.exists():
+                structural_errors += 1
+        elif source.exists() or not destination.exists():
+            print(f"  MOVE unresolved: {migration['from']} -> {migration['to']}")
+            structural_errors += 1
+        else:
+            print(f"  MOVED {migration['from']} -> {migration['to']}")
+
+    for relative, forbidden in skin.get("project_cleanup", {}).items():
+        path = scoped_path(root, relative)
+        if not path.is_file():
+            print(f"  MISSING project cleanup path: {relative}")
+            structural_errors += 1
+            continue
+        contents = path.read_text(encoding="utf-8", errors="replace")
+        remaining = [marker for marker in forbidden if marker in contents]
+        if args.phase == "before":
+            state = "present" if remaining else "already absent"
+            print(f"  PROJECT REFS {relative}: {state}")
+        elif remaining:
+            print(f"  PROJECT REFS unresolved in {relative}: {', '.join(remaining)}")
+            structural_errors += len(remaining)
+        else:
+            print(f"  PROJECT REFS clean: {relative}")
+
+    present = []
+    for relative in owned:
+        if scoped_path(root, relative).exists():
+            present.append(relative)
+    print(f"owned paths present: {len(present)} / {len(owned)}")
+    for relative in present:
+        print(f"  DELETE {relative}")
+    if args.phase == "before":
+        for relative in owned:
+            if relative not in present:
+                print(f"  ABSENT {relative} (already removed or inventory drift)")
+
+    missing = []
+    candidates = 0
+    unresolved_candidates = 0
+    accepted_candidates = {
+        (entry["path"], entry["contains"]) for entry in skin.get("accepted_candidates", [])
+    }
+    for relative in shared:
+        path = scoped_path(root, relative)
+        if not path.is_file():
+            missing.append(relative)
+            continue
+        for number, line in enumerate(
+            path.read_text(encoding="utf-8", errors="replace").splitlines(), 1
+        ):
+            if any(marker in line for marker in skin["markers"]):
+                candidates += 1
+                stripped = line.strip()
+                if any(path == relative and marker in stripped for path, marker in accepted_candidates):
+                    print(f"  KEEP {relative}:{number}: {stripped[:180]}")
+                else:
+                    unresolved_candidates += 1
+                    print(f"  REVIEW {relative}:{number}: {stripped[:180]}")
+    print(
+        f"shared candidate lines: {candidates}; unresolved: {unresolved_candidates}; "
+        f"missing shared paths: {len(missing)}"
+    )
+    for relative in missing:
+        print(f"  MISSING {relative}")
+    if args.phase == "after" and (
+        present or unresolved_candidates or missing or structural_errors
+    ):
+        print("after audit needs resolution: inspect only the registered paths and structural checks above")
+        return 1
+    if args.phase == "before" and (missing or structural_errors):
+        print("before audit has drift: update the inventory before deleting")
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

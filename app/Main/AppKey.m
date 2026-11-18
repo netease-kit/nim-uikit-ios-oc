@@ -4,18 +4,22 @@
 
 #import "AppKey.h"
 
-NSString *const NEAppKey = @"<#请输入云信 AppKey#>";
-NSString *const NEAPNSCername = @"<#请输入云信 Apns 推送证书名#>";
-NSString *const NEPKCerName = @"<#请输入云信 PushKit 推送证书名#>";
-NSString *const NEAppAccount = @"<#account#>";
-NSString *const NEAppToken = @"<#token#>";
+#if __has_include("AppKey.private.h")
+#import "AppKey.private.h"
+#else
+NSString *const NEAppKey = @"";
+NSString *const NEAPNSCername = @"";
+NSString *const NEPKCerName = @"";
+NSString *const NEAppAccount = @"";
+NSString *const NEAppToken = @"";
+#endif
 
 NSString *const NENotificationLogout = @"logout";
 NSString *const NENotificationChangeLanguage = @"app.changeLanguage";
 NSString *const NENotificationChangeUI = @"change_ui";
 
 NSString *NELocalizedString(NSString *key) {
-  NSString *language = NEAppLanguageRawValue([NEAppLanguageUtil getCurrentLanguage]);
+  NSString *language = [NEAppLanguageUtil getCurrentLanguage] == NEAppLanguageChinese ? @"zh-Hans" : @"en";
   NSBundle *bundle = [NSBundle mainBundle];
   NSString *path = [bundle pathForResource:language ofType:@"lproj"];
   if (!path) {

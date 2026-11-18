@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomConversationListCell : NEConversationListCell
+@interface CustomConversationListCell : ConversationListCell
 @end
 
 NS_ASSUME_NONNULL_END

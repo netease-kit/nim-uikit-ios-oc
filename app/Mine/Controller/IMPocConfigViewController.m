@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #import "IMPocConfigViewController.h"
+#import <NEBaseUIKitOC/NEAdaptiveDeviceGate.h>
 #import "AppKey.h"
 #import "IMPocConfigManager.h"
 #import "NEStyleManager.h"
@@ -11,12 +12,12 @@
 #import "CustomSettingTextviewCell.h"
 #import "CustomThemeCells.h"
 #import "ArrowTitleCustomTeamSettingSwitchCell.h"
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
-#import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NECommonUIKitOC/NENavigationView.h>
+#import <NEBaseUIKitOC/NEBaseUIKitOC.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
 #import <NIMSDK/NIMSDK.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
@@ -57,7 +58,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.title = @"私有云环境配置";
+  self.title = NELocalizable(@"private_cloud_config");
   [self setupCellData];
   [self setupConfigUI];
 }
@@ -86,7 +87,7 @@
   [NSLayoutConstraint activateConstraints:@[
     [self.contentTableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
     [self.contentTableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    [self.contentTableView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:NEConstant.statusBarHeight + NEConstant.navigationHeight],
+    [self.contentTableView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:NEUIKitStatusBarHeight() + NEConstant.navigationHeight],
     [self.contentTableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
   ]];
 
@@ -229,6 +230,9 @@
   back.backgroundColor = UIColor.clearColor;
   ExpandButton *button = [[ExpandButton alloc] init];
   [back addSubview:button];
+  if (NEAdaptiveDeviceGate.adaptiveHostActive) {
+    button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  }
   [button setTitle:NELocalizable(@"save") forState:UIControlStateNormal];
   [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
   if ([NEStyleManager.instance isNormalStyle]) {

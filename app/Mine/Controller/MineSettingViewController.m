@@ -3,6 +3,8 @@
 // found in the LICENSE file.
 
 #import "MineSettingViewController.h"
+#import <NEChatKit/NEChatKit.h>
+#import <NEBaseUIKitOC/NEAdaptiveDeviceGate.h>
 #import "MessageRemindViewController.h"
 #import "StyleSelectionViewController.h"
 #import "LanguageViewController.h"
@@ -13,17 +15,16 @@
 #import "IMPocConfigManager.h"
 #import "NEStyleManager.h"
 #import "AppKey.h"
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/NEFriendUserCache.h>
-#import <NEChatKitOC/NESubscribeManager.h>
-#import <NECommonUIKitOC/NECommonUIKitOC.h>
-#import <NECommonUIKitOC/ViewControllerExtension.h>
-#import <NECommonUIKitOC/UIView+YXToast.h>
-#import <NEChatKitOC/SettingRepo.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/NEFriendUserCache.h>
+#import <NEChatKit/NESubscribeManager.h>
+#import <NEBaseUIKitOC/NEBaseUIKitOC.h>
+#import <NEBaseUIKitOC/ViewControllerExtension.h>
+#import <NEBaseUIKitOC/UIView+YXToast.h>
+#import <NEChatKit/SettingRepo.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
-#import <NECommonUIKitOC/NENavigationView.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
 #import <NIMSDK/NIMSDK.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
@@ -127,7 +128,7 @@ static NSString *const kEnableCloudConversationKey = @"nim_enable_v2_cloud_conve
   __weak typeof(self) weakSelf = self;
 
   SettingCellModel *configTest = [[SettingCellModel alloc] init];
-  configTest.cellName = @"全局配置";
+  configTest.cellName = NELocalizable(@"global_config");
   configTest.type = SettingCellTypeSettingArrowCell;
   configTest.cellClick = ^{
     [weakSelf.delegate didClickConfigTest];
@@ -135,7 +136,7 @@ static NSString *const kEnableCloudConversationKey = @"nim_enable_v2_cloud_conve
   [model.cellModels addObject:configTest];
 
   SettingCellModel *sdkConfigModel = [[SettingCellModel alloc] init];
-  sdkConfigModel.cellName = @"私有云环境配置";
+  sdkConfigModel.cellName = NELocalizable(@"private_cloud_config");
   sdkConfigModel.type = SettingCellTypeSettingArrowCell;
   sdkConfigModel.cellClick = ^{
     [weakSelf.delegate didClickSDKConfig];
@@ -143,7 +144,7 @@ static NSString *const kEnableCloudConversationKey = @"nim_enable_v2_cloud_conve
   [model.cellModels addObject:sdkConfigModel];
 
   SettingCellModel *pushConfigModel = [[SettingCellModel alloc] init];
-  pushConfigModel.cellName = @"推送配置";
+  pushConfigModel.cellName = NELocalizable(@"push_config");
   pushConfigModel.type = SettingCellTypeSettingArrowCell;
   pushConfigModel.cellClick = ^{
     [weakSelf.delegate didClickPushConfig];
@@ -278,7 +279,9 @@ static NSString *const kEnableCloudConversationKey = @"nim_enable_v2_cloud_conve
   delAccountBtn.accessibilityIdentifier = @"id.serverConfig";
   [self.view addSubview:delAccountBtn];
   [NSLayoutConstraint activateConstraints:@[
-    [delAccountBtn.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-10.0 - NEConstant.statusBarHeight],
+    [delAccountBtn.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor
+                                               constant:-10.0 - NEUIKitStatusBarHeight() -
+                                                        (NEAdaptiveDeviceGate.adaptiveHostActive ? 2.0 : 0.0)],
     [delAccountBtn.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
   ]];
 }
@@ -295,18 +298,15 @@ static NSString *const kEnableCloudConversationKey = @"nim_enable_v2_cloud_conve
   [_logoutButton setTitle:NELocalizable(@"logout") forState:UIControlStateNormal];
   [_logoutButton addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
   _logoutButton.accessibilityIdentifier = @"id.logout";
+  _logoutButton.translatesAutoresizingMaskIntoConstraints = NO;
   [footerView addSubview:_logoutButton];
-  if (isNormalStyle) {
-    _logoutButton.frame = CGRectMake(20.0, 12.0, self.view.frame.size.width - 40.0, 40.0);
-  } else {
-    _logoutButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [NSLayoutConstraint activateConstraints:@[
-      [_logoutButton.leftAnchor constraintEqualToAnchor:footerView.leftAnchor],
-      [_logoutButton.rightAnchor constraintEqualToAnchor:footerView.rightAnchor],
-      [_logoutButton.topAnchor constraintEqualToAnchor:footerView.topAnchor constant:12.0],
-      [_logoutButton.heightAnchor constraintEqualToConstant:40.0],
-    ]];
-  }
+  CGFloat inset = isNormalStyle ? 20.0 : 0.0;
+  [NSLayoutConstraint activateConstraints:@[
+    [_logoutButton.leadingAnchor constraintEqualToAnchor:footerView.leadingAnchor constant:inset],
+    [_logoutButton.trailingAnchor constraintEqualToAnchor:footerView.trailingAnchor constant:-inset],
+    [_logoutButton.topAnchor constraintEqualToAnchor:footerView.topAnchor constant:12.0],
+    [_logoutButton.heightAnchor constraintEqualToConstant:40.0],
+  ]];
   return footerView;
 }
 

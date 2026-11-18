@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <NEChatKitOC/NEAppLanguageUtil.h>
+#import <NEChatKit/NEAppLanguageUtil.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 对齐 Swift AppKey.swift / Constant.swift
 
-/// AppKey.swift 中的 Demo 账号占位配置
+/// 可选的本地 Demo 配置，公开仓库默认不包含凭据。
 FOUNDATION_EXPORT NSString *const NEAppKey;
 FOUNDATION_EXPORT NSString *const NEAPNSCername;
 FOUNDATION_EXPORT NSString *const NEPKCerName;

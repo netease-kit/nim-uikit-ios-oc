@@ -4,8 +4,8 @@
 
 #import "BirthdayDatePickerView.h"
 #import "AppKey.h"
-#import <NEChatKitOC/UIColor+NECommon.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
+#import <NEChatKit/UIColor+NECommon.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
 
 @interface BirthdayDatePickerView ()
 @property (nonatomic, strong) UIButton *cancelButton;
@@ -40,6 +40,7 @@
   [_cancelButton setTitleColor:[UIColor ne_normalTheme] forState:UIControlStateNormal];
   _cancelButton.titleLabel.font = [UIFont systemFontOfSize:14];
   [_cancelButton addTarget:self action:@selector(removeFromSuperview) forControlEvents:UIControlEventTouchUpInside];
+  _cancelButton.accessibilityIdentifier = @"id.adaptiveBack";
   [_pickerBackView addSubview:_cancelButton];
 
   _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -48,6 +49,7 @@
   [_sureButton setTitleColor:[UIColor ne_normalTheme] forState:UIControlStateNormal];
   _sureButton.titleLabel.font = [UIFont systemFontOfSize:14];
   [_sureButton addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
+  _sureButton.accessibilityIdentifier = @"id.sureButton";
   [_pickerBackView addSubview:_sureButton];
 
   _bottomLine = [[UIView alloc] init];
@@ -98,6 +100,14 @@
   NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
   fmt.dateFormat = @"yyyy-MM-dd";
   self.selectTime = [fmt stringFromDate:datePicker.date];
+}
+
+- (void)removeFromSuperview {
+  [super removeFromSuperview];
+  void (^dismiss)(void) = self.onDismiss;
+  if (dismiss) {
+    dismiss();
+  }
 }
 
 - (void)sureBtnClick {

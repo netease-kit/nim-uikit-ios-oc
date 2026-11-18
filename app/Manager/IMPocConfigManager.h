@@ -6,7 +6,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 对齐 Swift IMPocConfigModel
 @interface IMPocConfigModel : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSMutableDictionary *configMap;
@@ -17,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/// 对齐 Swift IMPocConfigManager — 私有云配置持久化
 @interface IMPocConfigManager : NSObject
 
 + (instancetype)instance;

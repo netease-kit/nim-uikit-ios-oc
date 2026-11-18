@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIDatePicker *picker;
 @property (nonatomic, copy, nullable) void (^timeCallBack)(NSString *_Nullable time);
+@property (nonatomic, copy, nullable) void (^onDismiss)(void);
 
 @end
 

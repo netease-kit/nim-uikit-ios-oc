@@ -3,13 +3,12 @@
 // found in the LICENSE file.
 
 #import "LoginViewController.h"
+#import <NEChatKit/NEChatKit.h>
 #import "Main/AppKey.h"
 #import "Mine/Controller/IMPocConfigViewController.h"
 #import "Mine/Controller/NENodeViewController.h"
 #import "PocLoginViewController.h"
-#import <NIMSDK/NIMSDK.h>
-#import <NEChatKitOC/NECoreIM2KitOC.h>
-#import <NECommonUIKitOC/UIView+YXToast.h>
+#import <NEBaseUIKitOC/UIView+YXToast.h>
 
 @interface LoginViewController ()
 
@@ -140,26 +139,21 @@
 }
 
 - (void)loginBtnClick {
-  NSLog(@"login accid : %@", NEAppAccount);
-  NSLog(@"login token : %@", NEAppToken);
-
-  V2NIMLoginOption *option = [[V2NIMLoginOption alloc] init];
-  option.syncLevel = V2NIM_DATA_SYNC_TYPE_LEVEL_BASIC;
+  if (NEAppKey.length == 0 || NEAppAccount.length == 0 || NEAppToken.length == 0) {
+    [self.view ne_makeToast:@"请先配置本地 AppKey、账号和 Token"];
+    return;
+  }
 
   __weak typeof(self) weakSelf = self;
-  [[NIMSDK sharedSDK].v2LoginService login:NEAppAccount
-                                     token:NEAppToken
-                                    option:option
-                                   success:^{
+  [[IMKitClient instance] login:NEAppAccount
+                          token:NEAppToken
+                     completion:^(NSError * _Nullable error) {
     dispatch_async(dispatch_get_main_queue(), ^{
-      if (weakSelf.loginSuccess) {
+      if (error) {
+        [weakSelf.view ne_makeToast:error.localizedDescription ?: @""];
+      } else if (weakSelf.loginSuccess) {
         weakSelf.loginSuccess();
       }
-    });
-  } failure:^(V2NIMError * _Nonnull error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      NSError *nsError = error.nserror;
-      [weakSelf.view ne_makeToast:nsError.localizedDescription ?: @""];
     });
   }];
 }

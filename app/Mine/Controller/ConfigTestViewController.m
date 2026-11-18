@@ -3,19 +3,20 @@
 // found in the LICENSE file.
 
 #import "ConfigTestViewController.h"
+#import <NEBaseUIKitOC/NEAdaptiveDeviceGate.h>
 #import "AppKey.h"
 #import "NEStyleManager.h"
 #import "CustomSettingCellModel.h"
 #import "CustomSettingTextviewCell.h"
 #import "CustomThemeCells.h"
-#import <NEChatKitOC/ChatConstant.h>
-#import <NEChatKitOC/NEConstant.h>
-#import <NEChatKitOC/IMKitConfigCenter.h>
-#import <NEChatKitOC/UIColor+NECommon.h>
+#import <NEChatKit/ChatConstant.h>
+#import <NEChatKit/NEConstant.h>
+#import <NEChatKit/IMKitConfigCenter.h>
+#import <NEChatKit/UIColor+NECommon.h>
 #import <NEChatUIKitOC/FunChatUIColor.h>
-#import <NECommonUIKitOC/NECommonUIConstant.h>
-#import <NECommonUIKitOC/NEConfigManager.h>
-#import <NECommonUIKitOC/NENavigationView.h>
+#import <NEBaseUIKitOC/NECommonUIConstant.h>
+#import <NEBaseUIKitOC/NEConfigManager.h>
+#import <NEBaseUIKitOC/NENavigationView.h>
 #import <NETeamUIKitOC/SettingCellModel.h>
 #import <NETeamUIKitOC/SettingSectionModel.h>
 #import <NETeamUIKitOC/NEBaseTeamSettingCell.h>
@@ -121,7 +122,7 @@
 }
 
 - (void)initialConfig {
-  self.title = @"全局配置";
+  self.title = NELocalizable(@"global_config");
   if ([NEStyleManager.instance isNormalStyle]) {
     self.view.backgroundColor = [UIColor ne_backgroundColor];
     self.navigationView.backgroundColor = [UIColor ne_backgroundColor];
@@ -148,7 +149,7 @@
   [NSLayoutConstraint activateConstraints:@[
     [tipLabel.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
     [tipLabel.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    [tipLabel.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:NEConstant.navigationAndStatusHeight],
+    [tipLabel.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:NEUIKitNavigationAndStatusHeight()],
     [tipLabel.heightAnchor constraintEqualToConstant:20],
   ]];
 

@@ -1,0 +1,143 @@
+{
+  "emoji-reaction": {
+    "aliases": [
+      "表情评论",
+      "reaction",
+      "emoji reaction",
+      "快捷表情评论",
+      "表情回应"
+    ],
+    "owned_paths": [
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/Reaction/",
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/reaction_emoji/",
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/NEBaseChatUIKit.xcassets/operation/reaction_add_emoji.imageset",
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/NEBaseChatUIKit.xcassets/operation/reaction_more_emoji.imageset",
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/NEBaseChatUIKit.xcassets/operation/reaction_less_emoji.imageset"
+    ],
+    "edit_paths": [
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/en.lproj/Localizable.strings",
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/zh-Hans.lproj/Localizable.strings",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Controller/ChatViewController.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/HistorySearch/NEBaseHistorySearchController.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Model/MessageContentModel.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Model/MessageContentModel.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Topic/NETopicChatViewModel.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/Cell/NEBaseChatMessageCell.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/Cell/NEBaseChatMessageCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/ChatView/MessageOperationView.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/ChatView/MessageOperationView.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/ViewModel/ChatViewModel.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/ViewModel/ChatViewModel.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageAudioCell.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageAudioCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageBaseCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageCallCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageFileCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageImageCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageLocationCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageMultiForwardCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageRevokeCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageRichTextCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageTextCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Cell/FunChatMessageVideoCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageAudioCell.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageAudioCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageCallCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageImageCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageRevokeCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageRichTextCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageTextCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageVideoCell.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/NormalChatMessageBaseCell.m",
+      "app/en.lproj/Localizable.strings",
+      "app/zh-Hans.lproj/Localizable.strings"
+    ],
+    "residual": {
+      "roots": [
+        "NEChatUIKitOC",
+        "app"
+      ],
+      "patterns": [
+        "NEMessageReaction|MessageReactionEmoji|MessageReactionManager|NEMessageReactionGroup|NEMessageReactionSnapshot",
+        "reactionGroups|reactionHeight|hasReaction|onReactionModifiedMessage|configureReactions|reactionEmojiProvider",
+        "stopReactionManager|startReactionManager|setupReactionManager|reactionManager",
+        "reaction_emoji|reaction_add_emoji|reaction_more_emoji|reaction_less_emoji|reaction_sync_failed|emoji_reaction",
+        "ReactionView|reactionView|ReactionBackdrop|reactionBackdrop|ReactionSurface|reactionSurface|ReactionPanel|reactionPanel|SupportsReaction|supportsReaction|ReactionReload|reactionReload",
+        "ne_chatReaction",
+        "AudioBodyBackgroundView|CallBodyBackgroundView",
+        "audioBodyBackgroundView|callBodyBackgroundView"
+      ],
+      "allowed_paths": []
+    }
+  },
+  "earliest-unread": {
+    "aliases": [
+      "跳转最早未读",
+      "最早未读",
+      "上次阅读位置",
+      "last read",
+      "earliest unread"
+    ],
+    "owned_paths": [
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/ChatView/NEBaseChatLastReadPositionView.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/View/ChatView/NEBaseChatLastReadPositionView.m"
+    ],
+    "edit_paths": [
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/en.lproj/Localizable.strings",
+      "NEChatUIKitOC/NEChatUIKitOC/Assets/zh-Hans.lproj/Localizable.strings",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Controller/ChatViewController.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Controller/ChatViewController.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Topic/NETopicChatViewModel.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/Topic/TopicChatViewModel.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/ViewModel/ChatViewModel.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Chat/ViewModel/ChatViewModel.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Common/NEChatUIKitObjCModels.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Common/NEChatUIKitObjCModels.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/Controller/FunChatViewController.m"
+    ],
+    "residual": {
+      "roots": [
+        "NEChatUIKitOC",
+        "app"
+      ],
+      "patterns": [
+        "LastReadPosition|lastReadPosition|last_read_position"
+      ],
+      "allowed_paths": []
+    }
+  },
+  "adaptive-shell": {
+    "aliases": [
+      "自适应外壳",
+      "折叠屏外壳",
+      "Duo UI",
+      "foldable shell"
+    ],
+    "owned_paths": [],
+    "edit_paths": [
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/ChatRouter/NEBaseChatRouter.h",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/ChatRouter/NEBaseChatRouter.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/Compat/NormalChatRouter.m",
+      "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/FunChatRouter.m",
+      "app/Custom/CustomConfig.m",
+      "app/Main/NETabBarController.h",
+      "app/Main/NETabBarController.m",
+      "app/SceneDelegate.m",
+      "app/en.lproj/Localizable.strings",
+      "app/zh-Hans.lproj/Localizable.strings"
+    ],
+    "residual": {
+      "roots": [
+        "NEChatUIKitOC",
+        "app"
+      ],
+      "patterns": [
+        "makeAdaptiveShellIfEnabled|NEAdaptiveShellViewController|NEAdaptiveDemoNavigationController|adaptiveEmptyDetailController|presentSectionChild|NEAdaptivePaging",
+        "adaptive_back|adaptive_empty_",
+        "NEAdaptiveUIKitOC|NEConversationOpenIntent",
+        "ConversationPresentation|presentConversationIfHandled|applyPresentationParameters"
+      ],
+      "allowed_paths": []
+    }
+  }
+}

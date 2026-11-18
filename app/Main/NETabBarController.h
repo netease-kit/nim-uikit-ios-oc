@@ -6,7 +6,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 对齐 Swift NETabBarController
 /// 三 Tab 主框架：消息 / 通讯录 / 我
 @interface NETabBarController : UITabBarController
 
@@ -14,6 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isChangeUIType;
 
 - (instancetype)initWithChangeUI:(BOOL)isChangeUI;
+
+@property (nonatomic, strong, readonly, nullable) UINavigationController *chatNavigation;
+@property (nonatomic, strong, readonly, nullable) UINavigationController *contactNavigation;
+@property (nonatomic, strong, readonly, nullable) UINavigationController *mineNavigation;
+
+- (nullable UIViewController *)makeAdaptiveShellIfEnabled;
 
 @end
 
