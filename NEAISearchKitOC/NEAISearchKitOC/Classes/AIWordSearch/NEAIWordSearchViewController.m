@@ -113,6 +113,20 @@
   }
 }
 
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  // 结果面板可能被嵌入右列（宽约 558），行高必须按当前列表宽度重测；
+  // 首次布局时宽度从 0 变成列宽，也需要补一次重算。
+  CGFloat width = CGRectGetWidth(self.contentTableView.bounds);
+  if (width <= 0 || fabs(width - self.viewModel.itemMaxWidth) <= 0.5) {
+    return;
+  }
+  [self.viewModel updateItemMaxWidth:width];
+  if (self.viewModel.data.count > 0) {
+    [self.contentTableView reloadData];
+  }
+}
+
 /// 弹窗可用容器：优先 presentationController，其次窗口，最后父视图。
 - (CGRect)sheetContainerBounds {
   CGRect bounds = self.presentationController.containerView.bounds;

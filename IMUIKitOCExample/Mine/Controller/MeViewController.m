@@ -242,6 +242,8 @@ static NSString *const kMineCellId = @"MineTableViewCell";
 #pragma mark - Actions
 
 - (void)personInfoButtonClick {
+  // 个人信息页不是左列的行：清掉过期选中，避免旧行继续高亮。
+  [self clearAdaptiveSelection];
   PersonInfoViewController *vc = [[PersonInfoViewController alloc] init];
   [self.navigationController pushViewController:vc animated:YES];
 }
@@ -285,6 +287,16 @@ static NSString *const kMineCellId = @"MineTableViewCell";
                     [indexPath isEqual:self.adaptiveSelectedIndexPath];
     [cell ne_applyAdaptiveSelectionColor:self.listSelectionBackgroundColor selected:selected];
   }
+}
+
+/// 右列回到空白占位或进入非行入口时调用：清掉记住的行并取消表格选中。
+- (void)clearAdaptiveSelection {
+  self.adaptiveSelectedIndexPath = nil;
+  NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+  if (selected) {
+    [self.tableView deselectRowAtIndexPath:selected animated:NO];
+  }
+  [self refreshAdaptiveSelectionTint];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -1,4 +1,5 @@
 require_relative "../PodConfigs/config_podspec.rb"
+require_relative "../PodConfigs/config_third.rb"
 require_relative "../PodConfigs/config_local_common.rb"
 require_relative "../PodConfigs/config_local_im.rb"
 
@@ -17,8 +18,8 @@ Pod::Spec.new do |s|
 
   s.dependency NEChatKit.name, NEChatKit.version
   s.dependency NEBaseUIKitOC.name, NEBaseUIKitOC.version
-  s.dependency 'MJRefresh', '3.7.5'
-  s.dependency 'SDWebImage', '5.20.1'
+  s.dependency MJRefresh.name, MJRefresh.version
+  s.dependency SDWebImage.name, SDWebImage.version
   s.dependency 'NIMSDK_LITE', YXConfig.nimsdk_version
 
   YXConfig.oc_pod_target_xcconfig(s)

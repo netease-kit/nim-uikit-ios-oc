@@ -26,6 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat topConstant;
 @property (nonatomic, copy) NSArray<PopListItem *> *itemDatas;
 
+/// 弹窗锚点：优先跟随实际点击的入口（导航栏按钮或迁移到侧栏后的侧栏按钮）。
+@property (nonatomic, weak, nullable) UIView *anchorView;
+/// 直接给定的锚点矩形（self 坐标系），优先于 anchorView；nil 表示不指定。
+@property (nonatomic, strong, nullable) NSValue *anchorRect;
+/// 锚点定位使用的顶部/右侧约束，由子类 setupUI 赋值。
+@property (nonatomic, strong, nullable) NSLayoutConstraint *shadowTopConstraint;
+@property (nonatomic, strong, nullable) NSLayoutConstraint *shadowRightConstraint;
+
 - (void)setupUI;
 - (void)itemClick:(UIButton *)sender;
 - (void)removeSelf;

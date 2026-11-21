@@ -104,7 +104,22 @@
   stack.spacing = 8;
   [self.view addSubview:stack];
 
-  CGFloat screenWidth = UIScreen.mainScreen.bounds.size.width;
+  // 展开态窗口远宽于单屏，登录按钮与底部入口收敛到一屏宽并居中；
+  // 普通手机宽度小于该上限，布局保持不变。
+  UIView *contentColumn = [[UIView alloc] init];
+  contentColumn.translatesAutoresizingMaskIntoConstraints = NO;
+  contentColumn.userInteractionEnabled = NO;
+  [self.view addSubview:contentColumn];
+  NSLayoutConstraint *contentColumnWidth =
+      [contentColumn.widthAnchor constraintEqualToAnchor:self.view.widthAnchor];
+  contentColumnWidth.priority = UILayoutPriorityDefaultHigh;
+  [NSLayoutConstraint activateConstraints:@[
+    [contentColumn.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+    [contentColumn.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+    [contentColumn.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+    [contentColumn.widthAnchor constraintLessThanOrEqualToConstant:466],
+    contentColumnWidth,
+  ]];
   [NSLayoutConstraint activateConstraints:@[
     [self.launchIconView.widthAnchor constraintEqualToConstant:88],
     [self.launchIconView.heightAnchor constraintEqualToConstant:88],
@@ -112,14 +127,14 @@
     [self.launchIconView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:145.0],
     [self.launchIconLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
     [self.launchIconLabel.topAnchor constraintEqualToAnchor:self.launchIconView.bottomAnchor constant:-12.0],
-    [self.loginButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+    [self.loginButton.leadingAnchor constraintEqualToAnchor:contentColumn.leadingAnchor constant:40],
+    [self.loginButton.trailingAnchor constraintEqualToAnchor:contentColumn.trailingAnchor constant:-40],
     [self.loginButton.topAnchor constraintEqualToAnchor:self.launchIconLabel.bottomAnchor constant:20.0],
-    [self.loginButton.widthAnchor constraintEqualToConstant:screenWidth - 80.0],
     [self.loginButton.heightAnchor constraintEqualToConstant:44.0],
     [stack.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
     [stack.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-70.0],
-    [stack.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20],
-    [stack.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:-20],
+    [stack.leftAnchor constraintEqualToAnchor:contentColumn.leftAnchor constant:20],
+    [stack.rightAnchor constraintEqualToAnchor:contentColumn.rightAnchor constant:-20],
     [stack.heightAnchor constraintEqualToConstant:44.0],
   ]];
 }

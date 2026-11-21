@@ -111,6 +111,31 @@
   }];
 }
 
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  if (self.bounds.size.width <= 0) {
+    return;
+  }
+  CGRect rect = CGRectZero;
+  BOOL hasAnchor = NO;
+  if (self.anchorRect) {
+    CGRect candidate = self.anchorRect.CGRectValue;
+    if (candidate.size.width > 0 && candidate.size.height > 0) {
+      rect = candidate;
+      hasAnchor = YES;
+    }
+  }
+  if (!hasAnchor && self.anchorView.window) {
+    rect = [self.anchorView convertRect:self.anchorView.bounds toView:self];
+    hasAnchor = rect.size.width > 0 && rect.size.height > 0;
+  }
+  if (!hasAnchor) {
+    return;
+  }
+  self.shadowTopConstraint.constant = CGRectGetMaxY(rect) + 8.0;
+  self.shadowRightConstraint.constant = CGRectGetMaxX(rect) - self.bounds.size.width;
+}
+
 - (void)itemClick:(UIButton *)sender {
   NSInteger index = sender.tag;
   if (index >= 0 && index < (NSInteger)self.itemDatas.count) {
@@ -137,10 +162,10 @@
 
 - (void)setupUI {
   [super setupUI];
-  [NSLayoutConstraint activateConstraints:@[
-    [self.shadowView.topAnchor constraintEqualToAnchor:self.topAnchor constant:self.topConstant - 10.0],
-    [self.shadowView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20.0],
-  ]];
+  self.shadowTopConstraint = [self.shadowView.topAnchor constraintEqualToAnchor:self.topAnchor constant:self.topConstant - 10.0];
+  self.shadowRightConstraint = [self.shadowView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20.0];
+  self.shadowTopConstraint.active = YES;
+  self.shadowRightConstraint.active = YES;
   self.popView.backgroundColor = UIColor.whiteColor;
 }
 
@@ -152,10 +177,10 @@
 
 - (void)setupUI {
   [super setupUI];
-  [NSLayoutConstraint activateConstraints:@[
-    [self.shadowView.topAnchor constraintEqualToAnchor:self.topAnchor constant:self.topConstant],
-    [self.shadowView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-8.0],
-  ]];
+  self.shadowTopConstraint = [self.shadowView.topAnchor constraintEqualToAnchor:self.topAnchor constant:self.topConstant];
+  self.shadowRightConstraint = [self.shadowView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-8.0];
+  self.shadowTopConstraint.active = YES;
+  self.shadowRightConstraint.active = YES;
   UIColor *bgColor = [NEConstant hexRGB:0x4C4C4C];
   self.popView.backgroundColor = bgColor;
 

@@ -55,32 +55,32 @@
     "NETeamUIKitOC/NETeamUIKitOC/Classes/Base/TeamRouter.m",
     "NETeamUIKitOC/NETeamUIKitOC/Classes/Setting/ViewModel/TeamSettingViewModel.h",
     "NETeamUIKitOC/NETeamUIKitOC/Classes/Setting/ViewModel/TeamSettingViewModel.m",
-    "app/Custom/CustomChatViewController.h",
-    "app/Custom/CustomChatViewController.m",
-    "app/Custom/CustomConfig.h",
-    "app/Custom/CustomConfig.m",
-    "app/Main/NEStyleManager.h",
-    "app/Main/NEStyleManager.m",
-    "app/Main/NETabBarController.m",
-    "app/Mine/Controller/ConfigTestViewController.m",
-    "app/Mine/Controller/IMPocConfigViewController.m",
-    "app/Mine/Controller/IMPushConfigViewController.m",
-    "app/Mine/Controller/InputPersonInfoController.m",
-    "app/Mine/Controller/LanguageViewController.m",
-    "app/Mine/Controller/MeViewController.m",
-    "app/Mine/Controller/MessageRemindViewController.m",
-    "app/Mine/Controller/MineSettingViewController.m",
-    "app/Mine/Controller/PersonInfoViewController.m",
-    "app/Mine/View/CustomSettingInputCell.m",
-    "app/Mine/View/CustomSettingTextviewCell.m",
-    "app/Mine/View/CustomThemeCells.m",
-    "app/SceneDelegate.m",
-    "app/en.lproj/Localizable.strings",
-    "app/zh-Hans.lproj/Localizable.strings"
+    "IMUIKitOCExample/Custom/CustomChatViewController.h",
+    "IMUIKitOCExample/Custom/CustomChatViewController.m",
+    "IMUIKitOCExample/Custom/CustomConfig.h",
+    "IMUIKitOCExample/Custom/CustomConfig.m",
+    "IMUIKitOCExample/Main/NEStyleManager.h",
+    "IMUIKitOCExample/Main/NEStyleManager.m",
+    "IMUIKitOCExample/Main/NETabBarController.m",
+    "IMUIKitOCExample/Mine/Controller/ConfigTestViewController.m",
+    "IMUIKitOCExample/Mine/Controller/IMPocConfigViewController.m",
+    "IMUIKitOCExample/Mine/Controller/IMPushConfigViewController.m",
+    "IMUIKitOCExample/Mine/Controller/InputPersonInfoController.m",
+    "IMUIKitOCExample/Mine/Controller/LanguageViewController.m",
+    "IMUIKitOCExample/Mine/Controller/MeViewController.m",
+    "IMUIKitOCExample/Mine/Controller/MessageRemindViewController.m",
+    "IMUIKitOCExample/Mine/Controller/MineSettingViewController.m",
+    "IMUIKitOCExample/Mine/Controller/PersonInfoViewController.m",
+    "IMUIKitOCExample/Mine/View/CustomSettingInputCell.m",
+    "IMUIKitOCExample/Mine/View/CustomSettingTextviewCell.m",
+    "IMUIKitOCExample/Mine/View/CustomThemeCells.m",
+    "IMUIKitOCExample/SceneDelegate.m",
+    "IMUIKitOCExample/en.lproj/Localizable.strings",
+    "IMUIKitOCExample/zh-Hans.lproj/Localizable.strings"
   ],
   "common_removals": [
-    "app/Mine/Controller/StyleSelectionViewController.h",
-    "app/Mine/Controller/StyleSelectionViewController.m"
+    "IMUIKitOCExample/Mine/Controller/StyleSelectionViewController.h",
+    "IMUIKitOCExample/Mine/Controller/StyleSelectionViewController.m"
   ],
   "shared_migrations": {
     "fun": [
@@ -120,24 +120,24 @@
         "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/ConversationSearchController.m",
         "NETeamUIKitOC/NETeamUIKitOC/Assets/NormalTeamUIKit.xcassets/",
         "NETeamUIKitOC/NETeamUIKitOC/Classes/NormalUI/",
-        "app/Assets.xcassets/Mine/clicked_normal.imageset",
-        "app/Assets.xcassets/Mine/style_normal.imageset",
-        "app/Assets.xcassets/Tabbar/chat.imageset",
-        "app/Assets.xcassets/Tabbar/chatSelect.imageset",
-        "app/Assets.xcassets/Tabbar/contact.imageset",
-        "app/Assets.xcassets/Tabbar/contactSelect.imageset",
-        "app/Assets.xcassets/Tabbar/person.imageset",
-        "app/Assets.xcassets/Tabbar/personSelect.imageset",
-        "app/Custom/CustomContactTableViewCell.h",
-        "app/Custom/CustomContactTableViewCell.m",
-        "app/Custom/CustomContactViewController.h",
-        "app/Custom/CustomContactViewController.m",
-        "app/Custom/CustomConversationController.h",
-        "app/Custom/CustomConversationController.m",
-        "app/Custom/CustomConversationListCell.h",
-        "app/Custom/CustomConversationListCell.m",
-        "app/Custom/CustomP2PChatViewController.h",
-        "app/Custom/CustomP2PChatViewController.m"
+        "IMUIKitOCExample/Assets.xcassets/Mine/clicked_normal.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Mine/style_normal.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/chat.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/chatSelect.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/contact.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/contactSelect.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/person.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/personSelect.imageset",
+        "IMUIKitOCExample/Custom/CustomContactTableViewCell.h",
+        "IMUIKitOCExample/Custom/CustomContactTableViewCell.m",
+        "IMUIKitOCExample/Custom/CustomContactViewController.h",
+        "IMUIKitOCExample/Custom/CustomContactViewController.m",
+        "IMUIKitOCExample/Custom/CustomConversationController.h",
+        "IMUIKitOCExample/Custom/CustomConversationController.m",
+        "IMUIKitOCExample/Custom/CustomConversationListCell.h",
+        "IMUIKitOCExample/Custom/CustomConversationListCell.m",
+        "IMUIKitOCExample/Custom/CustomP2PChatViewController.h",
+        "IMUIKitOCExample/Custom/CustomP2PChatViewController.m"
       ],
       "markers": [
         "NormalUI",
@@ -206,22 +206,22 @@
           "reason": "注释说明与共享实现一致；实现本身不依赖 NormalUI 目录。"
         },
         {
-          "path": "app/Main/NEStyleManager.h",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.h",
           "contains": "NEStyleManager",
           "reason": "组件层通过 NSClassFromString 反射读取 NEStyleManager，保留类与 isNormalStyle 作为跨边界契约。"
         },
         {
-          "path": "app/Main/NEStyleManager.h",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.h",
           "contains": "isNormalStyle",
           "reason": "反射契约方法，返回值固定为存活皮肤。"
         },
         {
-          "path": "app/Main/NEStyleManager.m",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.m",
           "contains": "NEStyleManager",
           "reason": "反射契约实现，保留类本身。"
         },
         {
-          "path": "app/Main/NEStyleManager.m",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.m",
           "contains": "isNormalStyle",
           "reason": "反射契约方法，返回值固定为存活皮肤。"
         }
@@ -234,10 +234,10 @@
         "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/View/FunRecordAudioView.m",
         "NEContactUIKitOC/NEContactUIKitOC/Classes/FunUI/ViewController/FunAIRobotDetailController.m",
         "NETeamUIKitOC/NETeamUIKitOC/Classes/FunUI/Controller/FunTeamSettingViewController.m",
-        "app/Mine/View/CustomThemeCells.h"
+        "IMUIKitOCExample/Mine/View/CustomThemeCells.h"
       ],
       "project_cleanup": {
-        "app.xcodeproj/project.pbxproj": [
+        "IMUIKitOCExample.xcodeproj/project.pbxproj": [
           "StyleSelectionViewController"
         ]
       }
@@ -265,14 +265,14 @@
         "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/FunSearchView.h",
         "NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/FunSearchView.m",
         "NEBaseUIKitOC/NEBaseUIKitOC/Assets/NECommonUI.xcassets/FunUI/",
-        "app/Assets.xcassets/Tabbar/funChat.imageset",
-        "app/Assets.xcassets/Tabbar/funChatSelect.imageset",
-        "app/Assets.xcassets/Tabbar/funContact.imageset",
-        "app/Assets.xcassets/Tabbar/funContactSelect.imageset",
-        "app/Assets.xcassets/Tabbar/funPerson.imageset",
-        "app/Assets.xcassets/Tabbar/funPersonSelect.imageset",
-        "app/Assets.xcassets/Mine/clicked_fun.imageset",
-        "app/Assets.xcassets/Mine/style_fun.imageset"
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/funChat.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/funChatSelect.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/funContact.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/funContactSelect.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/funPerson.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Tabbar/funPersonSelect.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Mine/clicked_fun.imageset",
+        "IMUIKitOCExample/Assets.xcassets/Mine/style_fun.imageset"
       ],
       "markers": [
         "FunUI",
@@ -318,22 +318,22 @@
           "reason": "公开初始化签名，保留以兼容客户集成调用。"
         },
         {
-          "path": "app/Main/NEStyleManager.h",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.h",
           "contains": "NEStyleManager",
           "reason": "组件层通过 NSClassFromString 反射读取 NEStyleManager，保留类与 isNormalStyle 作为跨边界契约。"
         },
         {
-          "path": "app/Main/NEStyleManager.h",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.h",
           "contains": "isNormalStyle",
           "reason": "反射契约方法，返回值固定为存活皮肤。"
         },
         {
-          "path": "app/Main/NEStyleManager.m",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.m",
           "contains": "NEStyleManager",
           "reason": "反射契约实现，保留类本身。"
         },
         {
-          "path": "app/Main/NEStyleManager.m",
+          "path": "IMUIKitOCExample/Main/NEStyleManager.m",
           "contains": "isNormalStyle",
           "reason": "反射契约方法，返回值固定为存活皮肤。"
         }
@@ -345,7 +345,7 @@
         "NEConversationUIKitOC/NEConversationUIKitOC/Classes/Controller/ConversationSearchController.m"
       ],
       "project_cleanup": {
-        "app.xcodeproj/project.pbxproj": [
+        "IMUIKitOCExample.xcodeproj/project.pbxproj": [
           "StyleSelectionViewController"
         ]
       }

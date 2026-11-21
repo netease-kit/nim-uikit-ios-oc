@@ -756,6 +756,18 @@ static const void *NEAdaptivePagingOriginalSafeAreaKey = &NEAdaptivePagingOrigin
   [(NEBaseConversationController *)self.chatVC ne_retainConversationInGroup:retained];
 }
 
+/// 清空页面记住的「上一次选中身份」：右列回到空白占位后，再次打开搜索/加好友/
+/// 个人信息等非行入口时，左列不会再点亮过期选中行。
++ (void)clearAdaptiveSelectionInPage:(UIViewController *)page {
+  if ([page isKindOfClass:[NEBaseContactViewController class]]) {
+    [(NEBaseContactViewController *)page clearAdaptiveSelection];
+  } else if ([page isKindOfClass:[NEBaseConversationController class]]) {
+    [(NEBaseConversationController *)page clearAdaptiveSelection];
+  } else if ([page isKindOfClass:[MeViewController class]]) {
+    [((MeViewController *)page) clearAdaptiveSelection];
+  }
+}
+
 - (void)setLeftColumnSelectionEnabled:(BOOL)enabled inShell:(NEAdaptiveShellViewController *)shell {  UIColor *color = enabled ? [shell.configuration.selectedTintColor colorWithAlphaComponent:0.1] : nil;
   for (UINavigationController *nav in shell.sections) {
     for (UIViewController *page in nav.viewControllers) {
@@ -768,6 +780,10 @@ static const void *NEAdaptivePagingOriginalSafeAreaKey = &NEAdaptivePagingOrigin
         ((NEBaseConversationController *)page).listSelectionBackgroundColor = color;
       } else if ([page isKindOfClass:[MeViewController class]]) {
         ((MeViewController *)page).listSelectionBackgroundColor = color;
+      }
+      // 关闭高亮时同步清空页面记住的选中身份；否则再次打开非行入口时会把过期行重新点亮。
+      if (!enabled && shell.isShowingPairedContent) {
+        [self.class clearAdaptiveSelectionInPage:page];
       }
     }
   }

@@ -20,7 +20,9 @@
 - (void)setupInit {
   ChatKitClient *client = [ChatKitClient shared];
   [client registerInit:[NEConversationService shared]];
-  [client buryDataPoints:@"ConversationUIKit" language:@"oc"];
+  NSString *version = [ChatKitClient componentVersionForBundle:[NSBundle bundleForClass:self.class]
+                                                        fallback:@""];
+  [client buryDataPoints:@"ConversationUIKitOC" version:version];
 }
 
 @end

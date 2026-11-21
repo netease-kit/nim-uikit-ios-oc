@@ -13,7 +13,7 @@ SKILL_DIR = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = SKILL_DIR / "references" / "feature-registry.json"
 ALLOWED_PREFIXES = (
     "NEChatUIKitOC/",
-    "app/",
+    "IMUIKitOCExample/",
 )
 
 
@@ -70,7 +70,7 @@ def git_root(candidate):
 
 
 def has_expected_layout(root):
-    return (root / "NEChatUIKitOC").is_dir() and (root / "app").is_dir()
+    return (root / "NEChatUIKitOC").is_dir() and (root / "IMUIKitOCExample").is_dir()
 
 
 def repository_root(requested):
@@ -91,10 +91,10 @@ def repository_root(requested):
 
     if requested:
         raise ValueError(
-            f"{requested} is not an OC source checkout with NEChatUIKitOC/ and app/"
+            f"{requested} is not an OC source checkout with NEChatUIKitOC/ and IMUIKitOCExample/"
         )
     raise ValueError(
-        "cannot locate an OC source checkout with NEChatUIKitOC/ and app/; "
+        "cannot locate an OC source checkout with NEChatUIKitOC/ and IMUIKitOCExample/; "
         "place this skill under skills/ in that repository or pass --repo"
     )
 

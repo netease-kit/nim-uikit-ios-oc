@@ -1,4 +1,5 @@
 require_relative "../PodConfigs/config_podspec.rb"
+require_relative "../PodConfigs/config_third.rb"
 require_relative "../PodConfigs/config_local_common.rb"
 require_relative "../PodConfigs/config_local_im.rb"
 
@@ -25,8 +26,8 @@ Pod::Spec.new do |s|
   s.resource     = 'NEBaseUIKitOC/Assets/**/*'
 
   s.dependency NEChatKit.name, NEChatKit.version
-  s.dependency 'SDWebImage', '5.20.1'
-  s.dependency 'lottie-ios', '2.5.3'
+  s.dependency SDWebImage.name, SDWebImage.version
+  s.dependency LottieOC.name, LottieOC.version
 
   YXConfig.oc_pod_target_xcconfig(s, "HEADER_SEARCH_PATHS" => '$(inherited) "${PODS_TARGET_SRCROOT}/NEBaseUIKitOC/Classes/Vender/Toast"')
 end

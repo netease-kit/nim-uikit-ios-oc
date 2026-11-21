@@ -47,6 +47,9 @@ static NSString * const NEConversationTeamCreateSeniorRouter = @"imkit://team.cr
 static NSString * const NEConversationTeamCreateDiscussResultRouter = @"imkit://team.create.discuss.result";
 static NSString * const NEConversationTeamCreateSeniorResultRouter = @"imkit://team.create.senior.result";
 
+/// 侧栏动作即将执行时广播入口的窗口坐标，页面弹窗据此定位。
+static NSString * const NEConversationRailActionWillPerformNotification = @"NEAdaptiveRailActionWillPerform";
+
 static BOOL NEConversationIsNormalStyle(void);
 
 static CGFloat NENavigationAndStatusHeight(void) {
@@ -102,6 +105,8 @@ static CGFloat NEConversationBrokenNetworkHeight(void) {
 - (void)updateConversationListFooter;
 /// 当前查看会话的 id：列表刷新后据此恢复左列选中高亮。
 @property (nonatomic, copy, nullable) NSString *adaptiveSelectedConversationId;
+/// 侧栏动作广播的入口位置（窗口坐标），优先于 identifier 搜索。
+@property (nonatomic, strong, nullable) NSValue *railActionAnchorFrame;
 /// 自定义标题栏高度约束：安全区/状态栏就绪后需要自愈。
 @property (nonatomic, strong, nullable) NSLayoutConstraint *navigationViewHeightAnchor;
 @end
@@ -162,6 +167,7 @@ static NSString * const NEConversationPushP2pChatVCRouter = @"imkit://chat/p2pCh
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self observeRailActionFrames];
   self.view.backgroundColor = NEConversationIsNormalStyle() ? UIColor.whiteColor : [NEConstant hexRGB:0xEDEDED];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(changeLanguage)
@@ -685,6 +691,17 @@ static NSString * const NEConversationPushP2pChatVCRouter = @"imkit://chat/p2pCh
   [self refreshAdaptiveSelectionTint];
 }
 
+/// 右列回到空白占位时宿主调用：清掉「上一次点过的行」，避免再次高亮过期选中项。
+/// 只在宿主明确关闭左列高亮（右列已无内容）时调用；列表自身刷新仍走选中 id 恢复逻辑。
+- (void)clearAdaptiveSelection {
+  self.adaptiveSelectedConversationId = nil;
+  NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+  if (selected) {
+    [self.tableView deselectRowAtIndexPath:selected animated:NO];
+  }
+  [self refreshAdaptiveSelectionTint];
+}
+
 - (void)ne_selectConversation:(nullable NSString *)conversationId animated:(BOOL)animated {
   [self ne_markSelectedConversationId:conversationId];
   if (conversationId.length == 0 || !self.listSelectionBackgroundColor) {
@@ -906,6 +923,8 @@ static NSString * const NEConversationPushP2pChatVCRouter = @"imkit://chat/p2pCh
 }
 
 - (void)didClickAddBtn {
+  // 搜索 / 新建会话不是左列的行：先清掉过期选中。
+  [self clearAdaptiveSelection];
   if (ConversationUIConfig.shared.titleBarRightClick) {
     ConversationUIConfig.shared.titleBarRightClick((NEBaseConversationController *)self);
     return;
@@ -925,9 +944,83 @@ static NSString * const NEConversationPushP2pChatVCRouter = @"imkit://chat/p2pCh
     return;
   }
   self.popListView.itemDatas = [self getPopListItems];
-  self.popListView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+  // 弹窗挂到窗口上：添加按钮迁移到侧栏后，锚点可能落在页面视图之外。
+  UIView *host = self.view.window ?: self.view;
+  self.popListView.frame = host.bounds;
   [self.popListView removeSelf];
-  [self.view addSubview:self.popListView];
+  [host addSubview:self.popListView];
+  if (self.railActionAnchorFrame) {
+    // broadcast frame 是窗口坐标；弹窗铺满窗口时坐标系一致。
+    self.popListView.anchorRect = self.railActionAnchorFrame;
+    self.popListView.anchorView = nil;
+    self.railActionAnchorFrame = nil;
+  } else {
+    self.popListView.anchorRect = nil;
+    self.popListView.anchorView = [self addEntryAnchor];
+  }
+  [self.popListView setNeedsLayout];
+  [self.popListView layoutIfNeeded];
+}
+
+- (void)observeRailActionFrames {
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleRailActionWillPerform:)
+                                               name:NEConversationRailActionWillPerformNotification
+                                             object:nil];
+}
+
+- (void)handleRailActionWillPerform:(NSNotification *)note {
+  NSString *identifier = note.userInfo[@"identifier"];
+  NSValue *frameValue = note.userInfo[@"frame"];
+  if (![identifier isKindOfClass:[NSString class]] ||
+      ![identifier hasSuffix:@"titleBarMoreImg"] ||
+      ![frameValue isKindOfClass:[NSValue class]]) {
+    return;
+  }
+  self.railActionAnchorFrame = frameValue;
+}
+
+/// 弹窗锚点：优先侧栏上的添加按钮（导航栏按钮迁移后原按钮已隐藏），否则用页面自己的按钮。
+- (nullable UIView *)addEntryAnchor {
+  // 侧栏按钮的 identifier 带 "id.adaptive.action." 前缀，用后缀匹配同时覆盖
+  // 页面原按钮与侧栏按钮；只接受可见的那个（原按钮会被外壳按透明度隐藏）。
+  UIView *window = self.view.window;
+  UIView *rail = window ? [self findVisibleEntryWithSuffix:@"titleBarMoreImg" inView:window] : nil;
+  if (rail) {
+    return rail;
+  }
+  UIButton *add = self.navigationView.addBtn;
+  return add.isHidden ? nil : add;
+}
+
+- (nullable UIView *)findVisibleEntryWithSuffix:(NSString *)suffix inView:(UIView *)root {
+  NSString *identifier = root.accessibilityIdentifier;
+  if ([identifier isKindOfClass:[NSString class]] && [identifier hasSuffix:suffix] &&
+      !root.isHidden && root.alpha > 0.01 && root.window != nil) {
+    return root;
+  }
+  for (UIView *child in root.subviews) {
+    UIView *match = [self findVisibleEntryWithSuffix:suffix inView:child];
+    if (match) {
+      return match;
+    }
+  }
+  return nil;
+}
+
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  // 弹窗显示期间旋转/折叠：保持铺满宿主并按锚点重新定位。
+  UIView *host = self.popListView.superview;
+  if (!host) {
+    return;
+  }
+  if (fabs(self.popListView.bounds.size.width - host.bounds.size.width) > 0.5 ||
+      fabs(self.popListView.bounds.size.height - host.bounds.size.height) > 0.5) {
+    self.popListView.frame = host.bounds;
+    [self.popListView setNeedsLayout];
+    [self.popListView layoutIfNeeded];
+  }
 }
 
 - (NEBasePopListView *)getPopListView {
@@ -1090,6 +1183,8 @@ static NSString * const NEConversationPushP2pChatVCRouter = @"imkit://chat/p2pCh
 }
 
 - (void)searchAction {
+  // 搜索 / 新建会话不是左列的行：先清掉过期选中。
+  [self clearAdaptiveSelection];
   if (ConversationUIConfig.shared.titleBarRight2Click) {
     ConversationUIConfig.shared.titleBarRight2Click((NEBaseConversationController *)self);
     return;

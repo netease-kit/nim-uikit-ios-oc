@@ -92,6 +92,8 @@ static NSString *const NIMDemoCallViewRouterCompat = @"imkit://callkit.page";
                 option:(nullable V2NIMLoginOption *)option
             completion:(void (^)(NSError *_Nullable error))completion;
 - (void)initConfig;
+/// 只有“展开后被转成竖屏”（窗口 669x951）才把根列表导航栏按钮迁移到侧栏。
+- (void)updateSectionRootNavigationMigrationInScene:(UIWindowScene *)scene;
 
 @end
 
@@ -383,6 +385,9 @@ willConnectToSession:(UISceneSession *)session
     self.retainedTabBarController =
         [adaptiveShell isKindOfClass:[NEAdaptiveShellViewController class]] ? tabBar : nil;
     self.window.rootViewController = adaptiveShell ?: tabBar;
+    if (self.window.windowScene) {
+      [self updateSectionRootNavigationMigrationInScene:self.window.windowScene];
+    }
     if ([adaptiveShell isKindOfClass:[NEAdaptiveShellViewController class]]) {
       // 刚挂到 window 上时还没有 window 引用，延后一轮再采集窗口事实。
       __weak NEAdaptiveShellViewController *weakShell = (NEAdaptiveShellViewController *)adaptiveShell;
@@ -391,6 +396,19 @@ willConnectToSession:(UISceneSession *)session
       });
     }
     [self consumePendingPushUserInfoIfNeeded];
+}
+
+/// 只有“展开后被转成竖屏”（窗口 669x951）才把根列表导航栏按钮迁移到侧栏；
+/// 折叠单屏（466x678 / 678x466）保持原导航栏按钮。
+- (void)updateSectionRootNavigationMigrationInScene:(UIWindowScene *)scene {
+    UIViewController *root = self.window.rootViewController;
+    if (![root isKindOfClass:[NEAdaptiveShellViewController class]]) {
+        return;
+    }
+    CGSize size = scene.coordinateSpace.bounds.size;
+    // 只认竖屏展开尺寸；折叠单屏（466x678）与横屏（951x669）都保持 NO。
+    BOOL unfoldedPortrait = fabs(size.width - 669.0) <= 2.0 && fabs(size.height - 951.0) <= 2.0;
+    ((NEAdaptiveShellViewController *)root).migratesSectionRootNavigation = unfoldedPortrait;
 }
 
 - (void)registerAPNS {
@@ -585,11 +603,18 @@ willConnectToSession:(UISceneSession *)session
     UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
 }
 
+/// 启动即展开/折叠时不会触发 didUpdate，激活时按当前姿态补一次迁移开关。
+- (void)sceneDidBecomeActive:(UIScene *)scene API_AVAILABLE(ios(13.0)) {
+    if (![scene isKindOfClass:[UIWindowScene class]]) {
+        return;
+    }
+    [self updateSectionRootNavigationMigrationInScene:(UIWindowScene *)scene];
+}
+
 - (void)windowScene:(UIWindowScene *)windowScene
     didUpdateCoordinateSpace:(id<UICoordinateSpace>)previousCoordinateSpace
     interfaceOrientation:(UIInterfaceOrientation)previousInterfaceOrientation
     traitCollection:(UITraitCollection *)previousTraitCollection API_AVAILABLE(ios(13.0)) {
-    (void)windowScene;
     (void)previousCoordinateSpace;
     (void)previousInterfaceOrientation;
     (void)previousTraitCollection;
@@ -597,6 +622,7 @@ willConnectToSession:(UISceneSession *)session
     if ([root isKindOfClass:[NEAdaptiveShellViewController class]]) {
         [(NEAdaptiveShellViewController *)root refreshWindow];
     }
+    [self updateSectionRootNavigationMigrationInScene:windowScene];
 }
 
 - (void)onLoginFailed:(V2NIMError *)error {

@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UILabel *messageLabel;
 @property (nonatomic, strong, readwrite, nullable) NSLayoutConstraint *widthConstraint;
 @property (nonatomic, strong, readwrite, nullable) NSLayoutConstraint *heightConstraint;
+@property (nonatomic, strong, readwrite, nullable) NSLayoutConstraint *imageTopConstraint;
 @end
 
 @implementation NEEmptyDataView
@@ -81,13 +82,41 @@
   _widthConstraint.active = YES;
   _heightConstraint.active = YES;
 
+  _imageTopConstraint = [_emptyImageView.topAnchor constraintEqualToAnchor:self.topAnchor constant:176.0];
+  _imageTopConstraint.active = YES;
+  [_emptyImageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+
   [NSLayoutConstraint activateConstraints:@[
-    [_emptyImageView.topAnchor constraintEqualToAnchor:self.topAnchor constant:176.0],
-    [_emptyImageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
     [_messageLabel.topAnchor constraintEqualToAnchor:_emptyImageView.bottomAnchor constant:8.0],
     [_messageLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20.0],
     [_messageLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20.0],
   ]];
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  if (!self.verticallyCentersContent || CGRectGetHeight(self.bounds) <= 0 || !self.imageTopConstraint) {
+    return;
+  }
+  CGFloat imageHeight = self.heightConstraint ? self.heightConstraint.constant : 91.0;
+  CGFloat labelHeight = CGRectGetHeight(self.messageLabel.bounds);
+  if (labelHeight <= 0) {
+    CGFloat availableWidth = MAX(0, CGRectGetWidth(self.bounds) - 40.0);
+    labelHeight = [self.messageLabel sizeThatFits:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
+  }
+  CGFloat contentHeight = imageHeight + 8.0 + MAX(0, labelHeight);
+  CGFloat offset = MAX(0, (CGRectGetHeight(self.bounds) - contentHeight) / 2.0);
+  if (fabs(self.imageTopConstraint.constant - offset) > 0.5) {
+    self.imageTopConstraint.constant = offset;
+  }
+}
+
+- (void)setVerticallyCentersContent:(BOOL)verticallyCentersContent {
+  if (_verticallyCentersContent == verticallyCentersContent) {
+    return;
+  }
+  _verticallyCentersContent = verticallyCentersContent;
+  [self setNeedsLayout];
 }
 
 - (void)setupSubviewStyle {

@@ -13,6 +13,11 @@
 #import <NIMSDK/NIMSDK.h>
 #import <NEChatKit/NEChatKit.h>
 
+@interface NEBaseSelectCell ()
+/// 是否展示人数（决定右侧预留宽度）
+@property (nonatomic, assign) BOOL showsMemberCount;
+@end
+
 @implementation NEBaseSelectCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -69,8 +74,31 @@
 - (void)showSelect:(BOOL)isShow {
   self.multiSelectImageView.hidden = !isShow;
   self.leftConstraint.constant = isShow ? 50 : 20;
-  self.titleLabelMaxWidth = [UIScreen mainScreen].bounds.size.width - (isShow ? 118 + self.memberLabelMaxWidth : 88 + self.memberLabelMaxWidth);
-  self.titleLabelWidthAnchor.constant = self.titleLabelMaxWidth;
+  // 名称宽度改由 `recalculateTitleLabelMaxWidth` 按 cell 实际宽度计算：
+  // 折叠屏折叠/展开时列宽会变，继续用 `[UIScreen mainScreen]` 的宽度会算出超过列宽的上限。
+  [self setNeedsLayout];
+}
+
+- (void)recalculateTitleLabelMaxWidth {
+  CGFloat width = CGRectGetWidth(self.contentView.bounds);
+  if (width <= 0) {
+    return;
+  }
+  CGFloat left = CGRectGetMinX(self.titleLabel.frame);
+  if (left <= 0) {
+    return;
+  }
+  CGFloat reserved = (self.showsMemberCount ? self.memberLabelMaxWidth : 0) + 20.0;
+  CGFloat candidate = MAX(0, width - left - reserved);
+  if (fabs(candidate - self.titleLabelMaxWidth) <= 0.5) {
+    return;
+  }
+  self.titleLabelMaxWidth = candidate;
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  [self recalculateTitleLabelMaxWidth];
 }
 
 - (void)setModel:(MultiSelectModel *)model {
@@ -78,12 +106,10 @@
 
   self.multiSelectImageView.highlighted = model.isSelected;
   self.titleLabel.text = model.name;
-  self.optionLabel.text = model.memberCount > 0 ? [NSString stringWithFormat:@" (%ld)", (long)model.memberCount] : nil;
-
-  if (model.memberCount == 0) {
-    self.titleLabelMaxWidth += self.memberLabelMaxWidth;
-    self.titleLabelWidthAnchor.constant = self.titleLabelMaxWidth;
-  }
+  self.showsMemberCount = model.memberCount > 0;
+  self.optionLabel.text = self.showsMemberCount ? [NSString stringWithFormat:@" (%ld)", (long)model.memberCount] : nil;
+  self.memberLabelWidthAnchor.constant = self.memberLabelMaxWidth;
+  [self setNeedsLayout];
 
   NSString *url = model.avatar;
   NSString *accountId = [V2NIMConversationIdUtil conversationTargetId:model.conversationId ?: @""] ?: @"";
@@ -104,6 +130,11 @@
 - (void)setTitleLabelMaxWidth:(CGFloat)titleLabelMaxWidth {
   _titleLabelMaxWidth = titleLabelMaxWidth;
   self.titleLabelWidthAnchor.constant = titleLabelMaxWidth;
+}
+
+- (void)setMemberLabelMaxWidth:(CGFloat)memberLabelMaxWidth {
+  _memberLabelMaxWidth = memberLabelMaxWidth;
+  self.memberLabelWidthAnchor.constant = memberLabelMaxWidth;
 }
 
 #pragma mark - Lazy Init

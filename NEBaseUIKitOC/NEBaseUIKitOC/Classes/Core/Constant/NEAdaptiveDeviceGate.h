@@ -20,6 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isFoldableDevice;
 
+/// 真机排障用的一行门禁/几何摘要（不参与布局）。
+///
+/// 模拟器与真机的差异几乎都落在这几项上：`UIScreen` 是否等于当前窗口、
+/// 安全区单侧性、`reservedRegions` 的 frame。真机无法接调试器时，把它随
+/// 诊断日志一起输出即可定位。
++ (NSString *)diagnosticDescription;
+
 /// 场景几何判定（官方推荐路径）：单侧横向安全区 + 贴边竖向遮挡区。
 + (BOOL)foldableBySceneGeometry;
 

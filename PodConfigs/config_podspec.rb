@@ -1,16 +1,16 @@
 module YXConfig
   def self.imuikit_version
-    "10.9.30"
+    "10.9.31"
   end
 
   # Objective-C UIKit 组件独立版本号（与 NEChatKit 的版本解耦）。
   def self.oc_uikit_version
-    "10.9.30"
+    "10.9.31"
   end
 
-  # NEChatKit 与 OC UIKit 10.9.30 配套发布，同时提供 ObjC 侧需要的修复。
+  # NEChatKit 与 OC UIKit 10.9.31 配套发布，同时提供 ObjC 侧需要的修复。
   def self.chatkit_version
-    "10.9.76"
+    "10.9.77"
   end
 
   def self.nimsdk_version

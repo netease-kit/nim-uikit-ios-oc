@@ -2,7 +2,7 @@
 
 ## 边界
 
-移除范围只包括 OC 开源仓库 `NEChatUIKitOC/` 与 Demo `app/` 中的“表情评论”。`NEChatKit` 是闭源组件，禁止扫描或修改；只移除 UI 对 Reaction API 的接线。`MessageReactionManager`、`IMKitConfigCenter.enableEmojiReaction`、`NEMessageReactionEmojiRegistry` 等闭源符号定义保留不动。
+移除范围只包括 OC 开源仓库 `NEChatUIKitOC/` 与 Demo `IMUIKitOCExample/` 中的“表情评论”。`NEChatKit` 是闭源组件，禁止扫描或修改；只移除 UI 对 Reaction API 的接线。`MessageReactionManager`、`IMKitConfigCenter.enableEmojiReaction`、`NEMessageReactionEmojiRegistry` 等闭源符号定义保留不动。
 
 核心名称：`NEMessageReaction*`、`MessageReactionManager`、`reactionGroups`、`reactionHeight`、`enableEmojiReaction`、`configureReactions`、`onReactionModifiedMessage`。
 
@@ -16,9 +16,9 @@
 
 ## Demo 与文案
 
-- `app/en.lproj/Localizable.strings`、`app/zh-Hans.lproj/Localizable.strings`：删除 `emoji_reaction`。
+- `IMUIKitOCExample/en.lproj/Localizable.strings`、`IMUIKitOCExample/zh-Hans.lproj/Localizable.strings`：删除 `emoji_reaction`。
 - `NEChatUIKitOC/NEChatUIKitOC/Assets/en.lproj/Localizable.strings`、`zh-Hans.lproj/Localizable.strings`：删除 `reaction_sync_failed`。
-- Demo 没有需要修改的工程文件或依赖；不得因移除本功能修改 `app.xcodeproj/` 或 `Podfile`。
+- Demo 没有需要修改的工程文件或依赖；不得因移除本功能修改 `IMUIKitOCExample.xcodeproj/` 或 `Podfile`。
 
 ## UI 接线
 
@@ -84,6 +84,6 @@ FunUI 必须恢复微信气泡 tail、媒体遮罩和文本内边距，不要用
 
 1. `python3 skills/oc-feature-removal/scripts/audit_inventory.py emoji-reaction --phase after` 不允许任何残留。
 2. 资源目录不再有 `reaction_emoji` 与三个 `operation/reaction_*.imageset`。
-3. `git diff --check` 通过；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `app`。
+3. `git diff --check` 通过；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `IMUIKitOCExample`。
 4. 运行时检查 NormalUI/FunUI：普通长按菜单无 Reaction 区域；文本、富文本、语音转文字、图片、视频、文件、位置、合并转发、撤回、话单、AIStream 无额外空白或复用残影。
-5. 最终业务 diff 只能位于 `NEChatUIKitOC/` 与 `app/`。
+5. 最终业务 diff 只能位于 `NEChatUIKitOC/` 与 `IMUIKitOCExample/`。

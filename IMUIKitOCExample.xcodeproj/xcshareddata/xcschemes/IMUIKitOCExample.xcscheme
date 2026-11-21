@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "857727DDAD19EC6D0DABDC15"
-               BuildableName = "app.app"
-               BlueprintName = "app"
-               ReferencedContainer = "container:app.xcodeproj">
+               BuildableName = "IMUIKitOCExample.app"
+               BlueprintName = "IMUIKitOCExample"
+               ReferencedContainer = "container:IMUIKitOCExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,9 +31,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "857727DDAD19EC6D0DABDC15"
-            BuildableName = "app.app"
-            BlueprintName = "app"
-            ReferencedContainer = "container:app.xcodeproj">
+            BuildableName = "IMUIKitOCExample.app"
+            BlueprintName = "IMUIKitOCExample"
+            ReferencedContainer = "container:IMUIKitOCExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -54,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "857727DDAD19EC6D0DABDC15"
-            BuildableName = "app.app"
-            BlueprintName = "app"
-            ReferencedContainer = "container:app.xcodeproj">
+            BuildableName = "IMUIKitOCExample.app"
+            BlueprintName = "IMUIKitOCExample"
+            ReferencedContainer = "container:IMUIKitOCExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "857727DDAD19EC6D0DABDC15"
-            BuildableName = "app.app"
-            BlueprintName = "app"
-            ReferencedContainer = "container:app.xcodeproj">
+            BuildableName = "IMUIKitOCExample.app"
+            BlueprintName = "IMUIKitOCExample"
+            ReferencedContainer = "container:IMUIKitOCExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
