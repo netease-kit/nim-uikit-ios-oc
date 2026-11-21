@@ -23,7 +23,6 @@
 		3E067CD18C3558398C153BB5 /* CustomContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD130054D416769115E7720 /* CustomContactTableViewCell.m */; };
 		3E5867E871926836AE545395 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A92886170EA6EF068EEFFD /* CustomView.m */; };
 		402A630180F0213DF6F86D62 /* MessageRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3770E430F95B86157B371 /* MessageRemindViewController.m */; };
-		43E1A7FDDA29AEA64710BD39 /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70076FBB3A4AEBEAFBB0969E /* Pods_app.framework */; };
 		44885059334685BF73F270D6 /* NEStyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 590FA67A4B7F79441A4D8DED /* NEStyleManager.m */; };
 		459CA9F46BB012AF1B2A6CA4 /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F00215291D89809C8E034079 /* LanguageViewController.m */; };
 		4B004DB8937EFDB839D23486 /* CustomConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA3B17933FDE654CE937C27 /* CustomConfig.m */; };
@@ -38,6 +37,7 @@
 		677381DA0A12A4963E6C5F7E /* NETabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C90489734BAA187CFF689 /* NETabBarController.m */; };
 		69B4AE070FE6E57D74615C99 /* InputPersonInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02353D05FBBBCA9531C4E47 /* InputPersonInfoController.m */; };
 		6A5398B37BF62109DCBFCA4D /* NodeSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286865C332EC4DFE902CBF7 /* NodeSelectCell.m */; };
+		7092DC4D0ABDD3E97F771686 /* Pods_IMUIKitOCExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D20B81E301C85B8DF60B14 /* Pods_IMUIKitOCExample.framework */; };
 		7184239A51EC94694CA52840 /* AIChatDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A47CF9D3A0439F61578BB9 /* AIChatDataLoader.m */; };
 		82D3353A970D0BFE667B9E3A /* BirthdayDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 113C3DC676EDB4A43E7F32A6 /* BirthdayDatePickerView.m */; };
 		854D81F1E7A701F579461A7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FCFA3A318B295C2D48161 /* Foundation.framework */; };
@@ -102,12 +102,12 @@
 		458DEA765F4FFB909EE3CF36 /* CustomChatCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CustomChatCell.h; sourceTree = "<group>"; };
 		463F3FA71D4165283BA7D20F /* CustomThemeCells.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CustomThemeCells.m; sourceTree = "<group>"; };
 		4787CB40C34F78B0E17A2BA9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A0011FB179ED77E0E8978E2 /* Pods-IMUIKitOCExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMUIKitOCExample.debug.xcconfig"; path = "Target Support Files/Pods-IMUIKitOCExample/Pods-IMUIKitOCExample.debug.xcconfig"; sourceTree = "<group>"; };
 		4EAA337D88CA46EFFDE6883D /* CustomContactTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CustomContactTableViewCell.h; sourceTree = "<group>"; };
 		5409599ED3755C67430A1439 /* NELoginViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NELoginViewController.m; sourceTree = "<group>"; };
 		585EF4F9CC66BA8B2F63AEA5 /* PocLoginViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PocLoginViewController.h; sourceTree = "<group>"; };
 		586D40163210370A181946A3 /* CustomChatViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CustomChatViewController.m; sourceTree = "<group>"; };
 		590FA67A4B7F79441A4D8DED /* NEStyleManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NEStyleManager.m; sourceTree = "<group>"; };
-		5CA68D528DDC66CD0558FC59 /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
 		5EA3B17933FDE654CE937C27 /* CustomConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CustomConfig.m; sourceTree = "<group>"; };
 		5F50A4D032720496925B3C67 /* ServerAddresses.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ServerAddresses.m; sourceTree = "<group>"; };
 		60A115A5FEB282B055D92E5F /* MessageRemindViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MessageRemindViewController.h; sourceTree = "<group>"; };
@@ -116,7 +116,6 @@
 		6A696B087110786C9FD38195 /* SceneDelegate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		6B5CCB78B22C034242C92F91 /* CustomContactViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CustomContactViewController.h; sourceTree = "<group>"; };
 		6DFAB5DEFF2D7EAC55387532 /* CustomSettingInputCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CustomSettingInputCell.m; sourceTree = "<group>"; };
-		70076FBB3A4AEBEAFBB0969E /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7029FA9756690FD845333E72 /* LanguageViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
 		7286865C332EC4DFE902CBF7 /* NodeSelectCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NodeSelectCell.m; sourceTree = "<group>"; };
 		793C90489734BAA187CFF689 /* NETabBarController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NETabBarController.m; sourceTree = "<group>"; };
@@ -124,6 +123,7 @@
 		7D22C90B1BE6F130236FC652 /* MineTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MineTableViewCell.h; sourceTree = "<group>"; };
 		8129EC80A4A4BD2EA693F1FA /* NEConfigInfoViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NEConfigInfoViewController.h; sourceTree = "<group>"; };
 		825930E46AF53E33D17B02D7 /* AppDelegate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		83D20B81E301C85B8DF60B14 /* Pods_IMUIKitOCExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMUIKitOCExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85CCA3B1FB828669E654C420 /* CustomSettingTextviewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CustomSettingTextviewCell.m; sourceTree = "<group>"; };
 		8A9817E0850537C03F978513 /* ArrowTitleCustomTeamSettingSwitchCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ArrowTitleCustomTeamSettingSwitchCell.h; sourceTree = "<group>"; };
 		8D73F4B4203C7939E1E1A956 /* AppDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -156,6 +156,7 @@
 		D02353D05FBBBCA9531C4E47 /* InputPersonInfoController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = InputPersonInfoController.m; sourceTree = "<group>"; };
 		D04B230FA3747720DF2A2758 /* IMPocConfigManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = IMPocConfigManager.h; sourceTree = "<group>"; };
 		D22D4F43C74553EE6ADC9A15 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = "zh-Hans.lproj"; sourceTree = "<group>"; };
+		D7D397E19A5E8DE17A0BBFC7 /* Pods-IMUIKitOCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMUIKitOCExample.release.xcconfig"; path = "Target Support Files/Pods-IMUIKitOCExample/Pods-IMUIKitOCExample.release.xcconfig"; sourceTree = "<group>"; };
 		D86190C74F3A3106358333D7 /* CustomConversationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CustomConversationController.h; sourceTree = "<group>"; };
 		D877A9396E5E5F6C9D739DB9 /* StyleSelectionViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StyleSelectionViewController.m; sourceTree = "<group>"; };
 		D88CDB982DD6581DA3FBB524 /* StyleSelectionViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StyleSelectionViewController.h; sourceTree = "<group>"; };
@@ -166,13 +167,12 @@
 		E0D094BFE89E0C1D46F2349A /* MeViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MeViewModel.m; sourceTree = "<group>"; };
 		E4B8DF639E660F11E6C18B67 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/PushKit.framework; sourceTree = DEVELOPER_DIR; };
 		EBFBFF429EF9F8C8EF57402E /* PersonInfoViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PersonInfoViewController.m; sourceTree = "<group>"; };
-		EC77B816A6F78CFF267DE50F /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC77B816A6F78CFF267DE50F /* IMUIKitOCExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMUIKitOCExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF83B0810CA00432D03630ED /* MineSettingViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MineSettingViewController.m; sourceTree = "<group>"; };
 		F00215291D89809C8E034079 /* LanguageViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
-		F029FB1E3A3343C9EDD97276 /* app.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
+		F029FB1E3A3343C9EDD97276 /* IMUIKitOCExample.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = IMUIKitOCExample.entitlements; sourceTree = "<group>"; };
 		F1DA7851F33AC985463FB32C /* LoginViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F51474AC0A13E112B64E7CAB /* CustomChatCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CustomChatCell.m; sourceTree = "<group>"; };
-		F736601494A3DCB7A015E6E9 /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
 		F95558244AD4A42B790E23D3 /* NETabBarController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NETabBarController.h; sourceTree = "<group>"; };
 		FB80BEC0B7B19A31EB149852 /* IMPocConfigViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = IMPocConfigViewController.m; sourceTree = "<group>"; };
 		FC5B6B6A041A2DAB8A7E99CF /* NEP2PSecurityWarningView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NEP2PSecurityWarningView.h; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 				8A58F07690BA6F495677E35F /* UIKit.framework in Frameworks */,
 				4F5D0A523A904743C46AC0E7 /* UserNotifications.framework in Frameworks */,
 				A03A8BE6601EAAC6A149350E /* PushKit.framework in Frameworks */,
-				43E1A7FDDA29AEA64710BD39 /* Pods_app.framework in Frameworks */,
+				7092DC4D0ABDD3E97F771686 /* Pods_IMUIKitOCExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +216,7 @@
 		1034ACE3D5B72DF67BD126D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EC77B816A6F78CFF267DE50F /* app.app */,
+				EC77B816A6F78CFF267DE50F /* IMUIKitOCExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,8 +233,8 @@
 		3AD976C116AA6FF111BD3B2E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F736601494A3DCB7A015E6E9 /* Pods-app.release.xcconfig */,
-				5CA68D528DDC66CD0558FC59 /* Pods-app.debug.xcconfig */,
+				D7D397E19A5E8DE17A0BBFC7 /* Pods-IMUIKitOCExample.release.xcconfig */,
+				4A0011FB179ED77E0E8978E2 /* Pods-IMUIKitOCExample.debug.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -328,12 +328,12 @@
 			isa = PBXGroup;
 			children = (
 				98D052AA702630E328882636 /* iOS */,
-				70076FBB3A4AEBEAFBB0969E /* Pods_app.framework */,
+				83D20B81E301C85B8DF60B14 /* Pods_IMUIKitOCExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B0170FFDD392FD3EC98A3ED1 /* app */ = {
+		B0170FFDD392FD3EC98A3ED1 /* IMUIKitOCExample */ = {
 			isa = PBXGroup;
 			children = (
 				8D73F4B4203C7939E1E1A956 /* AppDelegate.h */,
@@ -352,12 +352,12 @@
 				FCA678E129DE57193E02074D /* PrivacyInfo.xcprivacy */,
 				DC288919B26B79C0FB5DBA25 /* SceneDelegate.h */,
 				6A696B087110786C9FD38195 /* SceneDelegate.m */,
-				F029FB1E3A3343C9EDD97276 /* app.entitlements */,
+				F029FB1E3A3343C9EDD97276 /* IMUIKitOCExample.entitlements */,
 				0B9E3C2D540F46213731AAFC /* en.lproj */,
 				107FEEE5A4E89EF474A80DA0 /* main.m */,
 				D22D4F43C74553EE6ADC9A15 /* zh-Hans.lproj */,
 			);
-			path = app;
+			path = IMUIKitOCExample;
 			sourceTree = "<group>";
 		};
 		E290E17996DFEABE1D865DB3 /* Controller */ = {
@@ -411,7 +411,7 @@
 			children = (
 				1034ACE3D5B72DF67BD126D1 /* Products */,
 				9B74178ED09E55BC9BD472DE /* Frameworks */,
-				B0170FFDD392FD3EC98A3ED1 /* app */,
+				B0170FFDD392FD3EC98A3ED1 /* IMUIKitOCExample */,
 				3AD976C116AA6FF111BD3B2E /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -419,23 +419,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		857727DDAD19EC6D0DABDC15 /* app */ = {
+		857727DDAD19EC6D0DABDC15 /* IMUIKitOCExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 29D261E983011F98AF09B26E /* Build configuration list for PBXNativeTarget "app" */;
+			buildConfigurationList = 29D261E983011F98AF09B26E /* Build configuration list for PBXNativeTarget "IMUIKitOCExample" */;
 			buildPhases = (
-				151FE77572BCEAD204C66871 /* [CP] Check Pods Manifest.lock */,
+				B08D394709A950A5B2C15A43 /* [CP] Check Pods Manifest.lock */,
 				EC43E9B7767897FE10893073 /* Sources */,
 				3243B00B36CADA85BF8C82D7 /* Frameworks */,
 				2B25668220D4F57F6ECC584D /* Resources */,
-				360F757A8CC59DEB17308E07 /* [CP] Embed Pods Frameworks */,
+				55F8366F46E5B7E23BE743C1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = app;
-			productName = app;
-			productReference = EC77B816A6F78CFF267DE50F /* app.app */;
+			name = IMUIKitOCExample;
+			productName = IMUIKitOCExample;
+			productReference = EC77B816A6F78CFF267DE50F /* IMUIKitOCExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -453,7 +453,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EB03E3DDC69EFE0F03251FED /* Build configuration list for PBXProject "app" */;
+			buildConfigurationList = EB03E3DDC69EFE0F03251FED /* Build configuration list for PBXProject "IMUIKitOCExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -466,7 +466,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				857727DDAD19EC6D0DABDC15 /* app */,
+				857727DDAD19EC6D0DABDC15 /* IMUIKitOCExample */,
 			);
 		};
 /* End PBXProject section */
@@ -487,35 +487,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		151FE77572BCEAD204C66871 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-app-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		360F757A8CC59DEB17308E07 /* [CP] Embed Pods Frameworks */ = {
+		55F8366F46E5B7E23BE743C1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-app/Pods-app-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-IMUIKitOCExample/Pods-IMUIKitOCExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
@@ -592,7 +570,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-app/Pods-app-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IMUIKitOCExample/Pods-IMUIKitOCExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B08D394709A950A5B2C15A43 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IMUIKitOCExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -658,14 +658,14 @@
 /* Begin XCBuildConfiguration section */
 		5449F7112CA29CF5EF79A9ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F736601494A3DCB7A015E6E9 /* Pods-app.release.xcconfig */;
+			baseConfigurationReference = D7D397E19A5E8DE17A0BBFC7 /* Pods-IMUIKitOCExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IMUIKitOCExample/IMUIKitOCExample.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -676,10 +676,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_FILE = IMUIKitOCExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.9.30;
+				MARKETING_VERSION = 10.9.31;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.yunxin.app.im.uikit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -810,14 +810,14 @@
 		};
 		F6E35AA99F6A8BEE0CA302A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5CA68D528DDC66CD0558FC59 /* Pods-app.debug.xcconfig */;
+			baseConfigurationReference = 4A0011FB179ED77E0E8978E2 /* Pods-IMUIKitOCExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IMUIKitOCExample/IMUIKitOCExample.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -828,10 +828,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_FILE = IMUIKitOCExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.9.30;
+				MARKETING_VERSION = 10.9.31;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.yunxin.app.im.uikit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -844,7 +844,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		29D261E983011F98AF09B26E /* Build configuration list for PBXNativeTarget "app" */ = {
+		29D261E983011F98AF09B26E /* Build configuration list for PBXNativeTarget "IMUIKitOCExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5449F7112CA29CF5EF79A9ED /* Release */,
@@ -853,7 +853,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB03E3DDC69EFE0F03251FED /* Build configuration list for PBXProject "app" */ = {
+		EB03E3DDC69EFE0F03251FED /* Build configuration list for PBXProject "IMUIKitOCExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCAA1A252AEA81F7A991B5CE /* Debug */,

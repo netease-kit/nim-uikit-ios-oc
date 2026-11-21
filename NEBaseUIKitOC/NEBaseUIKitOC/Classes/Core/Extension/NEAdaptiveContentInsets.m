@@ -21,6 +21,18 @@ static void *NEAdaptiveScrollOriginalAutomaticIndicatorInsetKey = &NEAdaptiveScr
 
 @implementation UIScrollView (NEAdaptiveContentInsets)
 
+- (void)ne_resetContentInsetsManagedByContainer {
+  if (objc_getAssociatedObject(self, NEAdaptiveManagedKey) != nil) {
+    [self ne_setContentInsetsManagedByContainer:NO];
+  }
+}
+
+- (void)ne_resetScrollIndicatorsManagedByContainer {
+  if (objc_getAssociatedObject(self, NEAdaptiveScrollManagedKey) != nil) {
+    [self ne_setScrollIndicatorsManagedByContainer:NO];
+  }
+}
+
 - (void)ne_setScrollIndicatorsManagedByContainer:(BOOL)managed {
   if (managed) {
     if (objc_getAssociatedObject(self, NEAdaptiveScrollManagedKey) == nil) {

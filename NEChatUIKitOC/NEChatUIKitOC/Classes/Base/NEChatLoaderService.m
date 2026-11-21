@@ -32,7 +32,9 @@
   ChatKitClient *client = [ChatKitClient shared];
   if (!self.didRegisterService) {
     [client registerInit:[NEChatService shared]];
-    [client buryDataPoints:@"ChatUIKitOC" language:@"oc"];
+    NSString *version = [ChatKitClient componentVersionForBundle:[NSBundle bundleForClass:self.class]
+                                                          fallback:@""];
+    [client buryDataPoints:@"ChatUIKitOC" version:version];
     self.didRegisterService = YES;
   }
 }

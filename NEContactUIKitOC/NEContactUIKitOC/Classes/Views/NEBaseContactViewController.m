@@ -33,6 +33,8 @@ static NSString * const NESearchContactPageRouterCompat = @"imkit://search/searc
 @property (nonatomic, copy, nullable) NSString *adaptiveSelectedContactKey;
 
 @property (nonatomic, assign) NSInteger lastTitleIndex;
+/// 空态顶部约束：自适应布局下从系统入口行下方开始，让空态在“剩余区域”里居中。
+@property (nonatomic, strong, nullable) NSLayoutConstraint *emptyViewTopConstraint;
 @property (nonatomic, strong, nullable) NSLayoutConstraint *navigationViewHeightAnchor;
 @property (nonatomic, strong, nullable) NSLayoutConstraint *bodyTopViewTopAnchor;
 @property (nonatomic, strong, nullable) NSLayoutConstraint *bodyTopViewHeightAnchor;
@@ -123,6 +125,11 @@ static NSString * const NESearchContactPageRouterCompat = @"imkit://search/searc
 - (void)viewSafeAreaInsetsDidChange {
   [super viewSafeAreaInsetsDidChange];
   [self ne_refreshNavigationBarHeightIfNeeded];
+}
+
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  [self updateEmptyViewTopOffset];
 }
 
 #pragma mark - NENavigationBarHeightProviding
@@ -356,8 +363,24 @@ static NSString * const NESearchContactPageRouterCompat = @"imkit://search/searc
   return [NSString stringWithFormat:@"%ld|%@|%@", (long)info.contactCellType, info.router ?: @"", accountId];
 }
 
+/// 右列回到空白占位时宿主调用：清掉记住的行并取消表格选中。
+/// 否则右列再次展示非行入口（搜索/加好友等）时，左列会把过期行重新点亮。
+- (void)clearAdaptiveSelection {
+  self.adaptiveSelectedContactKey = nil;
+  NSIndexPath *selected = self.tableView.indexPathForSelectedRow;
+  if (selected) {
+    [self.tableView deselectRowAtIndexPath:selected animated:NO];
+  }
+  // 本页选中底色由 key 驱动，清掉 key 后要重算可见 cell 的底色才算真正取消选中。
+  [self refreshAdaptiveSelectionTint];
+}
+
 - (void)setListSelectionBackgroundColor:(UIColor *)listSelectionBackgroundColor {
   _listSelectionBackgroundColor = listSelectionBackgroundColor;
+  // 外壳用「选中底色为空」表达右列已回到空白占位：此时同步忘掉上一次选中的行。
+  if (listSelectionBackgroundColor == nil) {
+    self.adaptiveSelectedContactKey = nil;
+  }
   [self refreshAdaptiveSelectionTint];
 }
 
@@ -481,6 +504,29 @@ static NSString * const NESearchContactPageRouterCompat = @"imkit://search/searc
   [self subscribeVisibleRows];
 }
 
+/// 自适应外壳下把空态放到系统入口行下方的剩余区域里居中；普通机型保持整块居中
+/// （与原有手机视觉一致）。表格内容超出可视区时退回整块居中，避免空态被挤没。
+- (void)updateEmptyViewTopOffset {
+  if (!self.emptyViewTopConstraint || self.emptyView.isHidden) {
+    return;
+  }
+  CGFloat height = CGRectGetHeight(self.contentView.bounds);
+  if (height <= 0) {
+    return;
+  }
+  CGFloat offset = 0;
+  if (NEAdaptiveDeviceGate.adaptiveHostActive) {
+    CGFloat rowsBottom = self.tableView.contentSize.height;
+    CGFloat minimumRemaining = 160.0;
+    if (rowsBottom > 0 && rowsBottom < height - minimumRemaining) {
+      offset = rowsBottom;
+    }
+  }
+  if (fabs(self.emptyViewTopConstraint.constant - offset) > 0.5) {
+    self.emptyViewTopConstraint.constant = offset;
+  }
+}
+
 #pragma mark - didRefreshTable
 
 - (void)didRefreshTable {
@@ -521,6 +567,8 @@ static NSString * const NESearchContactPageRouterCompat = @"imkit://search/searc
 #pragma mark - TabNavigationViewDelegate
 
 - (void)searchAction {
+  // 搜索不是左列的行：右列内容与当前高亮行无关，先清掉过期选中。
+  [self clearAdaptiveSelection];
   if ([ContactUIConfig shared].titleBarRight2Click) {
     [ContactUIConfig shared].titleBarRight2Click(self);
     return;
@@ -529,6 +577,8 @@ static NSString * const NESearchContactPageRouterCompat = @"imkit://search/searc
 }
 
 - (void)didClickAddBtn {
+  // 添加好友/新建会话不是左列的行：同样先清掉过期选中。
+  [self clearAdaptiveSelection];
   if ([ContactUIConfig shared].titleBarRightClick) {
     [ContactUIConfig shared].titleBarRightClick(self);
     return;
@@ -634,10 +684,14 @@ static NSString * const NESearchContactPageRouterCompat = @"imkit://search/searc
       [self.tableView.bottomAnchor constraintEqualToAnchor:_contentView.bottomAnchor],
     ]];
 
+    // 空态按容器高度垂直居中：原先用屏宽的一半当顶部偏移，
+    // 折叠屏展开态左列只有 320 宽而 scene 951，会把空态推到列底部（甚至裁掉）。
+    self.emptyView.verticallyCentersContent = YES;
+    self.emptyViewTopConstraint = [self.emptyView.topAnchor constraintEqualToAnchor:_contentView.topAnchor];
     [NSLayoutConstraint activateConstraints:@[
       [self.emptyView.leftAnchor constraintEqualToAnchor:_contentView.leftAnchor],
       [self.emptyView.rightAnchor constraintEqualToAnchor:_contentView.rightAnchor],
-      [self.emptyView.topAnchor constraintEqualToAnchor:_contentView.topAnchor constant:[UIScreen mainScreen].bounds.size.width / 2],
+      self.emptyViewTopConstraint,
       [self.emptyView.bottomAnchor constraintEqualToAnchor:_contentView.bottomAnchor],
     ]];
   }

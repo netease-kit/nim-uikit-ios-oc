@@ -538,9 +538,9 @@
   }
 
   if ([NIMSDK sharedSDK].v2Option.enableV2CloudConversation == NO) {
-    [self.localConversationRepo setStickTop:conversationId stickTop:YES completion:completion];
+    [self.localConversationRepo setStickTop:conversationId stickTop:NO completion:completion];
   } else {
-    [self.conversationRepo setStickTop:conversationId stickTop:YES completion:completion];
+    [self.conversationRepo setStickTop:conversationId stickTop:NO completion:completion];
   }
 }
 

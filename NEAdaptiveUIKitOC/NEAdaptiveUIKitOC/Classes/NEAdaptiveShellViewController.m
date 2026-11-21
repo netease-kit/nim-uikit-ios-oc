@@ -174,6 +174,7 @@ static BOOL NEAdaptiveReuseExistingPage(UIViewController *controller, UINavigati
   NSNumber *_compactChatOriginSection;
   NSNumber *_lastLaidOutMode;
   BOOL _prefersConversationList;
+  BOOL _migratesSectionRootNavigation;
   __weak UIViewController *_lastDetailTopController;
 }
 
@@ -546,7 +547,11 @@ static BOOL NEAdaptiveReuseExistingPage(UIViewController *controller, UINavigati
     [_context invalidate];
     _observedWindow = window;
     __weak typeof(self) weakSelf = self;
+    // 布局读的是本视图的 bounds/safeAreaInsets，快照也用同一来源：真机转场里窗口与
+    // 视图的安全区会短暂不同步（实测 view r88 / window r84），只采窗口会把这次变化
+    // 判成"无变化"而跳过重排。
     _context = [[NEAdaptiveWindowContext alloc] initWithWindow:window
+                                                  samplingView:self.view
                                                       onChange:^(NEWindowSnapshot *snapshot) {
       [weakSelf applySnapshot:snapshot];
     }];
@@ -831,7 +836,10 @@ static BOOL NEAdaptiveReuseExistingPage(UIViewController *controller, UINavigati
     [self.view setNeedsLayout];
     return;
   }
-  if ([self restoreCompactChatOriginSection]) {
+  // 折叠态从通讯录等分区进入聊天时，返回优先回到来源分区；但只有「当前可见页就是
+  // 聊天根」才成立：聊天栈上方的设置页/子页面/present 页面必须逐级返回，不能直接
+  // 跳回来源分区（否则会跳过聊天页）。
+  if ([self isCompactChatRootVisible] && [self restoreCompactChatOriginSection]) {
     [self.view setNeedsLayout];
     return;
   }
@@ -839,6 +847,36 @@ static BOOL NEAdaptiveReuseExistingPage(UIViewController *controller, UINavigati
     _railBackHandler();
   }
   [self.view setNeedsLayout];
+}
+
+/// 是否头部分区根列表页（导航栏按钮默认由页面自己承担）。
+- (BOOL)isSectionRootPage:(UIViewController *)page {
+  for (UINavigationController *section in _sections) {
+    if (section.viewControllers.firstObject == page) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
+- (void)setMigratesSectionRootNavigation:(BOOL)migratesSectionRootNavigation {
+  if (_migratesSectionRootNavigation == migratesSectionRootNavigation) {
+    return;
+  }
+  _migratesSectionRootNavigation = migratesSectionRootNavigation;
+  [self restoreRailPageNavigation];
+  if (self.isViewLoaded) {
+    [self layoutContent];
+  }
+}
+
+/// 折叠态可见页是否为聊天根（占位页之上只有一个会话页）。
+- (BOOL)isCompactChatRootVisible {
+  if (self.isUsingLegacyLayout || !NEAdaptiveDecisionIsCompact(_decision, _hasDecision)) {
+    return NO;
+  }
+  UINavigationController *navigation = self.conversationCoordinator.navigationController;
+  return !self.conversationCoordinator.isShowingPlaceholder && navigation.viewControllers.count <= 2;
 }
 
 - (BOOL)restoreCompactChatOriginSection {
@@ -865,7 +903,19 @@ static BOOL NEAdaptiveReuseExistingPage(UIViewController *controller, UINavigati
   if (sender.tag < 0 || sender.tag >= (NSInteger)_railActions.count) {
     return;
   }
-  [_railActions[sender.tag] perform];
+  NEAdaptiveRailAction *action = _railActions[sender.tag];
+  // 页面弹窗需要知道入口的真实位置（按钮已从导航栏迁到侧栏）。
+  UIWindow *window = self.view.window;
+  if (action.identifier.length > 0 && window) {
+    CGRect frame = [sender convertRect:sender.bounds toView:window];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NEAdaptiveRailActionWillPerform"
+                                                        object:nil
+                                                      userInfo:@{
+                                                        @"identifier" : action.identifier,
+                                                        @"frame" : [NSValue valueWithCGRect:frame],
+                                                      }];
+  }
+  [action perform];
 }
 
 - (void)prepareRailNavigationForPresentationChange {
@@ -991,6 +1041,17 @@ static BOOL NEAdaptiveReuseExistingPage(UIViewController *controller, UINavigati
     [_railNavigationBindings removeObjectForKey:key];
   }
   for (UIViewController *page in chain) {
+    // 折叠单屏：头部分区根列表保留自己的导航栏按钮，不迁移到侧栏。
+    if (!self.migratesSectionRootNavigation && [self isSectionRootPage:page]) {
+      NSValue *key = [NSValue valueWithPointer:(__bridge const void *)page];
+      NEAdaptiveRailPageNavigation *existing = _railNavigationBindings[key];
+      if (existing) {
+        existing.onChange = nil;
+        [existing restore];
+        [_railNavigationBindings removeObjectForKey:key];
+      }
+      continue;
+    }
     [self bindRailNavigationIfNeededForPage:page];
   }
   UIViewController *topPage = chain.lastObject;
@@ -1304,9 +1365,10 @@ static BOOL NEAdaptiveReuseExistingPage(UIViewController *controller, UINavigati
   if (legacy) {
     backTop = contentTop;
   } else if (railMetrics.hasOcclusionBottom) {
-    backTop = MIN(MAX(contentTop, railMetrics.occlusionBottom), maxBackTop);
+    backTop = MIN(MAX(MAX(contentTop, railMetrics.occlusionBottom), CGRectGetMinY(safe)), maxBackTop);
   } else {
-    backTop = MIN(MAX(contentTop, CGRectGetMinY(bounds) + configuration.railBackTopInset), maxBackTop);
+    // rail 控件在右侧，必须避开顶部安全区（状态栏/系统按钮）。
+    backTop = MIN(MAX(contentTop, CGRectGetMinY(safe) + configuration.railBackTopInset), maxBackTop);
   }
   // 返回按钮固定在垂直轴顶部（HIG），右侧操作紧随其下；窗口高度不足时整组上移。
   if (showsRailActions) {

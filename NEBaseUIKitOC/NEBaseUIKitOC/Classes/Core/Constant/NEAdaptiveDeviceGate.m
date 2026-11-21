@@ -10,6 +10,16 @@
 /// 宿主写入的能力标记；nil 表示未显式设置，按设备判定。
 static NSNumber *NEAdaptiveHostActiveOverride = nil;
 
+static NSString *NEAdaptiveFormatRect(CGRect rect) {
+  return [NSString stringWithFormat:@"%.1f,%.1f %.1fx%.1f", rect.origin.x, rect.origin.y,
+                                    rect.size.width, rect.size.height];
+}
+
+static NSString *NEAdaptiveFormatInsets(UIEdgeInsets insets) {
+  return [NSString stringWithFormat:@"t%.1f l%.1f b%.1f r%.1f", insets.top, insets.left, insets.bottom,
+                                    insets.right];
+}
+
 @interface NEAdaptiveDeviceGate ()
 + (nullable UIWindow *)activeWindow;
 + (BOOL)foldableByModel;
@@ -37,6 +47,54 @@ static NSNumber *NEAdaptiveHostActiveOverride = nil;
     return YES;
   }
   return [self foldableByModel];
+}
+
++ (NSString *)diagnosticDescription {
+  NSMutableArray<NSString *> *parts = [NSMutableArray array];
+  [parts addObject:[NSString stringWithFormat:@"adaptiveHost=%@",
+                                              self.adaptiveHostActive ? @"YES" : @"NO"]];
+  [parts addObject:[NSString stringWithFormat:@"foldable=%@ geometry=%@ model=%@",
+                                              self.isFoldableDevice ? @"YES" : @"NO",
+                                              self.foldableBySceneGeometry ? @"YES" : @"NO",
+                                              self.foldableByModel ? @"YES" : @"NO"]];
+  [parts addObject:[NSString stringWithFormat:@"UIScreen=%@",
+                                              NEAdaptiveFormatRect(UIScreen.mainScreen.bounds)]];
+  UIWindow *window = [self activeWindow];
+  if (window) {
+    [parts addObject:[NSString stringWithFormat:@"window=%@ safe=%@",
+                                                NEAdaptiveFormatRect(window.bounds),
+                                                NEAdaptiveFormatInsets(window.safeAreaInsets)]];
+    UIWindowScene *scene = window.windowScene;
+    if (scene) {
+      CGRect statusBarFrame = scene.statusBarManager ? scene.statusBarManager.statusBarFrame : CGRectZero;
+      [parts addObject:[NSString stringWithFormat:@"scene=%@ statusBar=%@",
+                                                  NEAdaptiveFormatRect(scene.coordinateSpace.bounds),
+                                                  NEAdaptiveFormatRect(statusBarFrame)]];
+    }
+    if (@available(iOS 27.1, *)) {
+      NSMutableArray<NSString *> *occlusion = [NSMutableArray array];
+      NSArray<UIViewReservedRegion *> *occlusionRegions =
+          [window reservedRegionsOfKind:[UIViewReservedRegionKind occlusionRegionKind]];
+      for (UIViewReservedRegion *region in occlusionRegions) {
+        [occlusion addObject:[NSString stringWithFormat:@"%@:%@", NEAdaptiveFormatRect(region.frame),
+                                                        region.isActive ? @"on" : @"off"]];
+      }
+      NSMutableArray<NSString *> *division = [NSMutableArray array];
+      NSArray<UIViewReservedRegion *> *divisionRegions =
+          [window reservedRegionsOfKind:[UIViewReservedRegionKind divisionRegionKind]];
+      for (UIViewReservedRegion *region in divisionRegions) {
+        [division addObject:[NSString stringWithFormat:@"%@:%@", NEAdaptiveFormatRect(region.frame),
+                                                       region.isActive ? @"on" : @"off"]];
+      }
+      [parts addObject:[NSString stringWithFormat:@"occlusion=[%@] division=[%@]",
+                                                  [occlusion componentsJoinedByString:@" "],
+                                                  [division componentsJoinedByString:@" "]]];
+    }
+  } else {
+    [parts addObject:@"window=nil"];
+  }
+  [parts addObject:[NSString stringWithFormat:@"statusBarHeight=%.1f", NEUIKitStatusBarHeight()]];
+  return [parts componentsJoinedByString:@" "];
 }
 
 + (BOOL)foldableBySceneGeometry {

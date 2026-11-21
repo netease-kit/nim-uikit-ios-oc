@@ -11,9 +11,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (class, nonatomic, readonly) NEAudioSessionManager *shared;
 
+/// 录音进行中：此时 stopPlay 不能释放音频会话，否则会打断录音。
+@property (nonatomic, assign) BOOL isRecording;
+
 - (void)switchToSpeaker;
 - (void)switchToReceiver;
 - (void)configureAudioSession;
+/// 播放结束/停止后释放音频会话（避免折叠/展开时系统弹出音频路由提示）。
+- (void)deactivate;
 - (void)setAudioRouteTo:(AVAudioSessionPortOverride)port;
 - (void)startProximityMonitoring;
 - (void)stopProximityMonitoring;

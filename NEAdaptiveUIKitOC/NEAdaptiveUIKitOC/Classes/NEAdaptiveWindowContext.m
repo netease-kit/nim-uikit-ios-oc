@@ -34,12 +34,12 @@ static NEWindowSizeClass NEAdaptiveSizeClassFromUIUserInterfaceSizeClass(UIUserI
   }
 }
 
-/// 读取窗口当前激活的 division / occlusion 占位区。
-static NSArray<NEReservedRegionSnapshot *> *NEAdaptiveActiveReservedRegions(UIWindow *window) {
+/// 读取视图（窗口或外壳视图）当前激活的 division / occlusion 占位区。
+static NSArray<NEReservedRegionSnapshot *> *NEAdaptiveActiveReservedRegions(UIView *view) {
   if (@available(iOS 27.1, *)) {
     NSMutableArray<NEReservedRegionSnapshot *> *regions = [NSMutableArray array];
     NSArray<UIViewReservedRegion *> *occlusions =
-        [window reservedRegionsOfKind:[UIViewReservedRegionKind occlusionRegionKind]];
+        [view reservedRegionsOfKind:[UIViewReservedRegionKind occlusionRegionKind]];
     for (UIViewReservedRegion *region in occlusions) {
       if (!region.isActive) {
         continue;
@@ -48,7 +48,7 @@ static NSArray<NEReservedRegionSnapshot *> *NEAdaptiveActiveReservedRegions(UIWi
                                                                   frame:region.frame]];
     }
     NSArray<UIViewReservedRegion *> *divisions =
-        [window reservedRegionsOfKind:[UIViewReservedRegionKind divisionRegionKind]];
+        [view reservedRegionsOfKind:[UIViewReservedRegionKind divisionRegionKind]];
     for (UIViewReservedRegion *region in divisions) {
       if (!region.isActive) {
         continue;
@@ -162,21 +162,25 @@ static NSArray<NEReservedRegionSnapshot *> *NEAdaptiveActiveReservedRegions(UIWi
 }
 
 + (instancetype)snapshotWithWindow:(UIWindow *)window {
-  if (!window) {
+  return [self snapshotWithView:window];
+}
+
++ (instancetype)snapshotWithView:(UIView *)view {
+  if (!view) {
     return nil;
   }
-  UIEdgeInsets insets = window.safeAreaInsets;
-  return [[self alloc] initWithSize:window.bounds.size
+  UIEdgeInsets insets = view.safeAreaInsets;
+  return [[self alloc] initWithSize:view.bounds.size
                         safeAreaTop:insets.top
                        safeAreaLeft:insets.left
                      safeAreaBottom:insets.bottom
                       safeAreaRight:insets.right
                  horizontalSizeClass:NEAdaptiveSizeClassFromUIUserInterfaceSizeClass(
-                                          window.traitCollection.horizontalSizeClass)
+                                          view.traitCollection.horizontalSizeClass)
                    verticalSizeClass:NEAdaptiveSizeClassFromUIUserInterfaceSizeClass(
-                                          window.traitCollection.verticalSizeClass)
-                        displayScale:window.traitCollection.displayScale
-                    reservedRegions:NEAdaptiveActiveReservedRegions(window)];
+                                          view.traitCollection.verticalSizeClass)
+                        displayScale:view.traitCollection.displayScale
+                    reservedRegions:NEAdaptiveActiveReservedRegions(view)];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -253,9 +257,24 @@ static NSArray<NEReservedRegionSnapshot *> *NEAdaptiveActiveReservedRegions(UIWi
 
 - (instancetype)initWithWindow:(UIWindow *)window
                       onChange:(void (^)(NEWindowSnapshot *snapshot))onChange {
+  return [self initWithWindow:window samplingView:nil onChange:onChange];
+}
+
+- (instancetype)initWithWindow:(UIWindow *)window
+                  samplingView:(UIView *)samplingView
+                      onChange:(void (^)(NEWindowSnapshot *snapshot))onChange {
   __weak UIWindow *weakWindow = window;
+  __weak UIView *weakSamplingView = samplingView;
   return [self initWithSample:^NEWindowSnapshot *_Nullable {
-    return [NEWindowSnapshot snapshotWithWindow:weakWindow];
+    UIWindow *strongWindow = weakWindow;
+    if (!strongWindow) {
+      return nil;
+    }
+    UIView *strongSamplingView = weakSamplingView;
+    UIView *sampler = (strongSamplingView && strongSamplingView.window == strongWindow)
+                          ? strongSamplingView
+                          : strongWindow;
+    return [NEWindowSnapshot snapshotWithView:sampler];
   } onChange:onChange];
 }
 

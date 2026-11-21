@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id<NEAIWordSearchViewModelDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray<NEAIWordSearchModel *> *data;
+/// 结果列表的容器宽度；用于按当前列宽测量行高，<= 0 时回退整窗宽度。
+@property (nonatomic, assign) CGFloat itemMaxWidth;
+
+/// 更新结果列表宽度并重测已有行高（折叠/展开、进出右列时调用）。
+- (void)updateItemMaxWidth:(CGFloat)width;
 
 - (void)loadData:(nullable NSString *)searchText
       completion:(void (^)(NSError * _Nullable error))completion;

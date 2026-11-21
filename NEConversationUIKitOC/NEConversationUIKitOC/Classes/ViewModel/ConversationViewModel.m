@@ -899,6 +899,9 @@ static NSString * const kClassName = @"ConversationViewModel";
           NSString *conversationId = [V2NIMConversationIdUtil p2pConversationId:accountId];
           if (conversationId.length > 0) [conversationIds addObject:conversationId];
         }
+        // 账号 id 可能反解不出会话 id（空串/非法 target），空数组会让 SDK 报
+        // `invalid param: conversationIds is empty`，这里与 refreshRawConversationsForConversationIds: 保持一致直接跳过。
+        if (conversationIds.count == 0) return;
         [self.dataSource getRawConversationsByIds:conversationIds
                                       completion:^(NSArray * _Nullable rawConversations, NSError * _Nullable error) {
           __strong typeof(weakSelf) self = weakSelf;
@@ -929,6 +932,8 @@ static NSString * const kClassName = @"ConversationViewModel";
         NSString *conversationId = [V2NIMConversationIdUtil p2pConversationId:accountId];
         if (conversationId.length > 0) [conversationIds addObject:conversationId];
       }
+      // 空数组会让 SDK 报 `invalid param: conversationIds is empty`，这里与云端实现保持一致。
+      if (conversationIds.count == 0) return;
       [self.dataSource getRawConversationsByIds:conversationIds
                                     completion:^(NSArray * _Nullable rawConversations, NSError * _Nullable rawError) {
         __strong typeof(weakSelf) self = weakSelf;

@@ -8,8 +8,8 @@
 - 皮肤资源：`NEChatUIKitOC/NEChatUIKitOC/Assets/FunChatUIKit.xcassets/`、`NEContactUIKitOC/NEContactUIKitOC/Assets/FunContactUIKit.xcassets/`、`NEConversationUIKitOC/NEConversationUIKitOC/Assets/FunConversationUIKit.xcassets/`、`NETeamUIKitOC/NETeamUIKitOC/Assets/FunTeamUIKit.xcassets/`，以及基础组件 `NEBaseUIKitOC/NEBaseUIKitOC/Assets/NECommonUI.xcassets/FunUI/`。
 - `NEBaseUIKitOC/NEBaseUIKitOC/Classes/CommonView/FunSearchView.{h,m}`：先把 `SearchSessionBaseView` 迁到同目录 `SearchSessionBaseView.{h,m}`（迁移已登记，`--phase after` 必须输出 `MOVED`），再删除 `FunSearchView`、`FunSearchSessionHeaderView` 与 `fun_` 资源引用。
 - 会话组件无 `FunUI/` 目录：删除 `FunConversationSearchCell.{h,m}`、`FunConversationSearchController.{h,m}`，以及 `NEConversationListCell.h/m`、`NEConversationViewController.h/m` 里的 Fun 类与 Fun 分支；保留 Normal 类、`NEBase*` 基类与 `SearchSessionBaseView`。
-- Demo 资源：`app/Assets.xcassets/Tabbar/` 的 `funChat/funChatSelect/funContact/funContactSelect/funPerson/funPersonSelect.imageset`；`app/Assets.xcassets/Mine/clicked_fun.imageset`、`style_fun.imageset`。
-- 两个移除方向都会删的公共项：`app/Mine/Controller/StyleSelectionViewController.{h,m}` 与 `app.xcodeproj/project.pbxproj` 中对应引用。`Mine/unclicked.imageset` 只在选择页无别处引用时删。
+- Demo 资源：`IMUIKitOCExample/Assets.xcassets/Tabbar/` 的 `funChat/funChatSelect/funContact/funContactSelect/funPerson/funPersonSelect.imageset`；`IMUIKitOCExample/Assets.xcassets/Mine/clicked_fun.imageset`、`style_fun.imageset`。
+- 两个移除方向都会删的公共项：`IMUIKitOCExample/Mine/Controller/StyleSelectionViewController.{h,m}` 与 `IMUIKitOCExample.xcodeproj/project.pbxproj` 中对应引用。`Mine/unclicked.imageset` 只在选择页无别处引用时删。
 
 ## 必须编辑的接线
 
@@ -23,9 +23,9 @@
 - 会话共享文件：`NEConversationViewController.m` 删除 Fun 图片名分支（`fun_user_empty`、`fun_add_friend`、`fun_join_team`、`fun_create_*`、`fun_scan_qr` 等）与 `FunConversationController` 分支；`NEConversationListCell.m` 删除 `FunConversationListCell`、`FunStickTopCell` 与 `NEStyleManager` 反射判断；`NEConversationGroupBar.m`、`NEConversationGroupManageController.m` 的 Fun 颜色/空态分支收敛到 Normal。
 - `NEBaseConversationSearchController.m`、`ConversationSearchController.{h,m}` 与 `NEBaseUIKitOC.h` 的 `FunSearchView.h` import 更新为 `SearchSessionBaseView.h`；`NEConversationViewController.m` 的 `FunSearchView` 属性与创建改为共享搜索头部（Normal 搜索页仍在用）。
 - Demo：
-  - `app/Main/NEStyleManager.{h,m}`：删除 `setFunStyle` 与旧 `UserDefaults` 读取逻辑；`isNormalStyle` 保留为组件层反射契约并固定返回 `YES`（存活 Normal）。
-  - `app/SceneDelegate.m` 固定 `isFunUI = NO`；`CustomConfig.m` 的 `registerCustomChatRouterForFunUI:` 固定走 `CustomNormalChatViewController`，删除 `CustomFunChatViewController`。
-  - `app/Main/NETabBarController.m`、`Mine/Controller/MessageRemindViewController.m`、`PersonInfoViewController.m`、`MineSettingViewController.m`、`LanguageViewController.m`、`MeViewController.m`、`ConfigTestViewController.m`、`IMPocConfigViewController.m`、`IMPushConfigViewController.m`、`InputPersonInfoController.m`、`Mine/View/CustomSettingInputCell.m`、`CustomSettingTextviewCell.m`、`CustomThemeCells.m` 的 `isNormalStyle ? normal : fun` 收敛到 Normal 分支，`ne_funTheme` 改为 `ne_defaultPrimaryColor`。
+  - `IMUIKitOCExample/Main/NEStyleManager.{h,m}`：删除 `setFunStyle` 与旧 `UserDefaults` 读取逻辑；`isNormalStyle` 保留为组件层反射契约并固定返回 `YES`（存活 Normal）。
+  - `IMUIKitOCExample/SceneDelegate.m` 固定 `isFunUI = NO`；`CustomConfig.m` 的 `registerCustomChatRouterForFunUI:` 固定走 `CustomNormalChatViewController`，删除 `CustomFunChatViewController`。
+  - `IMUIKitOCExample/Main/NETabBarController.m`、`Mine/Controller/MessageRemindViewController.m`、`PersonInfoViewController.m`、`MineSettingViewController.m`、`LanguageViewController.m`、`MeViewController.m`、`ConfigTestViewController.m`、`IMPocConfigViewController.m`、`IMPushConfigViewController.m`、`InputPersonInfoController.m`、`Mine/View/CustomSettingInputCell.m`、`CustomSettingTextviewCell.m`、`CustomThemeCells.m` 的 `isNormalStyle ? normal : fun` 收敛到 Normal 分支，`ne_funTheme` 改为 `ne_defaultPrimaryColor`。
   - `MineSettingViewController.m` 删除外观入口数据行与 `didStyleClick` 跳转，`MeViewController.m` 保留 Normal 收藏入口；`Localizable.strings` 删除 `style_selection`、`style_fun`、`style_normal` 三个 key。
 - `NEConversationGroupManageController.m` 等 `NEGroupIsFunStyle()` 判断固定为 Normal；不要再保留 `fun_*` 图片名。
 

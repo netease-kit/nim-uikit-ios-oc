@@ -49,13 +49,13 @@
       "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageTextCell.m",
       "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/ChatMessageVideoCell.m",
       "NEChatUIKitOC/NEChatUIKitOC/Classes/NormalUI/Cell/NormalChatMessageBaseCell.m",
-      "app/en.lproj/Localizable.strings",
-      "app/zh-Hans.lproj/Localizable.strings"
+      "IMUIKitOCExample/en.lproj/Localizable.strings",
+      "IMUIKitOCExample/zh-Hans.lproj/Localizable.strings"
     ],
     "residual": {
       "roots": [
         "NEChatUIKitOC",
-        "app"
+        "IMUIKitOCExample"
       ],
       "patterns": [
         "NEMessageReaction|MessageReactionEmoji|MessageReactionManager|NEMessageReactionGroup|NEMessageReactionSnapshot",
@@ -98,7 +98,7 @@
     "residual": {
       "roots": [
         "NEChatUIKitOC",
-        "app"
+        "IMUIKitOCExample"
       ],
       "patterns": [
         "LastReadPosition|lastReadPosition|last_read_position"
@@ -119,17 +119,17 @@
       "NEChatUIKitOC/NEChatUIKitOC/Classes/ChatRouter/NEBaseChatRouter.m",
       "NEChatUIKitOC/NEChatUIKitOC/Classes/Compat/NormalChatRouter.m",
       "NEChatUIKitOC/NEChatUIKitOC/Classes/FunUI/FunChatRouter.m",
-      "app/Custom/CustomConfig.m",
-      "app/Main/NETabBarController.h",
-      "app/Main/NETabBarController.m",
-      "app/SceneDelegate.m",
-      "app/en.lproj/Localizable.strings",
-      "app/zh-Hans.lproj/Localizable.strings"
+      "IMUIKitOCExample/Custom/CustomConfig.m",
+      "IMUIKitOCExample/Main/NETabBarController.h",
+      "IMUIKitOCExample/Main/NETabBarController.m",
+      "IMUIKitOCExample/SceneDelegate.m",
+      "IMUIKitOCExample/en.lproj/Localizable.strings",
+      "IMUIKitOCExample/zh-Hans.lproj/Localizable.strings"
     ],
     "residual": {
       "roots": [
         "NEChatUIKitOC",
-        "app"
+        "IMUIKitOCExample"
       ],
       "patterns": [
         "makeAdaptiveShellIfEnabled|NEAdaptiveShellViewController|NEAdaptiveDemoNavigationController|adaptiveEmptyDetailController|presentSectionChild|NEAdaptivePaging",

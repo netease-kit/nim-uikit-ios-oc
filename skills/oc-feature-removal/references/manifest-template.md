@@ -4,13 +4,13 @@
 
 ## 边界
 
-- 只允许 `NEChatUIKitOC/` 与 `app/`；闭源 `NEChatKit` 不扫描、不修改。
+- 只允许 `NEChatUIKitOC/` 与 `IMUIKitOCExample/`；闭源 `NEChatKit` 不扫描、不修改。
 - 说明本功能是否属于外部组件（如 `NEAdaptiveUIKitOC/`），外部组件只允许可选接线。
 
 ## 整体删除
 
 - 功能专属目录 / 文件 / 资源（`.xcassets` imageset、原始资源、专题图标）。
-- 本地化 key（组件 `Assets/*.lproj/Localizable.strings` 与 Demo `app/*.lproj/Localizable.strings` 分别列出）。
+- 本地化 key（组件 `Assets/*.lproj/Localizable.strings` 与 Demo `IMUIKitOCExample/*.lproj/Localizable.strings` 分别列出）。
 - 若没有整文件删除项，明确写“没有”。
 
 ## 必须编辑的接线
@@ -24,7 +24,7 @@
 ## 验证
 
 - `audit_inventory.py <slug> --phase after` 无残留。
-- `git diff --check`；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `app`。
+- `git diff --check`；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `IMUIKitOCExample`。
 - NormalUI / FunUI 运行时检查项。
 - 最终 diff 范围检查。
 

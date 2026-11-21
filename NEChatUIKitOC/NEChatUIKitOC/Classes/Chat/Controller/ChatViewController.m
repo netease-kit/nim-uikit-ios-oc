@@ -3014,6 +3014,9 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
   self.playingCell = nil;
   self.playingModel = nil;
   [[NEAudioSessionManager shared] stopProximityMonitoring];
+  if (![NEAudioSessionManager shared].isRecording) {
+    [[NEAudioSessionManager shared] deactivate];
+  }
 }
 
 - (void)startRecord {
@@ -5630,10 +5633,13 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
 
 - (void)recordAudio:(nullable NSString *)filePath didBeganWithError:(nullable NSError *)error {
   NSLog(@"%f [record] sdk Began error:%@", [[NSDate date] timeIntervalSince1970], error.localizedDescription ?: @"");
+  // 录音已开始：stopPlay 只停播放，不能释放音频会话。
+  [NEAudioSessionManager shared].isRecording = YES;
   [self stopPlay];
 }
 
 - (void)recordAudio:(nullable NSString *)filePath didCompletedWithError:(nullable NSError *)error {
+  [NEAudioSessionManager shared].isRecording = NO;
   NSLog(@"%f [record] sdk Completed error:%@", [[NSDate date] timeIntervalSince1970], error.localizedDescription ?: @"");
   [self.chatInputView stopRecordAnimation];
   if (!filePath) {
@@ -5653,6 +5659,7 @@ static NSInteger NEChatIndexOfMessageInModels(V2NIMMessage *message, NSArray<id<
 }
 
 - (void)recordAudioDidCancelled {
+  [NEAudioSessionManager shared].isRecording = NO;
   NSLog(@"[record] sdk cancel");
 }
 

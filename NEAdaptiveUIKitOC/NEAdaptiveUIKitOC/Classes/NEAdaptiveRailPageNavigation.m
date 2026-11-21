@@ -282,7 +282,7 @@ static NEAdaptiveRailAction *NEAdaptiveActionForItem(UIBarButtonItem *item) {
 
   UIButton *back = NEAdaptiveUnifiedBackButton(page.view) ?: NEAdaptiveFirstControl(page.view, @[ @"id.arrowDown", @"id.adaptiveBack" ]);
   NSMutableArray<UIButton *> *candidateTrailing =
-      [NEAdaptiveControls(page.view, @[ @"id.sureButton", @"id.multiSelect", @"id.adaptiveAction", @"id.createTopic" ]) mutableCopy];
+      [NEAdaptiveControls(page.view, @[ @"id.sureButton", @"id.multiSelect", @"id.adaptiveAction", @"id.createTopic", @"id.titleBarSearchImg", @"id.titleBarMoreImg" ]) mutableCopy];
   if (back) {
     // 页面在 viewWillAppear 阶段可能还没完成 Auto Layout；此时不做行过滤，
     if (back.bounds.size.width > 0 && back.bounds.size.height > 0) {

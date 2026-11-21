@@ -61,10 +61,11 @@ compile_commands.json
 
 # CocoaPods
 Pods/
-app.xcworkspace/
+Podfile.lock
+IMUIKitOCExample.xcworkspace/xcuserdata/
 
 # Local credentials
-app/Main/AppKey.private.h
+IMUIKitOCExample/Main/AppKey.private.h
 
 # Xcode user/workspace state
 *.xcuserstate

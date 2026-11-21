@@ -45,6 +45,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 左滑删除按钮默认背景色
 @property (nonatomic, strong, nullable) UIColor *listSelectionBackgroundColor;
 
+/// 右列回到空白占位时宿主调用：清掉「上一次点过的行」，避免再次高亮过期选中项。
+/// 只在宿主明确关闭左列高亮（右列已无内容）时调用；列表自身刷新仍走选中 id 恢复逻辑。
+- (void)clearAdaptiveSelection;
+
 - (void)ne_markSelectedConversationId:(nullable NSString *)conversationId;
 - (void)ne_selectConversation:(nullable NSString *)conversationId animated:(BOOL)animated;
 /// 传 nil 释放保留，恢复普通手机的分组规则；内部按“值是否变化”决定是否刷新列表。
