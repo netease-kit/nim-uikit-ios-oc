@@ -2,7 +2,7 @@
 
 ## 边界
 
-移除范围只包括 OC 开源仓库 `NEChatUIKitOC/` 与 Demo `app/` 的“跳转最早未读/上次阅读位置”。`NEChatKit` 是闭源组件，禁止扫描或修改；只移除 UI 对其 Last Read API 的接线。`enableLastReadPosition`、`NELastReadPositionService` 等闭源定义保留不动。
+移除范围只包括 OC 开源仓库 `NEChatUIKitOC/` 与 Demo `IMUIKitOCExample/` 的“跳转最早未读/上次阅读位置”。`NEChatKit` 是闭源组件，禁止扫描或修改；只移除 UI 对其 Last Read API 的接线。`enableLastReadPosition`、`NELastReadPositionService` 等闭源定义保留不动。
 
 核心名称：`NELastReadPosition*`、`LastReadPositionState*`、`lastReadPosition*`、`supportsLastReadPosition`。
 
@@ -15,7 +15,7 @@
 
 - `NEChatUIKitOC/NEChatUIKitOC/Assets/en.lproj/Localizable.strings` 与 `zh-Hans.lproj/Localizable.strings`：删除 `last_read_position_count`、`last_read_position_overflow`、`last_read_position_accessibility_hint`。
 
-本功能没有 Demo 工程文件或依赖需要修改；不得因移除本功能修改 `app.xcodeproj/` 或 `Podfile`。
+本功能没有 Demo 工程文件或依赖需要修改；不得因移除本功能修改 `IMUIKitOCExample.xcodeproj/` 或 `Podfile`。
 
 ## ChatViewModel 接线
 
@@ -56,6 +56,6 @@
 
 1. `python3 skills/oc-feature-removal/scripts/audit_inventory.py earliest-unread --phase after` 不允许任何残留。
 2. 本地化文件不再包含三个 `last_read_position_*` key。
-3. `git diff --check` 通过；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `app`。
+3. `git diff --check` 通过；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `IMUIKitOCExample`。
 4. 运行时检查 NormalUI/FunUI：聊天页无最早未读入口；顶部置顶、回到底部、多选、历史分页、Reaction 更新仍正常。
-5. 最终业务 diff 只能位于 `NEChatUIKitOC/` 与 `app/`。
+5. 最终业务 diff 只能位于 `NEChatUIKitOC/` 与 `IMUIKitOCExample/`。

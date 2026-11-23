@@ -12,16 +12,16 @@ INVENTORY = SKILL_DIR / "references" / "skin-inventory.json"
 ALLOWED_ROOTS = {
     "NEChatUIKitOC", "NEContactUIKitOC", "NEConversationUIKitOC", "NETeamUIKitOC",
     "NEAISearchKitOC", "NEMapKitOC", "NEAdaptiveUIKitOC", "NEBaseUIKitOC",
-    "app", "app.xcodeproj",
+    "IMUIKitOCExample", "IMUIKitOCExample.xcodeproj",
 }
 
 
 def has_expected_layout(root):
-    return (root / "NEChatUIKitOC").is_dir() and (root / "app").is_dir()
+    return (root / "NEChatUIKitOC").is_dir() and (root / "IMUIKitOCExample").is_dir()
 
 
 def source_root(candidate):
-    """Resolve a checkout with the open-source OC layout ( + Common/ + app/)."""
+    """Resolve a checkout with the open-source OC layout (NEChatUIKitOC/ + IMUIKitOCExample/)."""
 
     for base in (candidate, candidate / "nim-uikit-ios-oc"):
         if base is None:
@@ -40,7 +40,7 @@ def source_root(candidate):
         if has_expected_layout(resolved):
             return resolved
     raise ValueError(
-        "checkout must contain  and app/ (open-source OC layout); "
+        "checkout must contain NEChatUIKitOC/ and IMUIKitOCExample/ (open-source OC layout); "
         "pass --repo /absolute/path/to/nim-uikit-ios-oc"
     )
 
@@ -53,7 +53,7 @@ def default_root():
             continue
         return root
     raise ValueError(
-        "cannot locate an OC checkout with  and app/; "
+        "cannot locate an OC checkout with  and IMUIKitOCExample/; "
         "place this skill under skills/ in that repository or pass --repo"
     )
 

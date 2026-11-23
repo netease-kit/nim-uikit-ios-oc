@@ -37,6 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 当前拥有可见内容面的控制器（双栏下是右列可见页）。
 @property (nonatomic, strong, readonly, nullable) UIViewController *activeContentViewController;
 
+/// 是否把分区根列表（`TabNavigationView`）的搜索/添加按钮迁移到侧栏。
+///
+/// 由宿主按姿态设置：只有"展开后被转成竖屏（669x951 单栏）"为 YES；折叠单屏与横屏保持
+/// NO，根列表继续使用自己的导航栏按钮。切换时会立即重置 rail 绑定并恢复原按钮。
+@property (nonatomic, assign) BOOL migratesSectionRootNavigation;
+
 @property (nonatomic, copy, nullable) void (^onSectionSelected)(NSInteger index);
 @property (nonatomic, copy, nullable) void (^onLegacyFallback)(void);
 @property (nonatomic, copy, nullable) void (^onGeometryChanged)(NSDictionary<NSString *, id> *geometry);

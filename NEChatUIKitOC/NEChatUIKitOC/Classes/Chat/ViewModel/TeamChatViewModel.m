@@ -130,10 +130,18 @@ static NSString *const TAG = @"TeamChatViewModel";
 
 - (BOOL)hasTopMessagePremission {
     if ([self.team ne_isDisscuss]) return YES;
-    if (self.teamMember.memberRole == V2NIM_TEAM_MEMBER_ROLE_OWNER ||
-        self.teamMember.memberRole == V2NIM_TEAM_MEMBER_ROLE_MANAGER) {
+
+    // 成员角色尚未加载完成（首进群/刚入群）：不做本地拦截，交给服务端校验，
+    // 否则群主/管理员在角色回来之前会被误报「暂无操作权限」。
+    if (!self.teamMember) {
         return YES;
-    } else if (self.teamMember.memberRole == V2NIM_TEAM_MEMBER_ROLE_NORMAL) {
+    }
+
+    V2NIMTeamMemberRole memberRole = self.teamMember.memberRole;
+    if (memberRole == V2NIM_TEAM_MEMBER_ROLE_OWNER ||
+        memberRole == V2NIM_TEAM_MEMBER_ROLE_MANAGER) {
+        return YES;
+    } else if (memberRole == V2NIM_TEAM_MEMBER_ROLE_NORMAL) {
         if (self.team.serverExtension) {
             NSDictionary *json = getDictionaryFromJSONString(self.team.serverExtension);
             if (json) {
@@ -178,11 +186,24 @@ static NSString *const TAG = @"TeamChatViewModel";
         serverExtension[@"lastOpt"] = keyTopMessage;
         NSString *extension = [NECommonUtil getJSONStringFromDictionary:serverExtension];
         [[TeamRepo shared] updateTeamExtension:tid teamType:V2NIM_TEAM_TYPE_NORMAL ext:extension mode:nil completion:^(NSError *error) {
-            if (!error) {
-                // 双屏/分栏下群信息更新回调不一定作用在当前聊天页，先同步本地缓存并
-                [weakSelf loadTopMessageWithExtension:extension];
+            if (error) {
+                completion(error);
+                return;
             }
-            completion(error);
+            // 置顶成功后先刷新群信息，再加载顶部置顶消息，不依赖群扩展变更通知的到达时机
+            // （首进群时容易延迟/丢失）；横幅使用刚写入的群扩展立即刷新，双屏/分栏下
+            // 群信息更新回调不一定作用在当前聊天页，避免要切页后才更新。
+            [[TeamRepo shared] getTeamInfo:tid teamType:V2NIM_TEAM_TYPE_NORMAL completion:^(V2NIMTeam *latestTeam, NSError *teamError) {
+                if (!weakSelf) {
+                    completion(nil);
+                    return;
+                }
+                if (!teamError && latestTeam) {
+                    weakSelf.team = latestTeam;
+                }
+                [weakSelf loadTopMessageWithExtension:extension];
+                completion(nil);
+            }];
         }];
     }];
 }

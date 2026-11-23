@@ -6,7 +6,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 # 云信 Specs 镜像：需要从云信源解析 OC UIKit 组件时，取消注释并保留官方源
 # source 'https://gitee.com/netease-im/Specs.git'
 
-target 'app' do
+target 'IMUIKitOCExample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 

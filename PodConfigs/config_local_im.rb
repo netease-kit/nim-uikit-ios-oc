@@ -1,7 +1,7 @@
 require_relative "config_podspec.rb"
 
 # ---------- NEChatKit ----------
-# NEChatKit 是闭源二进制依赖，始终从远端 Pod 源解析（与 OC UIKit 10.9.30 配套）。
+# NEChatKit 是闭源二进制依赖，始终从远端 Pod 源解析（与 OC UIKit 10.9.31 配套）。
 module NEChatKit
   def self.name
     "NEChatKit"

@@ -69,6 +69,18 @@
   }
 }
 
+/// 播放结束/停止后释放音频会话，避免会话常驻导致折叠/展开时系统弹出
+/// “音频已转至扬声器”的路由提示。
+- (void)deactivate {
+  NSError *error = nil;
+  [[AVAudioSession sharedInstance] setActive:NO
+                                 withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+                                       error:&error];
+  if (error) {
+    NSLog(@"[Audio] Session deactivate error: %@", error);
+  }
+}
+
 - (void)setAudioRouteTo:(AVAudioSessionPortOverride)port {
   [self configureAudioSessionForPort:port];
   AVAudioSession *session = [AVAudioSession sharedInstance];

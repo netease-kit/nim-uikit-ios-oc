@@ -14,6 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) NSLayoutConstraint *widthConstraint;
 @property (nonatomic, strong, readonly, nullable) NSLayoutConstraint *heightConstraint;
 
+/// 图片距顶部的约束（默认 176，保持既有页面视觉不变）。
+@property (nonatomic, strong, readonly, nullable) NSLayoutConstraint *imageTopConstraint;
+
+/// 为 YES 时，图片 + 文案整体在自身高度内垂直居中。
+///
+/// 默认 NO：沿用原设计（距顶 176）以保持既有页面一致；容器宽高比与手机差异较大时
+/// （折叠屏展开左列 320×657、或竖屏之外的窗口）固定 176 会把空态推到容器底部甚至裁掉，
+/// 这类页面应打开该开关并按容器高度布局。
+@property (nonatomic, assign) BOOL verticallyCentersContent;
+
 /// 占位图片，默认为 nil
 @property (nonatomic, strong, nullable) UIImage *image;
 

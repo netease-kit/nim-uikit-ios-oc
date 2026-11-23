@@ -5,13 +5,13 @@ description: 按维护清单完整移除 OC 版 IMUIKit 开源 UI 组件和 Demo
 
 # OC Feature Removal
 
-这个技能用于“按已维护清单移除功能”，不是在删除时重新发现功能范围。清单路径均相对于 OC 开源仓库根目录，业务代码范围是 `NEChatUIKitOC/` 和 Demo `app/`；`NEAdaptiveUIKitOC/` 是外部组件，只有 `adaptive-shell` 清单明确列出的可选接线可改。`NEChatKit` 是闭源组件，不扫描、不修改。
+这个技能用于“按已维护清单移除功能”，不是在删除时重新发现功能范围。清单路径均相对于 OC 开源仓库根目录，业务代码范围是 `NEChatUIKitOC/` 和 Demo `IMUIKitOCExample/`；`NEAdaptiveUIKitOC/` 是外部组件，只有 `adaptive-shell` 清单明确列出的可选接线可改。`NEChatKit` 是闭源组件，不扫描、不修改。
 
 ## Invocation Contract
 
 - 用户使用“移除...功能”“去掉...功能”“删除...功能”等明确删除表达，且目标命中登记名称或别名时，自动调用本技能；无需用户写 `$oc-feature-removal`。
 - 用户也可以显式调用 `$oc-feature-removal`。上述两种调用都已授权移除点名功能，不要重复询问是否删除。
-- 只扫描和修改 `NEChatUIKitOC/` 与 `app/`。只有清单明确记录了真实 Demo 源码或资源引用时，才修改 `app.xcodeproj/`；当前三个功能都不需要。
+- 只扫描和修改 `NEChatUIKitOC/` 与 `IMUIKitOCExample/`。只有清单明确记录了真实 Demo 源码或资源引用时，才修改 `IMUIKitOCExample.xcodeproj/`；当前三个功能都不需要。
 - 不扫描、不打开、不修改 `NEAdaptiveUIKitOC/` 的实现、闭源 `NEChatKit`、Swift 或 SwiftUI 工程，也不得离开当前源码 checkout 追删其他实现。
 - 未登记功能不要自动套用本技能；先按“Register Future Features”建立 UI/Demo 清单。
 - 不提交、不推送，除非用户另外明确要求。
@@ -49,7 +49,7 @@ python3 skills/oc-feature-removal/scripts/audit_inventory.py <feature> --phase b
 - 不要用大括号配对脚本或正则批量删除 OC 方法。实测会残留孤立的 `@property`、`#pragma mark`、文档注释和空 `if/else`；也会误删仍被其他功能使用的通用属性。逐处 `apply_patch`，删除后检查：孤立属性/注释、空 `else`、空 `if`、悬空 `#import`、重复 `@end`。
 - 只被某个观察器调用的通用属性要保留属性本身，只删观察器里的调用（例如 `ChatViewModel.anchor` 只删 `didSet` 内仅为 Last Read 存在的调用）。
 - ObjC 兼容层不是自动保留项：`NEChatUIKitObjCModels.h/m` 中的 `LastReadPositionState` 在功能移除后必须删除，除非清单登记了 `allowed_paths` 并说明原因。
-- 删完后必须真正编译，至少构建 `NEChatUIKitOC` target 和 `app`；`clang -fsyntax-only` 不能替代。
+- 删完后必须真正编译，至少构建 `NEChatUIKitOC` target 和 `IMUIKitOCExample`；`clang -fsyntax-only` 不能替代。
 - 批量替换三元表达式也会吞掉行尾的 `)`、`,` 等符号，替换后必须编译验证。
 
 ## Removal Workflow
@@ -76,7 +76,7 @@ python3 skills/oc-feature-removal/scripts/audit_inventory.py <feature> --phase b
 
 ## Register Future Features
 
-用户要求把新需求纳入本技能时，只在 `NEChatUIKitOC/` 和 `app/` 内按 [references/manifest-template.md](references/manifest-template.md) 做一次完整发现并建立清单。不要扫描 `NEChatKit`。新增需求必须同时：
+用户要求把新需求纳入本技能时，只在 `NEChatUIKitOC/` 和 `IMUIKitOCExample/` 内按 [references/manifest-template.md](references/manifest-template.md) 做一次完整发现并建立清单。不要扫描 `NEChatKit`。新增需求必须同时：
 
 - 在 `references/registry.md` 登记名称和别名。
 - 新建 `references/features/<slug>.md`，记录删除项、共享边界、交叉需求和验证条件。

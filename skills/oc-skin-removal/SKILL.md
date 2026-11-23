@@ -5,11 +5,11 @@ description: 按维护清单从 Objective-C 版 IMUIKit 的 UI 组件和示例 A
 
 # OC Skin Removal
 
-本 skill 随 OC 开源源码发布。用户只需说“移除 OC 版飞书/NormalUI 皮肤”或“移除 OC 版微信/FunUI 皮肤”，无需提供路径。删除的是**点名皮肤**，保留另一套皮肤的业务与 UI 能力。路径均相对 OC 开源仓库根目录；唯一业务范围是仓库根的 `NEChatUIKitOC/` 等组件目录、`NEBaseUIKitOC/`、`app/`，只有登记过的样式选择页引用才修改 `app.xcodeproj/`。不扫描、不修改闭源 `NEChatKit`、Swift/SwiftUI 工程或客户自己的 App。
+本 skill 随 OC 开源源码发布。用户只需说“移除 OC 版飞书/NormalUI 皮肤”或“移除 OC 版微信/FunUI 皮肤”，无需提供路径。删除的是**点名皮肤**，保留另一套皮肤的业务与 UI 能力。路径均相对 OC 开源仓库根目录；唯一业务范围是仓库根的 `NEChatUIKitOC/` 等组件目录、`NEBaseUIKitOC/`、`IMUIKitOCExample/`，只有登记过的样式选择页引用才修改 `IMUIKitOCExample.xcodeproj/`。不扫描、不修改闭源 `NEChatKit`、Swift/SwiftUI 工程或客户自己的 App。
 
 OC 与 Swift 版结构的关键差异：
 
-- 基础组件在 `NEBaseUIKitOC/`，其余组件在 `<Module>OC/`；Demo 是 `app/`。
+- 基础组件在 `NEBaseUIKitOC/`，其余组件在 `<Module>OC/`；Demo 是 `IMUIKitOCExample/`。
 - 只有聊天、通讯录、群组三个组件有 `Classes/NormalUI|FunUI/` 目录；会话组件的皮肤类定义在共享文件（`NEConversationViewController.h/m`、`NEConversationListCell.h/m`），皮肤资源则在 `Assets/Normal|FunConversationUIKit.xcassets`。
 - 基础皮肤资源是同一个 `NECommonUI.xcassets` 下的 `NormalUI/`、`FunUI/` 命名空间，不是独立 catalog。
 - 皮肤选择通过 `setupInit:` 的 `isFun` 参数下发：各服务 `registerRouter:` 走 `registerFun` 或普通 `register`。Demo 的 `NEStyleManager.isNormalStyle` 会被组件层用 `NSClassFromString` 反射读取，是跨边界契约，不能直接删。
@@ -23,9 +23,9 @@ OC 与 Swift 版结构的关键差异：
    `--phase before`。技能尚未复制进目标仓库时可加 `--repo /path/to/nim-uikit-ios-oc`。输出只读：专属目录、登记的共享迁移、工程引用和共享候选都会按清单列出，不需要再做全仓关键词扫描。若 `before` 报 `MISSING` 或 `MOVE ... missing`，先判定是版本漂移还是已部分移除，不能凭关键词扩大范围。
 3. 按清单处理：先改保留皮肤的入口、路由注册、共享视图和颜色，再删除目标皮肤的专属路径与 Demo 类/资源；移除 Demo 工程对已删除文件的引用。使用 `apply_patch` 编辑；删除前逐一确认清单路径，保留无关工作树修改。共享 API（例如 `setupInitWithFunUI:`、`isFun` 参数）只有在仍有存活调用者或明确外部兼容要求时才保留，否则收敛掉。
 4. 再运行审计脚本 `--phase after`，必须没有存活的专属路径、未完成的共享迁移、工程残留引用或未登记的共享候选；清单中明确保留的契约会显示为 `KEEP`，不应删除。检查 `git diff --check`。目标 checkout 结构或代码若漂移，针对**报告的具体路径**修正，并在同次改动更新清单文件，不能退化成客户每次全仓扫描。
-5. 源码删除后重新 `pod install --no-repo-update`，因为 podspec 的 `Classes/**/*`、`Assets/**/*` 通配符会在生成的 Pods 工程中缓存旧文件。构建所有受影响组件 target 和 `app`：
-   `xcodebuild -workspace app.xcworkspace -list` 与 `xcrun simctl list devices available` 获取真实 scheme/模拟器，例如
-   `xcodebuild -workspace app.xcworkspace -scheme app -configuration Debug -destination 'platform=iOS Simulator,id=<实际UDID>' -derivedDataPath <独立构建目录> CODE_SIGNING_ALLOWED=NO build`。
+5. 源码删除后重新 `pod install --no-repo-update`，因为 podspec 的 `Classes/**/*`、`Assets/**/*` 通配符会在生成的 Pods 工程中缓存旧文件。构建所有受影响组件 target 和 `IMUIKitOCExample`：
+   `xcodebuild -workspace IMUIKitOCExample.xcworkspace -list` 与 `xcrun simctl list devices available` 获取真实 scheme/模拟器，例如
+   `xcodebuild -workspace IMUIKitOCExample.xcworkspace -scheme IMUIKitOCExample -configuration Debug -destination 'platform=iOS Simulator,id=<实际UDID>' -derivedDataPath <独立构建目录> CODE_SIGNING_ALLOWED=NO build`。
    不能以只编译单个 `.m` 或 `clang -fsyntax-only` 描述成完整 App 可运行。
 6. 在模拟器或设备启动**保留皮肤**，覆盖启动和登录后路由、云端/本地会话、联系人、单群聊、消息收发、搜索结果、标记/收藏、群设置、样式入口消失；检查图片/音频/富文本/回复等不同消息以及皮肤资源实际显示。没有登录凭证、依赖或设备时明确列出未验证项目；只有编译通过并实际启动/互动之后才能声称“正常编译、运行”。不要提交/推送，除非另有明确要求。
 
@@ -51,7 +51,7 @@ OC 与 Swift 版结构的关键差异：
 - 删除源码/资源后必须重跑 `pod install --no-repo-update`，否则 `Build input file cannot be found` 或 `actool` 仍打包已删资源。
 - `NEChatUIKitOC.podspec` 的 `exclude_files` 登记了 `NEChatUIKitOC/Classes/NormalUI/NormalChatRouter.m`（真实编译的是 `Classes/Compat/NormalChatRouter.m`）。移除 NormalUI 时两处都要删，并删除这条 `exclude_files`，否则 podspec 指向不存在的文件。
 - 会话组件没有 `Classes/NormalUI|FunUI` 目录，别把 `NEBase*Controller`、`NEBase*Cell` 当成皮肤专属基类删除。
-- 删完必须真正编译保留皮肤对应的组件 target 和 `app`；`clang -fsyntax-only` 不能替代。批量替换三元表达式后必须编译验证，容易吞掉行尾 `)`、`,`。
+- 删完必须真正编译保留皮肤对应的组件 target 和 `IMUIKitOCExample`；`clang -fsyntax-only` 不能替代。批量替换三元表达式后必须编译验证，容易吞掉行尾 `)`、`,`。
 
 ## 交付标准
 

@@ -15,6 +15,7 @@
 #import <NEBaseUIKitOC/NEAdaptiveDeviceGate.h>
 #import <NEBaseUIKitOC/UIWindow+NEActiveKeyWindow.h>
 #import <NEChatKit/IMKitClient.h>
+#import <NEChatKit/XKitServiceManager.h>
 
 @implementation NEAISearchManager
 
@@ -45,9 +46,11 @@
 - (void)setupInit {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    [[XKit instance] registerService:self];
+    [[XKitServiceManager getInstance] registerService:self.serviceName service:self];
     [[IMKitPluginManager shared] registerPlugin:self.serviceName plugin:self];
-    [[ChatKitClient shared] buryDataPoints:@"AISearchKitOC" language:@"oc"];
+    NSString *version = [ChatKitClient componentVersionForBundle:[NSBundle bundleForClass:self.class]
+                                                          fallback:@""];
+    [[ChatKitClient shared] buryDataPoints:@"AISearchKitOC" version:version];
   });
 }
 

@@ -42,6 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NEEmptyDataView *emptyView;
 @property (nonatomic, strong) UIView *bodyBottomView;
 
+/// 右列回到空白占位时宿主调用：清掉「上一次点过的行」，避免再次高亮过期选中项。
+/// 只在宿主明确关闭左列高亮（右列已无内容）时调用；列表自身刷新仍按 key 恢复选中。
+- (void)clearAdaptiveSelection;
+
 - (void)showTitleBar;
 - (void)commonUI;
 - (void)loadData;

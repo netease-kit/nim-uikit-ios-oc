@@ -40,6 +40,17 @@
   [self.repo removeAIListener:self];
 }
 
+- (void)updateItemMaxWidth:(CGFloat)width {
+  if (width <= 0) {
+    return;
+  }
+  self.itemMaxWidth = width;
+  CGFloat textWidth = MAX(1.0, width - 40.0);
+  for (NEAIWordSearchModel *model in self.data) {
+    [model updateMaxTextWidth:textWidth];
+  }
+}
+
 - (V2NIMAIModelCallContent *)getAIModelCallContent:(NSString *)msg
                                               type:(V2NIMAIModelCallContentType)type {
   (void)type;
@@ -199,7 +210,11 @@
   NSString *showText = [self getErrorText:data];
   NSAttributedString *content =
       [[NSAttributedString alloc] initWithString:showText ?: @""];
-  NEAIWordSearchModel *model = [[NEAIWordSearchModel alloc] initWithContent:content];
+  // 首次布局前 itemMaxWidth 为 0，回退整窗宽度；布局完成后由 updateItemMaxWidth: 重测。
+  CGFloat textWidth = self.itemMaxWidth > 0 ? MAX(1.0, self.itemMaxWidth - 40.0)
+                                            : NEAISearchTextMaxSize().width;
+  NEAIWordSearchModel *model =
+      [[NEAIWordSearchModel alloc] initWithContent:content maxTextWidth:textWidth];
   [self.data insertObject:model atIndex:0];
   [self.requestIds removeObject:data.requestId];
 

@@ -8,8 +8,6 @@
 
 @interface NEBaseSelectedListCell ()
 @property (nonatomic, strong, nullable) MultiSelectModel *contentModel;
-@property (nonatomic, assign) CGFloat measuredLayoutWidth;
-- (CGFloat)titleLayoutWidth;
 - (CGFloat)titleMaxWidthForWidth:(CGFloat)width memberCount:(NSInteger)memberCount;
 @end
 
@@ -63,35 +61,27 @@
   [super setModel:model];
   self.contentModel = model;
   self.multiSelectImageView.hidden = YES;
-  self.titleLabelMaxWidth = [self titleMaxWidthForWidth:[self titleLayoutWidth]
+  CGFloat layoutWidth = CGRectGetWidth(self.contentView.bounds);
+  if (layoutWidth <= 0) {
+    layoutWidth = [UIScreen mainScreen].bounds.size.width;
+  }
+  self.titleLabelMaxWidth = [self titleMaxWidthForWidth:layoutWidth
                                             memberCount:model.memberCount];
 }
 
-- (void)layoutSubviews {
-  [super layoutSubviews];
-  if (!NEAdaptiveDeviceGate.adaptiveHostActive) {
-    return;
-  }
+/// “已选”列表的标题上限：右侧预留人数与移除按钮的位置。
+///
+/// 基类在 `layoutSubviews` 里调用本方法；这里覆写以保留“已选”列表自己的预留量。
+- (void)recalculateTitleLabelMaxWidth {
   CGFloat width = CGRectGetWidth(self.contentView.bounds);
-  if (width <= 0 || fabs(width - self.measuredLayoutWidth) <= 0.5) {
+  if (width <= 0) {
     return;
   }
-  self.measuredLayoutWidth = width;
-  if (!self.contentModel) {
+  CGFloat target = [self titleMaxWidthForWidth:width memberCount:self.contentModel ? self.contentModel.memberCount : 0];
+  if (fabs(target - self.titleLabelMaxWidth) <= 0.5) {
     return;
   }
-  self.titleLabelMaxWidth = [self titleMaxWidthForWidth:width
-                                            memberCount:self.contentModel.memberCount];
-}
-
-- (CGFloat)titleLayoutWidth {
-  if (NEAdaptiveDeviceGate.adaptiveHostActive) {
-    CGFloat width = CGRectGetWidth(self.contentView.bounds);
-    if (width > 0) {
-      return width;
-    }
-  }
-  return [UIScreen mainScreen].bounds.size.width;
+  self.titleLabelMaxWidth = target;
 }
 
 - (CGFloat)titleMaxWidthForWidth:(CGFloat)width memberCount:(NSInteger)memberCount {

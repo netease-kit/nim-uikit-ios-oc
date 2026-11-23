@@ -63,6 +63,9 @@ typedef NS_ENUM(NSInteger, NEReservedRegionKind) {
 /// 从窗口当前状态采样；窗口为 nil 时返回 nil。
 + (nullable instancetype)snapshotWithWindow:(nullable UIWindow *)window;
 
+/// 从视图当前状态采样（尺寸、安全区、trait、占位区都以该视图为准）；视图为 nil 时返回 nil。
++ (nullable instancetype)snapshotWithView:(nullable UIView *)view;
+
 /// 与另一个快照逐字段比较（含占位区）。
 - (BOOL)isEqualToSnapshot:(nullable NEWindowSnapshot *)other;
 
@@ -84,6 +87,15 @@ typedef NEWindowSnapshot *_Nullable (^NEAdaptiveWindowSnapshotProvider)(void);
 
 /// 直接绑定窗口；内部弱引用窗口，窗口释放后下次采样返回 nil。
 - (instancetype)initWithWindow:(UIWindow *)window
+                      onChange:(void (^)(NEWindowSnapshot *snapshot))onChange;
+
+/// 绑定窗口，并在同一窗口内优先采 `samplingView` 的事实。
+///
+/// 折叠/展开时窗口与视图的安全区会短暂不同步（真机实测 `view r88 / window r84`），
+/// 而布局读取的是视图；传入外壳自己的视图可让快照与布局使用同一事实源。`samplingView`
+/// 不属于该窗口时退回窗口采样。
+- (instancetype)initWithWindow:(UIWindow *)window
+                  samplingView:(nullable UIView *)samplingView
                       onChange:(void (^)(NEWindowSnapshot *snapshot))onChange;
 
 - (void)refresh;

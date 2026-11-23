@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showSelect:(BOOL)isShow;
 - (void)setModel:(MultiSelectModel *)model;
 
+/// 按 cell 的实际宽度重算名称上限。
+/// 子类可覆写以保留自己的预留量（如“已选”列表）。
+- (void)recalculateTitleLabelMaxWidth;
+
 @end
 
 NS_ASSUME_NONNULL_END

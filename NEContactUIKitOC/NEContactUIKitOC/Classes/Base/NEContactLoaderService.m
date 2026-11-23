@@ -27,7 +27,9 @@
   ChatKitClient *client = [ChatKitClient shared];
   if (!self.didRegisterService) {
     [client registerInit:[NEContactService shared]];
-    [client buryDataPoints:@"ContactUIKitOC" language:@"oc"];
+    NSString *version = [ChatKitClient componentVersionForBundle:[NSBundle bundleForClass:self.class]
+                                                          fallback:@""];
+    [client buryDataPoints:@"ContactUIKitOC" version:version];
     self.didRegisterService = YES;
   }
 }

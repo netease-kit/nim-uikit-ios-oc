@@ -2,7 +2,7 @@
 
 ## 范围
 
-本清单仅覆盖 OC 开源根目录 `app/` 与 `NEChatUIKitOC/` 中与自适应呈现相关的**可选接线**。`NEAdaptiveUIKitOC/` 是独立组件，不在删除范围；客户若确实不再需要折叠屏能力，应另行移除该组件依赖。不扫描闭源 `NEChatKit`、Swift/SwiftUI 工程或旧副本。
+本清单仅覆盖 OC 开源根目录 `IMUIKitOCExample/` 与 `NEChatUIKitOC/` 中与自适应呈现相关的**可选接线**。`NEAdaptiveUIKitOC/` 是独立组件，不在删除范围；客户若确实不再需要折叠屏能力，应另行移除该组件依赖。不扫描闭源 `NEChatKit`、Swift/SwiftUI 工程或旧副本。
 
 ## 整体删除
 
@@ -10,10 +10,10 @@
 
 ## Demo 局部编辑
 
-- `app/Main/NETabBarController.h`：删除 `makeAdaptiveShellIfEnabled` 声明。
-- `app/Main/NETabBarController.m`：删除 `NEAdaptiveUIKitOC` / `NEConversationOpenIntent` import、`NEAdaptiveDemoNavigationController` 类、`adaptiveShell` 属性与 `NEAdaptivePresentationDidChange` 通知监听、`makeAdaptiveShellIfEnabled`、`clearAdaptiveConversation:`、`adaptiveEmptyDetailControllerForSection:` / `adaptiveEmptyDetailController`、`adaptiveConversationForIntent:`、`syncRailBadgeForSection:count:` 及其在 `updateSessionBadge:` / `setUpContactBadgeValue` 中的调用、`ne_disablePagingSafeAreaInsetsIn:`、`ne_updateScrollGeometryInView:managedByContainer:`、`ne_updatePagingGeometryInController:managedByContainer:`、`ne_setTopConstantIfSupported:`、`ne_setAdaptiveNavigationButtonWidths:paired:`、`ne_setAdaptiveSelectionButtonWidth:`、`ne_prepareAdaptivePage:paired:managedByContainer:`、`ne_scheduleLeftColumnSelectionUpdateInShell:`、`ne_updateLeftColumnSelectionInShell:`、`ne_updateConversationGroupRetentionInShell:`、`setLeftColumnSelectionEnabled:inShell:` 与 `NEAdaptivePagingOriginalSafeAreaKey` swizzle；`useAdaptiveNavigation = [NEAdaptiveDeviceGate isFoldableDevice]` 分支恢复为原三个导航栈的 tab 宿主。保留 unread/contact/team 监听、皮肤资源、角标、语言更新与旧路由行为。
-- `app/SceneDelegate.m`：删除 `NEAdaptiveUIKitOC` import、`makeAdaptiveShellIfEnabled` 根控制器分支、`NEAdaptiveShellViewController` 的窗口刷新（`didUpdateCoordinateSpace`）与通知入口选择 shell section；通知回退到原 tab 消息导航栈。保留登录、推送、呼叫的模拟器编译保护与 `pendingPushUserInfo` 业务逻辑。
-- `app/en.lproj/Localizable.strings`、`app/zh-Hans.lproj/Localizable.strings`：删除 `adaptive_back`、`adaptive_empty_conversation`、`adaptive_empty_contact`、`adaptive_empty_mine`。
+- `IMUIKitOCExample/Main/NETabBarController.h`：删除 `makeAdaptiveShellIfEnabled` 声明。
+- `IMUIKitOCExample/Main/NETabBarController.m`：删除 `NEAdaptiveUIKitOC` / `NEConversationOpenIntent` import、`NEAdaptiveDemoNavigationController` 类、`adaptiveShell` 属性与 `NEAdaptivePresentationDidChange` 通知监听、`makeAdaptiveShellIfEnabled`、`clearAdaptiveConversation:`、`adaptiveEmptyDetailControllerForSection:` / `adaptiveEmptyDetailController`、`adaptiveConversationForIntent:`、`syncRailBadgeForSection:count:` 及其在 `updateSessionBadge:` / `setUpContactBadgeValue` 中的调用、`ne_disablePagingSafeAreaInsetsIn:`、`ne_updateScrollGeometryInView:managedByContainer:`、`ne_updatePagingGeometryInController:managedByContainer:`、`ne_setTopConstantIfSupported:`、`ne_setAdaptiveNavigationButtonWidths:paired:`、`ne_setAdaptiveSelectionButtonWidth:`、`ne_prepareAdaptivePage:paired:managedByContainer:`、`ne_scheduleLeftColumnSelectionUpdateInShell:`、`ne_updateLeftColumnSelectionInShell:`、`ne_updateConversationGroupRetentionInShell:`、`setLeftColumnSelectionEnabled:inShell:` 与 `NEAdaptivePagingOriginalSafeAreaKey` swizzle；`useAdaptiveNavigation = [NEAdaptiveDeviceGate isFoldableDevice]` 分支恢复为原三个导航栈的 tab 宿主。保留 unread/contact/team 监听、皮肤资源、角标、语言更新与旧路由行为。
+- `IMUIKitOCExample/SceneDelegate.m`：删除 `NEAdaptiveUIKitOC` import、`makeAdaptiveShellIfEnabled` 根控制器分支、`NEAdaptiveShellViewController` 的窗口刷新（`didUpdateCoordinateSpace`）与通知入口选择 shell section；通知回退到原 tab 消息导航栈。保留登录、推送、呼叫的模拟器编译保护与 `pendingPushUserInfo` 业务逻辑。
+- `IMUIKitOCExample/en.lproj/Localizable.strings`、`IMUIKitOCExample/zh-Hans.lproj/Localizable.strings`：删除 `adaptive_back`、`adaptive_empty_conversation`、`adaptive_empty_contact`、`adaptive_empty_mine`。
 
 ## 组件层局部编辑
 
@@ -33,7 +33,7 @@
 ## 验证
 
 1. `python3 skills/oc-feature-removal/scripts/audit_inventory.py adaptive-shell --phase after` 不允许任何残留。
-2. `git diff --check` 通过；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `app`。
+2. `git diff --check` 通过；重新 `pod install --no-repo-update` 后构建 `NEChatUIKitOC` 与 `IMUIKitOCExample`。
 3. 运行时检查：非折叠屏启动仍为普通 tab bar；折叠屏（或模拟 `NEAdaptiveDeviceGate`）下不再进入双栏外壳，而是普通 tab；会话/联系人/我的根导航恢复原 push；通知点击进入消息页；自定义 Router 覆盖仍生效；返回与重复点击无异常。
 4. 删除后不得留下本清单唯一指纹；通用 viewport 与外部组件不作为 required-remove 指纹。
 
